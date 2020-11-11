@@ -1,9 +1,10 @@
 import React from 'react'
-import NavItem from './navItem'
+import NavItem from '../navItem/navItem'
+import classes from './navItems.module.css'
 
 const navItems = props => {
     return (
-        <ul>
+        <ul className={classes.navItems}>
             <NavItem link="" exact>
                 Categories
             </NavItem>
