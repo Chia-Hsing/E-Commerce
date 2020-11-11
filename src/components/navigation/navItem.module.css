@@ -1,0 +1,9 @@
+.navItem {
+    background-color: #000;
+}
+
+.navItem a:hover,
+.navItem a:active,
+.navItem a.active {
+    color: #40a4c8;
+}
