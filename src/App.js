@@ -1,6 +1,6 @@
 import React from 'react'
-import LayOut from './components/layout'
-import NavBar from './components/navigation/navBar/navBar'
+import LayOut from './components/Layout'
+import NavBar from './components/Navigation/NavBar'
 import './App.css'
 
 function App() {
