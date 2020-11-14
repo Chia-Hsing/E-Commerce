@@ -1,20 +1,12 @@
 import React from 'react'
-import Backdrop from './SideDrawer'
-import Logo from './Logo'
-import NavItems from './NavItems'
+import Backdrop from '../UI/Backdrop'
 import '../../styles/navigation.scss'
 
 const sideDrawer = props => {
     return (
-        <>
+        <div className="sideDrawer">
             <Backdrop />
-            <div className="sideDrawer">
-                <Logo />
-            </div>
-            <nav>
-                <NavItems />
-            </nav>
-        </>
+        </div>
     )
 }
 

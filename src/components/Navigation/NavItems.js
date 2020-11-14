@@ -7,9 +7,21 @@ const NavItems = props => {
     return (
         <nav className="navItems">
             <NavItem>man</NavItem>
-            <DropDown />
+            <DropDown
+                firstItem="TEES"
+                secondItem="SHIRTS"
+                thirdItem="HOODIES&SWEATERS"
+                fourthItem="JACKETS&VESTS"
+                fifthItem="PANTS&JEANS"
+            />
             <NavItem>women</NavItem>
-            <NavItem>accessories</NavItem>
+            <DropDown
+                firstItem="TEES"
+                secondItem="SHIRTS"
+                thirdItem="HOODIES&SWEATERS"
+                fourthItem="JACKETS&VESTS"
+                fifthItem="DRESSES"
+            />
             <NavItem>search</NavItem>
         </nav>
     )

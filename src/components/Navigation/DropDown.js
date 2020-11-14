@@ -4,13 +4,13 @@ import '../../styles/navigation.scss'
 
 const dropDown = props => {
     return (
-        <ui className="dropDown">
-            <DropDownItem link="">TEES</DropDownItem>
-            <DropDownItem link="">SHIRTS</DropDownItem>
-            <DropDownItem link="">HOODIES&SWEATERS</DropDownItem>
-            <DropDownItem link="">JACKETS&VESTS</DropDownItem>
-            <DropDownItem link="">PANTS&JEANS</DropDownItem>
-        </ui>
+        <ul className="dropDown">
+            <DropDownItem link="">{props.firstItem}</DropDownItem>
+            <DropDownItem link="">{props.secondItem}</DropDownItem>
+            <DropDownItem link="">{props.thirdItem}</DropDownItem>
+            <DropDownItem link="">{props.fourthItem}</DropDownItem>
+            <DropDownItem link="">{props.fifthItem}</DropDownItem>
+        </ul>
     )
 }
 
