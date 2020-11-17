@@ -4,7 +4,7 @@ import '../../styles/navigation.scss'
 
 const login = props => {
     return (
-        <div className="login">
+        <div className={props.class}>
             <NavItem link="" exact>
                 ACCOUNT / LOGIN
             </NavItem>

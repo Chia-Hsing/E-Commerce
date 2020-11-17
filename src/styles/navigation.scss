@@ -14,7 +14,6 @@
 
 $heavy-grey: #1f1f1f;
 $light-grey: #555454;
-$transition: all 0.3s;
 
 .logo {
     height: 150px;
@@ -35,6 +34,7 @@ $transition: all 0.3s;
 }
 
 .navBar {
+    display: block;
     background-color: #fff;
     width: 100vw;
     height: 200px;
@@ -104,21 +104,58 @@ $transition: all 0.3s;
 }
 
 .sideDrawer {
-    position: fixed;
-    width: 280px;
-    max-width: 70%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background-color: rgb(204, 203, 203);
-    padding: 32px 16px;
-    box-sizing: border-box;
-    transition: transform 0.3s ease-out;
+    display: none;
 }
 
-@media (min-width: 500px) {
+@media (max-width: 500px) {
     .sideDrawer {
+        display: block;
+        position: fixed;
+        width: 280px;
+        max-width: 70%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgb(143, 143, 143);
+        padding: 32px 16px;
+        box-sizing: border-box;
+        z-index: 1;
+        transition: transform 0.3s ease-out;
+    }
+
+    .navBar {
         display: none;
+    }
+
+    .logo-Side-Drawer {
+        z-index: 2;
+        text-align: left;
+        font: {
+            size: 1.5em;
+            weight: bold;
+        }
+    }
+
+    .navItems-Side-Drawer {
+        z-index: 2;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+
+        & .navItem {
+            background-color: transparent;
+            padding: 5px 0;
+        }
+    }
+
+    .login-Side-Drawer {
+        margin-top: 30px;
+        text-align: left;
+        & .navItem {
+            background-color: transparent;
+        }
     }
 }
 

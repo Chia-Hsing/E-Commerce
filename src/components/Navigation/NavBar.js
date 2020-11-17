@@ -7,9 +7,9 @@ import '../../styles/navigation.scss'
 const navBar = props => {
     return (
         <header className="navBar">
-            <Logo />
-            <NavItems />
-            <Login />
+            <Logo class="logo" />
+            <NavItems class="navItems" />
+            <Login class="login" />
         </header>
     )
 }

@@ -5,7 +5,7 @@ import '../../styles/navigation.scss'
 
 const NavItems = props => {
     return (
-        <nav className="navItems">
+        <nav className={props.class}>
             <NavItem>man</NavItem>
             <DropDown
                 firstItem="TEES"

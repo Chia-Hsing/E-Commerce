@@ -5,8 +5,8 @@ import SideDrawer from './Navigation/SideDrawer'
 const layout = props => {
     return (
         <>
-            <NavBar />
             <SideDrawer />
+            <NavBar />
             {/* <main>{props.children}</main> */}
         </>
     )
