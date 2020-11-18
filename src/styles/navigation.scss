@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
+
 @mixin flex-vertical {
     display: flex;
     flex-direction: column;
@@ -6,16 +8,16 @@
 }
 
 @mixin dropdown-hover {
-    left: -10px;
     opacity: 1;
     transform: translateY(0%);
-    transition: opacity 0.6s 0.3s;
+    transition: 0.2s 0.2s;
 }
 
 $heavy-grey: #1f1f1f;
 $light-grey: #555454;
 
 .logo {
+    background-color: #fff;
     height: 150px;
     line-height: 150px;
     margin: 0 auto;
@@ -34,24 +36,23 @@ $light-grey: #555454;
 }
 
 .navBar {
-    display: block;
     background-color: #fff;
     width: 100vw;
     height: 200px;
     position: sticky;
+    z-index: 2;
     @include flex-vertical;
 }
 
 .navItems {
     position: relative;
     min-width: 500px;
-    min-height: 30px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
 }
 
 .navItem {
-    background-color: #fff;
     flex-basis: auto;
     list-style: none;
     font-size: 1.2em;
@@ -61,7 +62,7 @@ $light-grey: #555454;
         color: $heavy-grey;
     }
 
-    & a:hover {
+    &:hover a {
         color: $light-grey;
         border-bottom: 1px solid $light-grey;
     }
@@ -72,16 +73,18 @@ $light-grey: #555454;
 }
 
 .dropDown {
+    min-width: 300px;
+    height: auto;
     margin-top: 30px;
-    border: $light-grey 1px solid;
-    background-color: rgba(226, 225, 225, 0.541);
+    background-color: #fff;
     padding: 8px;
     position: absolute;
     top: 0;
-    left: -10px;
+    left: 80px;
     transform: translateY(-1000%);
-    min-width: 500px;
     opacity: 0;
+    transition: 0.3s 0.4s;
+    z-index: -1;
 
     .dropDownItem {
         list-style: none;
@@ -93,7 +96,7 @@ $light-grey: #555454;
             color: $heavy-grey;
         }
 
-        & a:hover {
+        &:hover a {
             color: $light-grey;
             border-bottom: 1px solid $light-grey;
         }
@@ -116,7 +119,7 @@ $light-grey: #555454;
         height: 100%;
         left: 0;
         top: 0;
-        background-color: rgb(143, 143, 143);
+        background-color: rgba(197, 198, 199, 0.411);
         padding: 32px 16px;
         box-sizing: border-box;
         z-index: 1;
@@ -147,6 +150,10 @@ $light-grey: #555454;
         & .navItem {
             background-color: transparent;
             padding: 5px 0;
+
+            &:hover + .dropDown {
+                display: block;
+            }
         }
     }
 
@@ -155,6 +162,22 @@ $light-grey: #555454;
         text-align: left;
         & .navItem {
             background-color: transparent;
+        }
+    }
+
+    .dropDown {
+        min-width: 200px;
+        margin: 0 auto;
+
+        background-color: transparent;
+        position: relative;
+        text-align: left;
+        left: -10px;
+        display: none;
+        z-index: 1;
+
+        &:hover {
+            display: block;
         }
     }
 }

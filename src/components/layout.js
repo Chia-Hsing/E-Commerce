@@ -7,7 +7,8 @@ const layout = props => {
         <>
             <SideDrawer />
             <NavBar />
-            {/* <main>{props.children}</main> */}
+            <main>{props.children}</main>
+            {/* <Footer /> */}
         </>
     )
 }
