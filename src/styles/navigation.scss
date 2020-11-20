@@ -1,19 +1,5 @@
-@mixin flex-vertical {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-@mixin dropdown-hover {
-    opacity: 1;
-    transform: translateY(0%);
-    transition: 0.2s 0.4s;
-}
-
-$heavy-grey: #1f1f1f;
-$light-grey: #555454;
-$yellow: #ccc012;
+@import 'variables';
+@import 'mixin';
 
 .logo {
     background-color: #fff;
@@ -21,49 +7,46 @@ $yellow: #ccc012;
     line-height: 150px;
     margin: 0 auto;
     font: {
-        size: 2.5em;
-        weight: 600;
+        size: size(2xl);
+        weight: weight(bold);
     }
 }
 
 .login {
-    font-size: 0.8em;
+    @include position(fixed, 10, none, 10);
+    font-size: size(xs);
     width: auto;
-    position: fixed;
-    top: 10px;
-    right: 10px;
 }
 
 .navBar {
+    @include display-flex(column, center, center);
+    @include position(sticky, 0);
     background-color: #fff;
     width: 100vw;
     height: 200px;
-    position: sticky;
-    z-index: 2;
-    @include flex-vertical;
+    z-index: z-index(d);
 }
 
 .navItems {
+    @include display-flex(row, space-between, '');
     position: relative;
     min-width: 500px;
     height: 30px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .navItem {
     flex-basis: auto;
     list-style: none;
-    font-size: 1.2em;
+    font-size: size(m);
 
     a {
         text-decoration: none;
-        color: $heavy-grey;
+        color: color(heavy-grey);
     }
 
     &:hover a {
-        color: $light-grey;
-        border-bottom: 2px solid $yellow;
+        color: color(light-grey);
+        border-bottom: 2px solid color(yellow);
     }
 
     &:hover + .dropDown {
@@ -72,32 +55,30 @@ $yellow: #ccc012;
 }
 
 .dropDown {
+    @include position(absolute, 0, 80, none);
     min-width: 300px;
     height: auto;
     margin-top: 30px;
     padding: 8px;
-    position: absolute;
-    top: 0;
-    left: 80px;
     transform: translateY(-1000%);
     opacity: 0;
     transition: 0.3s 0.6s;
-    z-index: -1;
+    z-index: z-index(b);
 
     .dropDownItem {
         list-style: none;
-        font-size: 0.9em;
         padding: 8px;
+        font-size: size(s);
 
         a {
             text-decoration: none;
-            color: $heavy-grey;
+            color: color(heavy-grey);
         }
 
         &:hover a {
-            font-size: 1.2em;
-            color: $light-grey;
-            border-bottom: 1px solid $yellow;
+            font-size: size(m);
+            color: color(light-grey);
+            border-bottom: 1px solid color(yellow);
         }
     }
     &:hover {
@@ -105,45 +86,35 @@ $yellow: #ccc012;
     }
 }
 
-.sideDrawer {
-    display: none;
-}
-
+.sideDrawer,
 .menuToggle {
     display: none;
 }
 
-@media (max-width: 500px) {
+@include response(m) {
     .menuToggle {
+        @include position(fixed, 10, 10, none);
         display: block;
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        font-size: 1.6em;
+        font-size: size(xl);
         cursor: pointer;
     }
 
     .menuClose {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 1.6em;
+        @include position(absolute, 10, none, 10);
+        font-size: size(l);
         cursor: pointer;
     }
 
     .sideDrawer {
+        @include position(fixed, 0, 0, none);
         transform: translateX(-100%);
         display: block;
-        position: fixed;
-        width: 400px;
-        max-width: 70%;
+        min-width: 70%;
         height: 100%;
-        left: 0;
-        top: 0;
-        background-color: rgb(255, 255, 255);
+        background-color: #fff;
         padding: 32px 16px;
         box-sizing: border-box;
-        z-index: 8;
+        z-index: z-index(h);
         transition: transform 0.4s cubic-bezier(0.9, 0.1, 0.94, -0.07) 0.2s;
     }
 
@@ -158,20 +129,18 @@ $yellow: #ccc012;
     }
 
     .logo-Side-Drawer {
-        z-index: 9;
+        z-index: z-index(i);
         text-align: left;
         font: {
-            size: 1.5em;
-            weight: bold;
+            size: size(l);
+            weight: weight(bold);
         }
     }
 
     .navItems-Side-Drawer {
-        z-index: 9;
+        @include display-flex(column, center, flex-start);
+        z-index: z-index(i);
         width: 100px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
         margin-top: 20px;
 
         & .navItem {
@@ -193,14 +162,13 @@ $yellow: #ccc012;
     }
 
     .dropDown {
+        @include position(relative, 0, -10, none);
         min-width: 200px;
         margin: 0 auto;
         background-color: transparent;
-        position: relative;
         text-align: left;
-        left: -10px;
         display: none;
-        z-index: 10;
+        z-index: z-index(i);
 
         &:hover {
             display: block;
@@ -211,12 +179,10 @@ $yellow: #ccc012;
     }
 
     .backdrop {
+        @include position(fixed);
         width: 100%;
         height: 100%;
-        position: fixed;
-        z-index: 3;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.137);
+        z-index: z-index(e);
+        background-color: color(transparent-grey);
     }
 }
