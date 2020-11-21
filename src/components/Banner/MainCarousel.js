@@ -2,11 +2,11 @@ import React from 'react'
 import { Carousel } from 'react-bootstrap'
 import '../../styles/index.scss'
 import '../../styles/carousel.scss'
-import a from '../../img/1.jpg'
-import b from '../../img/2.jpg'
-import c from '../../img/3.jpg'
+import a from '../../assets/img/1.jpg'
+import b from '../../assets/img/2.jpg'
+import c from '../../assets/img/3.jpg'
 
-const CarouselBanner = props => {
+const MainCarousel = props => {
     return (
         <Carousel className="slider">
             <Carousel.Item>
@@ -22,4 +22,4 @@ const CarouselBanner = props => {
     )
 }
 
-export default CarouselBanner
+export default MainCarousel

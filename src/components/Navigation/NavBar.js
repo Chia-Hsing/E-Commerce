@@ -7,12 +7,12 @@ import MenuToggle from './MenuToggle'
 
 const NavBar = props => {
     return (
-        <section className="navBar">
+        <header className="navBar">
             <MenuToggle clicked={props.open} />
             <Logo class="logo" />
             <Login class="login" />
             <NavItems class="navItems" />
-        </section>
+        </header>
     )
 }
 

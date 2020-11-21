@@ -4,17 +4,18 @@
 .navBar {
     @include display-flex(column, center, center);
     @include position(sticky, 0);
-    background-color: #fff;
+    border-bottom: 1px solid color(heavy-grey);
+    padding-bottom: 10px;
+    background-color: color(white);
     width: 100vw;
-    height: 200px;
+    height: 130px;
     z-index: z-index(d);
-    border-bottom: 1px solid #1f1f1f;
 
     .logo {
-        background-color: #fff;
+        background-color: color(white);
         height: 100%;
         width: 100%;
-        line-height: 150px;
+        line-height: 100px;
         margin: 0 auto;
         font: {
             size: size(2xl);
@@ -24,13 +25,17 @@
 
     .login {
         @include position(fixed, 10, none, 10);
-        font-size: size(xs);
+        font: {
+            size: size(s);
+            weight: weight(bold);
+        }
+
         width: auto;
     }
 
     .navItems {
-        @include display-flex(row, space-between, '');
-        margin: 0 auto;
+        @include display-flex(row, space-between, none);
+        box-sizing: border-box;
         min-width: 500px;
         height: 30px;
     }
@@ -40,8 +45,7 @@
     flex-basis: auto;
     list-style: none;
     font-size: size(m);
-    z-index: z-index(i);
-    background-color: #fff;
+    background-color: color(white);
 
     @include A(heavy-grey, light-grey, yellow);
 
@@ -51,13 +55,13 @@
 }
 
 .dropDown {
-    @include position(absolute, 200px, 0, 0);
-    background-color: rgba(255, 255, 255, 0.767);
+    @include position(absolute, 200px, -20, 0);
+    background-color: color(fade-white);
     min-width: 100vw;
     height: auto;
     margin-top: 30px;
     padding: 8px;
-    transform: translateY(-2000px);
+    transform: translateY(-500px);
     opacity: 0;
     transition: 0.4s 0.4s;
     z-index: z-index(b);
@@ -65,7 +69,7 @@
     .dropDownItem {
         list-style: none;
         padding: 8px;
-        font-size: size(s);
+        font-size: size(xs);
 
         @include A(heavy-grey, light-grey, yellow);
     }
@@ -109,7 +113,7 @@
         display: block;
         min-width: 70%;
         height: 100%;
-        background-color: #fff;
+        background-color: color(white);
         padding: 32px 16px;
         box-sizing: border-box;
         z-index: z-index(h);

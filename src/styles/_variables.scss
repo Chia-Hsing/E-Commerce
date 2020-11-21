@@ -1,8 +1,9 @@
 $color: (
     heavy-grey: #1f1f1f,
     light-grey: #555454,
-    transparent-grey: rgba(0, 0, 0, 0.137),
     yellow: #ccc012,
+    white: #fff,
+    fade-white: rgba(255, 255, 255, 0.6),
 );
 
 @function color($color-name) {
