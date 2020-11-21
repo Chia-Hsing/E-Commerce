@@ -1,0 +1,28 @@
+@import 'variables';
+
+.MerchandiseCarousel {
+    max-width: 1200px;
+    height: auto;
+    margin: 50px auto;
+}
+
+.MerchandiseItem {
+    margin: 10px;
+    object-fit: cover;
+    img {
+        height: 250px;
+    }
+}
+
+// .prev {
+//     position: absolute;
+//     top: 40%;
+//     right: -3%;
+//     display: block;
+
+//     svg {
+//         cursor: pointer;
+//         height: 25px;
+//         width: 25px;
+//     }
+// }

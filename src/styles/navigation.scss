@@ -4,8 +4,8 @@
 .navBar {
     @include display-flex(column, center, center);
     @include position(sticky, 0);
-    border-bottom: 1px solid color(heavy-grey);
-    padding-bottom: 10px;
+    border-bottom: 1px solid color(light-grey);
+    padding-bottom: 20px;
     background-color: color(white);
     width: 100vw;
     height: 130px;
@@ -58,7 +58,6 @@
     @include position(absolute, 200px, -20, 0);
     background-color: color(fade-white);
     min-width: 100vw;
-    height: auto;
     margin-top: 30px;
     padding: 8px;
     transform: translateY(-500px);

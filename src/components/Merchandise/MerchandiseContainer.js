@@ -1,11 +1,11 @@
 import React from 'react'
-import MerchandiseItems from './MerchandiseItems'
+import MerchandiseCarousel from './MerchandiseCarousel'
 import '../../styles/merchandise.scss'
 
 const MerchandiseContainer = props => {
     return (
         <section className="MerchandiseContainer">
-            <MerchandiseItems />
+            <MerchandiseCarousel />
         </section>
     )
 }
