@@ -4,7 +4,7 @@ import NavItems from './NavItems'
 import Login from './Login'
 import '../../styles/navigation.scss'
 
-const sideDrawer = props => {
+const SideDrawer = props => {
     const classes = ['sideDrawer']
 
     if (props.show) {
@@ -29,4 +29,4 @@ const sideDrawer = props => {
     )
 }
 
-export default sideDrawer
+export default SideDrawer

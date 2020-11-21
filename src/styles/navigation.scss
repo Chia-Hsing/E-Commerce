@@ -1,22 +1,5 @@
 @import 'variables';
-@import 'mixin';
-
-.logo {
-    background-color: #fff;
-    height: 150px;
-    line-height: 150px;
-    margin: 0 auto;
-    font: {
-        size: size(2xl);
-        weight: weight(bold);
-    }
-}
-
-.login {
-    @include position(fixed, 10, none, 10);
-    font-size: size(xs);
-    width: auto;
-}
+@import 'mixins';
 
 .navBar {
     @include display-flex(column, center, center);
@@ -25,29 +8,42 @@
     width: 100vw;
     height: 200px;
     z-index: z-index(d);
-}
+    border-bottom: 1px solid #1f1f1f;
 
-.navItems {
-    @include display-flex(row, space-between, '');
-    position: relative;
-    min-width: 500px;
-    height: 30px;
+    .logo {
+        background-color: #fff;
+        height: 100%;
+        width: 100%;
+        line-height: 150px;
+        margin: 0 auto;
+        font: {
+            size: size(2xl);
+            weight: weight(bold);
+        }
+    }
+
+    .login {
+        @include position(fixed, 10, none, 10);
+        font-size: size(xs);
+        width: auto;
+    }
+
+    .navItems {
+        @include display-flex(row, space-between, '');
+        margin: 0 auto;
+        min-width: 500px;
+        height: 30px;
+    }
 }
 
 .navItem {
     flex-basis: auto;
     list-style: none;
     font-size: size(m);
+    z-index: z-index(i);
+    background-color: #fff;
 
-    a {
-        text-decoration: none;
-        color: color(heavy-grey);
-    }
-
-    &:hover a {
-        color: color(light-grey);
-        border-bottom: 2px solid color(yellow);
-    }
+    @include A(heavy-grey, light-grey, yellow);
 
     &:hover + .dropDown {
         @include dropdown-hover;
@@ -55,14 +51,15 @@
 }
 
 .dropDown {
-    @include position(absolute, 0, 80, none);
-    min-width: 300px;
+    @include position(absolute, 200px, 0, 0);
+    background-color: rgba(255, 255, 255, 0.767);
+    min-width: 100vw;
     height: auto;
     margin-top: 30px;
     padding: 8px;
-    transform: translateY(-1000%);
+    transform: translateY(-2000px);
     opacity: 0;
-    transition: 0.3s 0.6s;
+    transition: 0.4s 0.4s;
     z-index: z-index(b);
 
     .dropDownItem {
@@ -70,16 +67,7 @@
         padding: 8px;
         font-size: size(s);
 
-        a {
-            text-decoration: none;
-            color: color(heavy-grey);
-        }
-
-        &:hover a {
-            font-size: size(m);
-            color: color(light-grey);
-            border-bottom: 1px solid color(yellow);
-        }
+        @include A(heavy-grey, light-grey, yellow);
     }
     &:hover {
         @include dropdown-hover;
@@ -92,8 +80,18 @@
 }
 
 @include response(m) {
+    .navBar {
+        height: 50px;
+
+        & .navItems,
+        & .logo,
+        & .login {
+            display: none;
+        }
+    }
+
     .menuToggle {
-        @include position(fixed, 10, 10, none);
+        @include position(fixed, 0, 15, none);
         display: block;
         font-size: size(xl);
         cursor: pointer;
@@ -116,48 +114,38 @@
         box-sizing: border-box;
         z-index: z-index(h);
         transition: transform 0.4s cubic-bezier(0.9, 0.1, 0.94, -0.07) 0.2s;
-    }
 
-    .navBar {
-        height: 50px;
-
-        & .navItems,
-        & .logo,
-        & .login {
-            display: none;
-        }
-    }
-
-    .logo-Side-Drawer {
-        z-index: z-index(i);
-        text-align: left;
-        font: {
-            size: size(l);
-            weight: weight(bold);
-        }
-    }
-
-    .navItems-Side-Drawer {
-        @include display-flex(column, center, flex-start);
-        z-index: z-index(i);
-        width: 100px;
-        margin-top: 20px;
-
-        & .navItem {
-            background-color: transparent;
-            padding: 5px 0;
-
-            &:hover + .dropDown {
-                display: block;
+        .logo-Side-Drawer {
+            z-index: z-index(i);
+            text-align: left;
+            font: {
+                size: size(l);
+                weight: weight(bold);
             }
         }
-    }
 
-    .login-Side-Drawer {
-        margin-top: 30px;
-        text-align: left;
-        & .navItem {
-            background-color: transparent;
+        .navItems-Side-Drawer {
+            @include display-flex(column, center, flex-start);
+            z-index: z-index(i);
+            width: 100px;
+            margin-top: 20px;
+
+            & .navItem {
+                background-color: transparent;
+                padding: 5px 0;
+
+                &:hover + .dropDown {
+                    display: block;
+                }
+            }
+        }
+
+        .login-Side-Drawer {
+            margin-top: 30px;
+            text-align: left;
+            & .navItem {
+                background-color: transparent;
+            }
         }
     }
 
@@ -169,11 +157,13 @@
         text-align: left;
         display: none;
         z-index: z-index(i);
+        box-shadow: none;
 
         &:hover {
             display: block;
         }
     }
+
     .sideDrawer.active {
         transform: translateX(0);
     }

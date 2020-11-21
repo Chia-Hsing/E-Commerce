@@ -21,6 +21,7 @@ const Layout = props => {
             <SideDrawer show={drawerOpen} close={() => drawerCloseHandler()} />
             <Backdrop close={() => drawerCloseHandler()} show={drawerOpen} />
             <NavBar open={() => drawerOpenHandler()} />
+
             <main>{props.children}</main>
             {/* <Footer /> */}
         </>

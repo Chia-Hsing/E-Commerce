@@ -15,7 +15,7 @@
 @mixin dropdown-hover {
     opacity: 1;
     transform: translateY(0%);
-    transition: 0.2s 0.4s;
+    transition: 0.6s 0.4s;
 }
 
 @mixin response($breakpoint) {
@@ -26,26 +26,14 @@
     }
 }
 
-@mixin keyframes($name) {
-    @if ($name == slide) {
-        @keyframes slide {
-            0% {
-                visibility: hidden;
-                opacity: 0;
-            }
-            2% {
-                visibility: visible;
-                opacity: 1;
-            }
-            18% {
-                visibility: visible;
-                opacity: 1;
-            }
-            20%,
-            100% {
-                visibility: hidden;
-                opacity: 0;
-            }
-        }
+@mixin A($color, $hoverColor, $bottomColor) {
+    a {
+        text-decoration: none;
+        color: color($color);
+    }
+
+    &:hover a {
+        color: color($hoverColor);
+        border-bottom: 2px solid color($bottomColor);
     }
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import '../../styles/navigation.scss'
 
-const logo = props => {
+const Logo = props => {
     return <div className={props.class}>THREE BEATS</div>
 }
 
-export default logo
+export default Logo

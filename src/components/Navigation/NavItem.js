@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/navigation.scss'
 
-const navItem = props => {
+const NavItem = props => {
     return (
         <div className="navItem">
             <Link to="">{props.children}</Link>
@@ -10,4 +10,4 @@ const navItem = props => {
     )
 }
 
-export default navItem
+export default NavItem

@@ -3,17 +3,17 @@ import NavItems from './NavItems'
 import Logo from './Logo'
 import Login from './Login'
 import '../../styles/navigation.scss'
-import { HeroiconsSolidMenuAlt2 } from './menuToggle'
+import MenuToggle from './MenuToggle'
 
-const navBar = props => {
+const NavBar = props => {
     return (
-        <header className="navBar">
-            <HeroiconsSolidMenuAlt2 clicked={props.open} />
+        <section className="navBar">
+            <MenuToggle clicked={props.open} />
             <Logo class="logo" />
-            <NavItems class="navItems" />
             <Login class="login" />
-        </header>
+            <NavItems class="navItems" />
+        </section>
     )
 }
 
-export default navBar
+export default NavBar

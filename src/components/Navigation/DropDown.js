@@ -2,9 +2,15 @@ import React from 'react'
 import DropDownItem from './DropDownItem'
 import '../../styles/navigation.scss'
 
-const dropDown = props => {
+const DropDown = props => {
+    const classes = ['dropDown']
+
+    if (props.dropDownOpenOne || props.dropDownOpenTwo) {
+        classes.push('active')
+    }
+
     return (
-        <ul className="dropDown">
+        <ul className={classes.join(' ')}>
             <DropDownItem link="">{props.firstItem}</DropDownItem>
             <DropDownItem link="">{props.secondItem}</DropDownItem>
             <DropDownItem link="">{props.thirdItem}</DropDownItem>
@@ -14,4 +20,4 @@ const dropDown = props => {
     )
 }
 
-export default dropDown
+export default DropDown

@@ -2,7 +2,7 @@ import React from 'react'
 import NavItem from './NavItem'
 import '../../styles/navigation.scss'
 
-const login = props => {
+const Login = props => {
     return (
         <div className={props.class}>
             <NavItem link="" exact>
@@ -12,4 +12,4 @@ const login = props => {
     )
 }
 
-export default login
+export default Login

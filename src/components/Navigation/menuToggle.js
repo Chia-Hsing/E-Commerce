@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../styles/navigation.scss'
 
-export const HeroiconsSolidMenuAlt2 = props => {
+const MenuToggle = props => {
     return (
         <div className="menuToggle" onClick={props.clicked}>
             <svg focusable="false" width="1em" height="1em" viewBox="0 0 20 20">
@@ -29,3 +29,5 @@ export const HeroiconsSolidMenuAlt2 = props => {
         </div>
     )
 }
+
+export default MenuToggle
