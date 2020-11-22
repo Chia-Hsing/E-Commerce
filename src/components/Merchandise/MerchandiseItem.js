@@ -1,11 +1,13 @@
 import React from 'react'
 import '../../styles/merchandise.scss'
-import d from '../../assets/img/4.jpg'
+import d from '../../assets/img/6.jpg'
 
 const MerchandiseItem = props => {
     return (
         <div className="MerchandiseItem">
-            <img src={d} alt="" />
+            <div className="imgContainer">
+                <img src={d} alt="" />
+            </div>
             <div className="details">
                 <h5>Brand</h5>
                 <h6>Name</h6>

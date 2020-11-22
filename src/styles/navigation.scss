@@ -3,8 +3,7 @@
 
 .navBar {
     @include display-flex(column, center, center);
-    @include position(sticky, 0);
-    border-bottom: 1px solid color(light-grey);
+    @include position(sticky, 0, 0);
     padding-bottom: 20px;
     background-color: color(white);
     width: 100vw;
@@ -45,10 +44,14 @@
 .navItem {
     flex-basis: auto;
     list-style: none;
-    font-size: size(m);
+    font: {
+        size: size(m);
+        weight: weight(bold);
+    }
+
     background-color: color(white);
 
-    @include A(heavy-grey, light-grey, yellow);
+    @include A(black, light-grey, yellow);
 
     &:hover + .dropDown {
         @include dropdown-hover;
