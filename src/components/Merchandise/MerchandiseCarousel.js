@@ -8,22 +8,12 @@ import 'slick-carousel/slick/slick-theme.css'
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props
-    return (
-        <div className={className} style={{ ...style, display: 'block', background: 'green' }} onClick={onClick}>
-            {/* <svg focusable="false" width="1em" height="1em" viewBox="0 0 42 42">
-                <path
-                    fillRule="evenodd"
-                    d="M13.933 1L34 21.068L14.431 40.637l-4.933-4.933l14.638-14.636L9 5.933z"
-                    fill="currentColor"
-                ></path>
-            </svg> */}
-        </div>
-    )
+    return <div className={className} style={{ ...style, display: 'block' }} onClick={onClick} />
 }
 
 function SamplePrevArrow(props) {
     const { className, style, onClick } = props
-    return <div className={className} style={{ ...style, display: 'block', background: 'green' }} onClick={onClick} />
+    return <div className={className} style={{ ...style, display: 'block' }} onClick={onClick} />
 }
 
 const MerchandiseCarousel = props => {
@@ -31,24 +21,32 @@ const MerchandiseCarousel = props => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 4,
+        slidesToScroll: 4,
         initialSlide: 0,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
             {
-                breakpoint: 700,
+                breakpoint: 1200,
                 settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                },
+            },
+            {
+                breakpoint: 890,
+                settings: {
+                    arrows: false,
                     slidesToShow: 2,
                     slidesToScroll: 2,
                     initialSlide: 2,
                 },
             },
             {
-                breakpoint: 500,
-                arrows: false,
+                breakpoint: 600,
                 settings: {
+                    arrows: false,
                     slidesToShow: 1,
                     slidesToScroll: 1,
                 },
@@ -57,7 +55,7 @@ const MerchandiseCarousel = props => {
     }
     return (
         <div className="MerchandiseCarousel">
-            <h2> Responsive </h2>
+            <h2>New Arrival</h2>
             <Slider {...settings}>
                 <div>
                     <MerchandiseItem />

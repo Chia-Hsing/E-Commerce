@@ -6,8 +6,11 @@ const MerchandiseItem = props => {
     return (
         <div className="MerchandiseItem">
             <img src={d} alt="" />
-            <h4>name</h4>
-            <span>price</span>
+            <div className="details">
+                <h5>Brand</h5>
+                <h6>Name</h6>
+                <span>Price</span>
+            </div>
         </div>
     )
 }

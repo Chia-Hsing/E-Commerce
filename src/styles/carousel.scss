@@ -1,7 +1,8 @@
 @import 'mixins';
 
-.slider {
-    @include position(relative, 0, 0, none);
-    margin: 30px 50px;
+.MainCarousel {
+    @include position(relative, 0, 0, 0);
+    margin: 30px auto;
+    width: 1200px;
     overflow: hidden;
 }
