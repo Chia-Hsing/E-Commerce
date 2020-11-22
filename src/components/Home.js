@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import Layout from './Layout'
 import MainCarousel from './Banner/MainCarousel'
-import MerchandiseCarousel from './Merchandise/MerchandiseCarousel'
+import MerchandiseContainer from './Merchandise/MerchandiseContainer'
 
 class Home extends Component {
     render() {
         return (
             <Layout>
                 <MainCarousel />
-                <MerchandiseCarousel />
+                <MerchandiseContainer />
             </Layout>
         )
     }

@@ -1,15 +1,22 @@
 @import 'variables';
 
-.MerchandiseCarousel {
-    max-width: 1200px;
-    height: auto;
+.MerchandiseContainer {
+    width: 100vw;
+    height: 520px;
     margin: 50px auto 20px;
+    background-color: color(lighter-grey);
 
     h2 {
         height: 100px;
         line-height: 100px;
         font-weight: weight(bold);
     }
+}
+
+.MerchandiseCarousel {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: auto;
 
     .slick-slider {
         max-width: 100%;

@@ -55,7 +55,6 @@ const MerchandiseCarousel = props => {
     }
     return (
         <div className="MerchandiseCarousel">
-            <h2>New Arrival</h2>
             <Slider {...settings}>
                 <div>
                     <MerchandiseItem />

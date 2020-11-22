@@ -1,9 +1,11 @@
 $color: (
-    heavy-grey: #1f1f1f,
-    light-grey: #555454,
+    heavy-grey: #2a2c30,
+    light-grey: #5b5e64,
+    lighter-grey: rgb(240, 241, 241),
+    transparent-grey: #2a2c305d,
     yellow: #ccc012,
     white: #fff,
-    fade-white: rgba(255, 255, 255, 0.6),
+    fade-white: rgba(255, 255, 255, 0.85),
 );
 
 @function color($color-name) {
@@ -11,12 +13,12 @@ $color: (
 }
 
 $font-size: (
-    2xl: 2.5rem,
-    xl: 2rem,
-    l: 1.5rem,
-    m: 1.2rem,
-    s: 1rem,
-    xs: 0.7rem,
+    2xl: 2.5em,
+    xl: 2em,
+    l: 1.5em,
+    m: 1.2em,
+    s: 1em,
+    xs: 0.7em,
 );
 
 @function size($size) {

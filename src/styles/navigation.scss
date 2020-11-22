@@ -24,10 +24,11 @@
     }
 
     .login {
-        @include position(fixed, 10, none, 10);
+        @include position(fixed, 10, none, 20);
+        @include A(yellow, light-grey, yellow);
         font: {
-            size: size(s);
-            weight: weight(bold);
+            size: size(xs);
+            weight: weight(normal);
         }
 
         width: auto;
@@ -176,6 +177,7 @@
         width: 100%;
         height: 100%;
         z-index: z-index(e);
+        transition: 0.4s;
         background-color: color(transparent-grey);
     }
 }
