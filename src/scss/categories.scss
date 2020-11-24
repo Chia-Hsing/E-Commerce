@@ -24,8 +24,9 @@
     grid-template-rows: repeat(2, 1fr);
 
     .category {
-        width: 400px;
-        height: 300px;
+        @include WL(max, 380px);
+        margin-bottom: 30px;
+        position: relative;
 
         .imgContainer {
             @include WL(none, 100%);
@@ -34,6 +35,57 @@
                 @include WL(none, 100%);
                 object-fit: cover;
             }
+
+            .cat {
+                position: absolute;
+                top: 45%;
+                left: 0;
+                right: 0;
+                color: color(white);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.6s ease;
+                transform: translateY(-100%);
+                z-index: z(i);
+                font: {
+                    size: size(l);
+                    weight: weight(bold);
+                }
+            }
+
+            &::after {
+                @include WL(none, 100%, 100%);
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: color(transparent-grey);
+                pointer-events: none;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.6s ease;
+            }
+
+            &:hover::after,
+            &:hover .cat {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
         }
+    }
+}
+
+@include response(l) {
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+}
+
+@include response(m) {
+    .categories {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
     }
 }

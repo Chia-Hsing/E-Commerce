@@ -29,8 +29,14 @@
 }
 
 @mixin response($breakpoint) {
+    @if ($breakpoint == l) {
+        @media (max-width: 1250px) {
+            @content;
+        }
+    }
+
     @if ($breakpoint == m) {
-        @media (max-width: 500px) {
+        @media (max-width: 850px) {
             @content;
         }
     }

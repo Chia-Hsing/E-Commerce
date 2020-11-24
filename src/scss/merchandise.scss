@@ -17,7 +17,7 @@
 }
 
 .MerchandiseCarousel {
-    @include WL(max, 1200px, 320px);
+    @include WL(none, 90vw, 320px);
     margin: 0 auto;
 
     .slick-slider {
