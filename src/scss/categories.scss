@@ -1,0 +1,39 @@
+@import 'mixins';
+@import 'variables';
+
+.categoriesContainer {
+    @include WL(none, 100vw);
+    margin: 0 auto 20px;
+    background-color: color(white);
+
+    h2 {
+        height: 100px;
+        line-height: 100px;
+        font: {
+            size: size(l);
+            weight: weight(bold);
+        }
+    }
+}
+
+.categories {
+    @include WL(none, 100vw);
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    .category {
+        width: 400px;
+        height: 300px;
+
+        .imgContainer {
+            @include WL(none, 100%);
+
+            img {
+                @include WL(none, 100%);
+                object-fit: cover;
+            }
+        }
+    }
+}
