@@ -1,7 +1,7 @@
 import React from 'react'
 import NavItem from './NavItem'
 import DropDown from './DropDown'
-import '../../styles/navigation.scss'
+import '../../../scss/navigation.scss'
 
 const NavItems = props => {
     return (

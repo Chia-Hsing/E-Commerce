@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import NavBar from './Navigation/NavBar'
-import SideDrawer from './Navigation/SideDrawer'
+import NavBar from './Layout/Navigation/NavBar'
+import SideDrawer from './Layout/Navigation/SideDrawer'
 import Backdrop from '../components/UI/Backdrop'
 
 const Layout = props => {
     const [drawerOpen, setDrawerOpen] = useState(false)
 
-    const drawerOpenHandler = () => {
+    const drawerToggleHandler = () => {
         setDrawerOpen(prevState => {
             return !prevState
         })
@@ -20,7 +20,7 @@ const Layout = props => {
         <>
             <SideDrawer close={() => drawerCloseHandler()} show={drawerOpen} />
             <Backdrop close={() => drawerCloseHandler()} show={drawerOpen} />
-            <NavBar open={() => drawerOpenHandler()} />
+            <NavBar open={() => drawerToggleHandler()} />
             <main>{props.children}</main>
             {/* <Footer /> */}
         </>

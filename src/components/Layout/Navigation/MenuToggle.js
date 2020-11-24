@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/navigation.scss'
+import '../../../scss/navigation.scss'
 
 const MenuToggle = props => {
     return (

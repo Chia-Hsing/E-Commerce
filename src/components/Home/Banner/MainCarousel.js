@@ -1,10 +1,9 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
-import '../../styles/index.scss'
-import '../../styles/carousel.scss'
-import a from '../../assets/img/1.jpg'
-import b from '../../assets/img/2.jpg'
-import c from '../../assets/img/3.jpg'
+import '../../../scss/carousel.scss'
+import a from '../../../assets/img/1.jpg'
+import b from '../../../assets/img/2.jpg'
+import c from '../../../assets/img/3.jpg'
 
 const MainCarousel = props => {
     return (

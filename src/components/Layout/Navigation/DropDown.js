@@ -1,6 +1,6 @@
 import React from 'react'
 import DropDownItem from './DropDownItem'
-import '../../styles/navigation.scss'
+import '../../../scss/navigation.scss'
 
 const DropDown = props => {
     const classes = ['dropDown']

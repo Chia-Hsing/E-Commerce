@@ -1,6 +1,6 @@
 import React from 'react'
-import '../../styles/merchandise.scss'
-import d from '../../assets/img/6.jpg'
+import '../../../scss/merchandise.scss'
+import d from '../../../assets/img/6.jpg'
 
 const MerchandiseItem = props => {
     return (
@@ -9,9 +9,13 @@ const MerchandiseItem = props => {
                 <img src={d} alt="" />
             </div>
             <div className="details">
-                <h5>Brand</h5>
+                <h5>
+                    <em>Brand</em>
+                </h5>
                 <h6>Name</h6>
-                <span>Price</span>
+                <span>
+                    <strong>Price</strong>
+                </span>
             </div>
         </div>
     )

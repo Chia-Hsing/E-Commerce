@@ -1,6 +1,6 @@
 import React from 'react'
 import MerchandiseCarousel from './MerchandiseCarousel'
-import '../../styles/merchandise.scss'
+import '../../../scss/merchandise.scss'
 
 const MerchandiseContainer = props => {
     return (

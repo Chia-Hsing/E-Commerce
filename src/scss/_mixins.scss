@@ -1,3 +1,13 @@
+@mixin WL($range, $width, $height: auto) {
+    @if ($range == max) {
+        max-width: $width;
+    } @else if($range == min) {
+        min-width: $width;
+    }
+    width: $width;
+    height: $height;
+}
+
 @mixin position($position, $top: 0, $left: 0, $right: 0) {
     position: $position;
     top: #{$top}px;
@@ -28,8 +38,8 @@
 
 @mixin A($color, $hoverColor, $bottomColor) {
     a {
-        text-decoration: none;
         color: color($color);
+        text-decoration: none;
     }
 
     &:hover a {

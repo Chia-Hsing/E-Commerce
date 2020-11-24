@@ -48,6 +48,6 @@ $z-index: (
     i: 7,
 );
 
-@function z-index($index) {
+@function z($index) {
     @return map-get($z-index, $index);
 }

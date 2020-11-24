@@ -2,7 +2,7 @@ import React from 'react'
 import NavItems from './NavItems'
 import Logo from './Logo'
 import Login from './Login'
-import '../../styles/navigation.scss'
+import '../../../scss/navigation.scss'
 import MenuToggle from './MenuToggle'
 
 const NavBar = props => {

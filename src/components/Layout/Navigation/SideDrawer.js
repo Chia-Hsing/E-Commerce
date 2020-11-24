@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from './Logo'
 import NavItems from './NavItems'
 import Login from './Login'
-import '../../styles/navigation.scss'
+import '../../../scss/navigation.scss'
 
 const SideDrawer = props => {
     const classes = ['sideDrawer']

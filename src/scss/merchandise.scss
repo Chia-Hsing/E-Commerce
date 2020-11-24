@@ -1,22 +1,24 @@
 @import 'variables';
+@import 'mixins';
 
 .MerchandiseContainer {
-    width: 100vw;
-    height: 450px;
+    @include WL(none, 100vw, 450px);
     margin: 50px auto 20px;
     background-color: color(lighter-grey);
 
     h2 {
         height: 100px;
         line-height: 100px;
-        font-weight: weight(bold);
+        font: {
+            size: size(l);
+            weight: weight(bold);
+        }
     }
 }
 
 .MerchandiseCarousel {
-    max-width: 1200px;
+    @include WL(max, 1200px, 320px);
     margin: 0 auto;
-    height: 320px;
 
     .slick-slider {
         max-width: 100%;
@@ -33,9 +35,8 @@
             height: 320px;
 
             .MerchandiseItem {
+                @include WL(none, 280px, 300px);
                 margin: 0 auto;
-                width: 280px;
-                height: 300px;
                 box-sizing: border-box;
                 transition: 0.5s ease-out;
                 cursor: pointer;
@@ -45,13 +46,11 @@
                 }
 
                 .imgContainer {
-                    width: 100%;
-                    height: 65%;
+                    @include WL(none, 100%, 65%);
                     overflow: hidden;
 
                     img {
-                        width: 100%;
-                        height: auto;
+                        @include WL(none, 100%);
                         object-fit: contain;
                         transition: 0.5s ease-out;
 
