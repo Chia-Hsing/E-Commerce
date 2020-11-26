@@ -10,13 +10,18 @@
     z-index: z(d);
 
     .logo {
-        @include WL(none, 100%, 100%);
+        @include WL(none, 30%);
         background-color: color(white);
-        line-height: 100px;
         margin: 0 auto;
-        font: {
-            size: size(l);
-            weight: weight(bold);
+
+        a {
+            line-height: 100px;
+            text-decoration: none;
+            color: color(heavy-grey);
+            font: {
+                size: size(l);
+                weight: weight(bold);
+            }
         }
     }
 
@@ -58,10 +63,10 @@
     background-color: color(fade-white);
     margin-top: 30px;
     padding: 8px;
-    transform: translateY(-500px);
     opacity: 0;
     transition: 0.4s 0.4s;
     z-index: z(b);
+    pointer-events: none;
 
     .dropDownItem {
         @include A(heavy-grey, light-grey, yellow);

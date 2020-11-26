@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import NavBar from './Layout/Navigation/NavBar'
+import Footer from '../components/Layout/Footer/Footer'
 import SideDrawer from './Layout/Navigation/SideDrawer'
 import Backdrop from '../components/UI/Backdrop'
 
@@ -22,7 +23,7 @@ const Layout = props => {
             <Backdrop close={() => drawerCloseHandler()} show={drawerOpen} />
             <NavBar open={() => drawerToggleHandler()} />
             <main>{props.children}</main>
-            {/* <Footer /> */}
+            <Footer />
         </>
     )
 }

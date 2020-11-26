@@ -17,23 +17,21 @@
 }
 
 .categories {
-    @include WL(none, 100vw);
+    @include WL(none, 100%);
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 
     .category {
-        @include WL(max, 380px);
+        @include WL(max, 320px);
         margin-bottom: 30px;
         position: relative;
 
         .imgContainer {
-            @include WL(none, 100%);
-
             img {
                 @include WL(none, 100%);
-                object-fit: cover;
+                object-fit: contain;
             }
 
             .cat {
@@ -87,5 +85,9 @@
     .categories {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(6, 1fr);
+
+        .category {
+            @include WL(max, 100%);
+        }
     }
 }

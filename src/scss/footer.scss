@@ -1,0 +1,50 @@
+@import 'mixins';
+@import 'variables';
+
+footer {
+    @include WL(max, 100vw, 150px);
+    background-color: color(lighter-grey);
+    padding: 15px;
+}
+
+.icon-gp {
+    margin: 0 auto;
+    width: 15%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    .icon-item {
+        font-size: 1.6em;
+        a {
+            color: color(heavy-grey);
+        }
+    }
+}
+
+.detail {
+    .ft-item {
+        @include display-flex(column, space-around, center);
+        width: 20%;
+        margin: 10px auto;
+        span {
+            @include A(light-grey, heavy-grey, yellow);
+            font-weight: weight(bold);
+        }
+    }
+}
+
+.copyright {
+    margin: 0 auto;
+
+    span {
+        display: inline-block;
+        max-width: 50%;
+        font-size: 0.9rem;
+    }
+}
+
+@include response(m) {
+    .icon-gp {
+        width: 35%;
+    }
+}

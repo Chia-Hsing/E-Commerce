@@ -26,17 +26,18 @@
     opacity: 1;
     transform: translateY(0%);
     transition: 0.6s 0.4s;
+    pointer-events: auto;
 }
 
 @mixin response($breakpoint) {
     @if ($breakpoint == l) {
-        @media (max-width: 1250px) {
+        @media screen and (min-width: 850px) and (max-width: 1250px) {
             @content;
         }
     }
 
     @if ($breakpoint == m) {
-        @media (max-width: 850px) {
+        @media screen and (max-width: 850px) {
             @content;
         }
     }
