@@ -13,6 +13,7 @@
         @include WL(none, 30%);
         background-color: color(white);
         margin: 0 auto;
+        z-index: z(i);
 
         a {
             line-height: 100px;

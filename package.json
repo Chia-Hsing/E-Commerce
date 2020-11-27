@@ -1,19 +1,25 @@
 {
-  "name": "e-commerce",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Chia-Hsing/E-Commerce-react.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Chia-Hsing/E-Commerce-react/issues"
-  },
-  "homepage": "https://github.com/Chia-Hsing/E-Commerce-react#readme"
+    "name": "e-commerce",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server/index.js",
+        "dev": "nodemon -r dotenv/config server/index.js -e js dotenv_config_path=/Users/ChiaHsing/Projects/React/e-commerce/server/config/dev.env"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Chia-Hsing/E-Commerce-react.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "mongoose": "^5.10.16"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
 }
