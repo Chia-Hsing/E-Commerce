@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import NavBar from './Layout/Navigation/NavBar'
-import Footer from '../components/Layout/Footer/Footer'
-import SideDrawer from './Layout/Navigation/SideDrawer'
-import Backdrop from '../components/UI/Backdrop'
+import NavBar from './Navigation/NavBar'
+import SideDrawer from './Navigation/SideDrawer'
+import Footer from './Footer/Footer'
+import Backdrop from '../UI/Backdrop'
 
 const Layout = props => {
     const [drawerOpen, setDrawerOpen] = useState(false)
