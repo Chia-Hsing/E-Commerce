@@ -43,7 +43,11 @@
                 cursor: pointer;
 
                 &:hover {
-                    box-shadow: 0 8px 15px -3px color(transparent-grey);
+                    box-shadow: 0 7px 10px -3px color(transparent-grey);
+
+                    img {
+                        transform: scale(1.1, 1.1);
+                    }
                 }
 
                 .imgContainer {
@@ -54,10 +58,6 @@
                         @include WL(none, 100%);
                         object-fit: cover;
                         transition: 0.5s ease-out;
-
-                        &:hover {
-                            transform: scale(1.1, 1.1);
-                        }
                     }
                 }
 

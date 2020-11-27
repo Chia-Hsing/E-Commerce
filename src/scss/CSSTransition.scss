@@ -1,0 +1,18 @@
+.home-enter,
+.home-appear {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.home-enter-active,
+.home-appear-active {
+    opacity: 1;
+    visibility: visible;
+    transition: 2s;
+}
+
+.home-done,
+.home-appear-done {
+    opacity: 1;
+    visibility: visible;
+}

@@ -1,11 +1,17 @@
 import React from 'react'
+import { CSSTransition } from 'react-transition-group'
+
 import Home from './components/Home/Home'
+
+import './scss/CSSTransition.scss'
 
 function App() {
     return (
-        <div className="App">
-            <Home />
-        </div>
+        <CSSTransition in={true} appear={true} timeout={2000} classNames="home">
+            <div className="App">
+                <Home />
+            </div>
+        </CSSTransition>
     )
 }
 

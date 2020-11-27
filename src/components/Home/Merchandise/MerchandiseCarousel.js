@@ -28,14 +28,14 @@ const MerchandiseCarousel = props => {
         prevArrow: <SamplePrevArrow />,
         responsive: [
             {
-                breakpoint: 1200,
+                breakpoint: 1280,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                 },
             },
             {
-                breakpoint: 890,
+                breakpoint: 980,
                 settings: {
                     arrows: false,
                     slidesToShow: 2,
@@ -44,7 +44,7 @@ const MerchandiseCarousel = props => {
                 },
             },
             {
-                breakpoint: 600,
+                breakpoint: 680,
                 settings: {
                     arrows: false,
                     slidesToShow: 1,

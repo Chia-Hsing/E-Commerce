@@ -121,11 +121,15 @@
         transition: transform 0.4s cubic-bezier(0.9, 0.1, 0.94, -0.07) 0.2s;
 
         .logo-Side-Drawer {
-            z-index: z(i);
             text-align: left;
-            font: {
-                size: size(l);
-                weight: weight(bold);
+            a {
+                text-decoration: none;
+                color: color(heavy-grey);
+                z-index: z(i);
+                font: {
+                    size: size(l);
+                    weight: weight(bold);
+                }
             }
         }
 

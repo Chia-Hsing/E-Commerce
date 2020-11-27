@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import Layout from '../Layout'
 import MainCarousel from './Banner/MainCarousel'
 import MerchandiseContainer from './Merchandise/MerchandiseContainer'
