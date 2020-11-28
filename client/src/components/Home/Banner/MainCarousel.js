@@ -1,21 +1,38 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import '../../../scss/carousel.scss'
-import a from '../../../assets/img/1.jpg'
-import b from '../../../assets/img/2.jpg'
-import c from '../../../assets/img/3.jpg'
 
 const MainCarousel = props => {
     return (
-        <Carousel controls="false" className="MainCarousel">
+        <Carousel className="MainCarousel">
             <Carousel.Item>
-                <img className="d-block w-100" src={a} alt="First slide" />
+                <img
+                    className="d-block w-100"
+                    src="https://gigaplus.makeshop.jp/dmountain/img/bnr_top/arc_20201114.jpg"
+                    alt="First slide"
+                />
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src={b} alt="Third slide" />
+                <img
+                    className="d-block w-100"
+                    src="https://gigaplus.makeshop.jp/dmountain/img/bnr_top/cdgh_20201115.jpg"
+                    alt="Third slide"
+                />
             </Carousel.Item>
             <Carousel.Item>
-                <img className="d-block w-100" src={c} alt="Third slide" />
+                <img
+                    className="d-block w-100"
+                    src="https://gigaplus.makeshop.jp/dmountain/img/bnr_top/camp_20201103.jpg"
+                    alt="Third slide"
+                />
+            </Carousel.Item>
+
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src="https://gigaplus.makeshop.jp/dmountain/img/bnr_top/women_20201109.jpg"
+                    alt="Fourth slide"
+                />
             </Carousel.Item>
         </Carousel>
     )

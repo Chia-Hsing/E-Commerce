@@ -1,11 +1,13 @@
 import React from 'react'
-import d from '../../../assets/img/6.jpg'
 
 const Category = props => {
     return (
         <div className="category">
             <div className="imgContainer">
-                <img src={d} alt=""></img>
+                <img
+                    src="https://makeshop-multi-images.akamaized.net/dmountain/shopimages/07/24/29_000000012407.jpg?1603619837"
+                    alt=""
+                ></img>
                 <div className="cat">
                     <span>{props.cat}</span>
                 </div>
