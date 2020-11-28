@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
-const cors = require('cors')
 
 require('./db/mongoose')
 
@@ -14,7 +13,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 /* There is also a built-in environment variable called NODE_ENV. When run npm start, it is always equal to 'development', when run npm test it is always equal to 'test', and when run npm run build to make a production bundle, it is always equal to 'production' */
-
+const cors = require('cors')
 app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import mainMaterials from './mainMaterials'
 
-export default combineReducers({
+const rootReducer = combineReducers({
     mainMaterials,
 })
+
+export default rootReducer

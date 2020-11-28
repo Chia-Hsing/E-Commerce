@@ -7,14 +7,14 @@ const initialState = {
 }
 
 const getMainMaterialsSuccess = (state, action) => {
-    return updateObj(state, { materials: action.materials })
+    return updateObj(state, { materials: action.materials.mainMaterials })
 }
 const getMainMaterialsFailed = (state, action) => {
     return updateObj(state, { error: action.error })
 }
 
 const reducer = (state = initialState, action) => {
-    switch (actionTypes) {
+    switch (action.type) {
         case actionTypes.GET_MAIN_MATERIALS_SUCCESS:
             return getMainMaterialsSuccess(state, action)
         case actionTypes.GET_MAIN_MATERIALS_FAILED:

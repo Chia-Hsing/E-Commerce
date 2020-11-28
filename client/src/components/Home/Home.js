@@ -26,7 +26,7 @@ export class Home extends Component {
 
 const mapStateToProps = state => {
     return {
-        materials: state.materials,
+        materials: state.mainMaterials.materials,
     }
 }
 
