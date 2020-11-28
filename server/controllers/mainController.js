@@ -1,9 +1,9 @@
-const mainCategories = require('../json/mainCategories.json')
+const mainMaterials = require('../json/mainMaterials.json')
 
-const getMainItems = (req, res) => {
-    return res.status(200).json({ status: 'success', mainCategories, message: 'main page image' })
+const getMainMaterials = (req, res) => {
+    return res.status(200).json({ status: 'success', mainMaterials, message: 'main page materials' })
 }
 
 module.exports = {
-    getMainItems,
+    getMainMaterials,
 }
