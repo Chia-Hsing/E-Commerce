@@ -2,14 +2,16 @@ import * as actionTypes from '../actions/actionTypes'
 import { updateObj } from '../../utils/utilities'
 
 const initialState = {
-    materials: [],
+    materials: null,
     error: null,
 }
 
 const getMainMaterialsSuccess = (state, action) => {
-    return updateObj(state, action.materials)
+    return updateObj(state, { materials: action.materials })
 }
-const getMainMaterialsFailed = (state, action) => {}
+const getMainMaterialsFailed = (state, action) => {
+    return updateObj(state, { error: action.error })
+}
 
 const reducer = (state = initialState, action) => {
     switch (actionTypes) {

@@ -1,6 +1,7 @@
 const mainMaterials = require('../json/mainMaterials.json')
 
 const getMainMaterials = (req, res) => {
+    console.log('Hi')
     return res.status(200).json({ status: 'success', mainMaterials, message: 'main page materials' })
 }
 

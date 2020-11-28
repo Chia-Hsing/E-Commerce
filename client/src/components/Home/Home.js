@@ -8,9 +8,9 @@ import CategoriesContainer from './Categories/CategoriesContainer'
 // import { getMainMaterials } from '../../store/actions/index'
 import * as actions from '../../store/actions/index'
 
-class Home extends Component {
-    componentDidMount() {
-        this.props.onGetMainMaterials()
+export class Home extends Component {
+    async componentDidMount() {
+        await this.props.onGetMainMaterials()
     }
 
     render() {
@@ -30,10 +30,10 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchTpProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
         onGetMainMaterials: () => dispatch(actions.getMainMaterials()),
     }
 }
 
-export default connect(mapDispatchTpProps, mapStateToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
