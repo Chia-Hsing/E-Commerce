@@ -1,13 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Category = props => {
     return (
         <div className="category">
             <div className="imgContainer">
-                <img
-                    src="https://makeshop-multi-images.akamaized.net/dmountain/shopimages/07/24/29_000000012407.jpg?1603619837"
-                    alt=""
-                ></img>
+                <img src={props.img} alt={props.cat}></img>
                 <div className="cat">
                     <span>{props.cat}</span>
                 </div>
@@ -17,3 +15,8 @@ const Category = props => {
 }
 
 export default Category
+
+Category.propsTypes = {
+    img: PropTypes.string,
+    cat: PropTypes.string,
+}

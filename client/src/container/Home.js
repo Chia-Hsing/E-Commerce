@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import Layout from './Layout'
 import MainCarousel from '../components/Home/Banner/MainCarousel'
-import MerchandiseContainer from '../components/Home/Merchandise/MerchandiseContainer'
-import CategoriesContainer from '../components/Home/Categories/CategoriesContainer'
+import MerchandiseCarousel from '../components/Home/Merchandise/MerchandiseCarousel'
+import CategoriesBanner from '../components/Home/Categories/CategoriesBanner'
 import * as actions from '../store/actions/index'
 
 export class Home extends Component {
@@ -13,19 +13,31 @@ export class Home extends Component {
     }
 
     render() {
+        let mainPage
+        // = this.props.error ? <div> </div> : null
+
+        if (this.props.mainCategories) {
+            mainPage = (
+                <>
+                    <MainCarousel />
+                    <MerchandiseCarousel />
+                    <CategoriesBanner mainCategories={this.props.mainCategories} />
+                </>
+            )
+        }
+
         return (
-            <Layout>
-                <MainCarousel />
-                <MerchandiseContainer />
-                <CategoriesContainer />
-            </Layout>
+            <>
+                <div>{mainPage}</div>
+            </>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        materials: state.mainMaterials.materials,
+        mainCategories: state.mainMaterials.mainCategories,
+        error: state.mainMaterials.error,
     }
 }
 
@@ -36,3 +48,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
+
+Home.propTypes = {
+    mainCategories: PropTypes.array,
+    error: PropTypes.string,
+    onGetMainMaterials: PropTypes.func,
+}

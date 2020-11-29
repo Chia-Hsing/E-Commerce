@@ -1,7 +1,7 @@
-const mainMaterials = require('../json/mainMaterials.json')
+const mainCategories = require('../json/mainCategories.json')
 
 const getMainMaterials = (req, res) => {
-    return res.status(200).json({ status: 'success', mainMaterials, message: 'main page materials' })
+    return res.status(200).json({ status: 'success', mainCategories, message: 'main page materials' })
 }
 
 module.exports = {

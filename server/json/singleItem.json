@@ -1,0 +1,28 @@
+[
+    {
+        "name": "TEES",
+        "img": "https://makeshop-multi-images.akamaized.net/dmountain/shopimages/46/96/1_000000009646.jpg?1585995774",
+        "_id": "",
+        "price": ""
+    },
+    {
+        "name": "SHIRTS",
+        "img": "https://makeshop-multi-images.akamaized.net/dmountain/shopimages/07/10/1_000000011007.jpg?1581416494"
+    },
+    {
+        "name": "HOODIES&SWEATERS",
+        "img": "https://makeshop-multi-images.akamaized.net/dmountain/shopimages/89/04/11_000000010489.jpg?1571287025"
+    },
+    {
+        "name": "JACKIES&VESTS",
+        "img": "https://makeshop-multi-images.akamaized.net/dmountain/shopimages/80/25/1_000000012580.jpg?1604818025"
+    },
+    {
+        "name": "PANTS&JEANS",
+        "img": "https://makeshop-multi-images.akamaized.net/dmountain/shopimages/51/26/1_000000012651.jpg?1604900454"
+    },
+    {
+        "name": "DRESSES",
+        "img": "https://makeshop-multi-images.akamaized.net/dmountain/shopimages/21/70/7_000000007021.jpg?1602750936"
+    }
+]

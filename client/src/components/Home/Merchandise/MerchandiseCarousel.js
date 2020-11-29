@@ -54,37 +54,41 @@ const MerchandiseCarousel = props => {
         ],
     }
     return (
-        <div className="MerchandiseCarousel">
-            <Slider {...settings}>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-                <div>
-                    <MerchandiseItem />
-                </div>
-            </Slider>
-        </div>
+        <section className="MerchandiseContainer">
+            <h2>New Arrival</h2>
+
+            <div className="MerchandiseCarousel">
+                <Slider {...settings}>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                    <div>
+                        <MerchandiseItem />
+                    </div>
+                </Slider>
+            </div>
+        </section>
     )
 }
 

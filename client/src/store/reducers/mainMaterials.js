@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import { updateObj } from '../../utils/utilities'
 
 const initialState = {
-    mainCategories: null,
+    mainCategories: [],
     error: null,
 }
 
