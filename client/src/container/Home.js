@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Layout from '../Layout/Layout'
-import MainCarousel from './Banner/MainCarousel'
-import MerchandiseContainer from './Merchandise/MerchandiseContainer'
-import CategoriesContainer from './Categories/CategoriesContainer'
-// import { getMainMaterials } from '../../store/actions/index'
-import * as actions from '../../store/actions/index'
+import Layout from './Layout'
+import MainCarousel from '../components/Home/Banner/MainCarousel'
+import MerchandiseContainer from '../components/Home/Merchandise/MerchandiseContainer'
+import CategoriesContainer from '../components/Home/Categories/CategoriesContainer'
+import * as actions from '../store/actions/index'
 
 export class Home extends Component {
     async componentDidMount() {

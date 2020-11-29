@@ -1,7 +1,7 @@
 import React from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-import Home from './components/Home/Home'
+import Home from './container/Home'
 
 import './scss/CSSTransition.scss'
 

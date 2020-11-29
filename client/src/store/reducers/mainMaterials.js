@@ -2,12 +2,12 @@ import * as actionTypes from '../actions/actionTypes'
 import { updateObj } from '../../utils/utilities'
 
 const initialState = {
-    materials: null,
+    mainCategories: null,
     error: null,
 }
 
 const getMainMaterialsSuccess = (state, action) => {
-    return updateObj(state, { materials: action.materials.mainMaterials })
+    return updateObj(state, { mainCategories: action.mainCategories, error: null })
 }
 const getMainMaterialsFailed = (state, action) => {
     return updateObj(state, { error: action.error })
