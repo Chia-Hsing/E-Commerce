@@ -47,10 +47,12 @@
     a {
         color: color($color);
         text-decoration: none;
+        transition: color 0.7s;
     }
 
     &:hover a {
         color: color($hoverColor);
-        border-bottom: 2px solid color($bottomColor);
+        text-decoration: none;
+        border-bottom: 1px solid color($bottomColor);
     }
 }

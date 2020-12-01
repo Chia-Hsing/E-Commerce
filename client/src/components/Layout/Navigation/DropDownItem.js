@@ -5,7 +5,14 @@ import '../../../scss/navigation.scss'
 const DropDownItem = props => {
     return (
         <li className="dropDownItem">
-            <Link to={props.link}>{props.children}</Link>
+            <Link
+                to={{
+                    pathname: `products`,
+                    search: `gender=${encodeURIComponent(props.gender)}&category=${encodeURIComponent(props.link)}`,
+                }}
+            >
+                {props.children}
+            </Link>
         </li>
     )
 }

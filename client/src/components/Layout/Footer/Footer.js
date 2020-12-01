@@ -43,10 +43,13 @@ const Footer = props => {
             <div className="detail">
                 <div className="ft-item">
                     <span>
-                        <Link>contact</Link>
+                        <Link>about</Link>
                     </span>
                     <span>
-                        <Link>policy</Link>
+                        <Link>contact us</Link>
+                    </span>
+                    <span>
+                        <Link>site policy</Link>
                     </span>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 @import 'variables';
 
 footer {
-    @include WL(max, 100vw, 150px);
+    @include WL(max, 100vw, 200px);
     background-color: color(lighter-grey);
     padding: 15px;
 }
@@ -28,13 +28,13 @@ footer {
         margin: 10px auto;
         span {
             @include A(light-grey, heavy-grey, yellow);
-            font-weight: weight(bold);
+            font-weight: weight(light);
         }
     }
 }
 
 .copyright {
-    margin: 0 auto;
+    margin: 2rem auto 0;
 
     span {
         display: inline-block;

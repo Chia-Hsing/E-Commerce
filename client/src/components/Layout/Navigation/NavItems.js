@@ -13,14 +13,16 @@ const NavItems = props => {
                 thirdItem="HOODIES&SWEATERS"
                 fourthItem="JACKETS&VESTS"
                 fifthItem="PANTS&JEANS"
+                gender="man"
             />
-            <NavItem>women</NavItem>
+            <NavItem>woman</NavItem>
             <DropDown
                 firstItem="TEES"
                 secondItem="SHIRTS"
                 thirdItem="HOODIES&SWEATERS"
                 fourthItem="JACKETS&VESTS"
                 fifthItem="DRESSES"
+                gender="woman"
             />
             <NavItem>search</NavItem>
         </nav>

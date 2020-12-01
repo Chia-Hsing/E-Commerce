@@ -8,6 +8,7 @@
     padding-bottom: 20px;
     background-color: color(white);
     z-index: z(d);
+    box-shadow: 1px 1px 1px color(light-grey);
 
     .logo {
         @include WL(none, 30%);
@@ -37,14 +38,14 @@
     }
 
     .navItems {
-        @include display-flex(row, space-between, none);
+        @include display-flex(row, space-around, none);
         @include WL(min, 500px, 30px);
         box-sizing: border-box;
     }
 }
 
 .navItem {
-    @include A(light-grey, heavy-grey, yellow);
+    @include A(heavy-grey, light-grey, yellow);
     flex-basis: auto;
     list-style: none;
     background-color: color(white);

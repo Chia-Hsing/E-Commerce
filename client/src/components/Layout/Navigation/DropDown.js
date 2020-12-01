@@ -5,11 +5,21 @@ import '../../../scss/navigation.scss'
 const DropDown = props => {
     return (
         <ul className="dropDown">
-            <DropDownItem link="/TEES">{props.firstItem}</DropDownItem>
-            <DropDownItem link="">{props.secondItem}</DropDownItem>
-            <DropDownItem link="">{props.thirdItem}</DropDownItem>
-            <DropDownItem link="">{props.fourthItem}</DropDownItem>
-            <DropDownItem link="">{props.fifthItem}</DropDownItem>
+            <DropDownItem gender={props.gender} link={props.firstItem}>
+                {props.firstItem}
+            </DropDownItem>
+            <DropDownItem gender={props.gender} link={props.secondItem}>
+                {props.secondItem}
+            </DropDownItem>
+            <DropDownItem gender={props.gender} link={props.thirdItem}>
+                {props.thirdItem}
+            </DropDownItem>
+            <DropDownItem gender={props.gender} link={props.fourthItem}>
+                {props.fourthItem}
+            </DropDownItem>
+            <DropDownItem gender={props.gender} link={props.fifthItem}>
+                {props.fifthItem}
+            </DropDownItem>
         </ul>
     )
 }
