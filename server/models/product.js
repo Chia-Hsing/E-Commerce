@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
             required: true,
         },
         price: {
-            type: Number,
+            type: String,
             min: 0,
             required: true,
         },
@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema(
             maxlength: 200,
         },
         image: {
-            type: String,
+            type: Buffer,
             default: '',
             required: true,
         },
@@ -46,6 +46,6 @@ const productSchema = new mongoose.Schema(
     }
 )
 
-const Product = mongoose.model('Product', productSchema)
+const Product = new mongoose.model('Product', productSchema)
 
 module.exports = Product

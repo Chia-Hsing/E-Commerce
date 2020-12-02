@@ -4,6 +4,6 @@ const adminRouter = require('./adminRouter')
 
 module.exports = app => {
     app.use('/api', mainRouter)
-    app.use('/api/product', productRouter)
     app.use('/api/admin', adminRouter)
+    app.use('/api/product', productRouter)
 }

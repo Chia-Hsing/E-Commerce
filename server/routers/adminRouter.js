@@ -1,11 +1,13 @@
 const express = require('express')
-const Product = require('../models/product')
+const cors = require('cors')
 const adminController = require('../controllers/adminController')
+const validator = require('../middlewares/validator')
+const { upload } = require('../middlewares/middleware')
 
-const router = express.Router()
+const router = new express.Router()
 
+router.post('/product', cors(), upload.single('image'), validator.createNewProduct, adminController.postProduct)
 // router.get('/product')
-router.post('/product', adminController.postProduct)
 // router.put('/product')
 // router.delete('/product')
 
