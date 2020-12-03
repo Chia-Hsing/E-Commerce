@@ -8,7 +8,6 @@
     padding-bottom: 20px;
     background-color: color(white);
     z-index: z(d);
-    box-shadow: 1px 1px 1px color(light-grey);
 
     .logo {
         @include WL(none, 30%);

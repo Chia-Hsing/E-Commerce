@@ -12,7 +12,7 @@ const SideDrawer = props => {
     }
 
     return (
-        <div className={classes.join(' ')}>
+        <nav className={classes.join(' ')}>
             <div className="menuClose" onClick={props.close}>
                 <svg focusable="false" width="1em" height="1em" viewBox="0 0 512 512">
                     <path
@@ -25,7 +25,7 @@ const SideDrawer = props => {
             <Logo class="logo-Side-Drawer" />
             <NavItems class="navItems-Side-Drawer" />
             <Login class="login-Side-Drawer" />
-        </div>
+        </nav>
     )
 }
 

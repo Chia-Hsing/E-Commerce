@@ -26,11 +26,7 @@ export class Home extends Component {
             )
         }
 
-        return (
-            <>
-                <div>{mainPage}</div>
-            </>
-        )
+        return <>{mainPage}</>
     }
 }
 

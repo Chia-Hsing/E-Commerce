@@ -13,7 +13,7 @@ const validator = {
         body('description').notEmpty().withMessage('Please write some description!'),
         body('price')
             .isCurrency({
-                symbol: '$',
+                symbol: '￥',
                 require_symbol: true,
                 allow_negatives: false,
                 thousands_separator: ',',

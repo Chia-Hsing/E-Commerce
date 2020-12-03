@@ -17,7 +17,8 @@
 }
 
 .categories {
-    @include WL(none, 100%);
+    @include WL(none, 80%);
+    margin: 0 auto;
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
