@@ -7,8 +7,9 @@ class Products extends Component {
         products: [],
     }
 
-    async componentDidUpdate() {
+    async componentDidMount() {
         const query = new URLSearchParams(this.props.location.search)
+
         let gender = null
         let category = null
 
@@ -19,9 +20,11 @@ class Products extends Component {
                 category = param[1]
             }
         }
-        let page = 1
+
+        let page = 2
 
         const res = await apis.getProducts(gender, category, page)
+
         console.log(res.data)
     }
 
