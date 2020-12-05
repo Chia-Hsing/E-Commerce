@@ -8,7 +8,7 @@ const Footer = props => {
         <footer>
             <div className="icon-gp">
                 <div className="icon-item">
-                    <Link>
+                    <Link to="">
                         <svg focusable="false" width="1em" height="1em" viewBox="0 0 24 24">
                             <path
                                 d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"
@@ -19,7 +19,7 @@ const Footer = props => {
                 </div>
 
                 <div className="icon-item">
-                    <Link>
+                    <Link to="">
                         <svg focusable="false" width="1em" height="1em" viewBox="0 0 20 20">
                             <path
                                 d="M17 1H3c-1.1 0-2 .9-2 2v14c0 1.101.9 2 2 2h14c1.1 0 2-.899 2-2V3c0-1.1-.9-2-2-2zM9.984 15.523a5.539 5.539 0 0 0 5.538-5.539c0-.338-.043-.664-.103-.984H17v7.216a.69.69 0 0 1-.693.69H3.693a.69.69 0 0 1-.693-.69V9h1.549c-.061.32-.104.646-.104.984a5.54 5.54 0 0 0 5.539 5.539zM6.523 9.984a3.461 3.461 0 1 1 6.922 0a3.461 3.461 0 0 1-6.922 0zM16.307 6h-1.615A.694.694 0 0 1 14 5.308V3.691c0-.382.31-.691.691-.691h1.615c.384 0 .694.309.694.691v1.616c0 .381-.31.693-.693.693z"
@@ -43,13 +43,13 @@ const Footer = props => {
             <div className="detail">
                 <div className="ft-item">
                     <span>
-                        <Link>about</Link>
+                        <Link to="">about</Link>
                     </span>
                     <span>
-                        <Link>contact us</Link>
+                        <Link to="">contact us</Link>
                     </span>
                     <span>
-                        <Link>site policy</Link>
+                        <Link to="">site policy</Link>
                     </span>
                 </div>
             </div>
