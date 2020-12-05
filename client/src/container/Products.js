@@ -1,23 +1,18 @@
 import { React, Component } from 'react'
+import { connect } from 'react-redux'
 
-import * as apis from '../apis/products'
+import * as actions from '../store/actions/index'
 
 class Products extends Component {
     state = {
         page: 0,
-        products: [],
-        totalPages: 1,
-        count: 0,
         loading: true,
-        error: false,
     }
 
-    getProductsHandler = async () => {
-        this.changePageHandler()
+    getProductsHandler = () => {
         try {
             const query = new URLSearchParams(this.props.location.search)
             const pageItemsLimit = 6
-
             let gender = null
             let category = null
 
@@ -29,23 +24,16 @@ class Products extends Component {
                 }
             }
 
-            console.log(this.state.page)
-            const res = await apis.getProducts(gender, category, pageItemsLimit, this.state.page)
-            const { count, products, totalPages } = res.data.productResponse
-            console.log(products)
-            this.setState(prevState => ({
-                count,
-                products: [...prevState.products, ...products],
-                totalPages,
-                error: false,
-                loading: false,
-            }))
-            console.log(this.state)
+            this.setState(
+                prevState => ({
+                    page: prevState.page + 1,
+                    loading: false,
+                }),
+                () => {
+                    this.props.onGetProducts(gender, category, pageItemsLimit, this.state.page)
+                }
+            )
         } catch (e) {}
-    }
-
-    changePageHandler = () => {
-        this.setState(prevState => ({ ...prevState, page: prevState.page + 1 }))
     }
 
     componentDidMount() {
@@ -54,7 +42,7 @@ class Products extends Component {
 
     render() {
         let moreProductsButton =
-            this.state.page !== this.state.totalPages ? (
+            this.state.page !== this.props.totalPages ? (
                 <button
                     onClick={() => {
                         this.getProductsHandler()
@@ -68,4 +56,18 @@ class Products extends Component {
     }
 }
 
-export default Products
+const mapStateToProps = state => {
+    return {
+        count: state.products.count,
+        totalPages: state.products.totalPages,
+        products: state.products.products,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetProducts: (gd, cg, pil, pg) => dispatch(actions.getProducts(gd, cg, pil, pg)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

@@ -10,7 +10,7 @@ const getMainMaterialsSuccess = (state, action) => {
     return updateObj(state, { mainCategories: action.mainCategories, error: null })
 }
 const getMainMaterialsFailed = (state, action) => {
-    return updateObj(state, { error: action.error })
+    return updateObj(state, { error: action.error.message })
 }
 
 const reducer = (state = initialState, action) => {
