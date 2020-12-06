@@ -1,5 +1,5 @@
 const Product = require('../models/product')
-const Category = require('../models/category')
+const { Category } = require('../models/category')
 const sharp = require('sharp')
 const { validationResult } = require('express-validator')
 
@@ -18,16 +18,43 @@ const postProduct = async (req, res) => {
         }
 
         const buffer = await sharp(req.file.buffer).resize({ width: 300, height: 200 }).png().toBuffer()
-        const product = new Product({ ...req.body, image: buffer })
+
+        const categorySelected = await Category.findById({ _id: req.body.categoryId })
+        if (!categorySelected) {
+            return res.status(404).json({ status: 'error', message: 'Category  not found!' })
+        }
+
+        const product = new Product({ ...req.body, category: categorySelected, image: buffer })
         await product.save()
         return res.status(200).json({
             status: 'success',
-            message: 'Creating product successfully.',
+            message: 'Create product success.',
         })
     } catch (e) {
-        res.status(404).json({
+        res.status(500).json({
             status: 'error',
             message: 'Something went wrong during creating product.',
+        })
+    }
+}
+
+const postCategory = async (req, res) => {
+    try {
+        const results = validationResult(req)
+        if (!results.isEmpty()) {
+            return res.status(400).json({ status: 'error', message: results.array() })
+        }
+
+        const category = new Category({ ...req.body })
+        await category.save()
+        return res.status(200).json({
+            status: 'success',
+            message: 'Create category success.',
+        })
+    } catch (e) {
+        return res.status(500).json({
+            status: 'error',
+            message: 'Something went wrong during creating category.',
         })
     }
 }
@@ -51,6 +78,7 @@ module.exports = {
     // getProducts,
     // getProduct,
     postProduct,
+    postCategory,
     // putProduct,
     // deleteProduct,
 }

@@ -4,18 +4,17 @@ import { updateObj } from '../../utils/utilities'
 const initialState = {
     products: [],
     totalPages: 1,
-    count: 0,
     error: null,
 }
 
 const getProductsSuccess = (state, action) => {
-    const { count, totalPages, products } = action.productResponse
+    const { totalPages, products } = action.productResponse
     const newProducts = [...state.products, ...products]
-    return updateObj(state, { count, totalPages, products: newProducts, error: null })
+    return updateObj(state, { totalPages, products: newProducts, error: null })
 }
 
 const getProductsFailed = (state, action) => {
-    return updateObj(state, { count: 0, totalPages: 1, products: [], error: action.error.message })
+    return updateObj(state, { totalPages: 1, products: [], error: action.error.message })
 }
 
 const reducer = (state = initialState, action) => {

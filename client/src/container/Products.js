@@ -2,6 +2,7 @@ import { React, Component } from 'react'
 import { connect } from 'react-redux'
 
 import * as actions from '../store/actions/index'
+import SingleItem from '../components/Products/SingleItem'
 
 class Products extends Component {
     state = {
@@ -24,6 +25,8 @@ class Products extends Component {
                 }
             }
 
+            this.props.history.push(`/products?gender=${gender}&category=${category}`)
+
             this.setState(
                 prevState => ({
                     page: prevState.page + 1,
@@ -41,24 +44,36 @@ class Products extends Component {
     }
 
     render() {
-        let moreProductsButton =
-            this.state.page !== this.props.totalPages ? (
-                <button
-                    onClick={() => {
-                        this.getProductsHandler()
-                    }}
-                >
-                    click
-                </button>
-            ) : null
+        let products
+        let moreProductsButton
 
-        return <section>1234{moreProductsButton}</section>
+        if (this.props.products) {
+            products = this.props.products.map((product, i) => {
+                return <SingleItem key={i} name={product.name} img={product.image.data} price={product.price} />
+            })
+            moreProductsButton =
+                this.state.page === this.props.totalPages || this.props.totalPages === 0 ? null : (
+                    <button
+                        onClick={() => {
+                            this.getProductsHandler()
+                        }}
+                    >
+                        click
+                    </button>
+                )
+        }
+
+        return (
+            <section>
+                {products}
+                {moreProductsButton}
+            </section>
+        )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        count: state.products.count,
         totalPages: state.products.totalPages,
         products: state.products.products,
     }

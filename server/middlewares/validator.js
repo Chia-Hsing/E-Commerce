@@ -22,6 +22,9 @@ const validator = {
         body('stock').isInt().withMessage('The stock must be a positive integer number.'),
         body('image'),
     ],
+    createNewCategory: [
+        body('name').trim().notEmpty().isLength({ main: 1, max: 20 }).withMessage('Invalid category name.'),
+    ],
 }
 
 module.exports = validator

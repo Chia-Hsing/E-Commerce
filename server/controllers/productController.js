@@ -1,5 +1,4 @@
 const Product = require('../models/product')
-const Category = require('../models/category')
 
 // pass params on the search query to get products meeting the request from the database.
 const getProducts = async (req, res) => {
@@ -19,45 +18,49 @@ const getProducts = async (req, res) => {
 
             const products =
                 +page > 1
-                    ? await Product.find({ gender })
+                    ? await Product.find({ gender }, { name: 1, image: 1, price: 1 })
                           .skip((+page - 1) * pageItemsLimit)
                           .limit(6)
-                    : await Product.find({ gender }).limit(6)
+                          .sort({ createdAt: 1 })
+                    : await Product.find({ gender }, { name: 1, image: 1, price: 1 }).limit(6).sort({ createdAt: 1 })
 
             productResponse = {
-                count,
                 totalPages,
                 products,
             }
         } else if (gender === 'null') {
-            const count = await Product.countDocuments({ category })
+            const count = await Product.countDocuments({ 'category.name': category })
             const totalPages = Math.ceil(count / pageItemsLimit)
 
             const products =
                 +page > 1
-                    ? await Product.find({ category })
+                    ? await Product.find({ 'category.name': category }, { name: 1, image: 1, price: 1 })
                           .skip((+page - 1) * pageItemsLimit)
                           .limit(6)
-                    : await Product.find({ category }).limit(6)
+                          .sort({ createdAt: 1 })
+                    : await Product.find({ 'category.name': category }, { name: 1, image: 1, price: 1 })
+                          .limit(6)
+                          .sort({ createdAt: 1 })
 
             productResponse = {
-                count,
                 totalPages,
                 products,
             }
-        } else {
-            const count = Product.countDocuments({ gender, category })
+        } else if (gender && category) {
+            const count = await Product.where({ gender, 'category.name': category }).countDocuments()
             const totalPages = Math.ceil(count / pageItemsLimit)
 
             const products =
                 +page > 1
-                    ? await Product.find({ gender, category })
+                    ? await Product.find({ gender, 'category.name': category }, { name: 1, image: 1, price: 1 })
                           .skip((+page - 1) * pageItemsLimit)
                           .limit(6)
-                    : await Product.find({ gender, category }).limit(6)
+                          .sort({ createdAt: 1 })
+                    : await Product.find({ gender, 'category.name': category }, { name: 1, image: 1, price: 1 })
+                          .limit(6)
+                          .sort({ createdAt: 1 })
 
             productResponse = {
-                count,
                 totalPages,
                 products,
             }

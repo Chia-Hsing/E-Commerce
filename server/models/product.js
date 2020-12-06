@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const categorySchema = require('./category')
 
 const productSchema = new mongoose.Schema(
     {
@@ -9,7 +10,7 @@ const productSchema = new mongoose.Schema(
             required: true,
         },
         category: {
-            type: String,
+            type: categorySchema,
             required: true,
         },
         gender: {

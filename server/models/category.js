@@ -5,19 +5,14 @@ const categorySchema = new mongoose.Schema({
         type: String,
         minlength: 1,
         maxlength: 20,
-        lowercase: true,
+        uppercase: true,
         required: true,
-    },
-    gender: {
-        type: String,
-        required: true,
-    },
-    isAvailable: {
-        type: Boolean,
-        default: true,
     },
 })
 
 const Category = mongoose.model('Category', categorySchema)
 
-module.exports = Category
+module.exports = {
+    Category,
+    categorySchema,
+}

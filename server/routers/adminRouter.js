@@ -11,4 +11,6 @@ router.post('/product', cors(), upload.single('image'), validator.createNewProdu
 // router.put('/product')
 // router.delete('/product')
 
+router.post('/category', cors(), validator.createNewCategory, adminController.postCategory)
+
 module.exports = router
