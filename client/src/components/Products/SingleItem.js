@@ -2,10 +2,12 @@ import React from 'react'
 
 const SingleItem = props => {
     return (
-        <div>
+        <div className="single-item">
             <img src={props.img} alt="" />
             <span>{props.name}</span>
-            <span>{props.price}</span>
+            <span>
+                <strong>{props.price}</strong>
+            </span>
         </div>
     )
 }

@@ -1,0 +1,28 @@
+@import 'variables';
+@import 'mixins';
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    .single-item {
+        @include display-flex(column, center, center);
+        margin: 1em;
+
+        span {
+            margin-top: 1rem;
+        }
+
+        span:first-of-type {
+            font: {
+                size: 0.9rem;
+            }
+        }
+    }
+}
+
+button {
+    background-color: color(transparent);
+    border-radius: 10px;
+}

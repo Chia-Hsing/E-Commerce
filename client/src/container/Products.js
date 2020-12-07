@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
+import '../scss/products.scss'
 
 class Products extends Component {
     state = {
@@ -25,7 +26,6 @@ class Products extends Component {
                 }
             }
 
-            console.log(this.props.location.search)
             // add one to state.page before every time request the products, until page equal to totalpages.
             this.setState(
                 prevState => ({
@@ -81,7 +81,7 @@ class Products extends Component {
                             this.getProductsHandler()
                         }}
                     >
-                        click
+                        more items
                     </button>
                 )
         } else if (this.props.products.length === 1) {
@@ -92,7 +92,7 @@ class Products extends Component {
 
         return (
             <section>
-                <div>{products}</div>
+                <div className="products-container">{products}</div>
                 {moreProductsButton}
             </section>
         )
