@@ -7,11 +7,11 @@ import SingleItem from '../components/Products/SingleItem'
 class Products extends Component {
     state = {
         page: 0,
-        loading: true,
     }
 
     getProductsHandler = () => {
         try {
+            // take the search query content from url.
             const query = new URLSearchParams(this.props.location.search)
             const pageItemsLimit = 6
             let gender = null
@@ -25,12 +25,11 @@ class Products extends Component {
                 }
             }
 
-            this.props.history.push(`/products?gender=${gender}&category=${category}`)
-
+            console.log(this.props.location.search)
+            // add one to state.page before every time request the products, until page equal to totalpages.
             this.setState(
                 prevState => ({
                     page: prevState.page + 1,
-                    loading: false,
                 }),
                 () => {
                     this.props.onGetProducts(gender, category, pageItemsLimit, this.state.page)
@@ -40,19 +39,43 @@ class Products extends Component {
     }
 
     componentDidMount() {
-        this.getProductsHandler()
+        // initialize state before page mounting.
+        this.setState({ page: 0 }, () => {
+            this.props.onInitProducts()
+            this.getProductsHandler()
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.location.search !== prevProps.location.search) {
+            this.setState({ page: 0 }, () => {
+                this.props.onInitProducts()
+                this.getProductsHandler()
+            })
+        }
+    }
+
+    // regarding image response, the backend returns the type of array buffer, so need a converter to convert it to a readable string.
+    arrayBufferToBase64Img = buffer => {
+        // Creates a new Uint8Array object, and fromCharCode() returns a string created from the specified sequence of UTF-16 code units
+
+        const str = String.fromCharCode(...new Uint8Array(buffer))
+        // The btoa() method encodes a string in base-64.
+        return `data:image/jpeg;base64,${window.btoa(str)}`
     }
 
     render() {
-        let products
-        let moreProductsButton
+        let products = null
+        let moreProductsButton = null
 
-        if (this.props.products) {
+        if (this.props.products.length > 1) {
             products = this.props.products.map((product, i) => {
-                return <SingleItem key={i} name={product.name} img={product.image.data} price={product.price} />
+                const img = this.arrayBufferToBase64Img(product.image.data)
+                return <SingleItem key={i} name={product.name} img={img} price={product.price} />
             })
+
             moreProductsButton =
-                this.state.page === this.props.totalPages || this.props.totalPages === 0 ? null : (
+                this.props.totalPages === 0 || this.state.page === this.props.totalPages ? null : (
                     <button
                         onClick={() => {
                             this.getProductsHandler()
@@ -61,11 +84,15 @@ class Products extends Component {
                         click
                     </button>
                 )
+        } else if (this.props.products.length === 1) {
+            products = this.props.products.map(info => {
+                return <div key={info}>{info}</div>
+            })
         }
 
         return (
             <section>
-                {products}
+                <div>{products}</div>
                 {moreProductsButton}
             </section>
         )
@@ -76,11 +103,13 @@ const mapStateToProps = state => {
     return {
         totalPages: state.products.totalPages,
         products: state.products.products,
+        loading: state.products.loading,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        onInitProducts: () => dispatch(actions.initProducts()),
         onGetProducts: (gd, cg, pil, pg) => dispatch(actions.getProducts(gd, cg, pil, pg)),
     }
 }

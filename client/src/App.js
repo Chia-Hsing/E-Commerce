@@ -11,8 +11,8 @@ import './scss/CSSTransition.scss'
 function App() {
     let routers = (
         <Switch>
+            <Route path="/products" component={Products}></Route>
             <Route path="/" exact component={Home}></Route>
-            <Route path="/products" exact component={Products}></Route>
             <Redirect to="/" />
         </Switch>
     )

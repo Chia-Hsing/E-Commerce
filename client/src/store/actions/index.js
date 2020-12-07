@@ -1,2 +1,2 @@
 export { getMainMaterials } from './mainMaterials'
-export { getProducts } from './products'
+export { getProducts, initProducts } from './products'

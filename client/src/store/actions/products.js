@@ -1,6 +1,10 @@
 import * as actionTypes from './actionTypes'
 import * as apis from '../../apis/products'
 
+export const initProducts = () => dispatch => {
+    dispatch({ type: actionTypes.INIT_PRODUCTS })
+}
+
 export const getProducts = (gender, category, pageItemsLimit, page) => async dispatch => {
     try {
         const res = await apis.getProducts(gender, category, pageItemsLimit, page)
