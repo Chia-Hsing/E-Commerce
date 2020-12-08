@@ -9,4 +9,12 @@ body {
     font-family: 'Work Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    &.swal2-shown > [aria-hidden='true'] {
+        filter: blur(10px);
+    }
+
+    & > * {
+        transition: 0.1s filter linear;
+    }
 }

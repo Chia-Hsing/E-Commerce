@@ -1,5 +1,7 @@
 import { React, Component } from 'react'
 import { connect } from 'react-redux'
+// import Swal from 'sweetalert2'
+import { alert } from '../utils/utilities'
 
 import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
@@ -65,6 +67,23 @@ class Products extends Component {
         return `data:image/jpeg;base64,${window.btoa(str)}`
     }
 
+    onAlertHandler = () => {
+        alert
+            .fire({
+                title: 'Oops...',
+                text: this.props.error,
+                icon: 'warning',
+                iconHtml: '!!',
+                iconColor: '#2a2c30',
+                confirmButtonText: 'redirect to homepage',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    this.props.history.push('/')
+                }
+            })
+    }
+
     render() {
         let products = null
         let moreProductsButton = null
@@ -97,6 +116,11 @@ class Products extends Component {
             })
         }
 
+        if (this.props.error) {
+            this.onAlertHandler()
+            this.props.history.push('/')
+        }
+
         return (
             <section>
                 <div className="products-container">{products}</div>
@@ -111,6 +135,7 @@ const mapStateToProps = state => {
         totalPages: state.products.totalPages,
         products: state.products.products,
         loading: state.products.loading,
+        error: state.products.error,
     }
 }
 
