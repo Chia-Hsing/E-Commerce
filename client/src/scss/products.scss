@@ -2,13 +2,20 @@
 @import 'mixins';
 
 .products-container {
+    @include WL(max, 70%);
+    min-height: 50vh;
+    margin: 0 auto;
     display: grid;
+    place-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 
     .single-item {
         @include display-flex(column, center, center);
-        margin: 1em;
+        @include WL(max, 100%, 100%);
+        position: relative;
+        cursor: pointer;
+        margin: 1em 0;
 
         span {
             margin-top: 1rem;
@@ -19,10 +26,83 @@
                 size: 0.9rem;
             }
         }
+
+        #itemImg {
+            position: relative;
+        }
+
+        #itemImg::before {
+            content: '';
+            @include WL(none, 100%, 100%);
+            @include position(absolute, 0, 0);
+            background-color: color(transparent-grey);
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s ease;
+        }
+
+        &:hover #itemImg::before {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 }
 
-button {
-    background-color: color(transparent);
-    border-radius: 10px;
+.no-item {
+    grid-column: 1 / span 3;
+    grid-row: 1 / 3;
+    font: {
+        size: size(l);
+        weight: weight(bold);
+    }
+}
+
+.button {
+    background-color: transparent;
+    border: 1px solid color(lighter-grey);
+    border-radius: 20px;
+    font-size: size(s);
+
+    color: color(heavy-grey);
+    margin: 20px 0;
+    padding: 6px 12px;
+    outline: none;
+    transition: 0.7s;
+
+    &:hover {
+        border: 1px solid color(heavy-grey);
+        color: color(yellow);
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+@include response(l) {
+    .products-container {
+        @include WL(max, 80%);
+        min-height: 50vh;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+
+        .no-item {
+            grid-column: 1 / span 2;
+            grid-row: 2 / 3;
+        }
+    }
+}
+
+@include response(m) {
+    .products-container {
+        @include WL(max, 100%);
+        min-height: 65vh;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+
+        .single-item {
+            @include WL(max, 100%);
+        }
+    }
 }

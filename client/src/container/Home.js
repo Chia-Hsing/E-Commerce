@@ -6,6 +6,7 @@ import MainCarousel from '../components/Home/Banner/MainCarousel'
 import MerchandiseCarousel from '../components/Home/Merchandise/MerchandiseCarousel'
 import CategoriesBanner from '../components/Home/Categories/CategoriesBanner'
 import * as actions from '../store/actions/index'
+import '../scss/home.scss'
 
 export class Home extends Component {
     async componentDidMount() {

@@ -54,10 +54,8 @@
 
             &::after {
                 @include WL(none, 100%, 100%);
+                @include position(absolute);
                 content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
                 background-color: color(transparent-grey);
                 pointer-events: none;
                 opacity: 0;

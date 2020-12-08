@@ -7,9 +7,11 @@ import '../scss/products.scss'
 
 class Products extends Component {
     state = {
+        // determine what current page is.
         page: 0,
     }
 
+    // trigger api handler to get products information from backend.
     getProductsHandler = () => {
         try {
             // take the search query content from url.
@@ -58,7 +60,6 @@ class Products extends Component {
     // regarding image response, the backend returns the type of array buffer, so need a converter to convert it to a readable string.
     arrayBufferToBase64Img = buffer => {
         // Creates a new Uint8Array object, and fromCharCode() returns a string created from the specified sequence of UTF-16 code units
-
         const str = String.fromCharCode(...new Uint8Array(buffer))
         // The btoa() method encodes a string in base-64.
         return `data:image/jpeg;base64,${window.btoa(str)}`
@@ -68,6 +69,7 @@ class Products extends Component {
         let products = null
         let moreProductsButton = null
 
+        // if the content of product array greater than 1 ( 1 is the 'no item notification.)
         if (this.props.products.length > 1) {
             products = this.props.products.map((product, i) => {
                 const img = this.arrayBufferToBase64Img(product.image.data)
@@ -77,6 +79,7 @@ class Products extends Component {
             moreProductsButton =
                 this.props.totalPages === 0 || this.state.page === this.props.totalPages ? null : (
                     <button
+                        className="button"
                         onClick={() => {
                             this.getProductsHandler()
                         }}
@@ -86,7 +89,11 @@ class Products extends Component {
                 )
         } else if (this.props.products.length === 1) {
             products = this.props.products.map(info => {
-                return <div key={info}>{info}</div>
+                return (
+                    <div key={info} className="no-item">
+                        <span>{info}</span>
+                    </div>
+                )
             })
         }
 

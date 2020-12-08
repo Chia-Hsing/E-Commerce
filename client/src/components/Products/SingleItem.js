@@ -3,7 +3,9 @@ import React from 'react'
 const SingleItem = props => {
     return (
         <div className="single-item">
-            <img src={props.img} alt="" />
+            <div id="itemImg">
+                <img src={props.img} alt="" />
+            </div>
             <span>{props.name}</span>
             <span>
                 <strong>{props.price}</strong>
