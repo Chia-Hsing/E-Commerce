@@ -50,6 +50,7 @@ class Products extends Component {
         })
     }
 
+    // if the location.search is different from the previous one, update the page.
     componentDidUpdate(prevProps, prevState) {
         if (this.props.location.search !== prevProps.location.search) {
             this.setState({ page: 0 }, () => {
@@ -73,7 +74,7 @@ class Products extends Component {
                 title: 'Oops...',
                 text: this.props.error,
                 icon: 'warning',
-                iconHtml: '!!',
+                iconHtml: '!',
                 iconColor: '#2a2c30',
                 confirmButtonText: 'redirect to homepage',
             })
@@ -88,13 +89,31 @@ class Products extends Component {
         let products = null
         let moreProductsButton = null
 
-        // if the content of product array greater than 1 ( 1 is the 'no item notification.)
-        if (this.props.products.length > 1) {
+        // if no items return.
+        if (this.props.isNoItem) {
+            products = (
+                <div className="no-item">
+                    <span>There is no items in this category!</span>
+                </div>
+            )
+        }
+
+        // handle products returning.
+        if (this.props.products.length > 0) {
             products = this.props.products.map((product, i) => {
                 const img = this.arrayBufferToBase64Img(product.image.data)
-                return <SingleItem key={i} name={product.name} img={img} price={product.price} />
+                return (
+                    <SingleItem
+                        key={product._id}
+                        _id={product._id}
+                        name={product.name}
+                        img={img}
+                        price={product.price}
+                    />
+                )
             })
 
+            // determine whether show the more products button or not.
             moreProductsButton =
                 this.props.totalPages === 0 || this.state.page === this.props.totalPages ? null : (
                     <button
@@ -106,16 +125,9 @@ class Products extends Component {
                         more items
                     </button>
                 )
-        } else if (this.props.products.length === 1) {
-            products = this.props.products.map(info => {
-                return (
-                    <div key={info} className="no-item">
-                        <span>{info}</span>
-                    </div>
-                )
-            })
         }
 
+        // if there is a error.
         if (this.props.error) {
             this.onAlertHandler()
             this.props.history.push('/')
@@ -135,6 +147,7 @@ const mapStateToProps = state => {
         totalPages: state.products.totalPages,
         products: state.products.products,
         loading: state.products.loading,
+        isNoItem: state.products.isNoItem,
         error: state.products.error,
     }
 }

@@ -10,6 +10,17 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 
+    a {
+        text-decoration: none;
+        color: color(heavy-grey);
+        transition: 0.6s ease;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: transparent;
+    }
+
     .single-item {
         @include display-flex(column, center, center);
         @include WL(max, 100%, 100%);

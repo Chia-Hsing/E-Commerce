@@ -1,16 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const SingleItem = props => {
     return (
-        <div className="single-item">
-            <div id="itemImg">
-                <img src={props.img} alt="" />
+        <Link
+            to={{
+                pathname: `products/product/${props._id}`,
+            }}
+        >
+            <div className="single-item">
+                <div id="itemImg">
+                    <img src={props.img} alt="" />
+                </div>
+                <span>{props.name}</span>
+                <span>
+                    <strong>{props.price}</strong>
+                </span>
             </div>
-            <span>{props.name}</span>
-            <span>
-                <strong>{props.price}</strong>
-            </span>
-        </div>
+        </Link>
     )
 }
 

@@ -18,11 +18,13 @@ const getProducts = async (req, res) => {
 
             const products =
                 +page > 1
-                    ? await Product.find({ gender }, { name: 1, image: 1, price: 1 })
+                    ? await Product.find({ gender }, { name: 1, image: 1, price: 1, _id: 1 })
                           .skip((+page - 1) * pageItemsLimit)
                           .limit(6)
                           .sort({ createdAt: 1 })
-                    : await Product.find({ gender }, { name: 1, image: 1, price: 1 }).limit(6).sort({ createdAt: 1 })
+                    : await Product.find({ gender }, { name: 1, image: 1, price: 1, _id: 1 })
+                          .limit(6)
+                          .sort({ createdAt: 1 })
 
             productResponse = {
                 totalPages,
@@ -34,11 +36,11 @@ const getProducts = async (req, res) => {
 
             const products =
                 +page > 1
-                    ? await Product.find({ 'category.name': category }, { name: 1, image: 1, price: 1 })
+                    ? await Product.find({ 'category.name': category }, { name: 1, image: 1, price: 1, _id: 1 })
                           .skip((+page - 1) * pageItemsLimit)
                           .limit(6)
                           .sort({ createdAt: 1 })
-                    : await Product.find({ 'category.name': category }, { name: 1, image: 1, price: 1 })
+                    : await Product.find({ 'category.name': category }, { name: 1, image: 1, price: 1, _id: 1 })
                           .limit(6)
                           .sort({ createdAt: 1 })
 
@@ -52,11 +54,11 @@ const getProducts = async (req, res) => {
 
             const products =
                 +page > 1
-                    ? await Product.find({ gender, 'category.name': category }, { name: 1, image: 1, price: 1 })
+                    ? await Product.find({ gender, 'category.name': category }, { name: 1, image: 1, price: 1, _id: 1 })
                           .skip((+page - 1) * pageItemsLimit)
                           .limit(6)
                           .sort({ createdAt: 1 })
-                    : await Product.find({ gender, 'category.name': category }, { name: 1, image: 1, price: 1 })
+                    : await Product.find({ gender, 'category.name': category }, { name: 1, image: 1, price: 1, _id: 1 })
                           .limit(6)
                           .sort({ createdAt: 1 })
 
@@ -71,8 +73,20 @@ const getProducts = async (req, res) => {
     }
 }
 
-const getProduct = (req, res) => {
-    return
+const getProduct = async (req, res) => {
+    try {
+        const PID = req.body.params
+
+        const product = await Product.findById(PID)
+
+        if (!product) {
+            return res.status(404).json({ status: 'error', message: 'product no found!' })
+        }
+
+        return res.status(200).json({ status: 'success', product, message: 'request success' })
+    } catch (e) {
+        res.status(500).json({ status: 'error', message: 'Something went wrong on server side!' })
+    }
 }
 
 module.exports = {

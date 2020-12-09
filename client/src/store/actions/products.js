@@ -15,12 +15,24 @@ export const getProducts = (gender, category, pageItemsLimit, page) => async dis
             data: { productResponse },
         } = res
 
-        if (productResponse.products.length === 0) {
-            productResponse.products = ['There is no item in this category!']
-        }
-
         dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, productResponse })
     } catch (error) {
         dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error })
+    }
+}
+
+export const getProduct = PID => async dispatch => {
+    try {
+        const res = await apis.getProduct(PID)
+
+        if (res.data.status !== 'success' || res.statusText !== 'OK') throw new Error(res.data.message)
+
+        const {
+            data: { product },
+        } = res
+
+        dispatch({ type: actionTypes.GET_PRODUCT_SUCCESS, product })
+    } catch (error) {
+        dispatch({ type: actionTypes.GET_PRODUCT_FAILED, error })
     }
 }
