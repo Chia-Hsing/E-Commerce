@@ -1,6 +1,8 @@
 import React from 'react'
 import Slider from 'react-slick'
+
 import MerchandiseItem from './MerchandiseItem'
+import { arrayBufferToBase64Img } from '../../../utils/utilities'
 
 import '../../../scss/merchandise.scss'
 import 'slick-carousel/slick/slick.css'
@@ -53,40 +55,27 @@ const MerchandiseCarousel = props => {
             },
         ],
     }
+
+    let newArrival = null
+
+    if (props.newArrival.length > 0) {
+        newArrival = props.newArrival.map(item => {
+            const img = arrayBufferToBase64Img(item.image.data)
+
+            return (
+                <div>
+                    <MerchandiseItem key={item.name} img={img} name={item.name} price={item.price} _id={item._id} />
+                </div>
+            )
+        })
+    }
+
     return (
         <section className="MerchandiseContainer">
             <h2>New Arrival</h2>
 
             <div className="MerchandiseCarousel">
-                <Slider {...settings}>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                    <div>
-                        <MerchandiseItem />
-                    </div>
-                </Slider>
+                <Slider {...settings}>{newArrival}</Slider>
             </div>
         </section>
     )

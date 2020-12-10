@@ -21,7 +21,7 @@ export class Home extends Component {
             mainPage = (
                 <>
                     <MainCarousel />
-                    <MerchandiseCarousel />
+                    <MerchandiseCarousel newArrival={this.props.newArrival} />
                     <CategoriesBanner mainCategories={this.props.mainCategories} />
                 </>
             )
@@ -34,6 +34,7 @@ export class Home extends Component {
 const mapStateToProps = state => {
     return {
         mainCategories: state.mainMaterials.mainCategories,
+        newArrival: state.mainMaterials.newArrival,
         error: state.mainMaterials.error,
     }
 }

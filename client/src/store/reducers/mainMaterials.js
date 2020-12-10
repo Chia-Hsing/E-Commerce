@@ -3,11 +3,12 @@ import { updateObj } from '../../utils/utilities'
 
 const initialState = {
     mainCategories: [],
+    newArrival: [],
     error: null,
 }
 
 const getMainMaterialsSuccess = (state, action) => {
-    return updateObj(state, { mainCategories: action.mainCategories, error: null })
+    return updateObj(state, { mainCategories: action.mainCategories, newArrival: action.newArrival, error: null })
 }
 const getMainMaterialsFailed = (state, action) => {
     return updateObj(state, { error: action.error.message })

@@ -1,7 +1,7 @@
 import { React, Component } from 'react'
 import { connect } from 'react-redux'
 // import Swal from 'sweetalert2'
-import { alert } from '../utils/utilities'
+import { alert, arrayBufferToBase64Img } from '../utils/utilities'
 
 import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
@@ -60,14 +60,6 @@ class Products extends Component {
         }
     }
 
-    // regarding image response, the backend returns the type of array buffer, so need a converter to convert it to a readable string.
-    arrayBufferToBase64Img = buffer => {
-        // Creates a new Uint8Array object, and fromCharCode() returns a string created from the specified sequence of UTF-16 code units
-        const str = String.fromCharCode(...new Uint8Array(buffer))
-        // The btoa() method encodes a string in base-64.
-        return `data:image/jpeg;base64,${window.btoa(str)}`
-    }
-
     onAlertHandler = () => {
         alert
             .fire({
@@ -101,7 +93,7 @@ class Products extends Component {
         // handle products returning.
         if (this.props.products.length > 0) {
             products = this.props.products.map((product, i) => {
-                const img = this.arrayBufferToBase64Img(product.image.data)
+                const img = arrayBufferToBase64Img(product.image.data)
                 return (
                     <SingleItem
                         key={product._id}

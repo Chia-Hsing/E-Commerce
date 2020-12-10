@@ -5,9 +5,9 @@ export const getMainMaterials = () => async dispatch => {
     try {
         const res = await apis.getMainMaterials()
         const {
-            data: { mainCategories },
+            data: { mainCategories, newArrival },
         } = res
-        dispatch({ type: actionTypes.GET_MAIN_MATERIALS_SUCCESS, mainCategories })
+        dispatch({ type: actionTypes.GET_MAIN_MATERIALS_SUCCESS, mainCategories, newArrival })
     } catch (error) {
         dispatch({ type: actionTypes.GET_MAIN_MATERIALS_FAILED, error })
     }

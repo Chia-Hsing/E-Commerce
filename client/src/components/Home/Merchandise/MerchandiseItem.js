@@ -1,23 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import '../../../scss/merchandise.scss'
-import d from '../../../assets/img/6.jpg'
 
 const MerchandiseItem = props => {
     return (
-        <div className="MerchandiseItem">
-            <div className="imgContainer">
-                <img src={d} alt="" />
+        <Link to={`/products/product/${props._id}`}>
+            <div className="MerchandiseItem">
+                <div className="imgContainer">
+                    <img src={props.img} alt="" />
+                </div>
+                <div className="details">
+                    <h6>{props.name}</h6>
+                    <span>
+                        <strong>{props.price}</strong>
+                    </span>
+                </div>
             </div>
-            <div className="details">
-                <h5>
-                    <em>Brand</em>
-                </h5>
-                <h6>Name</h6>
-                <span>
-                    <strong>Price</strong>
-                </span>
-            </div>
-        </div>
+        </Link>
     )
 }
 
