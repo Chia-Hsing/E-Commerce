@@ -5,7 +5,8 @@ import * as actions from '../store/actions/index'
 
 class Product extends Component {
     componentDidMount() {
-        this.props.onGetProduct()
+        const PID = this.props.match.params.PID
+        this.props.onGetProduct(PID)
     }
 
     render() {

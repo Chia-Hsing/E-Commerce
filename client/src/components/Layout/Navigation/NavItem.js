@@ -7,8 +7,8 @@ const NavItem = props => {
         <div className="navItem">
             <Link
                 to={{
-                    pathname: `products`,
-                    search: `?gender=${props.children}`,
+                    pathname: `/products`,
+                    search: `gender=${props.children}`,
                 }}
             >
                 {props.children}

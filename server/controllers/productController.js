@@ -75,7 +75,7 @@ const getProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
     try {
-        const PID = req.body.params
+        const PID = req.params.PID
 
         const product = await Product.findById(PID)
 
@@ -83,7 +83,7 @@ const getProduct = async (req, res) => {
             return res.status(404).json({ status: 'error', message: 'product no found!' })
         }
 
-        return res.status(200).json({ status: 'success', product, message: 'request success' })
+        return res.status(200).json({ status: 'success', product, message: 'request success!' })
     } catch (e) {
         res.status(500).json({ status: 'error', message: 'Something went wrong on server side!' })
     }

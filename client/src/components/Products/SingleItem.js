@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom'
 
 const SingleItem = props => {
     return (
-        <Link
-            to={{
-                pathname: `products/product/${props._id}`,
-            }}
-        >
+        <Link to={`/products/product/${props._id}`}>
             <div className="single-item">
                 <div id="itemImg">
                     <img src={props.img} alt="" />

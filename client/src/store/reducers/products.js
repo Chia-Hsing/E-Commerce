@@ -11,7 +11,7 @@ const initialState = {
 }
 
 const initProducts = (state, action) => {
-    return updateObj(state, { products: [], loading: true, totalPages: 1, error: null })
+    return updateObj(state, { products: [], product: {}, loading: true, totalPages: 1, error: null, isNoItem: false })
 }
 
 const getProductsSuccess = (state, action) => {
@@ -20,21 +20,44 @@ const getProductsSuccess = (state, action) => {
         return updateObj(state, { isNoItem: true })
     }
     const newProducts = [...state.products, ...products]
-    return updateObj(state, { totalPages, loading: false, products: newProducts, error: null })
+    return updateObj(state, {
+        totalPages,
+        loading: false,
+        isNoItem: false,
+        product: {},
+        products: newProducts,
+        error: null,
+    })
 }
 
 const getProductsFailed = (state, action) => {
-    return updateObj(state, { totalPages: 1, loading: false, products: [], error: action.error.message })
+    return updateObj(state, {
+        totalPages: 1,
+        loading: false,
+        products: [],
+        product: {},
+        error: action.error.message,
+    })
 }
 
 const getProductSuccess = (state, action) => {
     const product = action.product
 
-    return updateObj(state, { product, loading: false, error: null })
+    return updateObj(state, {
+        product,
+        loading: false,
+        error: null,
+        products: [],
+    })
 }
 
 const getProductFailed = (state, action) => {
-    return updateObj(state, { product: {}, loading: false, error: action.error.message })
+    return updateObj(state, {
+        product: {},
+        products: [],
+        loading: false,
+        error: action.error.message,
+    })
 }
 
 const reducer = (state = initialState, action) => {
