@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropType from 'prop-types'
 
 const SingleItem = props => {
     return (
@@ -18,3 +19,10 @@ const SingleItem = props => {
 }
 
 export default SingleItem
+
+SingleItem.propTypes = {
+    _id: PropType.string,
+    img: PropType.string,
+    name: PropType.string,
+    price: PropType.string,
+}

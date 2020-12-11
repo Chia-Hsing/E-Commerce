@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import '../../../scss/merchandise.scss'
 
@@ -22,3 +23,10 @@ const MerchandiseItem = props => {
 }
 
 export default MerchandiseItem
+
+MerchandiseItem.prototypes = {
+    _id: PropTypes.string,
+    img: PropTypes.string,
+    price: PropTypes.string,
+    name: PropTypes.string,
+}

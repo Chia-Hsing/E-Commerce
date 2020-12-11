@@ -28,8 +28,18 @@ export const getProduct = PID => async dispatch => {
         if (res.data.status !== 'success' || res.statusText !== 'OK') throw new Error(res.data.message)
 
         const {
-            data: { product },
+            data: {
+                product: {
+                    name,
+                    price,
+                    description,
+                    stock: { S, M, L },
+                    image,
+                },
+            },
         } = res
+
+        let product = { name, price, description, S, M, L, image }
 
         dispatch({ type: actionTypes.GET_PRODUCT_SUCCESS, product })
     } catch (error) {

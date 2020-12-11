@@ -9,21 +9,31 @@ import Product from './container/Product'
 
 import './scss/CSSTransition.scss'
 
+const routes = [
+    { path: '/products', name: 'Products', Component: Products },
+    { path: '/products/product/:PID', name: 'product', Component: Product },
+    { path: '/', name: 'Home', Component: Home },
+]
+
 function App() {
-    let routers = (
-        <Switch>
-            <Route path="/products" exact component={Products}></Route>
-            <Route path="/products/product/:PID" component={Product}></Route>
-            <Route path="/" exact component={Home}></Route>
-            <Redirect to="/" />
-        </Switch>
-    )
+    let routers = routes.map(({ path, Component }) => (
+        <Route key={path} exact path={path}>
+            {({ match }) => (
+                <CSSTransition in={match != null} appear={true} timeout={2000} classNames="home" unmountOnExit>
+                    <div className="page">
+                        <Component />
+                    </div>
+                </CSSTransition>
+            )}
+        </Route>
+    ))
 
     return (
         <Layout>
-            <CSSTransition in={true} appear={true} timeout={2000} classNames="home">
+            <Switch>
                 {routers}
-            </CSSTransition>
+                <Redirect to="/" />
+            </Switch>
         </Layout>
     )
 }

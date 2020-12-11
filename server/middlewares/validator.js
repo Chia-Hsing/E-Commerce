@@ -19,7 +19,6 @@ const validator = {
                 thousands_separator: ',',
             })
             .withMessage('The price must be a positive integer number.'),
-        body('stock').isInt().withMessage('The stock must be a positive integer number.'),
         body('image'),
     ],
     createNewCategory: [

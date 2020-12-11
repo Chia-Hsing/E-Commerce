@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Logo from './Logo'
 import NavItems from './NavItems'
 import Login from './Login'
@@ -30,3 +32,8 @@ const SideDrawer = props => {
 }
 
 export default SideDrawer
+
+SideDrawer.prototypes = {
+    show: PropTypes.func,
+    close: PropTypes.func,
+}

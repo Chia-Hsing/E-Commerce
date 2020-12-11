@@ -1,5 +1,7 @@
 import { React, Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import * as actions from '../store/actions/index'
 import ItemDetail from '../components/Products/ItemDetail'
@@ -24,11 +26,10 @@ class Product extends Component {
             const img = arrayBufferToBase64Img(imgBuffer)
 
             product = (
-                <section>
+                <>
                     <ItemDetail product={this.props.product} img={img} />
-                </section>
+                </>
             )
-            console.log(this.props.product.image)
         }
 
         return <>{product}</>
@@ -47,4 +48,9 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product))
+
+Product.propTypes = {
+    product: PropTypes.object,
+    onGetProduct: PropTypes.func,
+}

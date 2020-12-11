@@ -23,9 +23,18 @@ const productSchema = new mongoose.Schema(
             required: true,
         },
         stock: {
-            type: Number,
-            min: 0,
-            required: true,
+            S: {
+                type: Number,
+                default: 0,
+            },
+            M: {
+                type: Number,
+                default: 0,
+            },
+            L: {
+                type: Number,
+                default: 0,
+            },
         },
         description: {
             type: String,

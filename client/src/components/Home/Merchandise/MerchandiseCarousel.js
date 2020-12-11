@@ -1,5 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
+import PropTypes from 'prop-types'
 
 import MerchandiseItem from './MerchandiseItem'
 import { arrayBufferToBase64Img } from '../../../utils/utilities'
@@ -63,8 +64,8 @@ const MerchandiseCarousel = props => {
             const img = arrayBufferToBase64Img(item.image.data)
 
             return (
-                <div>
-                    <MerchandiseItem key={item.name} img={img} name={item.name} price={item.price} _id={item._id} />
+                <div key={item.name}>
+                    <MerchandiseItem img={img} name={item.name} price={item.price} _id={item._id} />
                 </div>
             )
         })
@@ -82,3 +83,7 @@ const MerchandiseCarousel = props => {
 }
 
 export default MerchandiseCarousel
+
+MerchandiseCarousel.propTypes = {
+    newArrival: PropTypes.array,
+}

@@ -1,9 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import NavItems from './NavItems'
 import Logo from './Logo'
 import Login from './Login'
-import '../../../scss/navigation.scss'
 import MenuToggle from './MenuToggle'
+import '../../../scss/navigation.scss'
 
 const NavBar = props => {
     return (
@@ -17,3 +19,7 @@ const NavBar = props => {
 }
 
 export default NavBar
+
+NavBar.propTypes = {
+    open: PropTypes.func,
+}

@@ -1,10 +1,11 @@
 import { React, Component } from 'react'
 import { connect } from 'react-redux'
-// import Swal from 'sweetalert2'
-import { alert, arrayBufferToBase64Img } from '../utils/utilities'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
+import { alert, arrayBufferToBase64Img } from '../utils/utilities'
 import '../scss/products.scss'
 
 class Products extends Component {
@@ -151,4 +152,13 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Products))
+
+Products.propTypes = {
+    onGetProducts: PropTypes.func,
+    onInitProducts: PropTypes.func,
+    error: PropTypes.string,
+    isNoItem: PropTypes.bool,
+    products: PropTypes.array,
+    totalPages: PropTypes.number,
+}
