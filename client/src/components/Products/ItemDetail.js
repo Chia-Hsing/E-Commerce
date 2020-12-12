@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { icons } from '../../utils/icons'
 import '../../scss/product.scss'
 
 const ItemDetail = props => {
@@ -15,6 +16,7 @@ const ItemDetail = props => {
                 </div>
                 <div>
                     <strong>{props.product.price}</strong>
+
                     <select onChange={e => props.getStock(e)}>
                         <option value={0}> - size - </option>
                         {props.product.stock.map(item => {
@@ -27,9 +29,19 @@ const ItemDetail = props => {
                             )
                         })}
                     </select>
+
                     {props.itemStock === 0 ? null : <span>stock: {props.itemStock}</span>}
 
                     <button disabled={props.canBePurchased}>add to bag</button>
+
+                    <ul className="productPurchaseController">
+                        <li>{icons.minus()}</li>
+                        <li>
+                            <span className="product-detail-qty"></span>
+                        </li>
+                        <li onClick={() => props.onAddProductHandler(props.product._id)}>{icons.plus()}</li>
+                    </ul>
+
                     <p>{props.product.description}</p>
                 </div>
             </div>

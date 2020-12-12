@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import jwt_decode from 'jwt-decode'
 
 export const updateObj = (oldObj, updatedProperties) => {
     return {
@@ -23,4 +24,17 @@ export const arrayBufferToBase64Img = buffer => {
     const str = String.fromCharCode(...new Uint8Array(buffer))
     // The btoa() method encodes a string in base-64.
     return `data:image/jpeg;base64,${window.btoa(str)}`
+}
+
+export const checkCartFromLS = () => {
+    if (localStorage.cart) {
+        if (jwt_decode(localStorage.getItem('cart')).exp < Date.now()) {
+            localStorage.removeItem('cart')
+            return {}
+        } else {
+            const item = jwt_decode(localStorage.getItem('cart').token)
+            return item
+        }
+    }
+    return {}
 }

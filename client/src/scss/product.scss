@@ -24,6 +24,13 @@
         p {
             margin-top: 1.2rem;
         }
+
+        .productPurchaseController {
+            @include display-flex(row, space-around, center);
+            @include WL(max, 30%, auto);
+            list-style: none;
+            text-align: left;
+        }
     }
 }
 

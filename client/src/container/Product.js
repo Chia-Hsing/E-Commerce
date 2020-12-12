@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../store/actions/index'
 import ItemDetail from '../components/Products/ItemDetail'
-import { arrayBufferToBase64Img } from '../utils/utilities'
+import { arrayBufferToBase64Img, checkCartFromLS } from '../utils/utilities'
 
 class Product extends Component {
     state = {
@@ -13,14 +13,12 @@ class Product extends Component {
         disablePurchase: true,
     }
 
-    // get product detail from api.
-    onGetProduct = () => {
+    // get product detail from api and check cart on localStorage.
+    componentDidMount() {
         const PID = this.props.match.params.PID
         this.props.onGetProduct(PID)
-    }
-
-    componentDidMount() {
-        this.onGetProduct()
+        const items = checkCartFromLS()
+        this.props.onSetCartItems(items)
     }
 
     // make sure the route work properly.
@@ -43,6 +41,12 @@ class Product extends Component {
         })
     }
 
+    onAddProductHandler = id => {
+        // const item = this.isInCart(id)
+    }
+
+    isInCart = id => {}
+
     render() {
         let product = null
 
@@ -55,11 +59,12 @@ class Product extends Component {
             product = (
                 <>
                     <ItemDetail
-                        getStock={this.getStock}
-                        itemStock={this.state.itemStock}
                         product={this.props.product}
                         img={img}
+                        getStock={this.getStock}
+                        itemStock={this.state.itemStock}
                         canBePurchased={this.state.disablePurchase}
+                        onAddProductHandler={this.onAddProductHandler}
                     />
                 </>
             )
@@ -72,6 +77,7 @@ class Product extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
+        onSetCartItems: items => dispatch(actions.setCartItems(items)),
     }
 }
 
