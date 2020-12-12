@@ -15,7 +15,21 @@ const ItemDetail = props => {
                 </div>
                 <div>
                     <strong>{props.product.price}</strong>
-                    <span>{props.product.S}</span>
+                    <select onChange={e => props.getStock(e)}>
+                        <option value={0}> - size - </option>
+                        {props.product.stock.map(item => {
+                            const size = Object.keys(item)
+                            const stock = Object.values(item)
+                            return (
+                                <option key={size} value={stock}>
+                                    {size}
+                                </option>
+                            )
+                        })}
+                    </select>
+                    {props.itemStock === 0 ? null : <span>stock: {props.itemStock}</span>}
+
+                    <button disabled={props.canBePurchased}>add to bag</button>
                     <p>{props.product.description}</p>
                 </div>
             </div>
@@ -27,4 +41,7 @@ export default ItemDetail
 
 ItemDetail.propTypes = {
     img: PropTypes.string,
+    product: PropTypes.object,
+    itemStock: PropTypes.number,
+    getStock: PropTypes.func,
 }
