@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import '../../scss/product.scss'
+
 const ItemDetail = props => {
     return (
         <section className="productContainer">

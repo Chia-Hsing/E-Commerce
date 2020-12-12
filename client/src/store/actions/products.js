@@ -39,7 +39,7 @@ export const getProduct = PID => async dispatch => {
             },
         } = res
 
-        let product = { name, price, description, S, M, L, image }
+        let product = { name, price, description, stock: [{ S }, { M }, { L }], image }
 
         dispatch({ type: actionTypes.GET_PRODUCT_SUCCESS, product })
     } catch (error) {

@@ -8,13 +8,19 @@ import ItemDetail from '../components/Products/ItemDetail'
 import { arrayBufferToBase64Img } from '../utils/utilities'
 
 class Product extends Component {
-    OnGetProduct = () => {
+    onGetProduct = () => {
         const PID = this.props.match.params.PID
         this.props.onGetProduct(PID)
     }
 
     componentDidMount() {
-        this.OnGetProduct()
+        this.onGetProduct()
+    }
+
+    componentDidUpdate(prevProps, PrevState) {
+        if (this.props.location.pathname !== prevProps.location.pathname) {
+            this.props.history.replace(`/products${this.props.location.search}`)
+        }
     }
 
     render() {

@@ -1,0 +1,63 @@
+@import 'variables';
+@import 'mixins';
+
+.productContainer {
+    @include WL(max, 70%);
+    @include display-flex(row, space-around, center);
+    min-height: 50vh;
+    margin: 0 auto;
+
+    .imgContainer {
+        flex-basis: 60%;
+
+        img {
+            width: 70%;
+            object-fit: cover;
+        }
+    }
+
+    .detailContainer {
+        flex-basis: 40%;
+        margin: 10px 0;
+        text-align: left;
+
+        p {
+            margin-top: 1.2rem;
+        }
+    }
+}
+
+@include response(l) {
+    .productContainer {
+        @include display-flex(column, space-around, center);
+        @include WL(max, 100%);
+        min-height: 65vh;
+
+        .imgContainer {
+            img {
+                width: 100%;
+            }
+        }
+        .detailContainer {
+            text-align: center;
+        }
+    }
+}
+
+@include response(m) {
+    .productContainer {
+        @include display-flex(column, space-around, center);
+        @include WL(max, 100%);
+        min-height: 65vh;
+
+        .imgContainer {
+            img {
+                width: 100%;
+            }
+        }
+
+        .detailContainer {
+            text-align: center;
+        }
+    }
+}
