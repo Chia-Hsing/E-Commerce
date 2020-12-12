@@ -21,7 +21,7 @@ const ItemDetail = props => {
                         <option value={0}> - size - </option>
                         {props.product.stock.map(item => {
                             const size = Object.keys(item)
-                            const stock = Object.values(item)
+                            const stock = item[size]
                             return (
                                 <option key={size} value={stock}>
                                     {size}

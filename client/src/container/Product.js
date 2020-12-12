@@ -10,6 +10,7 @@ import { arrayBufferToBase64Img, checkCartFromLS } from '../utils/utilities'
 class Product extends Component {
     state = {
         itemStock: 0,
+        itemSize: null,
         disablePurchase: true,
     }
 
@@ -31,8 +32,9 @@ class Product extends Component {
     // get stock from selected option (size).
     getStock = e => {
         e.preventDefault()
+        const index = e.nativeEvent.target.selectedIndex
         // add + to ensure the value passed by props is number.
-        this.setState({ itemStock: +e.target.value }, () => {
+        this.setState({ itemStock: +e.target.value, itemSize: e.nativeEvent.target[index].text }, () => {
             if (this.state.itemStock > 0) {
                 this.setState({ disablePurchase: false })
             } else {
@@ -41,9 +43,7 @@ class Product extends Component {
         })
     }
 
-    onAddProductHandler = id => {
-        // const item = this.isInCart(id)
-    }
+    onAddProductHandler = id => {}
 
     isInCart = id => {}
 
@@ -84,6 +84,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         product: state.products.product,
+        cartItems: state.cart.cartItems,
     }
 }
 
