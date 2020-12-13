@@ -26,13 +26,13 @@ export const arrayBufferToBase64Img = buffer => {
     return `data:image/jpeg;base64,${window.btoa(str)}`
 }
 
-export const checkCartFromLS = () => {
-    if (localStorage.cart) {
-        if (jwt_decode(localStorage.getItem('cart')).exp < Date.now()) {
-            localStorage.removeItem('cart')
+export const checkBagFromLS = () => {
+    if (localStorage.bag) {
+        if (jwt_decode(localStorage.getItem('bag')).exp < Date.now()) {
+            localStorage.removeItem('bag')
             return {}
         } else {
-            const item = jwt_decode(localStorage.getItem('cart').token)
+            const item = jwt_decode(localStorage.getItem('bag').token)
             return item
         }
     }

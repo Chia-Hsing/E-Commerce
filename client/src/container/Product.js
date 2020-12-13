@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../store/actions/index'
 import ItemDetail from '../components/Products/ItemDetail'
-import { arrayBufferToBase64Img, checkCartFromLS } from '../utils/utilities'
+import { arrayBufferToBase64Img, checkBagFromLS } from '../utils/utilities'
 
 class Product extends Component {
     state = {
@@ -14,12 +14,12 @@ class Product extends Component {
         disablePurchase: true,
     }
 
-    // get product detail from api and check cart on localStorage.
+    // get product detail from api and check bag on localStorage.
     componentDidMount() {
         const PID = this.props.match.params.PID
         this.props.onGetProduct(PID)
-        const items = checkCartFromLS()
-        this.props.onSetCartItems(items)
+        const items = checkBagFromLS()
+        this.props.onSetBagItems(items)
     }
 
     // make sure the route work properly.
@@ -43,9 +43,26 @@ class Product extends Component {
         })
     }
 
-    onAddProductHandler = id => {}
+    // add the quantity by one to the shopping bag.
+    onAddProductHandler = id => {
+        const inBagItem = this.isInBag(id)
+        // if the stock left great than the item stock you selected, or you do not select yet.
+        if (this.state.itemStock > inBagItem.qty || inBagItem.qty === undefined) {
+            alert('hi')
+        }
+    }
 
-    isInCart = id => {}
+    // use id to get the product items selected in the shopping bag that came from local storage.
+    isInBag = id => {
+        // if that bag not empty
+        if (Object.keys(this.props.bagItems).length) {
+            // get the item you selected by id.
+            this.props.bagItems.filter(item => {
+                return this.props.bagItems.bag._id === id
+            })
+        }
+        return {}
+    }
 
     render() {
         let product = null
@@ -77,14 +94,14 @@ class Product extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
-        onSetCartItems: items => dispatch(actions.setCartItems(items)),
+        onSetBagItems: items => dispatch(actions.setBagItems(items)),
     }
 }
 
 const mapStateToProps = state => {
     return {
         product: state.products.product,
-        cartItems: state.cart.cartItems,
+        bagItems: state.bag.bagItems,
     }
 }
 

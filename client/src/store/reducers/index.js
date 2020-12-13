@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import mainMaterials from './mainMaterials'
 import products from './products'
-import cart from './cart'
+import bag from './bag'
 
 const rootReducer = combineReducers({
     mainMaterials,
     products,
-    cart,
+    bag,
 })
 
 export default rootReducer

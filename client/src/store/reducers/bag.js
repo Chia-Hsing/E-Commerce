@@ -2,17 +2,17 @@ import * as actionTypes from '../actions/actionTypes'
 import { updateObj } from '../../utils/utilities'
 
 const initialState = {
-    cartItems: [],
+    bagItems: [],
 }
 
-const setCartItems = (state, action) => {
-    return updateObj(state, { cartItems: action.items })
+const setBagItems = (state, action) => {
+    return updateObj(state, { bagItems: action.items })
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.SET_CART_ITEMS:
-            return setCartItems(state, action)
+        case actionTypes.SET_BAG_ITEMS:
+            return setBagItems(state, action)
         default:
             return state
     }
