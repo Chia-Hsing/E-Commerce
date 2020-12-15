@@ -9,6 +9,10 @@ const setBagItems = (state, action) => {
     return updateObj(state, { bagItems: action.items })
 }
 
+// const setBagToken = (state, action) => {
+//     return updateObj(state, { bagItems: action.items })
+// }
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_BAG_ITEMS:

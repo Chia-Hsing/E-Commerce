@@ -1,12 +1,12 @@
-const { body } = require('express-validator')
+const { body, param } = require('express-validator')
 
 const validator = {
     createNewProduct: [
         body('name').trim().notEmpty().isLength({ main: 1, max: 50 }).withMessage('Invalid Product name.'),
-        body('category').isLength({ main: 1, max: 20 }).withMessage('Invalid Category field.'),
+        body('categoryId').isMongoId().withMessage('Invalid id'),
         body('gender').custom(val => {
-            if (val !== 'man' || val !== 'woman') {
-                return new Error('Gender should be man or woman!')
+            if (val !== 'men' || val !== 'women') {
+                return new Error('Gender should be men or women!')
             }
             return true
         }),
@@ -19,11 +19,12 @@ const validator = {
                 thousands_separator: ',',
             })
             .withMessage('The price must be a positive integer number.'),
-        body('image'),
+        body('stock.*').isInt().withMessage('The stock should be a positive integer!'),
     ],
     createNewCategory: [
         body('name').trim().notEmpty().isLength({ main: 1, max: 20 }).withMessage('Invalid category name.'),
     ],
+    addItemToBag: [param('id').isMongoId().withMessage('Invalid id')],
 }
 
 module.exports = validator

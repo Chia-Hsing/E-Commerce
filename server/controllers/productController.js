@@ -68,8 +68,8 @@ const getProducts = async (req, res) => {
             }
         }
         return res.status(200).json({ status: 'success', productResponse, message: 'Request success!' })
-    } catch (e) {
-        res.status(500).json({ status: 'error', message: 'Something went wrong on server side!' })
+    } catch (error) {
+        res.status(500).json({ status: 'error', error, message: 'Something went wrong on server side!' })
     }
 }
 
@@ -84,8 +84,8 @@ const getProduct = async (req, res) => {
         }
 
         return res.status(200).json({ status: 'success', product, message: 'request success!' })
-    } catch (e) {
-        res.status(500).json({ status: 'error', message: 'Something went wrong on server side!' })
+    } catch (error) {
+        res.status(500).json({ status: 'error', error, message: 'Something went wrong on server side!' })
     }
 }
 

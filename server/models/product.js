@@ -25,21 +25,27 @@ const productSchema = new mongoose.Schema(
         stock: {
             S: {
                 type: Number,
-                default: 0,
+                min: 0,
+                max: 999,
+                required: true,
             },
             M: {
                 type: Number,
-                default: 0,
+                min: 0,
+                max: 999,
+                required: true,
             },
             L: {
                 type: Number,
-                default: 0,
+                min: 0,
+                max: 999,
+                required: true,
             },
         },
         description: {
             type: String,
             minlength: 1,
-            maxlength: 200,
+            maxlength: 500,
         },
         image: {
             type: Buffer,

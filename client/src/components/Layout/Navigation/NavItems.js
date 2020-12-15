@@ -6,23 +6,23 @@ import '../../../scss/navigation.scss'
 const NavItems = props => {
     return (
         <nav className={props.class}>
-            <NavItem>man</NavItem>
+            <NavItem>men</NavItem>
             <DropDown
                 firstItem="TEES"
                 secondItem="SHIRTS"
                 thirdItem="HOODIES&SWEATERS"
                 fourthItem="JACKETS&VESTS"
                 fifthItem="PANTS&JEANS"
-                gender="man"
+                gender="men"
             />
-            <NavItem>woman</NavItem>
+            <NavItem>women</NavItem>
             <DropDown
                 firstItem="TEES"
                 secondItem="SHIRTS"
                 thirdItem="HOODIES&SWEATERS"
                 fourthItem="JACKETS&VESTS"
                 fifthItem="DRESSES"
-                gender="woman"
+                gender="women"
             />
             <NavItem>search</NavItem>
         </nav>

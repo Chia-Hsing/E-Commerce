@@ -15,11 +15,10 @@ class Product extends Component {
     }
 
     // get product detail from api and check bag on localStorage.
-    componentDidMount() {
+    async componentDidMount() {
         const PID = this.props.match.params.PID
         this.props.onGetProduct(PID)
-        const items = checkBagFromLS()
-        this.props.onSetBagItems(items)
+        await this.props.onSetBagItems()
     }
 
     // make sure the route work properly.
@@ -44,11 +43,14 @@ class Product extends Component {
     }
 
     // add the quantity by one to the shopping bag.
-    onAddProductHandler = id => {
+    onAddProductHandler = () => {
+        // this product's id
+        const id = this.props.product._id
+        // check out if the same product item in the shopping bag.
         const inBagItem = this.isInBag(id)
         // if the stock left great than the item stock you selected, or you do not select yet.
         if (this.state.itemStock > inBagItem.qty || inBagItem.qty === undefined) {
-            alert('hi')
+            this.props.onAddItemToBag(id)
         }
     }
 
@@ -58,7 +60,7 @@ class Product extends Component {
         if (Object.keys(this.props.bagItems).length) {
             // get the item you selected by id.
             this.props.bagItems.filter(item => {
-                return this.props.bagItems.bag._id === id
+                return item.bag._id === id
             })
         }
         return {}
@@ -94,7 +96,8 @@ class Product extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
-        onSetBagItems: items => dispatch(actions.setBagItems(items)),
+        onAddItemToBag: id => dispatch(actions.addItemToBag(id)),
+        onSetBagItems: () => dispatch(actions.setBagItems()),
     }
 }
 

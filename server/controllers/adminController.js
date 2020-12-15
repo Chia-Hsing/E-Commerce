@@ -25,14 +25,22 @@ const postProduct = async (req, res) => {
         }
 
         const product = new Product({ ...req.body, category: categorySelected, image: buffer })
-        await product.save()
+
+        await product.save(error => {
+            if (error) {
+                console.log(error)
+                return
+            }
+        })
+
         return res.status(200).json({
             status: 'success',
             message: 'Create product success.',
         })
-    } catch (e) {
+    } catch (error) {
         res.status(500).json({
             status: 'error',
+            error,
             message: 'Something went wrong during creating product.',
         })
     }
@@ -46,14 +54,20 @@ const postCategory = async (req, res) => {
         }
 
         const category = new Category({ ...req.body })
-        await category.save()
+        await category.save(error => {
+            if (error) {
+                console.log(error)
+                return
+            }
+        })
         return res.status(200).json({
             status: 'success',
             message: 'Create category success.',
         })
-    } catch (e) {
+    } catch (error) {
         return res.status(500).json({
             status: 'error',
+            error,
             message: 'Something went wrong during creating category.',
         })
     }

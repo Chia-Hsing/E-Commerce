@@ -7,9 +7,7 @@ const getMainMaterials = async (req, res) => {
 
         return res.status(200).json({ status: 'success', newArrival, mainCategories, message: 'main page materials' })
     } catch (error) {
-        return res
-            .status(500)
-            .json({ status: 'error', newArrival, mainCategories, message: 'Something went wrong on server side!' })
+        return res.status(500).json({ status: 'error', error, message: 'Something went wrong on server side!' })
     }
 }
 
