@@ -6,7 +6,6 @@ const addItemToBag = async (req, res) => {
         const id = req.params.id
         const product = await Product.findById(id)
 
-        console.log(product)
         return
     } catch (error) {}
 }
