@@ -12,8 +12,8 @@ const upload = multer({
 })
 
 const bagItemToken = async (req, res, next) => {
+    // token: {items: {bag: [{},{},{}] }
     let { token } = req.body
-
     try {
         if (!token) {
             token = jwt.sign(

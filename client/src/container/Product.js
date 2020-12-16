@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../store/actions/index'
 import ItemDetail from '../components/Products/ItemDetail'
-import { arrayBufferToBase64Img, checkBagFromLS } from '../utils/utilities'
+import { arrayBufferToBase64Img } from '../utils/utilities'
 
 class Product extends Component {
     state = {
@@ -60,7 +60,7 @@ class Product extends Component {
         if (Object.keys(this.props.bagItems).length) {
             // get the item you selected by id.
             this.props.bagItems.filter(item => {
-                return item.bag._id === id
+                return item.items.bag.bag[0]._id === id
             })
         }
         return {}

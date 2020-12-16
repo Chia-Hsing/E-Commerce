@@ -1,22 +1,22 @@
-class Bag {
+module.exports = class Bag {
     constructor(oldBag) {
         this.bag = oldBag || []
         this.totalQuantity = oldBag.totalQuantity || 0
         this.totalAmount = oldBag.totalAmount || 0
     }
 
-    addItemToBag(item) {
+    addItemToBag(product) {
+        // if there is something in the bag.
         if (this.bag.length > 0) {
-            const id = item._id
-            const index = this.bag.findIndex(i => i.item._id === id)
+            const index = this.bag.findIndex(item => item._id === product._id)
 
             if (index === -1) {
-                this.addItem(item)
+                this.addItem(product)
             } else {
-                this.updateItem(item)
+                this.updateItem(product)
             }
         } else {
-            this.addItem(item)
+            this.addItem(product)
         }
     }
 
@@ -24,7 +24,7 @@ class Bag {
     cleanBag() {}
 
     addItem(item) {
-        this.bag = [...this.bag, { item }]
+        this.bag = [...this.bag, item]
     }
     updateItem() {}
     removeItem() {}
