@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 bagToJwt = bag => {
     return jwt.sign(
         {
-            items: { bag },
+            items: bag,
             iat: new Date().getTime(),
             exp: new Date().setSeconds(3600),
         },
@@ -17,14 +17,16 @@ const addItemToBag = async (req, res) => {
     try {
         const id = req.params.id
         const product = await Product.findById(id).select(['name', 'category.name', 'price', 'stock'])
-        // req.bag = { items: { bag:[] }, exp..., iat...}
-        // req.bag.items.bag = [...]
-        console.log(req.bag.items.bag)
+        // { items: { bag:[ {item:{}, quantity: ...} ], ...... }, iat: ..., exp: ... }
         const bag = new Bag(req.bag.items.bag)
         bag.addItemToBag(product)
+        // { bag: [{...}], totalQuantity: 0, totalAmount: 0 }
+
         const token = bagToJwt(bag)
         return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })
-    } catch (error) {}
+    } catch (error) {
+        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+    }
 }
 
 module.exports = {

@@ -5,26 +5,32 @@ import jwt_decode from 'jwt-decode'
 
 export const setBagItems = () => async dispatch => {
     try {
-        // bagItems = {items: {bag:[]}}
+        // bagItems: { items: { bag: []}, iat:..., exp:... }
         const bagItems = await checkBagFromLS()
-        dispatch({ type: actionTypes.SET_BAG_ITEMS, bagItems })
-    } catch (error) {}
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems })
+    } catch (error) {
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
+    }
 }
 
 export const addItemToBag = id => async dispatch => {
     try {
-        const oldToken = localStorage.getItem('bagToken')
-        const res = await apis.addItemToBag(id, oldToken || {})
+        // bagToken: { token: ...}
+        const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
         const {
             data: { token },
-        } = res
+        } = await apis.addItemToBag(id, oldToken || {})
 
-        const tokenLS = token
+        const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
-        const { items } = jwt_decode(token.token)
-        // bag:{bag:[{}]}
-        console.log(items)
-        dispatch({ type: actionTypes.SET_BAG_ITEMS, items })
-    } catch (error) {}
+        // { items: { bag: []}, iat:..., exp:... }
+        const {
+            items: { bag: bagItems },
+        } = jwt_decode(token)
+
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems })
+    } catch (error) {
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
+    }
 }

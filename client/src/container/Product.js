@@ -14,14 +14,14 @@ class Product extends Component {
         disablePurchase: true,
     }
 
-    // get product detail from api and check bag on localStorage.
+    // get product detail from api and check if there is a bag on localStorage, set it to state.
     async componentDidMount() {
         const PID = this.props.match.params.PID
         this.props.onGetProduct(PID)
         await this.props.onSetBagItems()
     }
 
-    // make sure the route work properly.
+    // make sure the route works properly by comparing the two path names.
     componentDidUpdate(prevProps, PrevState) {
         if (this.props.location.pathname !== prevProps.location.pathname) {
             this.props.history.replace(`/products${this.props.location.search}`)
@@ -42,26 +42,26 @@ class Product extends Component {
         })
     }
 
-    // add the quantity by one to the shopping bag.
+    // add the quantity of a product by one to the shopping bag.
     onAddProductHandler = () => {
         // this product's id
         const id = this.props.product._id
-        // check out if the same product item in the shopping bag.
+        // check out if there is a product same as this product in the shopping bag.
         const inBagItem = this.isInBag(id)
-        // if the stock left great than the item stock you selected, or you do not select yet.
-        if (this.state.itemStock > inBagItem.qty || inBagItem.qty === undefined) {
+        // if the stock left great than the item stock selected, or yet select.
+        if (this.state.itemStock > inBagItem.totalQuantity || inBagItem.totalQuantity === undefined) {
             this.props.onAddItemToBag(id)
         }
     }
 
-    // use id to get the product items selected in the shopping bag that came from local storage.
+    // use id to get the product items same as the selected one in the shopping bag coming from local storage.
     isInBag = id => {
         // if that bag not empty
-        if (Object.keys(this.props.bagItems).length) {
+        if (this.props.bagItems.length) {
             // get the item you selected by id.
-            this.props.bagItems.filter(item => {
-                return item.items.bag.bag[0]._id === id
-            })
+            // bagItems: { items: { bag: [ {}, {} ], totalQuantity, totalAmount }, iat:..., exp:... }
+            const thisProduct = this.props.bagItems.filter(item => item.item._id === id)
+            return thisProduct.length ? thisProduct[0] : []
         }
         return {}
     }

@@ -28,13 +28,18 @@ export const arrayBufferToBase64Img = buffer => {
 
 export const checkBagFromLS = () => {
     if (localStorage.bagToken) {
+        // bagToken: { token: ...}
+        // bagToken: { items: { bag: []}, iat:..., exp:... } (after jwt_decode)
         if (jwt_decode(localStorage.getItem('bagToken')).exp < Date.now()) {
             localStorage.removeItem('bagToken')
             return {}
         } else {
-            const bagItems = jwt_decode(localStorage.getItem('bagToken'))
+            const {
+                items: { bag: bagItems },
+            } = jwt_decode(localStorage.getItem('bagToken'))
+            // bagItems: { items: { bag: []}, iat:..., exp:... }
             return bagItems
         }
     }
-    return {}
+    return []
 }

@@ -8,25 +8,37 @@ module.exports = class Bag {
     addItemToBag(product) {
         // if there is something in the bag.
         if (this.bag.length > 0) {
-            const index = this.bag.findIndex(item => item._id === product._id)
+            const index = this.bag.findIndex(item => {
+                return item.item._id == product._id
+            })
 
             if (index === -1) {
                 this.addItem(product)
             } else {
-                this.updateItem(product)
+                console.log('hi')
+                this.updateItem(product._id, '+')
             }
         } else {
             this.addItem(product)
         }
     }
-
     removeItemFromBag() {}
     cleanBag() {}
 
     addItem(item) {
-        this.bag = [...this.bag, item]
+        this.bag = [...this.bag, { item, quantity: 1 }]
     }
-    updateItem() {}
+    updateItem(id, operator) {
+        const bag = this.bag.map(products =>
+            products.item._id == id
+                ? (products = {
+                      ...products,
+                      quantity: operator === '+' ? products.quantity + 1 : products.quantity - 1,
+                  })
+                : products
+        )
+        this.bag = bag
+    }
     removeItem() {}
 }
 
