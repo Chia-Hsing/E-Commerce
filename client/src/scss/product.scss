@@ -34,7 +34,7 @@
                 border: 1px solid color(light-grey);
                 border-radius: 5px;
                 margin: 0 1rem;
-                padding: 0.1rem 0.7rem;
+                padding: 0.05rem 0.6rem;
             }
 
             p {
@@ -42,7 +42,7 @@
             }
 
             ul.productPurchaseController {
-                @include display-flex(row, space-around, stretch);
+                @include display-flex(row, space-evenly, stretch);
                 @include WL(max, 35%, auto);
                 margin: 0 0.6rem;
                 padding: 0;
@@ -67,7 +67,7 @@
             text-align: center;
 
             .detailBody {
-                @include WL(max, 30%, auto);
+                @include WL(max, 60%, auto);
                 @include display-flex(row, center, center);
                 margin: 1rem auto;
             }

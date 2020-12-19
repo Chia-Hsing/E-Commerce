@@ -19,7 +19,21 @@ const setBagItemsSuccess = (state, action) => {
 }
 
 const setBagItemsFailed = (state, action) => {
-    return updateObj(state, { bagItems: [], totalQuantity: 0, totalAmount: 0, error: action.error.message })
+    return updateObj(state, {
+        bagItems: [],
+        totalQuantity: 0,
+        totalAmount: 0,
+        error: action.error.message,
+    })
+}
+
+const cleanBagSuccess = (state, action) => {
+    return updateObj(state, {
+        bagItems: [],
+        totalQuantity: 0,
+        totalAmount: 0,
+        error: null,
+    })
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +42,8 @@ const reducer = (state = initialState, action) => {
             return setBagItemsSuccess(state, action)
         case actionTypes.SET_BAG_ITEMS_FAILED:
             return setBagItemsFailed(state, action)
+        case actionTypes.CLEAN_BAG_SUCCESS:
+            return cleanBagSuccess(state, action)
         default:
             return state
     }

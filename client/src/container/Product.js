@@ -95,7 +95,6 @@ class Product extends Component {
                         itemStock={this.state.itemStock}
                         realItemStock={this.isInBag(this.props.product._id).itemStock}
                         quantity={this.isInBag(this.props.product._id).quantity}
-                        hadAlreadyAdded={this.isInBag(this.props.product._id)}
                         canBePurchased={this.state.disablePurchase}
                         onAddProductHandler={this.onAddProductHandler}
                         onDeleteProductHandler={this.onDeleteProductHandler}

@@ -34,7 +34,7 @@ module.exports = class Bag {
 
             // make the product quantity removed when it less than one.
             if (this.bag[index].quantity === 1) {
-                return this.removeItem(id)
+                return this.removeItem(id, itemSize)
             }
 
             if (index !== -1) {
@@ -42,7 +42,11 @@ module.exports = class Bag {
             }
         }
     }
-    cleanBag() {}
+    cleanBag() {
+        this.bag = []
+        this.totalAmount = 0
+        this.totalQuantity = 0
+    }
 
     addItem(item, itemSize, itemStock) {
         this.bag = [...this.bag, { item, quantity: 1, itemSize, itemStock: itemStock - 1 }]
@@ -64,8 +68,9 @@ module.exports = class Bag {
         this.totalAmount = totalAmount(this.bag)
         this.totalQuantity = totalQuantity(this.bag)
     }
-    removeItem(id) {
-        const bag = this.bag.filter(products => products.item._id != id)
+
+    removeItem(id, itemSize) {
+        const bag = this.bag.filter(products => products.item._id != id && products.itemSize === itemSize)
         this.bag = bag
         this.totalAmount = totalAmount(this.bag)
         this.totalQuantity = totalQuantity(this.bag)

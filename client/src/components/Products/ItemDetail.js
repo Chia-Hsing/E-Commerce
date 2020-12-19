@@ -64,5 +64,10 @@ ItemDetail.propTypes = {
     img: PropTypes.string,
     product: PropTypes.object,
     itemStock: PropTypes.number,
+    realItemStock: PropTypes.number,
     getStock: PropTypes.func,
+    quantity: PropTypes.number,
+    onDeleteProductHandler: PropTypes.func,
+    onAddProductHandler: PropTypes.func,
+    canBePurchased: PropTypes.bool,
 }

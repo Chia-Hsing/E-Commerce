@@ -24,7 +24,7 @@ const validator = {
     createNewCategory: [
         body('name').trim().notEmpty().isLength({ main: 1, max: 20 }).withMessage('Invalid category name.'),
     ],
-    addItemToBag: [param('id').isMongoId().withMessage('Invalid id')],
+    bagOperation: [param('id').isMongoId().withMessage('Invalid id')],
 }
 
 module.exports = validator

@@ -36,7 +36,6 @@ export const checkBagFromLS = () => {
         } else {
             const items = jwt_decode(localStorage.getItem('bagToken'))
 
-            console.log(items)
             // bagItems: { items: { bag: []}, iat:..., exp:... }
             return items
         }

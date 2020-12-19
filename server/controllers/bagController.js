@@ -49,7 +49,33 @@ const deleteItemFromBag = async (req, res) => {
     }
 }
 
+const removeWholeItem = async (req, res) => {
+    try {
+        const id = req.params.id
+        let { itemSize } = req.body
+
+        const bag = new Bag(req.bag.items.bag)
+        bag.removeItem(id, itemSize)
+
+        const token = bagToJwt(bag)
+        return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })
+    } catch (error) {
+        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+    }
+}
+
+const cleanBag = async (req, res) => {
+    try {
+        bag.cleanBag()
+        return res.status(200).json({ status: 'success', message: 'success to clean bag!' })
+    } catch (error) {
+        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+    }
+}
+
 module.exports = {
     addItemToBag,
     deleteItemFromBag,
+    removeWholeItem,
+    cleanBag,
 }
