@@ -40,7 +40,7 @@ const deleteItemFromBag = async (req, res) => {
         let { itemSize } = req.body
 
         const bag = new Bag(req.bag.items.bag)
-        bag.removeItemFromBag(id, itemSize)
+        bag.deleteItemFromBag(id, itemSize)
 
         const token = bagToJwt(bag)
         return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })

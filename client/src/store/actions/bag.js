@@ -6,8 +6,13 @@ import jwt_decode from 'jwt-decode'
 export const setBagItems = () => async dispatch => {
     try {
         // bagItems: { items: { bag: []}, iat:..., exp:... }
-        const bagItems = await checkBagFromLS()
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems })
+        const { items } = await checkBagFromLS()
+        dispatch({
+            type: actionTypes.SET_BAG_ITEMS_SUCCESS,
+            bagItems: items.bag,
+            totalQuantity: items.totalQuantity,
+            totalAmount: items.totalAmount,
+        })
     } catch (error) {
         dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
     }
@@ -26,10 +31,10 @@ export const addItemToBag = (id, itemStock, itemSize) => async dispatch => {
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
         // { items: { bag: []}, iat:..., exp:... }
         const {
-            items: { bag: bagItems },
+            items: { bag: bagItems, totalQuantity, totalAmount },
         } = jwt_decode(token)
 
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems })
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems, totalQuantity, totalAmount })
     } catch (error) {
         dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
     }
@@ -47,9 +52,9 @@ export const deleteItemFromBag = (id, itemSize) => async dispatch => {
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
         // { items: { bag: []}, iat:..., exp:... }
         const {
-            items: { bag: bagItems },
+            items: { bag: bagItems, totalQuantity, totalAmount },
         } = jwt_decode(token)
 
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems })
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems, totalQuantity, totalAmount })
     } catch (error) {}
 }

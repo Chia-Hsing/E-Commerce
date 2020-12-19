@@ -26,13 +26,13 @@ module.exports = class Bag {
             this.addItem(product, itemSize, itemStock)
         }
     }
-    removeItemFromBag(id, itemSize) {
+    deleteItemFromBag(id, itemSize) {
         if (this.bag.length > 0) {
             const index = this.bag.findIndex(item => {
                 return item.item._id == id && item.itemSize === itemSize
             })
 
-            // make the product quantity unavailable when it less than one.
+            // make the product quantity removed when it less than one.
             if (this.bag[index].quantity === 1) {
                 return this.removeItem(id)
             }
@@ -46,6 +46,8 @@ module.exports = class Bag {
 
     addItem(item, itemSize, itemStock) {
         this.bag = [...this.bag, { item, quantity: 1, itemSize, itemStock: itemStock - 1 }]
+        this.totalAmount = totalAmount(this.bag)
+        this.totalQuantity = totalQuantity(this.bag)
     }
 
     updateItem(id, operator) {
@@ -59,21 +61,39 @@ module.exports = class Bag {
                 : products
         )
         this.bag = bag
+        this.totalAmount = totalAmount(this.bag)
+        this.totalQuantity = totalQuantity(this.bag)
     }
     removeItem(id) {
         const bag = this.bag.filter(products => products.item._id != id)
         this.bag = bag
+        this.totalAmount = totalAmount(this.bag)
+        this.totalQuantity = totalQuantity(this.bag)
     }
+}
 
-    totalQuantity(bag) {
-        let totalQuantity = bag
-            .map(item => {
-                console.log(item)
-                return item.item.price
-            })
-            .reduce((a, c) => {
-                return a + c
-            }, 0)
-        return totalQuantity
-    }
+const totalAmount = bag => {
+    let totalAmount = bag
+        .map(item => {
+            const price = item.item.price.replace('￥', '').split(',').join('')
+            const itemAmount = +price * item.quantity
+            return itemAmount
+        })
+        .reduce((a, c) => {
+            return a + c
+        }, 0)
+
+    return totalAmount
+}
+
+const totalQuantity = bag => {
+    let totalQuantity = bag
+        .map(item => {
+            return item.quantity
+        })
+        .reduce((a, c) => {
+            return a + c
+        }, 0)
+
+    return totalQuantity
 }

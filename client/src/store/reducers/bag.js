@@ -3,8 +3,8 @@ import { updateObj } from '../../utils/utilities'
 
 const initialState = {
     bagItems: [],
-    // totalQuantity: 0,
-    // totalAmount: 0,
+    totalQuantity: 0,
+    totalAmount: 0,
     error: null,
 }
 
@@ -12,14 +12,14 @@ const initialState = {
 const setBagItemsSuccess = (state, action) => {
     return updateObj(state, {
         bagItems: action.bagItems,
-        // totalQuantity: action.totalQuantity,
-        // totalAmount: action.totalAmount,
+        totalQuantity: action.totalQuantity,
+        totalAmount: action.totalAmount,
         error: null,
     })
 }
 
 const setBagItemsFailed = (state, action) => {
-    return updateObj(state, { bagItems: [], error: action.error.message })
+    return updateObj(state, { bagItems: [], totalQuantity: 0, totalAmount: 0, error: action.error.message })
 }
 
 const reducer = (state = initialState, action) => {
