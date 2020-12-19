@@ -35,12 +35,21 @@ export const addItemToBag = (id, itemStock, itemSize) => async dispatch => {
     }
 }
 
-export const deleteItemFromBag = async id => {
+export const deleteItemFromBag = (id, itemSize) => async dispatch => {
     try {
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
         const {
             data: { token },
-        } = await apis.deleteItemFromBag(id, oldToken || {})
+        } = await apis.deleteItemFromBag(id, itemSize, oldToken || {})
+
+        const tokenLS = { token }
+        localStorage.setItem('bagToken', JSON.stringify(tokenLS))
+        // { items: { bag: []}, iat:..., exp:... }
+        const {
+            items: { bag: bagItems },
+        } = jwt_decode(token)
+
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems })
     } catch (error) {}
 }

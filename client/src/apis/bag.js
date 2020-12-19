@@ -5,6 +5,7 @@ export const addItemToBag = (id, itemStock, itemSize, oldToken) => {
     return apiHelper.post(`/bag/${id}`, productDetail)
 }
 
-export const deleteItemFromBag = (id, oldToken) => {
-    return apiHelper.put(`/bag/${id}`, oldToken)
+export const deleteItemFromBag = (id, itemSize, oldToken) => {
+    const productDetail = { oldToken, itemSize }
+    return apiHelper.put(`/bag/${id}`, productDetail)
 }

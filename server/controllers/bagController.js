@@ -34,6 +34,22 @@ const addItemToBag = async (req, res) => {
     }
 }
 
+const deleteItemFromBag = async (req, res) => {
+    try {
+        const id = req.params.id
+        let { itemSize } = req.body
+
+        const bag = new Bag(req.bag.items.bag)
+        bag.removeItemFromBag(id, itemSize)
+
+        const token = bagToJwt(bag)
+        return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })
+    } catch (error) {
+        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+    }
+}
+
 module.exports = {
     addItemToBag,
+    deleteItemFromBag,
 }

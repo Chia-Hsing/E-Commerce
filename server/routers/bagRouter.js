@@ -7,6 +7,6 @@ const express = require('express')
 const router = new express.Router()
 
 router.post('/:id', validator.addItemToBag, bagItemToken, bagController.addItemToBag)
-router.put('/:id', validator.addItemToBag, bagItemToken, bagController.addItemToBag)
+router.put('/:id', validator.addItemToBag, bagItemToken, bagController.deleteItemFromBag)
 
 module.exports = router

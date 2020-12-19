@@ -59,7 +59,7 @@ class Product extends Component {
 
     onDeleteProductHandler = () => {
         const id = this.props.product._id
-        this.props.onDeleteItemFromBag(id)
+        this.props.onDeleteItemFromBag(id, this.state.itemSize)
     }
 
     // use id to get the product items same as the selected one in the shopping bag coming from local storage.
@@ -95,6 +95,7 @@ class Product extends Component {
                         itemStock={this.state.itemStock}
                         realItemStock={this.isInBag(this.props.product._id).itemStock}
                         quantity={this.isInBag(this.props.product._id).quantity}
+                        hadAlreadyAdded={this.isInBag(this.props.product._id)}
                         canBePurchased={this.state.disablePurchase}
                         onAddProductHandler={this.onAddProductHandler}
                         onDeleteProductHandler={this.onDeleteProductHandler}
@@ -111,7 +112,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
         onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
-        onDeleteItemFromBag: id => dispatch(actions.deleteItemFromBag(id)),
+        onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
         onSetBagItems: () => dispatch(actions.setBagItems()),
     }
 }

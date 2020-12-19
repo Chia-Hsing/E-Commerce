@@ -15,25 +15,31 @@ module.exports = class Bag {
             if (index === -1) {
                 this.addItem(product, itemSize, itemStock)
             } else {
+                // make the product quantity unavailable when it greater than item stock.
+                if (this.bag[index].quantity === itemStock) {
+                    return
+                }
+
                 this.updateItem(product._id, '+')
             }
         } else {
             this.addItem(product, itemSize, itemStock)
         }
     }
-    removeItemFromBag(product, itemSize, itemStock) {
+    removeItemFromBag(id, itemSize) {
         if (this.bag.length > 0) {
             const index = this.bag.findIndex(item => {
-                return item.item._id == product._id && item.itemSize === itemSize
+                return item.item._id == id && item.itemSize === itemSize
             })
 
-            if (index === -1) {
-                this.addItem(product, itemSize, itemStock)
-            } else {
-                this.updateItem(product._id, '-')
+            // make the product quantity unavailable when it less than one.
+            if (this.bag[index].quantity === 1) {
+                return this.removeItem(id)
             }
-        } else {
-            this.addItem(product, itemSize, itemStock)
+
+            if (index !== -1) {
+                this.updateItem(id, '-')
+            }
         }
     }
     cleanBag() {}
@@ -47,24 +53,27 @@ module.exports = class Bag {
             products.item._id == id
                 ? (products = {
                       ...products,
-                      quantity:
-                          products.itemStock <= 0
-                              ? products.quantity
-                              : operator === '+'
-                              ? products.quantity + 1
-                              : products.quantity - 1,
-                      itemStock:
-                          products.itemStock <= 0
-                              ? 0
-                              : operator === '+'
-                              ? products.itemStock - 1
-                              : products.itemStock + 1,
+                      quantity: operator === '+' ? products.quantity + 1 : products.quantity - 1,
+                      itemStock: operator === '+' ? products.itemStock - 1 : products.itemStock + 1,
                   })
                 : products
         )
         this.bag = bag
     }
-    removeItem() {}
-}
+    removeItem(id) {
+        const bag = this.bag.filter(products => products.item._id != id)
+        this.bag = bag
+    }
 
-const calculator = {}
+    totalQuantity(bag) {
+        let totalQuantity = bag
+            .map(item => {
+                console.log(item)
+                return item.item.price
+            })
+            .reduce((a, c) => {
+                return a + c
+            }, 0)
+        return totalQuantity
+    }
+}
