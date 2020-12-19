@@ -16,11 +16,16 @@ bagToJwt = bag => {
 const addItemToBag = async (req, res) => {
     try {
         const id = req.params.id
-        const product = await Product.findById(id).select(['name', 'category.name', 'price', 'stock'])
-        // { items: { bag:[ {item:{}, quantity: ...} ], ...... }, iat: ..., exp: ... }
+        let { itemSize, itemStock } = req.body
+        const product = await Product.findById(id).select(['name', 'category.name', 'price'])
+
+        if (!product) {
+            return res.status(400).json({ status: 'error', message: 'This product can not be found!' })
+        }
+
+        // { items: { bag:[ {item:{}, quantity: ...} ], totalQuantity: 0, totalAmount: 0 }, iat: ..., exp: ... }
         const bag = new Bag(req.bag.items.bag)
-        bag.addItemToBag(product)
-        // { bag: [{...}], totalQuantity: 0, totalAmount: 0 }
+        bag.addItemToBag(product, itemSize, itemStock)
 
         const token = bagToJwt(bag)
         return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })

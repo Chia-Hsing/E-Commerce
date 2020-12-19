@@ -12,7 +12,9 @@ const upload = multer({
 })
 
 const bagItemToken = async (req, res, next) => {
-    let { token } = req.body
+    let {
+        oldToken: { token },
+    } = req.body
 
     try {
         if (!token) {
@@ -25,9 +27,7 @@ const bagItemToken = async (req, res, next) => {
                 process.env.JWT_SECRET_BAG
             )
             if (!req.params.id) {
-                return res
-                    .status(200)
-                    .json({ status: 'error', token, message: 'You did not add any product to your shopping bag!' })
+                return res.status(200).json({ status: 'error', token, message: 'Invalid product id!' })
             }
         }
 

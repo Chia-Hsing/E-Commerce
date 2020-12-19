@@ -30,14 +30,18 @@ const ItemDetail = props => {
                         })}
                     </select>
 
-                    {props.itemStock === 0 ? null : <span>stock: {props.itemStock}</span>}
+                    {props.itemStock === 0 ? null : props.realItemStock === undefined ? (
+                        <span>stock: {props.itemStock}</span>
+                    ) : (
+                        <span>stock: {props.realItemStock}</span>
+                    )}
 
                     <button disabled={props.canBePurchased}>add to bag</button>
 
                     <ul className="productPurchaseController">
                         <li>{icons.minus()}</li>
                         <li>
-                            <span className="product-detail-qty"></span>
+                            <span className="product-detail-qty">{props.quantity}</span>
                         </li>
                         <li onClick={() => props.onAddProductHandler(props.product._id)}>{icons.plus()}</li>
                     </ul>

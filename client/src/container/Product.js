@@ -48,10 +48,18 @@ class Product extends Component {
         const id = this.props.product._id
         // check out if there is a product same as this product in the shopping bag.
         const inBagItem = this.isInBag(id)
+
         // if the stock left great than the item stock selected, or yet select.
-        if (this.state.itemStock > inBagItem.totalQuantity || inBagItem.totalQuantity === undefined) {
-            this.props.onAddItemToBag(id)
+        if (this.state.itemStock > inBagItem.itemStock || inBagItem.itemStock === undefined) {
+            if (this.state.itemStock !== 0 && this.state.itemSize !== null) {
+                this.props.onAddItemToBag(id, this.state.itemStock, this.state.itemSize)
+            }
         }
+    }
+
+    onDeleteProductHandler = () => {
+        const id = this.props.product._id
+        this.props.onDeleteItemFromBag(id)
     }
 
     // use id to get the product items same as the selected one in the shopping bag coming from local storage.
@@ -59,8 +67,11 @@ class Product extends Component {
         // if that bag not empty
         if (this.props.bagItems.length) {
             // get the item you selected by id.
-            // bagItems: { items: { bag: [ {}, {} ], totalQuantity, totalAmount }, iat:..., exp:... }
-            const thisProduct = this.props.bagItems.filter(item => item.item._id === id)
+            // bagItems: [ {item:..., quantity:..., itemSize:..., itemStock:... }, {} ]
+            const thisProduct = this.props.bagItems.filter(
+                item => item.item._id === id && item.itemSize === this.state.itemSize
+            )
+
             return thisProduct.length ? thisProduct[0] : []
         }
         return {}
@@ -82,8 +93,11 @@ class Product extends Component {
                         img={img}
                         getStock={this.getStock}
                         itemStock={this.state.itemStock}
+                        realItemStock={this.isInBag(this.props.product._id).itemStock}
+                        quantity={this.isInBag(this.props.product._id).quantity}
                         canBePurchased={this.state.disablePurchase}
                         onAddProductHandler={this.onAddProductHandler}
+                        onDeleteProductHandler={this.onDeleteProductHandler}
                     />
                 </>
             )
@@ -96,7 +110,8 @@ class Product extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
-        onAddItemToBag: id => dispatch(actions.addItemToBag(id)),
+        onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
+        onDeleteItemFromBag: id => dispatch(actions.deleteItemFromBag(id)),
         onSetBagItems: () => dispatch(actions.setBagItems()),
     }
 }

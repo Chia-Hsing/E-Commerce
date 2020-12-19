@@ -13,14 +13,14 @@ export const setBagItems = () => async dispatch => {
     }
 }
 
-export const addItemToBag = id => async dispatch => {
+export const addItemToBag = (id, itemStock, itemSize) => async dispatch => {
     try {
         // bagToken: { token: ...}
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
         const {
             data: { token },
-        } = await apis.addItemToBag(id, oldToken || {})
+        } = await apis.addItemToBag(id, itemStock, itemSize, oldToken || {})
 
         const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
@@ -33,4 +33,14 @@ export const addItemToBag = id => async dispatch => {
     } catch (error) {
         dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
     }
+}
+
+export const deleteItemFromBag = async id => {
+    try {
+        const oldToken = JSON.parse(localStorage.getItem('bagToken'))
+
+        const {
+            data: { token },
+        } = await apis.deleteItemFromBag(id, oldToken || {})
+    } catch (error) {}
 }

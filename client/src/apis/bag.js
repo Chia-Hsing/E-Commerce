@@ -1,5 +1,10 @@
 import { apiHelper } from '../utils/helpers'
 
-export const addItemToBag = (id, oldToken) => {
-    return apiHelper.post(`/bag/${id}`, oldToken)
+export const addItemToBag = (id, itemStock, itemSize, oldToken) => {
+    const productDetail = { itemStock, itemSize, oldToken }
+    return apiHelper.post(`/bag/${id}`, productDetail)
+}
+
+export const deleteItemFromBag = (id, oldToken) => {
+    return apiHelper.put(`/bag/${id}`, oldToken)
 }
