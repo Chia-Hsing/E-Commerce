@@ -21,15 +21,33 @@
         margin: 10px 0;
         text-align: left;
 
-        p {
-            margin-top: 1.2rem;
-        }
+        .detailBody {
+            margin: 1rem 0;
+            @include display-flex(row, flex-start, center);
+            .sizeSelector {
+                padding: 0.2rem 0.7rem;
+                border-radius: 5px;
+            }
 
-        .productPurchaseController {
-            @include display-flex(row, space-around, center);
-            @include WL(max, 30%, auto);
-            list-style: none;
-            text-align: left;
+            button {
+                background-color: color(fade-white);
+                border: 1px solid color(light-grey);
+                border-radius: 5px;
+                margin: 0 1rem;
+                padding: 0.1rem 0.7rem;
+            }
+
+            p {
+                margin-top: 1.2rem;
+            }
+
+            ul.productPurchaseController {
+                @include display-flex(row, space-around, stretch);
+                @include WL(max, 35%, auto);
+                margin: 0 0.6rem;
+                padding: 0;
+                list-style: none;
+            }
         }
     }
 }
@@ -47,6 +65,12 @@
         }
         .detailContainer {
             text-align: center;
+
+            .detailBody {
+                @include WL(max, 30%, auto);
+                @include display-flex(row, center, center);
+                margin: 1rem auto;
+            }
         }
     }
 }
@@ -65,6 +89,12 @@
 
         .detailContainer {
             text-align: center;
+
+            .detailBody {
+                @include WL(max, 90%, auto);
+                @include display-flex(row, center, center);
+                margin: 1rem auto;
+            }
         }
     }
 }

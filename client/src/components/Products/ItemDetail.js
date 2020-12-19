@@ -13,11 +13,10 @@ const ItemDetail = props => {
             <div className="detailContainer">
                 <div>
                     <h4>{props.product.name}</h4>
-                </div>
-                <div>
                     <strong>{props.product.price}</strong>
-
-                    <select onChange={e => props.getStock(e)}>
+                </div>
+                <div className="detailBody">
+                    <select className="sizeSelector" onChange={e => props.getStock(e)}>
                         <option value={0}> - size - </option>
                         {props.product.stock.map(item => {
                             const size = Object.keys(item)
@@ -29,12 +28,6 @@ const ItemDetail = props => {
                             )
                         })}
                     </select>
-
-                    {props.itemStock === 0 ? null : props.realItemStock === undefined ? (
-                        <span>stock: {props.itemStock}</span>
-                    ) : (
-                        <span>stock: {props.realItemStock}</span>
-                    )}
 
                     {props.quantity !== undefined ? (
                         <ul className="productPurchaseController">
@@ -53,8 +46,13 @@ const ItemDetail = props => {
                         </button>
                     )}
 
-                    <p>{props.product.description}</p>
+                    {props.itemStock === 0 ? null : props.realItemStock === undefined ? (
+                        <span>stock: {props.itemStock}</span>
+                    ) : (
+                        <span>stock: {props.realItemStock}</span>
+                    )}
                 </div>
+                <p>{props.product.description}</p>
             </div>
         </section>
     )
