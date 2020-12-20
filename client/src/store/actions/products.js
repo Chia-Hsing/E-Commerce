@@ -21,6 +21,10 @@ export const getProducts = (gender, category, pageItemsLimit, page) => async dis
     }
 }
 
+export const initProduct = () => dispatch => {
+    dispatch({ type: actionTypes.INIT_PRODUCT })
+}
+
 export const getProduct = PID => async dispatch => {
     try {
         const res = await apis.getProduct(PID)

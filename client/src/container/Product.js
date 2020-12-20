@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import * as actions from '../store/actions/index'
 import ItemDetail from '../components/Products/ItemDetail'
 import { arrayBufferToBase64Img } from '../utils/utilities'
+import Spinner from '../components/UI/Spinner'
 
 class Product extends Component {
     state = {
@@ -17,6 +18,7 @@ class Product extends Component {
     // get product detail from api and check if there is a bag on localStorage, set it to state.
     async componentDidMount() {
         const PID = this.props.match.params.PID
+        this.props.onInitProduct()
         this.props.onGetProduct(PID)
         // check if there is a bag stored at the local storage, if yes, set it to the state.
         await this.props.onSetBagItems()
@@ -82,7 +84,7 @@ class Product extends Component {
     }
 
     render() {
-        let product = null
+        let product = <Spinner loading={this.props.loading} />
 
         // determine the product object returning is not empty.
         if (Object.keys(this.props.product).length > 0) {
@@ -107,12 +109,13 @@ class Product extends Component {
             )
         }
 
-        return <>{product}</>
+        return <section className="productContainer">{product}</section>
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        onInitProduct: () => dispatch(actions.initProduct()),
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
         onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
         onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
@@ -123,6 +126,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         product: state.products.product,
+        loading: state.products.loading,
         bagItems: state.bag.bagItems,
     }
 }

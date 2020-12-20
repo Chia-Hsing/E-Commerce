@@ -40,6 +40,10 @@ const getProductsFailed = (state, action) => {
     })
 }
 
+const initProduct = (state, action) => {
+    return updateObj(state, { products: [], product: {}, loading: true, totalPages: 1, error: null, isNoItem: false })
+}
+
 const getProductSuccess = (state, action) => {
     const product = action.product
 
@@ -68,6 +72,8 @@ const reducer = (state = initialState, action) => {
             return getProductsSuccess(state, action)
         case actionTypes.GET_PRODUCTS_FAILED:
             return getProductsFailed(state, action)
+        case actionTypes.INIT_PRODUCT:
+            return initProduct(state, action)
         case actionTypes.GET_PRODUCT_SUCCESS:
             return getProductSuccess(state, action)
         case actionTypes.GET_PRODUCT_FAILED:

@@ -17,6 +17,16 @@ class ShoppingBag extends Component {
         return false
     }
 
+    onAddProductHandler = (id, itemStock, itemSize) => {
+        if (itemStock > 0) {
+            this.props.onAddItemToBag(id, itemStock, itemSize)
+        }
+    }
+
+    onDeleteProductHandler = (id, itemSize) => {
+        this.props.onDeleteItemFromBag(id, itemSize)
+    }
+
     render() {
         let checkOutItems =
             this.props.bagItems.length > 0 ? (
@@ -31,8 +41,8 @@ class ShoppingBag extends Component {
                                 itemSize={product.itemSize}
                                 itemStock={product.itemStock}
                                 quantity={product.quantity}
-                                onAddItemToBag={this.props.onAddItemToBag}
-                                onDeleteItemFromBag={this.props.onDeleteItemFromBag}
+                                addProductHandler={this.onAddProductHandler}
+                                deleteItemFromBag={this.onDeleteProductHandler}
                             />
                         </>
                     )

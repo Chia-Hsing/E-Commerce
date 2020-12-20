@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
 import { alert, arrayBufferToBase64Img } from '../utils/utilities'
+import Spinner from '../components/UI/Spinner'
 import '../scss/products.scss'
 
 class Products extends Component {
@@ -79,7 +80,7 @@ class Products extends Component {
     }
 
     render() {
-        let products = null
+        let products = <Spinner loading={this.props.loading} />
         let moreProductsButton = null
 
         // if no items return.

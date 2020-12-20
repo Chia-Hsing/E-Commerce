@@ -7,7 +7,7 @@ import '../../scss/product.scss'
 
 const ItemDetail = props => {
     return (
-        <section className="productContainer">
+        <>
             <div className="imgContainer">
                 <img src={props.img} alt=""></img>
             </div>
@@ -60,7 +60,7 @@ const ItemDetail = props => {
                     <Link to="/shopping-bag">check bag</Link>
                 </div>
             </div>
-        </section>
+        </>
     )
 }
 
