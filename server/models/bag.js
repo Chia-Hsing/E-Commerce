@@ -8,24 +8,29 @@ module.exports = class Bag {
     addItemToBag(product, itemSize, itemStock) {
         // if there is something in the bag.
         if (this.bag.length > 0) {
+            // take the exact item from the bag by using product id and size.
             const index = this.bag.findIndex(item => {
                 return item.item._id == product._id && item.itemSize === itemSize
             })
 
+            // if there is no such product in the bag.
             if (index === -1) {
+                // add one to the bag.
                 this.addItem(product, itemSize, itemStock)
             } else {
-                // make the product quantity unavailable when it greater than item stock.
+                // when the product quantity greater than the item stock, make the plus operation unavailable.
                 if (this.bag[index].quantity === itemStock) {
                     return
                 }
 
+                // otherwise, add that product to the bag.
                 this.updateItem(product._id, '+')
             }
         } else {
             this.addItem(product, itemSize, itemStock)
         }
     }
+
     deleteItemFromBag(id, itemSize) {
         if (this.bag.length > 0) {
             const index = this.bag.findIndex(item => {
@@ -42,6 +47,7 @@ module.exports = class Bag {
             }
         }
     }
+
     cleanBag() {
         this.bag = []
         this.totalAmount = 0

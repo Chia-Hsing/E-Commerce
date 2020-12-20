@@ -6,12 +6,14 @@ import Layout from './container/Layout'
 import Home from './container/Home'
 import Products from './container/Products'
 import Product from './container/Product'
+import ShoppingBag from './container/ShoppingBag'
 
 import './scss/CSSTransition.scss'
 
 const routes = [
     { path: '/products', name: 'Products', Component: Products },
     { path: '/products/product/:PID', name: 'product', Component: Product },
+    { path: '/shopping-bag', name: 'shopping-bag', Component: ShoppingBag },
     { path: '/', name: 'Home', Component: Home },
 ]
 

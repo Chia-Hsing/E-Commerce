@@ -18,10 +18,11 @@ class Product extends Component {
     async componentDidMount() {
         const PID = this.props.match.params.PID
         this.props.onGetProduct(PID)
+        // check if there is a bag stored at the local storage, if yes, set it to the state.
         await this.props.onSetBagItems()
     }
 
-    // make sure the route works properly by comparing the two path names.
+    // make sure the route works properly by comparing two pathnames.
     componentDidUpdate(prevProps, PrevState) {
         if (this.props.location.pathname !== prevProps.location.pathname) {
             this.props.history.replace(`/products${this.props.location.search}`)
@@ -32,8 +33,9 @@ class Product extends Component {
     getStock = e => {
         e.preventDefault()
         const index = e.nativeEvent.target.selectedIndex
-        // add + to ensure the value passed by props is number.
+        // add + to ensure the value passed is number.
         this.setState({ itemStock: +e.target.value, itemSize: e.nativeEvent.target[index].text }, () => {
+            // if itemStock greater than 0, make the purchase button available.
             if (this.state.itemStock > 0) {
                 this.setState({ disablePurchase: false })
             } else {
@@ -45,28 +47,30 @@ class Product extends Component {
     // add the quantity of a product by one to the shopping bag.
     onAddProductHandler = () => {
         // this product's id
-        const id = this.props.product._id
+        const PID = this.props.product._id
         // check out if there is a product same as this product in the shopping bag.
-        const inBagItem = this.isInBag(id)
+        const inBagItem = this.isInBag(PID)
 
         // if the stock left great than the item stock selected, or yet select.
         if (this.state.itemStock > inBagItem.itemStock || inBagItem.itemStock === undefined) {
             if (this.state.itemStock !== 0 && this.state.itemSize !== null) {
-                this.props.onAddItemToBag(id, this.state.itemStock, this.state.itemSize)
+                this.props.onAddItemToBag(PID, this.state.itemStock, this.state.itemSize)
             }
         }
     }
 
+    // minus the quantity of a product by one from the shopping bag.
     onDeleteProductHandler = () => {
-        const id = this.props.product._id
-        this.props.onDeleteItemFromBag(id, this.state.itemSize)
+        const PID = this.props.product._id
+        const itemSize = this.state.itemSize
+        this.props.onDeleteItemFromBag(PID, itemSize)
     }
 
     // use id to get the product items same as the selected one in the shopping bag coming from local storage.
     isInBag = id => {
         // if that bag not empty
         if (this.props.bagItems.length) {
-            // get the item you selected by id.
+            // get the item you selected by id and size.
             // bagItems: [ {item:..., quantity:..., itemSize:..., itemStock:... }, {} ]
             const thisProduct = this.props.bagItems.filter(
                 item => item.item._id === id && item.itemSize === this.state.itemSize

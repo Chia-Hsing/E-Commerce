@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import { icons } from '../../utils/icons'
 import '../../scss/product.scss'
@@ -18,6 +19,7 @@ const ItemDetail = props => {
                 <div className="detailBody">
                     <select className="sizeSelector" onChange={e => props.getStock(e)}>
                         <option value={0}> - size - </option>
+                        {/* product.stock = [{S: ...},{M: ...},{L: ...}] */}
                         {props.product.stock.map(item => {
                             const size = Object.keys(item)
                             const stock = item[size]
@@ -29,6 +31,7 @@ const ItemDetail = props => {
                         })}
                     </select>
 
+                    {/* props.quantity equal to undefined when first time gets the information from server. */}
                     {props.quantity !== undefined ? (
                         <ul className="productPurchaseController">
                             <li onClick={() => props.onDeleteProductHandler(props.product._id)}>{icons.minus()}</li>
@@ -45,7 +48,7 @@ const ItemDetail = props => {
                             add to bag
                         </button>
                     )}
-
+                    {/* props.realItemStock equal to undefined when first time gets the information from server. */}
                     {props.itemStock === 0 ? null : props.realItemStock === undefined ? (
                         <span>stock: {props.itemStock}</span>
                     ) : (
@@ -53,6 +56,9 @@ const ItemDetail = props => {
                     )}
                 </div>
                 <p>{props.product.description}</p>
+                <div className="goToBag">
+                    <Link to="/shopping-bag">check bag</Link>
+                </div>
             </div>
         </section>
     )

@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode'
 
 export const setBagItems = () => async dispatch => {
     try {
-        // bagItems: { items: { bag: []}, iat:..., exp:... }
+        // bagItems: { items: { bag: [], totalQuantity: ..., totalAmount: ...}, iat:..., exp:... }
         const { items } = await checkBagFromLS()
         dispatch({
             type: actionTypes.SET_BAG_ITEMS_SUCCESS,
@@ -50,7 +50,7 @@ export const deleteItemFromBag = (id, itemSize) => async dispatch => {
 
         const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
-        // { items: { bag: []}, iat:..., exp:... }
+
         const {
             items: { bag: bagItems, totalQuantity, totalAmount },
         } = jwt_decode(token)
@@ -71,7 +71,7 @@ export const removeWholeItem = (id, itemSize) => async dispatch => {
 
         const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
-        // { items: { bag: []}, iat:..., exp:... }
+
         const {
             items: { bag: bagItems, totalQuantity, totalAmount },
         } = jwt_decode(token)
