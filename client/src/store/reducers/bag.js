@@ -8,6 +8,15 @@ const initialState = {
     error: null,
 }
 
+const initBagItems = (state, action) => {
+    return updateObj(state, {
+        bagItems: [],
+        totalQuantity: 0,
+        totalAmount: 0,
+        error: null,
+    })
+}
+
 // bagItems: { items: { bag: []}, iat:..., exp:... }
 const setBagItemsSuccess = (state, action) => {
     return updateObj(state, {
@@ -38,6 +47,8 @@ const cleanBagSuccess = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.INIT_BAG_ITEMS:
+            return initBagItems(state, action)
         case actionTypes.SET_BAG_ITEMS_SUCCESS:
             return setBagItemsSuccess(state, action)
         case actionTypes.SET_BAG_ITEMS_FAILED:

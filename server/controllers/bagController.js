@@ -16,7 +16,8 @@ bagToJwt = bag => {
 const addItemToBag = async (req, res) => {
     try {
         const id = req.params.id
-        let { itemSize, itemStock } = req.body
+        const { itemSize, itemStock } = req.body
+
         const product = await Product.findById(id).select(['name', 'category.name', 'price'])
 
         if (!product) {
@@ -37,7 +38,7 @@ const addItemToBag = async (req, res) => {
 const deleteItemFromBag = async (req, res) => {
     try {
         const id = req.params.id
-        let { itemSize } = req.body
+        const { itemSize } = req.body
 
         const bag = new Bag(req.bag.items.bag)
         bag.deleteItemFromBag(id, itemSize)
@@ -52,7 +53,7 @@ const deleteItemFromBag = async (req, res) => {
 const removeWholeItem = async (req, res) => {
     try {
         const id = req.params.id
-        let { itemSize } = req.body
+        const { itemSize } = req.body
 
         const bag = new Bag(req.bag.items.bag)
         bag.removeItem(id, itemSize)
@@ -66,8 +67,10 @@ const removeWholeItem = async (req, res) => {
 
 const cleanBag = async (req, res) => {
     try {
+        const bag = new Bag([])
         bag.cleanBag()
-        return res.status(200).json({ status: 'success', message: 'success to clean bag!' })
+        const token = bagToJwt(bag)
+        return res.status(200).json({ status: 'success', token, message: 'success to clean bag!' })
     } catch (error) {
         return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
     }

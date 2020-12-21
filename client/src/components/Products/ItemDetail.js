@@ -18,7 +18,7 @@ const ItemDetail = props => {
                 </div>
                 <div className="detailBody">
                     <select className="sizeSelector" onChange={e => props.getStock(e)}>
-                        <option value={0}> - size - </option>
+                        <option value={-1}> - size - </option>
                         {/* product.stock = [{S: ...},{M: ...},{L: ...}] */}
                         {props.product.stock.map(item => {
                             const size = Object.keys(item)
@@ -40,16 +40,17 @@ const ItemDetail = props => {
                             </li>
                             <li onClick={() => props.onAddProductHandler(props.product._id)}>{icons.plus()}</li>
                         </ul>
-                    ) : (
+                    ) : /* props.itemStock equal to -1 which means the selector is on the -size- option. */
+                    props.itemStock === -1 ? null : (
                         <button
                             disabled={props.canBePurchased}
                             onClick={() => props.onAddProductHandler(props.product._id)}
                         >
-                            add to bag
+                            {props.itemStock === 0 ? ' out of stock' : 'add to bag'}
                         </button>
                     )}
                     {/* props.realItemStock equal to undefined when first time gets the information from server. */}
-                    {props.itemStock === 0 ? null : props.realItemStock === undefined ? (
+                    {props.itemStock <= 0 ? null : props.realItemStock === undefined ? (
                         <span>stock: {props.itemStock}</span>
                     ) : (
                         <span>stock: {props.realItemStock}</span>

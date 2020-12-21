@@ -23,8 +23,10 @@ class ShoppingBag extends Component {
         }
     }
 
-    onDeleteProductHandler = (id, itemSize) => {
-        this.props.onDeleteItemFromBag(id, itemSize)
+    onDeleteProductHandler = (id, quantity, itemSize) => {
+        if (quantity > 1) {
+            this.props.onDeleteItemFromBag(id, itemSize)
+        }
     }
 
     render() {
@@ -43,6 +45,8 @@ class ShoppingBag extends Component {
                                 quantity={product.quantity}
                                 addProductHandler={this.onAddProductHandler}
                                 deleteItemFromBag={this.onDeleteProductHandler}
+                                removeItem={this.props.onRemoveWholeItem}
+                                cleanBag={this.props.onCleanBag}
                             />
                         </>
                     )
@@ -82,7 +86,7 @@ const mapDispatchToProps = dispatch => {
         onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
         onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
         onSetBagItems: () => dispatch(actions.setBagItems()),
-        onRemoveWholeItem: () => dispatch(actions.removeWholeItem()),
+        onRemoveWholeItem: (id, itemSize) => dispatch(actions.removeWholeItem(id, itemSize)),
         onCleanBag: () => dispatch(actions.cleanBag()),
     }
 }

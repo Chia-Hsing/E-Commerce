@@ -7,11 +7,17 @@ export const setBagItems = () => async dispatch => {
     try {
         // bagItems: { items: { bag: [], totalQuantity: ..., totalAmount: ...}, iat:..., exp:... }
         const { items } = await checkBagFromLS()
+        if (items) {
+            return dispatch({
+                type: actionTypes.SET_BAG_ITEMS_SUCCESS,
+                bagItems: items.bag,
+                totalQuantity: items.totalQuantity,
+                totalAmount: items.totalAmount,
+            })
+        }
+
         dispatch({
-            type: actionTypes.SET_BAG_ITEMS_SUCCESS,
-            bagItems: items.bag,
-            totalQuantity: items.totalQuantity,
-            totalAmount: items.totalAmount,
+            type: actionTypes.INIT_BAG_ITEMS,
         })
     } catch (error) {
         dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })

@@ -10,7 +10,7 @@ import Spinner from '../components/UI/Spinner'
 
 class Product extends Component {
     state = {
-        itemStock: 0,
+        itemStock: -1,
         itemSize: null,
         disablePurchase: true,
     }
@@ -54,7 +54,7 @@ class Product extends Component {
         const inBagItem = this.isInBag(PID)
 
         // if the stock left great than the item stock selected, or yet select.
-        if (this.state.itemStock > inBagItem.itemStock || inBagItem.itemStock === undefined) {
+        if (this.state.itemStock > inBagItem.realItemStock || inBagItem.realItemStock === undefined) {
             if (this.state.itemStock !== 0 && this.state.itemSize !== null) {
                 this.props.onAddItemToBag(PID, this.state.itemStock, this.state.itemSize)
             }
@@ -73,7 +73,7 @@ class Product extends Component {
         // if that bag not empty
         if (this.props.bagItems.length) {
             // get the item you selected by id and size.
-            // bagItems: [ {item:..., quantity:..., itemSize:..., itemStock:... }, {} ]
+            // bagItems: [ {item:..., quantity:..., itemSize:..., realItemStock:... }, {} ]
             const thisProduct = this.props.bagItems.filter(
                 item => item.item._id === id && item.itemSize === this.state.itemSize
             )
@@ -99,7 +99,7 @@ class Product extends Component {
                         img={img}
                         getStock={this.getStock}
                         itemStock={this.state.itemStock}
-                        realItemStock={this.isInBag(this.props.product._id).itemStock}
+                        realItemStock={this.isInBag(this.props.product._id).realItemStock}
                         quantity={this.isInBag(this.props.product._id).quantity}
                         canBePurchased={this.state.disablePurchase}
                         onAddProductHandler={this.onAddProductHandler}

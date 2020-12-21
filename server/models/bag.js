@@ -20,11 +20,12 @@ module.exports = class Bag {
             } else {
                 // when the product quantity greater than the item stock, make the plus operation unavailable.
                 if (this.bag[index].quantity === itemStock) {
+                    this.totalAmount = totalAmount(this.bag)
+                    this.totalQuantity = totalQuantity(this.bag)
                     return
                 }
-
                 // otherwise, add that product to the bag.
-                this.updateItem(product._id, '+')
+                this.updateItem(product._id, itemSize, '+')
             }
         } else {
             this.addItem(product, itemSize, itemStock)
@@ -43,7 +44,7 @@ module.exports = class Bag {
             }
 
             if (index !== -1) {
-                this.updateItem(id, '-')
+                this.updateItem(id, itemSize, '-')
             }
         }
     }
@@ -55,20 +56,20 @@ module.exports = class Bag {
     }
 
     addItem(item, itemSize, itemStock) {
-        this.bag = [...this.bag, { item, quantity: 1, itemSize, itemStock: itemStock - 1 }]
+        this.bag = [...this.bag, { item, quantity: 1, itemStock, itemSize, realItemStock: itemStock - 1 }]
         this.totalAmount = totalAmount(this.bag)
         this.totalQuantity = totalQuantity(this.bag)
     }
 
-    updateItem(id, operator) {
-        const bag = this.bag.map(products =>
-            products.item._id == id
-                ? (products = {
-                      ...products,
-                      quantity: operator === '+' ? products.quantity + 1 : products.quantity - 1,
-                      itemStock: operator === '+' ? products.itemStock - 1 : products.itemStock + 1,
+    updateItem(id, itemSize, operator) {
+        const bag = this.bag.map(product =>
+            product.item._id == id && product.itemSize === itemSize
+                ? (product = {
+                      ...product,
+                      quantity: operator === '+' ? product.quantity + 1 : product.quantity - 1,
+                      realItemStock: operator === '+' ? product.realItemStock - 1 : product.realItemStock + 1,
                   })
-                : products
+                : product
         )
         this.bag = bag
         this.totalAmount = totalAmount(this.bag)
@@ -76,7 +77,9 @@ module.exports = class Bag {
     }
 
     removeItem(id, itemSize) {
-        const bag = this.bag.filter(products => products.item._id != id && products.itemSize === itemSize)
+        const bag = this.bag.filter(product => {
+            return product.itemSize != itemSize || product.item._id != id
+        })
         this.bag = bag
         this.totalAmount = totalAmount(this.bag)
         this.totalQuantity = totalQuantity(this.bag)
