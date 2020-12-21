@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import WaitToCheckOutItems from '../components/ShoppingBag/WaitToCheckOutItems'
 import * as actions from '../store/actions/index'
+import '../scss/shoppingBag.scss'
 
 class ShoppingBag extends Component {
     componentDidMount() {
@@ -43,30 +44,31 @@ class ShoppingBag extends Component {
                                 itemSize={product.itemSize}
                                 itemStock={product.itemStock}
                                 quantity={product.quantity}
-                                addProductHandler={this.onAddProductHandler}
+                                addItemToBag={this.onAddProductHandler}
                                 deleteItemFromBag={this.onDeleteProductHandler}
                                 removeItem={this.props.onRemoveWholeItem}
-                                cleanBag={this.props.onCleanBag}
                             />
                         </>
                     )
                 })
             ) : (
-                <div>
-                    <span>
-                        You shopping bag is empty! <Link to="/"> Let's go shopping!</Link>
-                    </span>
+                <div className="empty">
+                    <h4>
+                        Your shopping bag is empty! <Link to="/"> Let's go shopping!</Link>
+                    </h4>
                 </div>
             )
 
         return (
-            <section>
-                {checkOutItems}
-                <div>
-                    <span>{this.props.totalQuantity}</span>
+            <section className="ShoppingBagContainer">
+                <div className="ShoppingBagHeader">
+                    <h4>Shopping Bag</h4>
+                    <span onClick={() => this.props.onCleanBag()}>Clean this Bag</span>
                 </div>
-                <div>
-                    <span>{this.props.totalAmount}</span>
+                <div className="checkOutItemWrap">{checkOutItems}</div>
+                <div className="checkOutItemSummary">
+                    <span>total quantity: {this.props.totalQuantity}</span>
+                    <span>total amount: ￥{this.props.totalAmount}</span>
                 </div>
             </section>
         )

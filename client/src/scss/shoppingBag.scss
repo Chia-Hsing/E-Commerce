@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'mixins';
+
+.ShoppingBagContainer {
+    @include WL(max, 70%);
+    @include display-flex(column, flex-start, center);
+    min-height: 55vh;
+    margin: 3em auto;
+
+    .ShoppingBagHeader {
+        @include WL(max, 85%);
+        @include display-flex(row, space-between, center);
+        margin-bottom: 0.4rem;
+        padding: 0.4rem;
+        border-bottom: 1px solid color(lighter-grey);
+
+        h4 {
+            color: color(yellow);
+        }
+        span {
+            cursor: pointer;
+            transition: 0.5s;
+
+            &:hover {
+                color: color(yellow);
+            }
+        }
+    }
+
+    .checkOutItemWrap {
+        @include WL(max, 90%);
+        min-height: 25vh;
+        padding: 2rem;
+
+        .checkOutItem {
+            display: grid;
+            grid-template-columns: 40% 20% repeat(3, 1fr);
+            @include WL(max, 100%);
+
+            .productPurchaseController {
+                @include display-flex(row, space-evenly, stretch);
+                @include WL(max, 100%, auto);
+                list-style: none;
+                padding: 0;
+
+                .operator {
+                    cursor: pointer;
+                }
+            }
+
+            .removeItem {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .checkOutItemSummary {
+        @include WL(max, 85%);
+        @include display-flex(row, flex-end, stretch);
+        border-top: 1px solid color(lighter-grey);
+        padding-top: 0.6rem;
+
+        span {
+            font: {
+                weight: weight(bold);
+                size: size(m);
+            }
+            margin-left: 3rem;
+        }
+
+        span:first-child {
+            color: color(light-grey);
+        }
+
+        span:nth-of-type(2) {
+            color: color(heavy-grey);
+        }
+    }
+}
