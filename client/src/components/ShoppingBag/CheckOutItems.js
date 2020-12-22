@@ -2,7 +2,7 @@ import React from 'react'
 
 import { icons } from '../../utils/icons'
 
-const WaitToCheckOutItems = props => {
+const CheckOutItems = props => {
     return (
         <section className="checkOutItem">
             <span>{props.name}</span>
@@ -32,4 +32,4 @@ const WaitToCheckOutItems = props => {
     )
 }
 
-export default WaitToCheckOutItems
+export default CheckOutItems

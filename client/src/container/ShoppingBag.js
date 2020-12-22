@@ -2,7 +2,7 @@ import { React, Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import WaitToCheckOutItems from '../components/ShoppingBag/WaitToCheckOutItems'
+import CheckOutItems from '../components/ShoppingBag/CheckOutItems'
 import * as actions from '../store/actions/index'
 import '../scss/shoppingBag.scss'
 
@@ -36,7 +36,7 @@ class ShoppingBag extends Component {
                 this.props.bagItems.map(product => {
                     return (
                         <>
-                            <WaitToCheckOutItems
+                            <CheckOutItems
                                 key={product.item._id}
                                 name={product.item.name}
                                 price={product.item.price}
