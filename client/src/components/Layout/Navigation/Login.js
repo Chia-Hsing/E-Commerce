@@ -1,11 +1,12 @@
 import React from 'react'
-import NavItem from './NavItem'
-import '../../../scss/navigation.scss'
+import { Link } from 'react-router-dom'
 
 const Login = props => {
     return (
         <div className={props.class}>
-            <NavItem exact>ACCOUNT / LOGIN</NavItem>
+            <Link to="/login" exact>
+                ACCOUNT / LOGIN
+            </Link>
         </div>
     )
 }

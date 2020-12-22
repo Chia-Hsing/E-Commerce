@@ -18,12 +18,22 @@
         a {
             line-height: 100px;
             text-decoration: none;
-            color: color(heavy-grey);
+            color: #000000;
             font: {
                 size: size(l);
                 weight: weight(bold);
             }
         }
+    }
+
+    .shoppingBag {
+        @include position(fixed, 10, none, 150);
+        @include A(yellow, light-grey, yellow);
+        font: {
+            size: size(xs);
+            weight: weight(normal);
+        }
+        width: auto;
     }
 
     .login {
@@ -74,6 +84,11 @@
         list-style: none;
         padding: 8px;
         font-size: size(xs);
+    }
+
+    &.close {
+        opacity: 0;
+        visibility: hidden;
     }
 
     &:hover {

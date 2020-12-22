@@ -3,8 +3,14 @@ import DropDownItem from './DropDownItem'
 import '../../../scss/navigation.scss'
 
 const DropDown = props => {
+    let dropdown = ['dropDown']
+
+    if (props.close) {
+        dropdown.push('close')
+    }
+
     return (
-        <ul className="dropDown">
+        <ul className={dropdown.join(' ')}>
             <DropDownItem gender={props.gender} link={props.firstItem}>
                 {props.firstItem}
             </DropDownItem>

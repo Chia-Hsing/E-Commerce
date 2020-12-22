@@ -54,7 +54,7 @@ class ShoppingBag extends Component {
             ) : (
                 <div className="empty">
                     <h4>
-                        Your shopping bag is empty! <Link to="/"> Let's go shopping!</Link>
+                        Your shopping bag is empty ! <Link to="/"> Let's go shopping ...</Link>
                     </h4>
                 </div>
             )
@@ -67,8 +67,10 @@ class ShoppingBag extends Component {
                 </div>
                 <div className="checkOutItemWrap">{checkOutItems}</div>
                 <div className="checkOutItemSummary">
-                    <span>total quantity: {this.props.totalQuantity}</span>
-                    <span>total amount: ￥{this.props.totalAmount}</span>
+                    <div>
+                        <span>ITEMS: {this.props.totalQuantity}</span>
+                        <span>SUBTOTAL: ￥{this.props.totalAmount}</span>
+                    </div>
                 </div>
             </section>
         )

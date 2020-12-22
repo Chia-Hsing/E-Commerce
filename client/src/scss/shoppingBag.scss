@@ -16,6 +16,7 @@
 
         h4 {
             color: color(yellow);
+            font-weight: weight(bold);
         }
         span {
             cursor: pointer;
@@ -31,6 +32,10 @@
         @include WL(max, 90%);
         min-height: 25vh;
         padding: 2rem;
+
+        .empty {
+            @include A(yellow, light-grey, yellow);
+        }
 
         .checkOutItem {
             display: grid;
