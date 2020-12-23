@@ -34,18 +34,15 @@ const ItemDetail = props => {
                     {/* props.quantity equal to undefined when first time gets the information from server. */}
                     {props.quantity !== undefined ? (
                         <ul className="productPurchaseController">
-                            <li onClick={() => props.onDeleteProductHandler(props.product._id)}>{icons.minus()}</li>
+                            <li onClick={props.onDeleteProductHandler}>{icons.minus()}</li>
                             <li>
                                 <span>{props.quantity}</span>
                             </li>
-                            <li onClick={() => props.onAddProductHandler(props.product._id)}>{icons.plus()}</li>
+                            <li onClick={props.onAddProductHandler}>{icons.plus()}</li>
                         </ul>
                     ) : /* props.itemStock equal to -1 which means the selector is on the -size- option. */
                     props.itemStock === -1 ? null : (
-                        <button
-                            disabled={props.canBePurchased}
-                            onClick={() => props.onAddProductHandler(props.product._id)}
-                        >
+                        <button disabled={props.canBePurchased} onClick={props.onAddProductHandler}>
                             {props.itemStock === 0 ? ' out of stock' : 'add to bag'}
                         </button>
                     )}

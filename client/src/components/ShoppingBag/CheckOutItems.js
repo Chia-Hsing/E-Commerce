@@ -10,21 +10,18 @@ const CheckOutItems = props => {
             <span>{props.itemSize}</span>
 
             <ul className="productPurchaseController">
-                <li
-                    className="operator"
-                    onClick={() => props.deleteItemFromBag(props.id, props.quantity, props.itemSize)}
-                >
+                <li className="operator" onClick={props.deleteItemFromBag}>
                     <i>{icons.minus()}</i>
                 </li>
                 <li>
                     <span>{props.quantity}</span>
                 </li>
-                <li className="operator" onClick={() => props.addItemToBag(props.id, props.itemStock, props.itemSize)}>
+                <li className="operator" onClick={props.addItemToBag}>
                     <i>{icons.plus()}</i>
                 </li>
             </ul>
             <div>
-                <i className="removeItem" onClick={() => props.removeItem(props.id, props.itemSize)}>
+                <i className="removeItem" onClick={props.removeItem}>
                     {icons.close()}
                 </i>
             </div>

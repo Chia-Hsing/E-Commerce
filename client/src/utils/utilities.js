@@ -42,3 +42,33 @@ export const checkBagFromLS = () => {
     }
     return []
 }
+
+export const checkValidity = (value, rule) => {
+    let isValid = true
+
+    if (!rule) return true
+
+    if (rule.required) {
+        return (isValid = value.trim() !== '' && isValid)
+    }
+
+    if (rule.minLength) {
+        return (isValid = value.length >= rule.minlength && isValid)
+    }
+
+    if (rule.maxLength) {
+        return (isValid = value.length <= rule.maxlength && isValid)
+    }
+
+    if (rule.isPassword) {
+        const regex = /^\S{8,12}$/
+        const PWCheck = value.match(regex)
+        return (isValid = PWCheck && isValid)
+    }
+
+    if (rule.isEmail) {
+        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        const emailCheck = value.match(regex)
+        return (isValid = emailCheck && isValid)
+    }
+}

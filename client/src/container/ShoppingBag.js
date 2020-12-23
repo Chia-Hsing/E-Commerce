@@ -44,9 +44,13 @@ class ShoppingBag extends Component {
                                 itemSize={product.itemSize}
                                 itemStock={product.itemStock}
                                 quantity={product.quantity}
-                                addItemToBag={this.onAddProductHandler}
-                                deleteItemFromBag={this.onDeleteProductHandler}
-                                removeItem={this.props.onRemoveWholeItem}
+                                addItemToBag={() =>
+                                    this.onAddProductHandler(product.item._id, product.itemStock, product.itemSize)
+                                }
+                                deleteItemFromBag={() =>
+                                    this.onDeleteProductHandler(product.item._id, product.quantity, product.itemSize)
+                                }
+                                removeItem={() => this.props.onRemoveWholeItem(product.item._id, product.itemSize)}
                             />
                         </>
                     )
