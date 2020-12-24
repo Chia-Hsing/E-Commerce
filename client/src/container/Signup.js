@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Input from '../components/UI/Input'
 import { updateObj, checkValidity } from '../utils/utilities'
+import * as actions from '../store/actions/index'
 import '../scss/auth.scss'
 class Signup extends Component {
     state = {
@@ -49,6 +51,22 @@ class Signup extends Component {
                 valid: false,
                 touched: false,
             },
+            confirmPassword: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'password',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                    isPassword: true,
+                    maxlength: 20,
+                    minlength: 8,
+                },
+                valid: false,
+                touched: false,
+            },
         },
     }
 
@@ -62,6 +80,15 @@ class Signup extends Component {
         })
 
         this.setState({ controls: updatedControls })
+    }
+
+    submitHandler = e => {
+        e.preventDefault()
+        const name = this.state.controls.name.val
+        const email = this.state.controls.email.val
+        const password = this.state.controls.password.val
+        const confirmPassword = this.state.controls.confirmPassword.val
+        this.props.onSignupAuth(name, email, password, confirmPassword)
     }
 
     render() {
@@ -82,8 +109,8 @@ class Signup extends Component {
                     value={ele.config.val}
                     type={ele.config.eleType}
                     config={ele.config.eleConfig}
-                    validation={ele.config.validation}
                     isValid={ele.config.valid}
+                    touched={ele.config.touched}
                     shouldValidate={ele.config.validation}
                     inputChange={e => this.inputChangeHandler(e, ele.key)}
                 />
@@ -92,7 +119,7 @@ class Signup extends Component {
 
         return (
             <div className="signup">
-                <form>
+                <form onSubmit={this.submitHandler}>
                     {form}
                     <button>Submit</button>
                 </form>
@@ -101,4 +128,15 @@ class Signup extends Component {
     }
 }
 
-export default Signup
+const mapStateToProps = state => {
+    return {}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSignupAuth: (name, email, password, confirmPassword) =>
+            dispatch(actions.signup(name, email, password, confirmPassword)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

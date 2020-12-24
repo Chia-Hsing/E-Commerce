@@ -7,7 +7,7 @@
     margin: 0 auto;
 
     form {
-        @include WL(max, 35%, 35vh);
+        @include WL(max, 35%, 45vh);
         @include display-flex(column, center, center);
         margin: 2em auto;
         position: relative;
@@ -62,6 +62,13 @@
             & input:not(:placeholder-shown) + .labelName::after,
             & input:focus + .labelName::after {
                 width: 100%;
+            }
+            input.invalid + label::after {
+                border-bottom: 3px solid color(red);
+            }
+
+            input.invalid + .labelName .contentName {
+                color: color(red);
             }
         }
     }

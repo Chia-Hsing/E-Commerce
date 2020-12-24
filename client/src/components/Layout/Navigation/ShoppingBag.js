@@ -6,9 +6,7 @@ import { connect } from 'react-redux'
 const Login = props => {
     return (
         <div className={props.class}>
-            <Link to="/shopping-bag" exact>
-                SHOPPING BAG ( {props.totalQuantity} )
-            </Link>
+            <Link to="/shopping-bag">SHOPPING BAG ( {props.totalQuantity} )</Link>
         </div>
     )
 }

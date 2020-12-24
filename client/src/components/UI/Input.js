@@ -9,6 +9,10 @@ const Input = props => {
         inputClass.push('invalid')
     }
 
+    if (props.value === '') {
+        inputClass.pop('invalid')
+    }
+
     switch (props.eleType) {
         case 'input':
             eleInput = (
@@ -56,6 +60,7 @@ const Input = props => {
         <>
             <div className="inputBody">
                 {eleInput}
+
                 <label className="labelName">
                     <span className="contentName">{props.label}</span>
                 </label>
