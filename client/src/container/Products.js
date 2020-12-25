@@ -7,12 +7,15 @@ import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
 import { alert, arrayBufferToBase64Img } from '../utils/utilities'
 import Spinner from '../components/UI/Spinner'
+import BreadCrumb from '../components/UI/Breadcrumb'
 import '../scss/products.scss'
 
 class Products extends Component {
     state = {
         // determine what current page is.
         page: 0,
+        gender: null,
+        category: null,
     }
 
     // trigger api handler to get products information from backend.
@@ -36,6 +39,8 @@ class Products extends Component {
             this.setState(
                 prevState => ({
                     page: prevState.page + 1,
+                    gender,
+                    category,
                 }),
                 () => {
                     this.props.onGetProducts(gender, category, pageItemsLimit, this.state.page)
@@ -129,6 +134,8 @@ class Products extends Component {
 
         return (
             <section>
+                <BreadCrumb gender={this.state.gender} category={this.state.category} />
+
                 <div className="products-container">{products}</div>
                 {moreProductsButton}
             </section>

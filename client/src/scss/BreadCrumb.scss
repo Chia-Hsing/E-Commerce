@@ -1,0 +1,32 @@
+@import 'mixins';
+@import 'variables';
+
+.breadCrumbWrap {
+    @include WL(max, 70%, auto);
+    margin: 1.5em auto;
+    .breadCrumb {
+        @include WL(min, 50%);
+        @include display-flex(row, flex-start, center);
+        list-style: none;
+
+        & li:first-child {
+            padding-left: 0.8rem;
+            border-left: 3px solid color(yellow);
+        }
+        & li a {
+            color: color(heavy-grey);
+            transition: 0.5s;
+        }
+
+        & li:hover a {
+            color: color(yellow);
+            text-decoration: none;
+        }
+
+        & li:last-child a {
+            pointer-events: none;
+            color: color(lighter-grey);
+            font-weight: weight(bold);
+        }
+    }
+}
