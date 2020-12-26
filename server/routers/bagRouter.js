@@ -1,8 +1,8 @@
+const express = require('express')
+
 const bagController = require('../controllers/bagController')
 const validator = require('../middlewares/validator')
 const { bagItemToken } = require('../middlewares/middleware')
-
-const express = require('express')
 
 const router = new express.Router()
 

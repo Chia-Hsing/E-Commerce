@@ -70,6 +70,7 @@ class Signup extends Component {
         },
     }
 
+    // handle the input changes.
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
             [controlName]: updateObj(this.state.controls[controlName], {
@@ -82,6 +83,7 @@ class Signup extends Component {
         this.setState({ controls: updatedControls })
     }
 
+    // handle the form submit.
     submitHandler = e => {
         e.preventDefault()
         const name = this.state.controls.name.val

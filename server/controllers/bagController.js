@@ -1,6 +1,7 @@
 const Bag = require('../models/bag')
 const Product = require('../models/product')
 const jwt = require('jsonwebtoken')
+const { validationResult } = require('express-validator')
 
 bagToJwt = bag => {
     return jwt.sign(
@@ -15,6 +16,11 @@ bagToJwt = bag => {
 
 const addItemToBag = async (req, res) => {
     try {
+        const results = validationResult(req)
+        if (!results.isEmpty()) {
+            return res.status(400).json({ status: 'error', message: results.array() })
+        }
+
         const id = req.params.id
         const { itemSize, itemStock } = req.body
 
@@ -37,6 +43,11 @@ const addItemToBag = async (req, res) => {
 
 const deleteItemFromBag = async (req, res) => {
     try {
+        const results = validationResult(req)
+        if (!results.isEmpty()) {
+            return res.status(400).json({ status: 'error', message: results.array() })
+        }
+
         const id = req.params.id
         const { itemSize } = req.body
 
@@ -52,6 +63,11 @@ const deleteItemFromBag = async (req, res) => {
 
 const removeWholeItem = async (req, res) => {
     try {
+        const results = validationResult(req)
+        if (!results.isEmpty()) {
+            return res.status(400).json({ status: 'error', message: results.array() })
+        }
+
         const id = req.params.id
         const { itemSize } = req.body
 
