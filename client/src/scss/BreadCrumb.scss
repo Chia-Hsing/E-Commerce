@@ -2,12 +2,13 @@
 @import 'variables';
 
 .breadCrumbWrap {
-    @include WL(max, 70%, auto);
+    @include WL(max, 65%, auto);
     margin: 1.5em auto;
     .breadCrumb {
         @include WL(min, 50%);
         @include display-flex(row, flex-start, center);
         list-style: none;
+        padding: 0;
 
         & li:first-child {
             padding-left: 0.8rem;
@@ -28,5 +29,22 @@
             color: color(lighter-grey);
             font-weight: weight(bold);
         }
+    }
+}
+
+@include response(l) {
+    .breadCrumbWrap {
+        @include WL(max, 68%, auto);
+    }
+}
+
+@include response(m) {
+    .breadCrumbWrap {
+        @include WL(max, 50%, auto);
+    }
+}
+@include response(s) {
+    .breadCrumbWrap {
+        @include WL(max, 90%, auto);
     }
 }

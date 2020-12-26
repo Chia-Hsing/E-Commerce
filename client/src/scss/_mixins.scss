@@ -37,7 +37,12 @@
     }
 
     @if ($breakpoint == m) {
-        @media screen and (max-width: 850px) {
+        @media screen and (min-width: 540px) and (max-width: 850px) {
+            @content;
+        }
+    }
+    @if ($breakpoint == s) {
+        @media screen and (max-width: 540px) {
             @content;
         }
     }

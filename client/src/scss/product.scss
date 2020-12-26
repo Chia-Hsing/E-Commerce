@@ -66,9 +66,10 @@
     .productContainer {
         @include display-flex(column, space-around, center);
         @include WL(max, 100%);
-        min-height: 65vh;
+        min-height: 70vh;
 
         .imgContainer {
+            width: 60%;
             img {
                 width: 100%;
             }
@@ -92,9 +93,38 @@
     .productContainer {
         @include display-flex(column, space-around, center);
         @include WL(max, 100%);
-        min-height: 70vh;
+        min-height: 75vh;
 
         .imgContainer {
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+
+        .detailContainer {
+            text-align: center;
+
+            .detailBody {
+                @include WL(max, 90%, auto);
+                @include display-flex(row, center, center);
+                margin: 1rem auto;
+            }
+            .goToBag {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+@include response(s) {
+    .productContainer {
+        @include display-flex(column, space-around, center);
+        @include WL(max, 100%);
+        min-height: 75vh;
+
+        .imgContainer {
+            width: 100%;
             img {
                 width: 100%;
             }

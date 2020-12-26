@@ -49,7 +49,7 @@ export const checkValidity = (value, rule) => {
     if (!rule) return true
 
     if (rule.required) {
-        isValid = value.trim() !== '' && isValid
+        isValid = value.trim() === '' && isValid
     }
 
     if (rule.minLength) {

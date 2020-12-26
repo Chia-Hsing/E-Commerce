@@ -12,10 +12,10 @@ import Signup from './container/Signup'
 import './scss/CSSTransition.scss'
 
 const routes = [
-    { path: '/products', name: 'Products', Component: Products },
+    { path: '/auth/signup', name: 'signup', Component: Signup },
+    { path: '/products', name: 'products', Component: Products },
     { path: '/products/product/:PID', name: 'product', Component: Product },
     { path: '/shopping-bag', name: 'shopping-bag', Component: ShoppingBag },
-    { path: '/auth/signup', name: 'signup', Component: Signup },
     { path: '/', name: 'Home', Component: Home },
 ]
 

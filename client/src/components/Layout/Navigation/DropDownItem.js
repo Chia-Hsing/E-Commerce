@@ -7,7 +7,7 @@ const DropDownItem = props => {
         <li className="dropDownItem">
             <Link
                 to={{
-                    pathname: `products`,
+                    pathname: `/products`,
                     search: `gender=${encodeURIComponent(props.gender)}&category=${encodeURIComponent(props.link)}`,
                 }}
             >

@@ -11,6 +11,7 @@ import '../scss/home.scss'
 export class Home extends Component {
     async componentDidMount() {
         await this.props.onGetMainMaterials()
+        await this.props.onInitProducts()
         await this.props.onSetBagItems()
     }
 
@@ -44,6 +45,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetMainMaterials: () => dispatch(actions.getMainMaterials()),
         onSetBagItems: () => dispatch(actions.setBagItems()),
+        onInitProducts: () => dispatch(actions.initProducts),
     }
 }
 

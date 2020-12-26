@@ -14,8 +14,9 @@
         padding: 1rem;
         background-color: #fff;
 
-        .inputBody {
+        & .inputBody {
             @include WL(max, 90%, 100%);
+            display: block;
             position: relative;
 
             & input {
@@ -77,5 +78,32 @@
 
     button {
         @include button;
+    }
+}
+
+@include response(l) {
+    .signup {
+        @include WL(max, 80%, 65vh);
+        form {
+            @include WL(max, 80%, 65%);
+        }
+    }
+}
+
+@include response(m) {
+    .signup {
+        @include WL(max, 90%, 65vh);
+        form {
+            @include WL(max, 100%, 65%);
+        }
+    }
+}
+
+@include response(s) {
+    .signup {
+        @include WL(max, 90%, 70vh);
+        form {
+            @include WL(max, 100%, 75%);
+        }
     }
 }

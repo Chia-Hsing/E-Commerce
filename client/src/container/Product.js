@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../store/actions/index'
 import ItemDetail from '../components/Products/ItemDetail'
-import { arrayBufferToBase64Img } from '../utils/utilities'
+import { arrayBufferToBase64Img, alert } from '../utils/utilities'
 import Spinner from '../components/UI/Spinner'
 
 class Product extends Component {
@@ -83,8 +83,30 @@ class Product extends Component {
         return {}
     }
 
+    onAlertHandler = () => {
+        alert
+            .fire({
+                title: 'Oops...',
+                text: this.props.error,
+                icon: 'warning',
+                iconHtml: '!',
+                iconColor: '#2a2c30',
+                confirmButtonText: 'redirect to homepage',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    this.props.history.push('/')
+                }
+            })
+    }
+
     render() {
         let product = <Spinner loading={this.props.loading} />
+
+        if (this.props.error) {
+            this.onAlertHandler()
+            this.props.history.push('/')
+        }
 
         // determine the product object returning is not empty.
         if (Object.keys(this.props.product).length > 0) {
@@ -128,6 +150,7 @@ const mapStateToProps = state => {
         product: state.products.product,
         loading: state.products.loading,
         bagItems: state.bag.bagItems,
+        error: state.products.error,
     }
 }
 

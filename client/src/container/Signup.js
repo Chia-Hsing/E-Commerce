@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Input from '../components/UI/Input'
-import { updateObj, checkValidity } from '../utils/utilities'
+import { updateObj, checkValidity, alert } from '../utils/utilities'
 import * as actions from '../store/actions/index'
 import '../scss/auth.scss'
 class Signup extends Component {
@@ -90,11 +90,34 @@ class Signup extends Component {
         const email = this.state.controls.email.val
         const password = this.state.controls.password.val
         const confirmPassword = this.state.controls.confirmPassword.val
+
         this.props.onSignupAuth(name, email, password, confirmPassword)
+    }
+
+    onAlertHandler = () => {
+        alert
+            .fire({
+                title: 'Oops...',
+                text: this.props.error,
+                icon: 'warning',
+                iconHtml: '!',
+                iconColor: '#2a2c30',
+                confirmButtonText: 'redirect to homepage',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    this.props.history.push('/')
+                }
+            })
     }
 
     render() {
         let formElement = []
+
+        if (this.props.error) {
+            this.onAlertHandler()
+            this.props.history.push('/')
+        }
 
         for (let key in this.state.controls) {
             formElement.push({
@@ -131,7 +154,9 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => {
-    return {}
+    return {
+        error: state.auth.error,
+    }
 }
 
 const mapDispatchToProps = dispatch => {

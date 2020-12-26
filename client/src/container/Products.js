@@ -88,6 +88,12 @@ class Products extends Component {
         let products = <Spinner loading={this.props.loading} />
         let moreProductsButton = null
 
+        // if there is a error.
+        if (this.props.error) {
+            this.onAlertHandler()
+            this.props.history.push('/')
+        }
+
         // if no items return.
         if (this.props.isNoItem) {
             products = (
@@ -124,12 +130,6 @@ class Products extends Component {
                         more items
                     </button>
                 )
-        }
-
-        // if there is a error.
-        if (this.props.error) {
-            this.onAlertHandler()
-            this.props.history.push('/')
         }
 
         return (

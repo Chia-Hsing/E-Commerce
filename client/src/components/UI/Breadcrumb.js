@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import '../../scss/BreadCrumb.scss'
+import '../../scss/breadCrumb.scss'
 
 const BreadCrumb = props => {
     return (

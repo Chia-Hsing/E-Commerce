@@ -43,8 +43,26 @@ footer {
     }
 }
 
+@include response(l) {
+    footer {
+        @include WL(max, 100vw, auto);
+    }
+}
+
 @include response(m) {
-    .icon-gp {
-        width: 40%;
+    footer {
+        @include WL(max, 100vw, auto);
+        .icon-gp {
+            width: 40%;
+        }
+    }
+}
+
+@include response(s) {
+    footer {
+        @include WL(max, 100vw, auto);
+        .icon-gp {
+            width: 40%;
+        }
     }
 }
