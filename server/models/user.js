@@ -30,7 +30,7 @@ userSchema.methods.generateAuthToken = function () {
         {
             _id: user._id,
             iat: new Date().getTime(),
-            exp: new Date().setHours(1, 0, 0),
+            exp: new Date().getTime() + 3600000,
         },
         process.env.JWT_SECRET_AUTH
     )
