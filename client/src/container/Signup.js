@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import Input from '../components/UI/Input'
-import { updateObj, checkValidity, alert } from '../utils/utilities'
+import { updateObj, checkValidity } from '../utils/utilities'
 import * as actions from '../store/actions/index'
 import '../scss/auth.scss'
 class Signup extends Component {
@@ -70,6 +71,10 @@ class Signup extends Component {
         },
     }
 
+    componentWillUnmount() {
+        this.props.inInitAuth()
+    }
+
     // handle the input changes.
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
@@ -94,30 +99,8 @@ class Signup extends Component {
         this.props.onSignupAuth(name, email, password, confirmPassword)
     }
 
-    onAlertHandler = () => {
-        alert
-            .fire({
-                title: 'Oops...',
-                text: this.props.error,
-                icon: 'warning',
-                iconHtml: '!',
-                iconColor: '#2a2c30',
-                confirmButtonText: 'redirect to homepage',
-            })
-            .then(result => {
-                if (result.isConfirmed) {
-                    this.props.history.push('/')
-                }
-            })
-    }
-
     render() {
         let formElement = []
-
-        if (this.props.error) {
-            this.onAlertHandler()
-            this.props.history.push('/')
-        }
 
         for (let key in this.state.controls) {
             formElement.push({
@@ -129,6 +112,7 @@ class Signup extends Component {
         const form = formElement.map(ele => {
             return (
                 <Input
+                    error={this.props.error}
                     key={ele.key}
                     label={ele.key}
                     value={ele.config.val}
@@ -145,6 +129,11 @@ class Signup extends Component {
         return (
             <div className="signup">
                 <form onSubmit={this.submitHandler}>
+                    {typeof this.props.error === 'string' && (
+                        <h5 style={{ color: 'red' }} className="errorMSG">
+                            <Link to="/auth/login">{this.props.error}</Link>
+                        </h5>
+                    )}
                     {form}
                     <button>Submit</button>
                 </form>
@@ -161,6 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        inInitAuth: () => dispatch(actions.initAuth()),
         onSignupAuth: (name, email, password, confirmPassword) =>
             dispatch(actions.signup(name, email, password, confirmPassword)),
     }

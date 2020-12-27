@@ -32,7 +32,7 @@ const setBagItemsFailed = (state, action) => {
         bagItems: [],
         totalQuantity: 0,
         totalAmount: 0,
-        error: action.error.message,
+        error: action.error,
     })
 }
 

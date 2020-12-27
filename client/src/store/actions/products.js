@@ -9,7 +9,9 @@ export const getProducts = (gender, category, pageItemsLimit, page) => async dis
     try {
         const res = await apis.getProducts(gender, category, pageItemsLimit, page)
 
-        if (res.data.status !== 'success' || res.statusText !== 'OK') throw new Error(res.data.message)
+        if (res.data.status !== 'success' || res.statusText !== 'OK') {
+            dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: res.data.message })
+        }
 
         const {
             data: { productResponse },
@@ -29,7 +31,9 @@ export const getProduct = PID => async dispatch => {
     try {
         const res = await apis.getProduct(PID)
 
-        if (res.data.status !== 'success' || res.statusText !== 'OK') throw new Error(res.data.message)
+        if (res.data.status !== 'success' || res.statusText !== 'OK') {
+            dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: res.data.message })
+        }
 
         const {
             data: {

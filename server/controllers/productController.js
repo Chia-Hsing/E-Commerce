@@ -8,7 +8,10 @@ const getProducts = async (req, res) => {
 
         // while there's neither category nor gender search query.
         if (category === 'null' && gender === 'null') {
-            return res.status(200).json({ status: 'error', message: 'Request rejected - invalid search condition!' })
+            return res.json({
+                status: 'error',
+                message: 'Request rejected - invalid search condition!',
+            })
         }
 
         // when first visiting the products page, only need to find the first 6 items for frontend rendering. while the number of pages greater than 1, skip the first 6 items and find the next 6 items for rendering.
@@ -67,9 +70,13 @@ const getProducts = async (req, res) => {
                 products,
             }
         }
-        return res.status(200).json({ status: 'success', productResponse, message: 'Request success!' })
+        return res.status(200).json({
+            status: 'success',
+            productResponse,
+            message: 'Request success!',
+        })
     } catch (error) {
-        res.status(500).json({ status: 'error', error, message: 'Something went wrong on server side!' })
+        res.status(500).send(error)
     }
 }
 
@@ -80,12 +87,19 @@ const getProduct = async (req, res) => {
         const product = await Product.findById(PID)
 
         if (!product) {
-            return res.status(404).json({ status: 'error', message: 'product no found!' })
+            return res.json({
+                status: 'error',
+                message: 'Product not found!',
+            })
         }
 
-        return res.status(200).json({ status: 'success', product, message: 'request success!' })
+        return res.status(200).json({
+            status: 'success',
+            product,
+            message: 'Request success!',
+        })
     } catch (error) {
-        res.status(500).json({ status: 'error', error, message: 'Something went wrong on server side!' })
+        res.status(500).send(error)
     }
 }
 

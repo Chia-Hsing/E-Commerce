@@ -60,8 +60,8 @@ const Input = props => {
         <>
             <div className="inputBody">
                 {eleInput}
-
                 <label className="labelName">
+                    {props.error && <span className="errorMSG">{props.error[props.label]}</span>}
                     <span className="contentName">{props.label}</span>
                 </label>
             </div>

@@ -82,7 +82,7 @@
     .dropDownItem {
         @include A(heavy-grey, light-grey, yellow);
         list-style: none;
-        padding: 8px;
+        padding: 14px;
         font-size: size(xs);
     }
 

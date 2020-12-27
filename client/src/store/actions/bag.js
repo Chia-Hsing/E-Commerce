@@ -89,11 +89,7 @@ export const removeWholeItem = (id, itemSize) => async dispatch => {
 }
 
 export const cleanBag = () => async dispatch => {
-    try {
-        localStorage.removeItem('bagToken')
-        await apis.cleanBag()
-        dispatch({ type: actionTypes.CLEAN_BAG_SUCCESS })
-    } catch (error) {
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
-    }
+    localStorage.removeItem('bagToken')
+    await apis.cleanBag()
+    dispatch({ type: actionTypes.CLEAN_BAG_SUCCESS })
 }

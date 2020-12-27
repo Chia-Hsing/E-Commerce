@@ -17,8 +17,9 @@ bagToJwt = bag => {
 const addItemToBag = async (req, res) => {
     try {
         const results = validationResult(req)
+
         if (!results.isEmpty()) {
-            return res.status(400).json({ status: 'error', message: results.array() })
+            return res.status(400).send('Invalid request!')
         }
 
         const id = req.params.id
@@ -27,7 +28,10 @@ const addItemToBag = async (req, res) => {
         const product = await Product.findById(id).select(['name', 'category.name', 'price'])
 
         if (!product) {
-            return res.status(400).json({ status: 'error', message: 'This product can not be found!' })
+            return res.json({
+                status: 'error',
+                message: 'Product not found!',
+            })
         }
 
         // { items: { bag:[ {item:{}, quantity: ...} ], totalQuantity: 0, totalAmount: 0 }, iat: ..., exp: ... }
@@ -35,17 +39,22 @@ const addItemToBag = async (req, res) => {
         bag.addItemToBag(product, itemSize, itemStock)
 
         const token = bagToJwt(bag)
-        return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })
+        return res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Success to get bag token!',
+        })
     } catch (error) {
-        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+        return res.status(500).send(error)
     }
 }
 
 const deleteItemFromBag = async (req, res) => {
     try {
         const results = validationResult(req)
+
         if (!results.isEmpty()) {
-            return res.status(400).json({ status: 'error', message: results.array() })
+            return res.status(400).send('Invalid request!')
         }
 
         const id = req.params.id
@@ -55,17 +64,22 @@ const deleteItemFromBag = async (req, res) => {
         bag.deleteItemFromBag(id, itemSize)
 
         const token = bagToJwt(bag)
-        return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })
+        return res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Success to get bag token!',
+        })
     } catch (error) {
-        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+        return res.status(500).send(error)
     }
 }
 
 const removeWholeItem = async (req, res) => {
     try {
         const results = validationResult(req)
+
         if (!results.isEmpty()) {
-            return res.status(400).json({ status: 'error', message: results.array() })
+            return res.status(400).send('Invalid request!')
         }
 
         const id = req.params.id
@@ -75,9 +89,13 @@ const removeWholeItem = async (req, res) => {
         bag.removeItem(id, itemSize)
 
         const token = bagToJwt(bag)
-        return res.status(200).json({ status: 'success', token, message: 'success to get bag token!' })
+        return res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Success to get bag token!',
+        })
     } catch (error) {
-        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+        return res.status(500).send(error)
     }
 }
 
@@ -86,9 +104,13 @@ const cleanBag = async (req, res) => {
         const bag = new Bag([])
         bag.cleanBag()
         const token = bagToJwt(bag)
-        return res.status(200).json({ status: 'success', token, message: 'success to clean bag!' })
+        return res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Success to clean bag!',
+        })
     } catch (error) {
-        return res.status(500).json({ status: 'error', error, message: 'something went wrong on server side!' })
+        return res.status(500).send(error)
     }
 }
 

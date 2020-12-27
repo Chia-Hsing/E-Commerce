@@ -7,10 +7,6 @@ import * as actions from '../store/actions/index'
 import '../scss/shoppingBag.scss'
 
 class ShoppingBag extends Component {
-    componentDidMount() {
-        this.props.onSetBagItems()
-    }
-
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.bagItems !== nextProps.bagItems) {
             return true
@@ -35,24 +31,22 @@ class ShoppingBag extends Component {
             this.props.bagItems.length > 0 ? (
                 this.props.bagItems.map(product => {
                     return (
-                        <>
-                            <CheckOutItems
-                                key={product.item._id}
-                                name={product.item.name}
-                                price={product.item.price}
-                                id={product.item._id}
-                                itemSize={product.itemSize}
-                                itemStock={product.itemStock}
-                                quantity={product.quantity}
-                                addItemToBag={() =>
-                                    this.onAddProductHandler(product.item._id, product.itemStock, product.itemSize)
-                                }
-                                deleteItemFromBag={() =>
-                                    this.onDeleteProductHandler(product.item._id, product.quantity, product.itemSize)
-                                }
-                                removeItem={() => this.props.onRemoveWholeItem(product.item._id, product.itemSize)}
-                            />
-                        </>
+                        <CheckOutItems
+                            key={Math.random()}
+                            name={product.item.name}
+                            price={product.item.price}
+                            id={product.item._id}
+                            itemSize={product.itemSize}
+                            itemStock={product.itemStock}
+                            quantity={product.quantity}
+                            addItemToBag={() =>
+                                this.onAddProductHandler(product.item._id, product.itemStock, product.itemSize)
+                            }
+                            deleteItemFromBag={() =>
+                                this.onDeleteProductHandler(product.item._id, product.quantity, product.itemSize)
+                            }
+                            removeItem={() => this.props.onRemoveWholeItem(product.item._id, product.itemSize)}
+                        />
                     )
                 })
             ) : (
@@ -93,7 +87,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
         onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
-        onSetBagItems: () => dispatch(actions.setBagItems()),
         onRemoveWholeItem: (id, itemSize) => dispatch(actions.removeWholeItem(id, itemSize)),
         onCleanBag: () => dispatch(actions.cleanBag()),
     }

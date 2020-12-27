@@ -58,7 +58,7 @@
     &:hover a {
         color: color($hoverColor);
         text-decoration: none;
-        border-bottom: 1px solid color($bottomColor);
+        border-bottom: 2px solid color($bottomColor);
     }
 }
 

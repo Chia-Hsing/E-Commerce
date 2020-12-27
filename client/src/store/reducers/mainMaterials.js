@@ -11,7 +11,7 @@ const getMainMaterialsSuccess = (state, action) => {
     return updateObj(state, { mainCategories: action.mainCategories, newArrival: action.newArrival, error: null })
 }
 const getMainMaterialsFailed = (state, action) => {
-    return updateObj(state, { error: action.error.message })
+    return updateObj(state, { error: action.error })
 }
 
 const reducer = (state = initialState, action) => {

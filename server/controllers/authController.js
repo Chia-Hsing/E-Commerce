@@ -7,18 +7,30 @@ const postSignup = async (req, res) => {
     try {
         const { name, email, password } = req.body
 
-        const results = validationResult(req)
+        const errorFormatter = ({ msg }) => {
+            return `${msg}`
+        }
+        const results = validationResult(req).formatWith(errorFormatter)
+
         if (!results.isEmpty()) {
-            return res.status(400).json({ status: 'error', message: results.array() })
+            return res.json({
+                status: 'error',
+                error: results.mapped(),
+                message: 'Invalid request!',
+            })
         }
 
         const existingUser = await User.findOne({ email })
         if (existingUser) {
-            return res.status(400).json({ status: 'success', message: 'Email address exists, please log in!' })
+            return res.json({
+                status: 'error',
+                message: 'Email address already exists, please log in!',
+            })
         }
 
         const user = new User({ name, email, password })
-        const token = await user.generateAuthToken()
+        const token = user.generateAuthToken()
+
         await user.save(error => {
             if (error) {
                 console.log(error)
@@ -29,14 +41,10 @@ const postSignup = async (req, res) => {
         return res.status(200).json({
             status: 'success',
             token,
-            message: 'Create user success!',
+            message: 'Creating user success!',
         })
     } catch (error) {
-        return res.status(500).json({
-            status: 'error',
-            error,
-            message: 'Create user failed!',
-        })
+        return res.status(500).send(error)
     }
 }
 

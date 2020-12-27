@@ -5,13 +5,21 @@ const { validationResult } = require('express-validator')
 
 const postProduct = async (req, res) => {
     try {
-        const results = validationResult(req)
+        const errorFormatter = ({ msg, param }) => {
+            return `${msg}`
+        }
+        const results = validationResult(req).formatWith(errorFormatter)
+
         if (!results.isEmpty()) {
-            return res.status(400).json({ status: 'error', message: results.array() })
+            return res.json({
+                status: 'error',
+                error: results.mapped(),
+                message: 'Invalid request!',
+            })
         }
 
         if (!req.file) {
-            return res.status(404).json({
+            return res.json({
                 status: 'error',
                 message: 'Should upload a picture of the product.',
             })
@@ -21,10 +29,17 @@ const postProduct = async (req, res) => {
 
         const categorySelected = await Category.findById({ _id: req.body.categoryId })
         if (!categorySelected) {
-            return res.status(404).json({ status: 'error', message: 'Category  not found!' })
+            return res.json({
+                status: 'error',
+                message: 'Category not found!',
+            })
         }
 
-        const product = new Product({ ...req.body, category: categorySelected, image: buffer })
+        const product = new Product({
+            ...req.body,
+            category: categorySelected,
+            image: buffer,
+        })
 
         await product.save(error => {
             if (error) {
@@ -35,22 +50,27 @@ const postProduct = async (req, res) => {
 
         return res.status(200).json({
             status: 'success',
-            message: 'Create product success.',
+            product,
+            message: 'Creating product success.',
         })
     } catch (error) {
-        res.status(500).json({
-            status: 'error',
-            error,
-            message: 'Something went wrong during creating product.',
-        })
+        res.status(500).send(error)
     }
 }
 
 const postCategory = async (req, res) => {
     try {
-        const results = validationResult(req)
+        const errorFormatter = ({ msg, param }) => {
+            return `${msg}`
+        }
+        const results = validationResult(req).formatWith(errorFormatter)
+
         if (!results.isEmpty()) {
-            return res.status(400).json({ status: 'error', message: results.array() })
+            return res.json({
+                status: 'error',
+                error: results.mapped(),
+                message: 'Invalid request!',
+            })
         }
 
         const category = new Category({ ...req.body })
@@ -62,14 +82,11 @@ const postCategory = async (req, res) => {
         })
         return res.status(200).json({
             status: 'success',
-            message: 'Create category success.',
+            category,
+            message: 'Creating category success.',
         })
     } catch (error) {
-        return res.status(500).json({
-            status: 'error',
-            error,
-            message: 'Something went wrong during creating category.',
-        })
+        res.status(500).send(error)
     }
 }
 

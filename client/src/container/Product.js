@@ -20,8 +20,6 @@ class Product extends Component {
         const PID = this.props.match.params.PID
         this.props.onInitProduct()
         this.props.onGetProduct(PID)
-        // check if there is a bag stored at the local storage, if yes, set it to the state.
-        await this.props.onSetBagItems()
     }
 
     // make sure the route works properly by comparing two pathnames.
@@ -141,7 +139,6 @@ const mapDispatchToProps = dispatch => {
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
         onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
         onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
-        onSetBagItems: () => dispatch(actions.setBagItems()),
     }
 }
 

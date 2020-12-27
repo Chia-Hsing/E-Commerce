@@ -36,7 +36,7 @@ const getProductsFailed = (state, action) => {
         loading: false,
         products: [],
         product: {},
-        error: action.error.message,
+        error: action.error,
     })
 }
 
@@ -60,7 +60,7 @@ const getProductFailed = (state, action) => {
         product: {},
         products: [],
         loading: false,
-        error: action.error.message,
+        error: action.error,
     })
 }
 

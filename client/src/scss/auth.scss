@@ -36,6 +36,12 @@
                 height: 100%;
                 pointer-events: none;
                 border-bottom: 1px solid color(light-grey);
+
+                & .errorMSG {
+                    float: right;
+                    color: color(red);
+                    font-size: size(xs);
+                }
             }
 
             & label::after {
