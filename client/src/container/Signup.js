@@ -72,7 +72,7 @@ class Signup extends Component {
     }
 
     componentWillUnmount() {
-        this.props.inInitAuth()
+        this.props.inInitErrorAuth()
     }
 
     // handle the input changes.
@@ -150,7 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        inInitAuth: () => dispatch(actions.initAuth()),
+        inInitErrorAuth: () => dispatch(actions.initErrorAuth()),
         onSignupAuth: (name, email, password, confirmPassword) =>
             dispatch(actions.signup(name, email, password, confirmPassword)),
     }

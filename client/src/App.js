@@ -27,6 +27,7 @@ const App = props => {
     useEffect(() => {
         // check if there is a bag stored at the local storage, if yes, set it to the state.
         props.onSetBagItems()
+        props.onAuthCheckState()
     }, [props])
 
     let routers = routes.map(({ path, Component }) => (
@@ -57,6 +58,7 @@ const App = props => {
 const mapDispatchToProps = dispatch => {
     return {
         onSetBagItems: () => dispatch(actions.setBagItems()),
+        onAuthCheckState: () => dispatch(actions.authCheckState()),
     }
 }
 
