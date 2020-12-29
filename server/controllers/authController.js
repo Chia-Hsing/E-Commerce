@@ -48,16 +48,53 @@ const postSignup = async (req, res) => {
     }
 }
 
-const postLogin = (req, res) => {
-    return
-}
+const postLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body
 
-const postLogout = (req, res) => {
-    return
+        const errorFormatter = ({ msg }) => {
+            return `${msg}`
+        }
+        const results = validationResult(req).formatWith(errorFormatter)
+
+        if (!results.isEmpty()) {
+            return res.json({
+                status: 'error',
+                error: results.mapped(),
+                message: 'Invalid request!',
+            })
+        }
+
+        const user = await User.findOne({ email })
+        if (!user) {
+            return res.json({
+                status: 'error',
+                message: 'Email address is not registered yet, please sign up!',
+            })
+        }
+
+        const isPasswordMatched = await user.findByCredentials(password)
+
+        if (!isPasswordMatched) {
+            return res.json({
+                status: 'error',
+                message: 'Password incorrect!',
+            })
+        }
+
+        const token = user.generateAuthToken()
+
+        return res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Log in success!',
+        })
+    } catch (error) {
+        return res.status(500).send(error)
+    }
 }
 
 module.exports = {
     postSignup,
     postLogin,
-    postLogout,
 }

@@ -6,15 +6,11 @@ const initialState = {
     totalQuantity: 0,
     totalAmount: 0,
     error: null,
+    purchasing: false,
 }
 
 const initBagItems = (state, action) => {
-    return updateObj(state, {
-        bagItems: [],
-        totalQuantity: 0,
-        totalAmount: 0,
-        error: null,
-    })
+    return initialState
 }
 
 // bagItems: { items: { bag: []}, iat:..., exp:... }
@@ -23,6 +19,7 @@ const setBagItemsSuccess = (state, action) => {
         bagItems: action.bagItems,
         totalQuantity: action.totalQuantity,
         totalAmount: action.totalAmount,
+        purchasing: true,
         error: null,
     })
 }
@@ -32,6 +29,7 @@ const setBagItemsFailed = (state, action) => {
         bagItems: [],
         totalQuantity: 0,
         totalAmount: 0,
+        purchasing: false,
         error: action.error,
     })
 }
@@ -41,8 +39,13 @@ const cleanBagSuccess = (state, action) => {
         bagItems: [],
         totalQuantity: 0,
         totalAmount: 0,
+        purchasing: false,
         error: null,
     })
+}
+
+const initPurchasing = (state, action) => {
+    return updateObj(state, { purchasing: false })
 }
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +58,8 @@ const reducer = (state = initialState, action) => {
             return setBagItemsFailed(state, action)
         case actionTypes.CLEAN_BAG_SUCCESS:
             return cleanBagSuccess(state, action)
+        case actionTypes.INIT_PURCHASING:
+            return initPurchasing(state, action)
         default:
             return state
     }

@@ -8,14 +8,22 @@ export const setBagItems = () => async dispatch => {
         // bagItems: { items: { bag: [], totalQuantity: ..., totalAmount: ...}, iat:..., exp:... }
         const { items } = await checkBagFromLS()
         if (items) {
-            return dispatch({
-                type: actionTypes.SET_BAG_ITEMS_SUCCESS,
-                bagItems: items.bag,
-                totalQuantity: items.totalQuantity,
-                totalAmount: items.totalAmount,
-            })
+            if (items.totalQuantity <= 0) {
+                // if there is nothing in the bag, initialize the bag state
+                return dispatch({
+                    type: actionTypes.INIT_BAG_ITEMS,
+                })
+            } else {
+                // otherwise set the bag state items according to the data in local storage
+                return dispatch({
+                    type: actionTypes.SET_BAG_ITEMS_SUCCESS,
+                    bagItems: items.bag,
+                    totalQuantity: items.totalQuantity,
+                    totalAmount: items.totalAmount,
+                })
+            }
         }
-
+        // if there is no data in local storage, initialize the bag state
         dispatch({
             type: actionTypes.INIT_BAG_ITEMS,
         })
@@ -62,6 +70,11 @@ export const deleteItemFromBag = (id, itemSize) => async dispatch => {
         } = jwt_decode(token)
 
         dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems, totalQuantity, totalAmount })
+
+        // if there is nothing in bag, set the redirect path to '/' instead of '/shopping-bag'
+        if (totalQuantity <= 0) {
+            dispatch({ type: actionTypes.INIT_PURCHASING })
+        }
     } catch (error) {
         dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
     }
@@ -83,6 +96,10 @@ export const removeWholeItem = (id, itemSize) => async dispatch => {
         } = jwt_decode(token)
 
         dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems, totalQuantity, totalAmount })
+
+        if (totalQuantity <= 0) {
+            dispatch({ type: actionTypes.INIT_PURCHASING })
+        }
     } catch (error) {
         dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
     }
@@ -92,4 +109,5 @@ export const cleanBag = () => async dispatch => {
     localStorage.removeItem('bagToken')
     await apis.cleanBag()
     dispatch({ type: actionTypes.CLEAN_BAG_SUCCESS })
+    dispatch({ type: actionTypes.INIT_PURCHASING })
 }

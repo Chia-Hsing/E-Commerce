@@ -36,14 +36,15 @@
         width: auto;
     }
 
-    .login {
-        @include position(fixed, 10, none, 20);
+    .login,
+    .logout {
+        @include position(fixed, 10, none, 30);
         @include A(yellow, light-grey, yellow);
         font: {
             size: size(xs);
             weight: weight(normal);
         }
-        width: auto;
+        max-width: auto;
     }
 
     .navItems {

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import NavItems from './NavItems'
 import Logo from './Logo'
 import Login from './Login'
+import Logout from './Logout'
 import ShoppingBag from './ShoppingBag'
 import MenuToggle from './MenuToggle'
 import '../../../scss/navigation.scss'
@@ -13,7 +14,8 @@ const NavBar = props => {
         <header className="navBar">
             <MenuToggle clicked={props.open} />
             <Logo class="logo" />
-            <Login class="login" />
+            {props.isAuthenticated ? <Logout onLogout={props.onLogout} class="logout" /> : <Login class="login" />}
+
             <ShoppingBag class="shoppingBag" />
             <NavItems class="navItems" />
         </header>

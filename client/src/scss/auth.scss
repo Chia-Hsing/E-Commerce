@@ -1,13 +1,13 @@
 @import 'mixins';
 @import 'variables';
 
-.signup {
+.auth {
     @include WL(max, 90%);
-    min-height: 55vh;
+    min-height: 60vh;
     margin: 0 auto;
 
     form {
-        @include WL(max, 40%, 50vh);
+        @include WL(max, 40%, auto);
         @include display-flex(column, center, center);
         margin: 2em auto;
         position: relative;
@@ -15,7 +15,7 @@
         background-color: #fff;
 
         & .inputBody {
-            @include WL(max, 90%, 100%);
+            @include WL(max, 90%, 70px);
             display: block;
             position: relative;
 

@@ -38,6 +38,13 @@ userSchema.methods.generateAuthToken = function () {
     return token
 }
 
+userSchema.methods.findByCredentials = async function (password) {
+    const user = this
+    const isMatched = await bcrypt.compare(password, user.password)
+
+    return isMatched
+}
+
 userSchema.pre('save', async function (next) {
     const user = this
     if (user.isModified('password')) {

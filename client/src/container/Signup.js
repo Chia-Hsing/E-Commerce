@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import Input from '../components/UI/Input'
+import Spinner from '../components/UI/Spinner'
 import { updateObj, checkValidity } from '../utils/utilities'
 import * as actions from '../store/actions/index'
 import '../scss/auth.scss'
@@ -71,8 +72,17 @@ class Signup extends Component {
         },
     }
 
+    componentDidMount() {
+        if (!this.props.isPurchasing && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthRedirectPath('/')
+        } else if (this.props.isPurchasing) {
+            this.props.onSetAuthRedirectPath('/shopping-bag')
+        }
+    }
+
+    // initialize the error message
     componentWillUnmount() {
-        this.props.inInitErrorAuth()
+        this.props.onInitErrorAuth()
     }
 
     // handle the input changes.
@@ -109,31 +119,34 @@ class Signup extends Component {
             })
         }
 
-        const form = formElement.map(ele => {
-            return (
-                <Input
-                    error={this.props.error}
-                    key={ele.key}
-                    label={ele.key}
-                    value={ele.config.val}
-                    type={ele.config.eleType}
-                    config={ele.config.eleConfig}
-                    isValid={ele.config.valid}
-                    touched={ele.config.touched}
-                    shouldValidate={ele.config.validation}
-                    inputChange={e => this.inputChangeHandler(e, ele.key)}
-                />
-            )
-        })
+        let form = this.props.loading ? (
+            <Spinner />
+        ) : (
+            formElement.map(ele => {
+                return (
+                    <Input
+                        error={this.props.error}
+                        key={ele.key}
+                        label={ele.key}
+                        value={ele.config.val}
+                        type={ele.config.eleType}
+                        config={ele.config.eleConfig}
+                        isValid={ele.config.valid}
+                        touched={ele.config.touched}
+                        shouldValidate={ele.config.validation}
+                        inputChange={e => this.inputChangeHandler(e, ele.key)}
+                    />
+                )
+            })
+        )
 
         return (
-            <div className="signup">
+            <div className="auth">
+                {this.props.isAuthenticated && <Redirect to={this.props.authRedirectPath} />}
                 <form onSubmit={this.submitHandler}>
-                    {typeof this.props.error === 'string' && (
-                        <h5 style={{ color: 'red' }} className="errorMSG">
-                            <Link to="/auth/login">{this.props.error}</Link>
-                        </h5>
-                    )}
+                    <h4>SIGN UP</h4>
+                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
+
                     {form}
                     <button>Submit</button>
                 </form>
@@ -145,12 +158,17 @@ class Signup extends Component {
 const mapStateToProps = state => {
     return {
         error: state.auth.error,
+        loading: state.auth.loading,
+        authRedirectPath: state.auth.authRedirectPath,
+        isAuthenticated: state.auth.token !== null,
+        isPurchasing: state.bag.purchasing,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        inInitErrorAuth: () => dispatch(actions.initErrorAuth()),
+        onInitErrorAuth: () => dispatch(actions.initErrorAuth()),
+        onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path)),
         onSignupAuth: (name, email, password, confirmPassword) =>
             dispatch(actions.signup(name, email, password, confirmPassword)),
     }
