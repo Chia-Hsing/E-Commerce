@@ -115,11 +115,18 @@
 @include response(s) {
     .navBar {
         height: 50px;
+        padding: 0;
 
         & .navItems,
         & .logo,
-        & .login {
+        & .login,
+        & .logout {
             display: none;
+        }
+
+        .shoppingBag {
+            position: absolute;
+            right: 5%;
         }
     }
 

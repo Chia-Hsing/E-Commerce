@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Logo from './Logo'
 import NavItems from './NavItems'
 import Login from './Login'
+import Logout from './Logout'
 import { icons } from '../../../utils/icons'
 import '../../../scss/navigation.scss'
 
@@ -22,7 +23,7 @@ const SideDrawer = props => {
 
             <Logo class="logo-Side-Drawer" />
             <NavItems class="navItems-Side-Drawer" />
-            <Login class="login-Side-Drawer" />
+            {props.isAuthenticated ? <Logout onLogout={props.onLogout} /> : <Login class="login-Side-Drawer" />}
         </nav>
     )
 }

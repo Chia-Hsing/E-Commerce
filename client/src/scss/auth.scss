@@ -88,7 +88,7 @@
 }
 
 @include response(l) {
-    .signup {
+    .auth {
         @include WL(max, 80%, 65vh);
         form {
             @include WL(max, 80%, 65%);
@@ -97,7 +97,7 @@
 }
 
 @include response(m) {
-    .signup {
+    .auth {
         @include WL(max, 90%, 65vh);
         form {
             @include WL(max, 100%, 65%);
@@ -106,7 +106,7 @@
 }
 
 @include response(s) {
-    .signup {
+    .auth {
         @include WL(max, 90%, 70vh);
         form {
             @include WL(max, 100%, 75%);
