@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import Input from '../components/UI/Input'
 import Spinner from '../components/UI/Spinner'
@@ -117,7 +117,12 @@ class Login extends Component {
                     {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
 
                     {form}
-                    <button>Submit</button>
+                    <div className="linkAndButton">
+                        <button>Submit</button>
+                        <div className="link">
+                            <Link to="/auth/signup">signup</Link>
+                        </div>
+                    </div>
                 </form>
             </div>
         )

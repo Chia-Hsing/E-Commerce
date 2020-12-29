@@ -55,6 +55,12 @@
                 transition: all 0.3s ease;
             }
 
+            .errorMSG {
+                position: absolute;
+                bottom: 5px;
+                right: 0;
+            }
+
             .contentName {
                 position: absolute;
                 bottom: 5px;
@@ -82,8 +88,17 @@
         }
     }
 
-    button {
-        @include button;
+    .linkAndButton {
+        @include WL(max, 80%, auto);
+        @include display-flex(row, space-between, center);
+
+        .link {
+            @include A(yellow, light-grey, yellow);
+        }
+
+        button {
+            @include button;
+        }
     }
 }
 

@@ -80,6 +80,7 @@ const mapStateToProps = state => {
         bagItems: state.bag.bagItems,
         totalQuantity: state.bag.totalQuantity,
         totalAmount: state.bag.totalAmount,
+        isPurchasing: state.bag.purchasing,
     }
 }
 

@@ -5,19 +5,6 @@ const { validationResult } = require('express-validator')
 
 const postProduct = async (req, res) => {
     try {
-        const errorFormatter = ({ msg, param }) => {
-            return `${msg}`
-        }
-        const results = validationResult(req).formatWith(errorFormatter)
-
-        if (!results.isEmpty()) {
-            return res.json({
-                status: 'error',
-                error: results.mapped(),
-                message: 'Invalid request!',
-            })
-        }
-
         if (!req.file) {
             return res.json({
                 status: 'error',
@@ -60,19 +47,6 @@ const postProduct = async (req, res) => {
 
 const postCategory = async (req, res) => {
     try {
-        const errorFormatter = ({ msg, param }) => {
-            return `${msg}`
-        }
-        const results = validationResult(req).formatWith(errorFormatter)
-
-        if (!results.isEmpty()) {
-            return res.json({
-                status: 'error',
-                error: results.mapped(),
-                message: 'Invalid request!',
-            })
-        }
-
         const category = new Category({ ...req.body })
         await category.save(error => {
             if (error) {

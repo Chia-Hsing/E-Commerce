@@ -7,19 +7,6 @@ const postSignup = async (req, res) => {
     try {
         const { name, email, password } = req.body
 
-        const errorFormatter = ({ msg }) => {
-            return `${msg}`
-        }
-        const results = validationResult(req).formatWith(errorFormatter)
-
-        if (!results.isEmpty()) {
-            return res.json({
-                status: 'error',
-                error: results.mapped(),
-                message: 'Invalid request!',
-            })
-        }
-
         const existingUser = await User.findOne({ email })
         if (existingUser) {
             return res.json({
@@ -51,19 +38,6 @@ const postSignup = async (req, res) => {
 const postLogin = async (req, res) => {
     try {
         const { email, password } = req.body
-
-        const errorFormatter = ({ msg }) => {
-            return `${msg}`
-        }
-        const results = validationResult(req).formatWith(errorFormatter)
-
-        if (!results.isEmpty()) {
-            return res.json({
-                status: 'error',
-                error: results.mapped(),
-                message: 'Invalid request!',
-            })
-        }
 
         const user = await User.findOne({ email })
         if (!user) {

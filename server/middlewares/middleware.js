@@ -1,5 +1,6 @@
 const multer = require('multer')
 const jwt = require('jsonwebtoken')
+const { validationResult } = require('express-validator')
 
 const upload = multer({
     limits: { fileSize: 1000000 },
@@ -40,7 +41,24 @@ const bagItemToken = async (req, res, next) => {
     }
 }
 
+const validationMessage = (req, res, next) => {
+    const errorFormatter = ({ msg }) => {
+        return `${msg}`
+    }
+    const results = validationResult(req).formatWith(errorFormatter)
+
+    if (!results.isEmpty()) {
+        return res.json({
+            status: 'error',
+            error: results.mapped(),
+            message: 'Invalid request!',
+        })
+    }
+    next()
+}
+
 module.exports = {
     upload,
     bagItemToken,
+    validationMessage,
 }

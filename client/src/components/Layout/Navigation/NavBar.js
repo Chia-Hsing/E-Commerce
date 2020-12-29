@@ -14,9 +14,10 @@ const NavBar = props => {
         <header className="navBar">
             <MenuToggle clicked={props.open} />
             <Logo class="logo" />
-            {props.isAuthenticated ? <Logout onLogout={props.onLogout} class="logout" /> : <Login class="login" />}
-
-            <ShoppingBag class="shoppingBag" />
+            <div className="link-group">
+                <ShoppingBag class="shoppingBag" />
+                {props.isAuthenticated ? <Logout onLogout={props.onLogout} class="logout" /> : <Login class="login" />}
+            </div>
             <NavItems class="navItems" />
         </header>
     )

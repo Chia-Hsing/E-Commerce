@@ -4,13 +4,13 @@
 .spinner {
     @include WL(max, 70%);
     @include display-flex(row, space-around, center);
-    min-height: 55vh;
+    min-height: 60vh;
 }
 
 .productContainer {
     @include WL(max, 70%);
     @include display-flex(row, space-around, center);
-    min-height: 55vh;
+    min-height: 60vh;
     margin: 0 auto;
 
     .imgContainer {
@@ -26,6 +26,21 @@
         flex-basis: 40%;
         margin: 10px 0;
         text-align: left;
+
+        h4 {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        h4::after {
+            content: ' ';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            width: 250px;
+            height: 2px;
+            background-color: color(yellow);
+        }
 
         .detailBody {
             margin: 1rem 0;
@@ -77,6 +92,19 @@
         .detailContainer {
             text-align: center;
 
+            h4 {
+                margin: 1rem 0 2rem;
+            }
+
+            h4::after {
+                position: absolute;
+                bottom: -1rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 50%;
+            }
+
             .detailBody {
                 @include WL(max, 60%, auto);
                 @include display-flex(row, center, center);
@@ -105,6 +133,19 @@
         .detailContainer {
             text-align: center;
 
+            h4 {
+                margin: 1rem 0 2rem;
+            }
+
+            h4::after {
+                position: absolute;
+                bottom: -1rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 65%;
+            }
+
             .detailBody {
                 @include WL(max, 90%, auto);
                 @include display-flex(row, center, center);
@@ -132,6 +173,19 @@
 
         .detailContainer {
             text-align: center;
+
+            h4 {
+                margin: 1rem 0 2rem;
+            }
+
+            h4::after {
+                position: absolute;
+                bottom: -1rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 90%;
+            }
 
             .detailBody {
                 @include WL(max, 90%, auto);
