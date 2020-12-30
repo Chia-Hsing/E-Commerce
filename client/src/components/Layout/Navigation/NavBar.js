@@ -5,6 +5,7 @@ import NavItems from './NavItems'
 import Logo from './Logo'
 import Login from './Login'
 import Logout from './Logout'
+import User from './User'
 import ShoppingBag from './ShoppingBag'
 import MenuToggle from './MenuToggle'
 import '../../../scss/navigation.scss'
@@ -16,7 +17,15 @@ const NavBar = props => {
             <Logo class="logo" />
             <div className="link-group">
                 <ShoppingBag class="shoppingBag" />
-                {props.isAuthenticated ? <Logout onLogout={props.onLogout} class="logout" /> : <Login class="login" />}
+
+                {props.isAuthenticated ? (
+                    <>
+                        <User class="user" />
+                        <Logout onLogout={props.onLogout} class="logout" />
+                    </>
+                ) : (
+                    <Login class="login" />
+                )}
             </div>
             <NavItems class="navItems" />
         </header>

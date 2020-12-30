@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'mixins';
+
+.userContainer {
+    @include WL(max, 70%);
+    @include display-flex(row, space-around, flex-start);
+    min-height: 70vh;
+    // border: 1px solid #000;
+    padding: 2em;
+    border-radius: 5px;
+    margin: 2em auto;
+
+    .userCard {
+        @include display-flex(column, space-around, flex-start);
+        flex-basis: 30%;
+        min-height: 40vh;
+        border-radius: 5px;
+        border: 1px solid color(light-grey);
+    }
+
+    .userProfile {
+        flex-basis: 60%;
+        min-height: 65vh;
+        border-radius: 5px;
+        border: 1px solid color(light-grey);
+    }
+}

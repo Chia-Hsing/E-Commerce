@@ -140,22 +140,23 @@ class Signup extends Component {
             })
         )
 
+        let button = this.props.loading ? null : (
+            <div className="linkAndButton">
+                <button>Submit</button>
+                <div className="link">
+                    <Link className="link" to="/auth/login">
+                        login
+                    </Link>
+                </div>
+            </div>
+        )
+
         return (
             <div className="auth">
                 {this.props.isAuthenticated && <Redirect to={this.props.authRedirectPath} />}
                 <form onSubmit={this.submitHandler}>
-                    <h4>SIGN UP</h4>
-                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
-
                     {form}
-                    <div className="linkAndButton">
-                        <button>Submit</button>
-                        <div className="link">
-                            <Link className="link" to="/auth/login">
-                                login
-                            </Link>
-                        </div>
-                    </div>
+                    {button}
                 </form>
             </div>
         )

@@ -27,20 +27,16 @@
     }
     .link-group {
         @include position(fixed, 10, none, 20);
-        @include display-flex(row, space-around, center);
-        @include WL(min, 20%);
-        .shoppingBag {
-            @include A(yellow, light-grey, yellow);
-            font: {
-                size: size(xs);
-                weight: weight(normal);
-            }
-            width: auto;
-        }
+        @include display-flex(row, flex-end, center);
+        @include WL(min, 100%);
+        z-index: z(i);
 
+        .shoppingBag,
         .login,
-        .logout {
+        .logout,
+        .user {
             @include A(yellow, light-grey, yellow);
+            margin: 0 0.7rem;
             font: {
                 size: size(xs);
                 weight: weight(normal);
@@ -109,7 +105,7 @@
         @include WL(none, 100vw, auto);
     }
 }
-@include response(s) {
+@include response(m) {
     .navBar {
         @include WL(none, 100vw, auto);
     }
@@ -122,7 +118,8 @@
         & .navItems,
         & .logo,
         & .login,
-        & .logout {
+        & .logout,
+        & .user {
             display: none;
         }
 
