@@ -1,14 +1,15 @@
 const express = require('express')
 
 const userController = require('../controllers/userController')
+const { auth } = require('../middlewares/middleware')
 
 const router = new express.Router()
 
-router.get('/profile', userController.getUserProfile)
-router.put('/profile', userController.putUserProfile)
+router.get('/profile', auth, userController.getUserProfile)
+// router.put('/profile', auth, userController.putUserProfile)
 
-router.get('/order', userController.getUserOrder)
-router.get('/canceledOrder', userController.getUserCanceledOrder)
-router.get('/history', userController.putUserOrderHistory)
+// router.get('/order', auth, userController.getUserOrder)
+// router.get('/canceledOrder', auth, userController.getUserCanceledOrder)
+// router.get('/history', auth, userController.putUserOrderHistory)
 
 module.exports = router

@@ -51,9 +51,10 @@ class ShoppingBag extends Component {
                 })
             ) : (
                 <div className="empty">
-                    <h4>
-                        Your shopping bag is empty ! <Link to="/"> Let's go shopping ...</Link>
-                    </h4>
+                    <h4>Your shopping bag is empty !</h4>
+                    <div className="link">
+                        <Link to="/"> Let's go shopping ...</Link>
+                    </div>
                 </div>
             )
 

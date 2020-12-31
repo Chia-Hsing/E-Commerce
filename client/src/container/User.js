@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Profile from '../components/User/Profile'
+import * as actions from '../store/actions/index'
 import '../scss/user.scss'
 
 class User extends Component {
+    componentDidMount() {
+        this.props.onGetUserProfile()
+    }
+
     render() {
         return (
             <section className="userContainer">
@@ -25,4 +31,14 @@ class User extends Component {
     }
 }
 
-export default User
+const mapStateToProps = state => {
+    return {}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetUserProfile: () => dispatch(actions.getUserProfile()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(User)

@@ -4,7 +4,7 @@
 .ShoppingBagContainer {
     @include WL(max, 70%);
     @include display-flex(column, flex-start, center);
-    min-height: 55vh;
+    min-height: 60vh;
     margin: 3em auto;
 
     .ShoppingBagHeader {
@@ -34,7 +34,11 @@
         padding: 2rem;
 
         .empty {
-            @include A(yellow, light-grey, yellow);
+            & .link {
+                @include WL(min, 20%);
+                @include A(yellow, light-grey, yellow);
+                margin: 0 auto;
+            }
         }
 
         .checkOutItem {

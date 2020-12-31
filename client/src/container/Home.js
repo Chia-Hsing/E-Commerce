@@ -52,6 +52,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home)
 Home.propTypes = {
     mainCategories: PropTypes.array,
     newArrival: PropTypes.array,
-    error: PropTypes.string,
+    error: PropTypes.object,
     onGetMainMaterials: PropTypes.func,
 }

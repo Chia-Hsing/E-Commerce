@@ -98,7 +98,8 @@ class Products extends Component {
         if (this.props.isNoItem) {
             products = (
                 <div className="no-item">
-                    <span>There is no items in this category!</span>
+                    <h3>There is no items in this category!</h3>
+                    <span>Head to another category to find out more items.</span>
                 </div>
             )
         }

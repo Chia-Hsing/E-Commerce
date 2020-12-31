@@ -1,6 +1,7 @@
 const multer = require('multer')
 const jwt = require('jsonwebtoken')
 const { validationResult } = require('express-validator')
+const User = require('../models/user')
 
 const upload = multer({
     limits: { fileSize: 1000000 },
@@ -57,8 +58,30 @@ const validationMessage = (req, res, next) => {
     next()
 }
 
+const auth = async (req, res, next) => {
+    try {
+        const token = req.header('Authorization').replace('Bearer ', '')
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_AUTH)
+
+        const user = await User.findOne({ _id: decoded._id }, { password: 0 })
+
+        if (!user) {
+            throw new Error('User authorization failed!')
+        }
+
+        req.token = token
+        req.user = user
+
+        next()
+    } catch (error) {
+        res.status(401).send('User authorization failed!')
+    }
+}
+
 module.exports = {
     upload,
     bagItemToken,
     validationMessage,
+    auth,
 }
