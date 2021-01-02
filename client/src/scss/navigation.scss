@@ -4,7 +4,7 @@
 .navBar {
     @include display-flex(column, center, center);
     @include position(sticky, 0, 0);
-    @include WL(none, 100vw, auto);
+    @include WL(none, 100vw);
     padding-bottom: 20px;
     background-color: color(white);
     z-index: z(d);
@@ -53,7 +53,7 @@
 }
 
 .navItem {
-    @include A(heavy-grey, light-grey, yellow);
+    @include A(lighter-grey, heavy-grey, yellow);
     flex-basis: auto;
     list-style: none;
     background-color: color(white);
@@ -112,7 +112,8 @@
 }
 @include response(s) {
     .navBar {
-        height: 50px;
+        @include WL(none, 100vw, auto);
+        min-height: 10vh;
         padding: 0;
 
         & .navItems,

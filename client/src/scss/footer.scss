@@ -2,9 +2,9 @@
 @import 'variables';
 
 footer {
-    @include WL(max, 100vw, 25vh);
+    @include WL(max, 100vw, auto);
     background-color: color(lighter-grey);
-    padding: 15px;
+    padding: 10px;
 }
 
 .icon-gp {

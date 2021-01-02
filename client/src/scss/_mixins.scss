@@ -64,7 +64,7 @@
 
 @mixin button {
     background-color: transparent;
-    border: 1px solid color(lighter-grey);
+    border: 1px solid color(heavy-grey);
     border-radius: 20px;
     font-size: size(s);
     color: color(heavy-grey);
@@ -74,7 +74,7 @@
     transition: 0.7s;
 
     &:hover {
-        border: 1px solid color(heavy-grey);
+        border: 1px solid color(lighter-grey);
         color: color(yellow);
     }
 

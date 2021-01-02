@@ -57,20 +57,20 @@
             height: 320px;
 
             .MerchandiseItem {
-                @include WL(none, 280px, 300px);
+                @include WL(none, 280px, 280px);
                 margin: 0 auto;
                 box-sizing: border-box;
-                transform: translateY(0);
+                transform: scale(1, 1);
                 transition: 0.5s ease-out;
-                box-shadow: 0 1px 3px 0px color(transparent-grey);
+                box-shadow: 0 1px 1px 0px color(transparent-grey);
 
                 cursor: pointer;
 
                 &:hover {
-                    box-shadow: 0 7px 10px -3px color(transparent-grey);
+                    box-shadow: 0 7px 10px -5px color(transparent-grey);
 
                     img {
-                        transform: scale(1.1, 1.1);
+                        transform: scale(1.05, 1.05);
                     }
                 }
 
@@ -86,7 +86,7 @@
                 }
 
                 .details {
-                    margin-top: 10px;
+                    margin-top: 15px;
                     height: 35%;
                 }
             }

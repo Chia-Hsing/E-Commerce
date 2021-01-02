@@ -16,12 +16,18 @@ const Input = props => {
     switch (props.eleType) {
         case 'input':
             eleInput = (
-                <input
-                    className={inputClass.join(' ')}
-                    value={props.value}
-                    {...props.config}
-                    onChange={props.inputChange}
-                />
+                <>
+                    <input
+                        className={inputClass.join(' ')}
+                        value={props.value}
+                        {...props.config}
+                        onChange={props.inputChange}
+                    />
+                    <label className="labelName">
+                        {props.error && <span className="errorMSG">{props.error[props.label]}</span>}
+                        <span className="contentName">{props.label}</span>
+                    </label>
+                </>
             )
             break
         case 'select':
@@ -46,25 +52,25 @@ const Input = props => {
             break
         default:
             eleInput = (
-                <input
-                    className={inputClass.join(' ')}
-                    value={props.value}
-                    {...props.config}
-                    onChange={props.inputChange}
-                />
+                <>
+                    <input
+                        className={inputClass.join(' ')}
+                        value={props.value}
+                        {...props.config}
+                        onChange={props.inputChange}
+                    />
+                    <label className="labelName">
+                        {props.error && <span className="errorMSG">{props.error[props.label]}</span>}
+                        <span className="contentName">{props.label}</span>
+                    </label>
+                </>
             )
             break
     }
 
     return (
         <>
-            <div className="inputBody">
-                {eleInput}
-                <label className="labelName">
-                    {props.error && <span className="errorMSG">{props.error[props.label]}</span>}
-                    <span className="contentName">{props.label}</span>
-                </label>
-            </div>
+            <div className="inputBody">{eleInput}</div>
         </>
     )
 }

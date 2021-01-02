@@ -18,9 +18,26 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        address: {},
+        address: {
+            street: {
+                type: String,
+                minlength: 5,
+                maxlength: 20,
+            },
+            county: {
+                type: String,
+                minlength: 5,
+                maxlength: 20,
+            },
+
+            postalCode: {
+                type: Number,
+                min: 1,
+                max: 999,
+            },
+        },
         phone: {
-            type: Number,
+            type: String,
         },
     },
     {

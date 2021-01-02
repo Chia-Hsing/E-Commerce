@@ -3,7 +3,7 @@
 
 .auth {
     @include WL(max, 90%);
-    min-height: 60vh;
+    min-height: 55vh;
     margin: 0 auto;
 
     form {
@@ -104,7 +104,8 @@
 
 @include response(l) {
     .auth {
-        @include WL(max, 80%, 65vh);
+        @include WL(max, 80%);
+        min-height: 75vh;
         form {
             @include WL(max, 80%, 65%);
         }
@@ -113,7 +114,8 @@
 
 @include response(m) {
     .auth {
-        @include WL(max, 90%, 65vh);
+        @include WL(max, 90%);
+        min-height: 65vh;
         form {
             @include WL(max, 100%, 65%);
         }
@@ -122,7 +124,8 @@
 
 @include response(s) {
     .auth {
-        @include WL(max, 90%, 70vh);
+        @include WL(max, 90%);
+        min-height: 70vh;
         form {
             @include WL(max, 100%, 75%);
         }

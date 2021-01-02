@@ -3,6 +3,6 @@
 .MainCarousel {
     @include position(relative, 0, 0, 0);
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 90%;
     overflow: hidden;
 }

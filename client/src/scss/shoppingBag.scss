@@ -4,7 +4,7 @@
 .ShoppingBagContainer {
     @include WL(max, 70%);
     @include display-flex(column, flex-start, center);
-    min-height: 60vh;
+    min-height: 45vh;
     margin: 3em auto;
 
     .ShoppingBagHeader {

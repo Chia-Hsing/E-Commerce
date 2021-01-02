@@ -112,8 +112,8 @@ class Login extends Component {
             <div className="linkAndButton">
                 <button>Submit</button>
                 <div className="link">
-                    <Link className="link" to="/auth/login">
-                        login
+                    <Link className="link" to="/auth/signup">
+                        signup
                     </Link>
                 </div>
             </div>

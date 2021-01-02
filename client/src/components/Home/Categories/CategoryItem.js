@@ -7,7 +7,7 @@ const Category = props => {
         <Link
             to={{
                 pathname: '/products',
-                search: `category=${props.cat}`,
+                search: `category=${encodeURIComponent(props.cat)}`,
             }}
         >
             <div className="category">

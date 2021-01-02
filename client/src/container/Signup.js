@@ -155,6 +155,8 @@ class Signup extends Component {
             <div className="auth">
                 {this.props.isAuthenticated && <Redirect to={this.props.authRedirectPath} />}
                 <form onSubmit={this.submitHandler}>
+                    <h4>SIGN UP</h4>
+                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
                     {form}
                     {button}
                 </form>
