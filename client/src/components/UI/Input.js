@@ -13,7 +13,7 @@ const Input = props => {
         inputClass.pop('invalid')
     }
 
-    switch (props.eleType) {
+    switch (props.type) {
         case 'input':
             eleInput = (
                 <>
@@ -32,12 +32,21 @@ const Input = props => {
             break
         case 'select':
             eleInput = (
-                <select
-                    className={inputClass.join(' ')}
-                    value={props.value}
-                    {...props.config}
-                    onChange={props.inputChange}
-                />
+                <>
+                    <select className={inputClass.join(' ')} value={props.value} onChange={props.inputChange}>
+                        <option selected>- City -</option>
+                        {props.config.options.map(option => {
+                            return (
+                                <option value={option.value} key={option.value}>
+                                    {option.value}
+                                </option>
+                            )
+                        })}
+                    </select>
+                    <label className="labelName">
+                        <span className="contentName">{props.label}</span>
+                    </label>
+                </>
             )
             break
         case 'textarea':

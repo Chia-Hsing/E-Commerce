@@ -82,3 +82,10 @@
         outline: 0;
     }
 }
+
+@mixin spinner {
+    @include WL(max, 40%);
+    @include display-flex(column, center, center);
+    min-height: inherit;
+    margin: 0 auto;
+}

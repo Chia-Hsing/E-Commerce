@@ -68,8 +68,7 @@ class User extends Component {
             city: {
                 eleType: 'select',
                 eleConfig: {
-                    type: 'text',
-                    placeholder: ' ',
+                    options: [{ value: 'Taipei' }],
                 },
                 val: '',
                 validation: {

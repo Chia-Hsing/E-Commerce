@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Logout = props => {
     return (
         <div className={props.class}>
-            <Link to="" onClick={props.onLogout}>
+            <Link to="/auth/login" onClick={props.onLogout}>
                 LOGOUT
             </Link>
         </div>

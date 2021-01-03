@@ -122,45 +122,40 @@ class Signup extends Component {
         let form = this.props.loading ? (
             <Spinner />
         ) : (
-            formElement.map(ele => {
-                return (
-                    <Input
-                        error={this.props.error}
-                        key={ele.key}
-                        label={ele.key}
-                        value={ele.config.val}
-                        type={ele.config.eleType}
-                        config={ele.config.eleConfig}
-                        isValid={ele.config.valid}
-                        touched={ele.config.touched}
-                        shouldValidate={ele.config.validation}
-                        inputChange={e => this.inputChangeHandler(e, ele.key)}
-                    />
-                )
-            })
-        )
-
-        let title = !this.props.loading && <h4>SIGN UP</h4>
-        let button = this.props.loading ? null : (
-            <div className="linkAndButton">
-                <button>Submit</button>
-                <div className="link">
-                    <Link className="link" to="/auth/login">
-                        login
-                    </Link>
+            <form onSubmit={this.submitHandler}>
+                <h4>SIGN UP</h4>
+                {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
+                {formElement.map(ele => {
+                    return (
+                        <Input
+                            error={this.props.error}
+                            key={ele.key}
+                            label={ele.key}
+                            value={ele.config.val}
+                            type={ele.config.eleType}
+                            config={ele.config.eleConfig}
+                            isValid={ele.config.valid}
+                            touched={ele.config.touched}
+                            shouldValidate={ele.config.validation}
+                            inputChange={e => this.inputChangeHandler(e, ele.key)}
+                        />
+                    )
+                })}
+                <div className="linkAndButton">
+                    <button>Submit</button>
+                    <div className="link">
+                        <Link className="link" to="/auth/login">
+                            login
+                        </Link>
+                    </div>
                 </div>
-            </div>
+            </form>
         )
 
         return (
             <div className="auth">
                 {this.props.isAuthenticated && <Redirect to={this.props.authRedirectPath} />}
-                <form onSubmit={this.submitHandler}>
-                    {title}
-                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
-                    {form}
-                    {button}
-                </form>
+                {form}
             </div>
         )
     }

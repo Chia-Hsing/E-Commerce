@@ -1,17 +1,15 @@
 @import 'variables';
 @import 'mixins';
 
-.spinner {
-    @include WL(max, 70%);
-    @include display-flex(row, space-around, center);
-    min-height: 60vh;
-}
-
 .productContainer {
     @include WL(max, 70%);
     @include display-flex(row, space-around, center);
     min-height: 60vh;
     margin: 0 auto;
+
+    .spinner {
+        @include spinner;
+    }
 
     .imgContainer {
         flex-basis: 60%;
