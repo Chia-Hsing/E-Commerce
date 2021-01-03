@@ -72,5 +72,17 @@ export const checkValidity = (value, rule) => {
         isValid = emailCheck && isValid
     }
 
+    if (rule.isPhone) {
+        const regex = /09\d{2}(\d{6}|-\d{3}-\d{3})/
+        const phoneCheck = value.match(regex)
+        isValid = phoneCheck && isValid
+    }
+
+    if (rule.isPostalCode) {
+        const regex = /^\d{5}|^\d{3}/
+        const PostalCodeCheck = value.match(regex)
+        isValid = PostalCodeCheck && isValid
+    }
+
     return isValid
 }

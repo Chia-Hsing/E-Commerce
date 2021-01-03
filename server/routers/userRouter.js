@@ -6,7 +6,7 @@ const { auth } = require('../middlewares/middleware')
 const router = new express.Router()
 
 router.get('/profile', auth, userController.getUserProfile)
-// router.put('/profile', auth, userController.putUserProfile)
+router.patch('/profile', auth, userController.patchUserProfile)
 
 // router.get('/order', auth, userController.getUserOrder)
 // router.get('/canceledOrder', auth, userController.getUserCanceledOrder)

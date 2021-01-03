@@ -14,3 +14,11 @@ export const getUserProfile = () => async dispatch => {
         dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error })
     }
 }
+
+export const updateUserProfile = (name, email, phone, address, city, postalCode) => async dispatch => {
+    try {
+        const user = await apis.updateUserProfile(name, email, phone, address, city, postalCode)
+
+        console.log(user)
+    } catch (error) {}
+}

@@ -108,6 +108,8 @@ class Login extends Component {
                 )
             })
         )
+
+        let title = !this.props.loading && <h4>LOG IN</h4>
         let button = this.props.loading ? null : (
             <div className="linkAndButton">
                 <button>Submit</button>
@@ -123,7 +125,7 @@ class Login extends Component {
             <div className="auth">
                 {this.props.isAuthenticated && <Redirect to={this.props.authRedirectPath} />}
                 <form onSubmit={this.submitHandler}>
-                    <h4>LOG IN</h4>
+                    {title}
                     {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
                     {form}
                     {button}

@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
+import UserProfileCard from '../components/User/UserProfileCard'
 import Input from '../components/UI/Input'
-import Spinner from '../components/UI/Spinner'
-import { updateObj, checkValidity } from '../utils/utilities'
 import * as actions from '../store/actions/index'
-import '../scss/auth.scss'
-class Signup extends Component {
+import { updateObj, checkValidity } from '../utils/utilities'
+import '../scss/userProfile.scss'
+
+class User extends Component {
     state = {
         controls: {
             name: {
                 eleType: 'input',
                 eleConfig: {
                     type: 'text',
-                    placeholder: ' ',
+                    placeholder: '',
                 },
                 val: '',
                 validation: {
@@ -27,7 +28,7 @@ class Signup extends Component {
                 eleType: 'input',
                 eleConfig: {
                     type: 'email',
-                    placeholder: ' ',
+                    placeholder: '',
                 },
                 val: '',
                 validation: {
@@ -37,34 +38,56 @@ class Signup extends Component {
                 valid: false,
                 touched: false,
             },
-            password: {
+            phone: {
                 eleType: 'input',
                 eleConfig: {
-                    type: 'password',
+                    type: 'text',
                     placeholder: ' ',
                 },
                 val: '',
                 validation: {
                     isRequired: true,
-                    isPassword: true,
-                    maxlength: 20,
-                    minlength: 8,
+                    isPhone: true,
                 },
                 valid: false,
                 touched: false,
             },
-            confirmPassword: {
+            address: {
                 eleType: 'input',
                 eleConfig: {
-                    type: 'password',
+                    type: 'text',
                     placeholder: ' ',
                 },
                 val: '',
                 validation: {
                     isRequired: true,
-                    isPassword: true,
-                    maxlength: 20,
-                    minlength: 8,
+                },
+                valid: false,
+                touched: false,
+            },
+            city: {
+                eleType: 'select',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            postalCode: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                    isPostalCode: true,
                 },
                 valid: false,
                 touched: false,
@@ -72,20 +95,25 @@ class Signup extends Component {
         },
     }
 
-    componentDidMount() {
-        if (!this.props.isPurchasing && this.props.authRedirectPath !== '/') {
-            this.props.onSetAuthRedirectPath('/')
-        } else if (this.props.isPurchasing) {
-            this.props.onSetAuthRedirectPath('/shopping-bag')
-        }
+    async componentDidMount() {
+        await this.props.onGetUserProfile()
+
+        const update = updateObj(this.state.controls, {
+            name: { ...this.state.controls.name, val: this.props.userProfile.name || '' },
+            email: { ...this.state.controls.email, val: this.props.userProfile.email || '' },
+            phone: { ...this.state.controls.phone, val: this.props.userProfile.phone || '' },
+            address: { ...this.state.controls.address, val: this.props.userProfile.address || '' },
+            city: { ...this.state.controls.city, val: this.props.userProfile.city || '' },
+            postalCode: { ...this.state.controls.postalCode, val: this.props.userProfile.postalCode || '' },
+        })
+
+        console.log(update)
+
+        this.setState({ controls: update })
+
+        console.log(this.state)
     }
 
-    // initialize the error message
-    componentWillUnmount() {
-        this.props.onInitErrorAuth()
-    }
-
-    // handle the input changes.
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
             [controlName]: updateObj(this.state.controls[controlName], {
@@ -98,15 +126,15 @@ class Signup extends Component {
         this.setState({ controls: updatedControls })
     }
 
-    // handle the form submit.
     submitHandler = e => {
-        e.preventDefault()
         const name = this.state.controls.name.val
         const email = this.state.controls.email.val
-        const password = this.state.controls.password.val
-        const confirmPassword = this.state.controls.confirmPassword.val
+        const phone = this.state.controls.phone.val
+        const address = this.state.controls.address.val
+        const city = this.state.controls.city.val
+        const postalCode = this.state.controls.postalCode.val
 
-        this.props.onSignupAuth(name, email, password, confirmPassword)
+        this.props.onUpdateUserProfile(name, email, phone, address, city, postalCode)
     }
 
     render() {
@@ -119,9 +147,7 @@ class Signup extends Component {
             })
         }
 
-        let form = this.props.loading ? (
-            <Spinner />
-        ) : (
+        let form = this.props.auth ? (
             formElement.map(ele => {
                 return (
                     <Input
@@ -138,51 +164,35 @@ class Signup extends Component {
                     />
                 )
             })
-        )
-
-        let title = !this.props.loading && <h4>SIGN UP</h4>
-        let button = this.props.loading ? null : (
-            <div className="linkAndButton">
-                <button>Submit</button>
-                <div className="link">
-                    <Link className="link" to="/auth/login">
-                        login
-                    </Link>
-                </div>
-            </div>
+        ) : (
+            <Redirect to="/" />
         )
 
         return (
-            <div className="auth">
-                {this.props.isAuthenticated && <Redirect to={this.props.authRedirectPath} />}
-                <form onSubmit={this.submitHandler}>
-                    {title}
-                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
+            <section className="userContainer">
+                <UserProfileCard />
+                <form onSubmit={this.submitHandler} className="userProfileDetail">
                     {form}
-                    {button}
+                    <button>Update</button>
                 </form>
-            </div>
+            </section>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        error: state.auth.error,
-        loading: state.auth.loading,
-        authRedirectPath: state.auth.authRedirectPath,
-        isAuthenticated: state.auth.token !== null,
-        isPurchasing: state.bag.purchasing,
+        userProfile: state.user.userProfile,
+        auth: state.auth.token !== null,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitErrorAuth: () => dispatch(actions.initErrorAuth()),
-        onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path)),
-        onSignupAuth: (name, email, password, confirmPassword) =>
-            dispatch(actions.signup(name, email, password, confirmPassword)),
+        onGetUserProfile: () => dispatch(actions.getUserProfile()),
+        onUpdateUserProfile: (name, email, phone, address, city, postalCode) =>
+            dispatch(actions.updateUserProfile(name, email, phone, address, city, postalCode)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(User)

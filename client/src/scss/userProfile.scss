@@ -1,23 +1,28 @@
-@import 'mixins';
 @import 'variables';
+@import 'mixins';
 
-.auth {
-    @include WL(max, 90%);
-    min-height: 55vh;
-    margin: 0 auto;
+.userContainer {
+    @include WL(max, 70%);
+    @include display-flex(row, space-around, flex-start);
+    min-height: 70vh;
+    border: 1px solid color(lighter-grey);
+    padding: 2em;
+    border-radius: 5px;
+    margin: 2em auto;
 
-    form {
-        @include WL(max, 40%, auto);
-        @include display-flex(column, center, center);
-        margin: 2em auto;
+    .userProfileDetail {
+        flex-basis: 60%;
+        min-height: 65vh;
+        border-radius: 5px;
+        border: 1px solid color(lighter-grey);
         position: relative;
         padding: 1rem;
-        background-color: #fff;
 
         & .inputBody {
             @include WL(max, 90%, 70px);
             display: block;
             position: relative;
+            margin: 0 auto;
 
             & input {
                 @include WL(max, 100%, 100%);
@@ -83,47 +88,13 @@
             }
         }
     }
+    // }
 
-    .linkAndButton {
-        @include WL(max, 80%, auto);
-        @include display-flex(row, space-between, center);
-
-        .link {
-            @include A(yellow, light-grey, yellow);
-        }
-
-        button {
-            @include button;
-        }
-    }
-}
-
-@include response(l) {
-    .auth {
-        @include WL(max, 80%);
-        min-height: 75vh;
-        form {
-            @include WL(max, 80%, 65%);
-        }
-    }
-}
-
-@include response(m) {
-    .auth {
-        @include WL(max, 90%);
-        min-height: 65vh;
-        form {
-            @include WL(max, 100%, 65%);
-        }
-    }
-}
-
-@include response(s) {
-    .auth {
-        @include WL(max, 90%);
-        min-height: 70vh;
-        form {
-            @include WL(max, 100%, 75%);
-        }
+    .userProfileCard {
+        @include display-flex(column, space-around, flex-start);
+        flex-basis: 30%;
+        min-height: 40vh;
+        border-radius: 5px;
+        border: 1px solid color(lighter-grey);
     }
 }

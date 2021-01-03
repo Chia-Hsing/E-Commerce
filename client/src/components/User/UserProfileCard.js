@@ -2,7 +2,7 @@ import React from 'react'
 
 const Profile = props => {
     return (
-        <div className="userProfile">
+        <div className="userProfileCard">
             <figure>
                 <img src=" " alt="" />
             </figure>
