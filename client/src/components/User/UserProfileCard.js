@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Profile = props => {
+const userProfileCard = props => {
     return (
         <div className="userProfileCard">
             <figure>
@@ -17,4 +17,4 @@ const Profile = props => {
     )
 }
 
-export default Profile
+export default userProfileCard

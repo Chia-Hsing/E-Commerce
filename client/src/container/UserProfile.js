@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
-import Input from '../components/UI/Input'
+import UserProfileForm from '../components/User/UserProfileForm'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity } from '../utils/utilities'
 import '../scss/userProfile.scss'
 
-class User extends Component {
+class UserProfile extends Component {
     state = {
         controls: {
             name: {
@@ -68,7 +67,8 @@ class User extends Component {
             city: {
                 eleType: 'select',
                 eleConfig: {
-                    options: [{ value: 'Taipei' }],
+                    placeholder: '- City -',
+                    options: ['Taipei', 'New Taipei'],
                 },
                 val: '',
                 validation: {
@@ -92,6 +92,7 @@ class User extends Component {
                 touched: false,
             },
         },
+        avatar: '',
     }
 
     async componentDidMount() {
@@ -106,11 +107,7 @@ class User extends Component {
             postalCode: { ...this.state.controls.postalCode, val: this.props.userProfile.postalCode || '' },
         })
 
-        console.log(update)
-
         this.setState({ controls: update })
-
-        console.log(this.state)
     }
 
     inputChangeHandler = (e, controlName) => {
@@ -125,7 +122,7 @@ class User extends Component {
         this.setState({ controls: updatedControls })
     }
 
-    submitHandler = e => {
+    submitHandler = () => {
         const name = this.state.controls.name.val
         const email = this.state.controls.email.val
         const phone = this.state.controls.phone.val
@@ -134,6 +131,17 @@ class User extends Component {
         const postalCode = this.state.controls.postalCode.val
 
         this.props.onUpdateUserProfile(name, email, phone, address, city, postalCode)
+    }
+
+    uploadImgHandler = e => {
+        const files = e.target.files
+        if (!files.length) return
+        const url = URL.createObjectURL(files[0])
+        this.setState({ avatar: url })
+    }
+
+    unloadImgHandler = () => {
+        this.setState({ avatar: '' })
     }
 
     render() {
@@ -146,34 +154,16 @@ class User extends Component {
             })
         }
 
-        let form = this.props.auth ? (
-            formElement.map(ele => {
-                return (
-                    <Input
-                        error={this.props.error}
-                        key={ele.key}
-                        label={ele.key}
-                        value={ele.config.val}
-                        type={ele.config.eleType}
-                        config={ele.config.eleConfig}
-                        isValid={ele.config.valid}
-                        touched={ele.config.touched}
-                        shouldValidate={ele.config.validation}
-                        inputChange={e => this.inputChangeHandler(e, ele.key)}
-                    />
-                )
-            })
-        ) : (
-            <Redirect to="/" />
-        )
-
         return (
             <section className="userContainer">
                 <UserProfileCard />
-                <form onSubmit={this.submitHandler} className="userProfileDetail">
-                    {form}
-                    <button>Update</button>
-                </form>
+                <UserProfileForm
+                    onSubmit={this.submitHandler}
+                    fileChange={this.uploadImgHandler}
+                    fileClick={this.unloadImgHandler}
+                    formElement={formElement}
+                    avatar={this.state.avatar}
+                />
             </section>
         )
     }
@@ -182,7 +172,7 @@ class User extends Component {
 const mapStateToProps = state => {
     return {
         userProfile: state.user.userProfile,
-        auth: state.auth.token !== null,
+        isAuthenticated: state.auth.token !== null,
     }
 }
 
@@ -194,4 +184,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(User)
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)

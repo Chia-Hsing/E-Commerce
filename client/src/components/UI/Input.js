@@ -34,11 +34,11 @@ const Input = props => {
             eleInput = (
                 <>
                     <select className={inputClass.join(' ')} value={props.value} onChange={props.inputChange}>
-                        <option selected>- City -</option>
+                        <option defaultValue>{props.config.placeholder}</option>
                         {props.config.options.map(option => {
                             return (
-                                <option value={option.value} key={option.value}>
-                                    {option.value}
+                                <option value={option} key={option}>
+                                    {option}
                                 </option>
                             )
                         })}
@@ -47,16 +47,6 @@ const Input = props => {
                         <span className="contentName">{props.label}</span>
                     </label>
                 </>
-            )
-            break
-        case 'textarea':
-            eleInput = (
-                <textarea
-                    className={inputClass.join(' ')}
-                    value={props.value}
-                    {...props.config}
-                    onChange={props.inputChange}
-                />
             )
             break
         default:
