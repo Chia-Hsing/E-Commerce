@@ -86,10 +86,3 @@ export const checkValidity = (value, rule) => {
 
     return isValid
 }
-
-// export const previewImg = e => {
-//     const files = e.target.files
-//     if (!files.length) return
-//     const url = URL.createObjectURL(files[0])
-//     return url
-// }
