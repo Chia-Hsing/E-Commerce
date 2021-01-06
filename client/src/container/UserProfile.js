@@ -9,95 +9,91 @@ import { updateObj, checkValidity } from '../utils/utilities'
 import '../scss/userProfile.scss'
 
 class UserProfile extends Component {
-    constructor(props) {
-        super(props)
-        this.form = React.createRef()
-        this.state = {
-            controls: {
-                name: {
-                    eleType: 'input',
-                    eleConfig: {
-                        type: 'text',
-                        placeholder: '',
-                    },
-                    val: '',
-                    validation: {
-                        isRequired: true,
-                    },
-                    valid: false,
-                    touched: false,
+    state = {
+        controls: {
+            name: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: '',
                 },
-                email: {
-                    eleType: 'input',
-                    eleConfig: {
-                        type: 'email',
-                        placeholder: '',
-                    },
-                    val: '',
-                    validation: {
-                        isRequired: true,
-                        isEmail: true,
-                    },
-                    valid: false,
-                    touched: false,
+                val: '',
+                validation: {
+                    isRequired: true,
                 },
-                phone: {
-                    eleType: 'input',
-                    eleConfig: {
-                        type: 'text',
-                        placeholder: ' ',
-                    },
-                    val: '',
-                    validation: {
-                        isRequired: true,
-                        isPhone: true,
-                    },
-                    valid: false,
-                    touched: false,
-                },
-                address: {
-                    eleType: 'input',
-                    eleConfig: {
-                        type: 'text',
-                        placeholder: ' ',
-                    },
-                    val: '',
-                    validation: {
-                        isRequired: true,
-                    },
-                    valid: false,
-                    touched: false,
-                },
-                city: {
-                    eleType: 'select',
-                    eleConfig: {
-                        placeholder: '- City -',
-                        options: ['Taipei', 'New Taipei'],
-                    },
-                    val: '',
-                    validation: {
-                        isRequired: true,
-                    },
-                    valid: false,
-                    touched: false,
-                },
-                postalCode: {
-                    eleType: 'input',
-                    eleConfig: {
-                        type: 'text',
-                        placeholder: ' ',
-                    },
-                    val: '',
-                    validation: {
-                        isRequired: true,
-                        isPostalCode: true,
-                    },
-                    valid: false,
-                    touched: false,
-                },
+                valid: false,
+                touched: false,
             },
-            avatar: '',
-        }
+            email: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'email',
+                    placeholder: '',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                    isEmail: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            phone: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                    isPhone: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            address: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            city: {
+                eleType: 'select',
+                eleConfig: {
+                    placeholder: '- City -',
+                    options: ['Taipei', 'New Taipei'],
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            postalCode: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                    isPostalCode: true,
+                },
+                valid: false,
+                touched: false,
+            },
+        },
+        avatar: '',
     }
 
     async componentDidMount() {
@@ -127,34 +123,24 @@ class UserProfile extends Component {
         this.setState({ controls: updatedControls })
     }
 
-    submitHandler = () => {
-        const name = this.state.controls.name.val
-        const email = this.state.controls.email.val
-        const phone = this.state.controls.phone.val
-        const address = this.state.controls.address.val
-        const city = this.state.controls.city.val
-        const postalCode = this.state.controls.postalCode.val
+    submitHandler = e => {
+        e.preventDefault()
 
-        console.log(name)
-        const formData = new FormData(this.form.current)
+        const target = e.target
 
-        // const stateKeys = ['name', 'email', 'phone', 'address', 'city', 'postalCode']
+        var formData = new FormData(target)
 
-        // stateKeys.forEach(stateKey => {
-        //     formData.set([stateKey], this.state.controls[stateKey].val)
-        // })
+        const stateKeys = ['name', 'email', 'phone', 'address', 'city', 'postalCode']
 
-        formData.append('file', this.state.avatar)
-        formData.append('name', name)
-        formData.append('email', email)
-        formData.append('phone', phone)
-        formData.append('address', address)
-        formData.append('city', city)
-        formData.append('postalCode', postalCode)
+        stateKeys.forEach(stateKey => {
+            formData.set([stateKey], this.state.controls[stateKey].val)
+        })
 
-        console.log(formData)
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' },
+        }
 
-        this.props.onUpdateUserProfile(name, email, phone, address, city, postalCode)
+        this.props.onUpdateUserProfile(formData, config)
     }
 
     uploadImgHandler = files => {
@@ -205,7 +191,7 @@ class UserProfile extends Component {
         return (
             <section className="userContainer">
                 <UserProfileCard />
-                <form ref={this.form} onSubmit={this.submitHandler} className="userProfileDetail">
+                <form onSubmit={this.submitHandler} className="userProfileDetail">
                     {form}
                     {avatarUpload}
                     <button>Update</button>
@@ -225,7 +211,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
-        onUpdateUserProfile: formData => dispatch(actions.updateUserProfile(formData)),
+        onUpdateUserProfile: (formData, config) => dispatch(actions.updateUserProfile(formData, config)),
     }
 }
 

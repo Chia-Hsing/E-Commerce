@@ -15,9 +15,9 @@ export const getUserProfile = () => async dispatch => {
     }
 }
 
-export const updateUserProfile = (name, email, phone, address, city, postalCode) => async dispatch => {
+export const updateUserProfile = (formData, config) => async dispatch => {
     try {
-        const user = await apis.updateUserProfile(name, email, phone, address, city, postalCode)
+        const user = await apis.updateUserProfile(formData, config)
 
         console.log(user)
     } catch (error) {}
