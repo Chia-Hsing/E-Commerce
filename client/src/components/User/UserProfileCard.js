@@ -1,17 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const userProfileCard = props => {
     return (
         <div className="userProfileCard">
             <figure>
-                <img src=" " alt="" />
+                <img src={props.avatar} alt="" />
             </figure>
-            <div>
-                <h3>NAME</h3>
+            <div className="userName">
+                <h3>{props.name}</h3>
             </div>
-            <div>
-                <span>PROFILE</span>
-                <span>ORDER</span>
+            <div className="link">
+                <Link>PROFILE</Link>
+                <Link>ORDER</Link>
             </div>
         </div>
     )

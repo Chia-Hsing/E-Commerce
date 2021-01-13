@@ -5,7 +5,7 @@ import UserProfileCard from '../components/User/UserProfileCard'
 import FileUploader from '../components/UI/FileUploader'
 import Input from '../components/UI/Input'
 import * as actions from '../store/actions/index'
-import { updateObj, checkValidity } from '../utils/utilities'
+import { updateObj, checkValidity, arrayBufferToBase64Img } from '../utils/utilities'
 import '../scss/userProfile.scss'
 
 class UserProfile extends Component {
@@ -15,7 +15,7 @@ class UserProfile extends Component {
                 eleType: 'input',
                 eleConfig: {
                     type: 'text',
-                    placeholder: '',
+                    placeholder: ' ',
                 },
                 val: '',
                 validation: {
@@ -28,7 +28,7 @@ class UserProfile extends Component {
                 eleType: 'input',
                 eleConfig: {
                     type: 'email',
-                    placeholder: '',
+                    placeholder: ' ',
                 },
                 val: '',
                 validation: {
@@ -93,7 +93,7 @@ class UserProfile extends Component {
                 touched: false,
             },
         },
-        avatar: '',
+        avatarPreview: '',
     }
 
     async componentDidMount() {
@@ -107,6 +107,8 @@ class UserProfile extends Component {
             city: { ...this.state.controls.city, val: this.props.userProfile.city || '' },
             postalCode: { ...this.state.controls.postalCode, val: this.props.userProfile.postalCode || '' },
         })
+
+        console.log(this.state)
 
         this.setState({ controls: update })
     }
@@ -124,8 +126,6 @@ class UserProfile extends Component {
     }
 
     submitHandler = e => {
-        e.preventDefault()
-
         const target = e.target
 
         var formData = new FormData(target)
@@ -146,11 +146,7 @@ class UserProfile extends Component {
     uploadImgHandler = files => {
         if (files.length <= 0) return
         const url = URL.createObjectURL(files[0])
-        this.setState({ avatar: url })
-    }
-
-    unloadImgHandler = e => {
-        this.setState({ avatar: '' })
+        this.setState({ avatarPreview: url })
     }
 
     render() {
@@ -180,17 +176,29 @@ class UserProfile extends Component {
             )
         })
 
-        const avatarUpload = (
-            <FileUploader
-                img={this.state.avatar}
-                fileChange={files => this.uploadImgHandler(files)}
-                fileClick={this.unloadImgHandler}
-            />
-        )
+        let avatarImg = null
+        let avatarPreview = null
+
+        if (this.props.userProfile.avatar) {
+            const imgBuffer = this.props.userProfile.avatar.data
+            avatarImg = arrayBufferToBase64Img(imgBuffer)
+
+            if (this.state.avatarPreview) {
+                avatarPreview = this.state.avatarPreview
+            } else {
+                avatarPreview = avatarImg
+            }
+        } else {
+            avatarImg =
+                'https://thumbs.dreamstime.com/z/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
+        }
+
+        const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
+        const avatarUpload = <FileUploader img={avatarPreview} fileChange={files => this.uploadImgHandler(files)} />
 
         return (
             <section className="userContainer">
-                <UserProfileCard />
+                {userProfileCard}
                 <form onSubmit={this.submitHandler} className="userProfileDetail">
                     {form}
                     {avatarUpload}

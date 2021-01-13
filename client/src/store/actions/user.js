@@ -17,8 +17,12 @@ export const getUserProfile = () => async dispatch => {
 
 export const updateUserProfile = (formData, config) => async dispatch => {
     try {
-        const user = await apis.updateUserProfile(formData, config)
+        const {
+            data: { user },
+        } = await apis.updateUserProfile(formData, config)
 
-        console.log(user)
-    } catch (error) {}
+        dispatch({ type: actionTypes.GET_USER_PROFILE_SUCCESS, user })
+    } catch (error) {
+        dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error })
+    }
 }

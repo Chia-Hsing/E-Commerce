@@ -9,8 +9,10 @@ const FileUploader = props => {
     }
     return (
         <>
-            <div className="avatarUpload" onClick={props.fileClick} style={{ width: '100px', height: '100px' }}>
+            <div className="avatarUpload" onClick={props.fileClick}>
+                <label for="file" className="label" />
                 <input
+                    id="file"
                     ref={fileInput}
                     type="file"
                     className="fileInput"
