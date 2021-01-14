@@ -9,8 +9,8 @@ const FileUploader = props => {
     }
     return (
         <>
-            <div className="avatarUpload" onClick={props.fileClick}>
-                <label for="file" className="label" />
+            <div className="avatarUpload">
+                <label htmlFor="file" className="label" />
                 <input
                     id="file"
                     ref={fileInput}
@@ -20,7 +20,7 @@ const FileUploader = props => {
                     accept=".png, .jpg, .jpeg"
                     onChange={handleFileInput}
                 />
-                <img src={props.img} alt="avatar" style={{ width: '100%', height: '100%' }} />
+                <img src={props.img} alt="avatar" />
             </div>
         </>
     )

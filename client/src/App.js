@@ -28,9 +28,9 @@ const routes = [
 const App = props => {
     useEffect(() => {
         // check if there is a bag stored at the local storage, if yes, set it to the state.
-        props.onSetBagItems()
         props.onAuthCheckState()
-    }, [props])
+        props.onSetBagItems()
+    })
 
     let routers = routes.map(({ path, Component }) => (
         <Route key={path} exact path={path}>

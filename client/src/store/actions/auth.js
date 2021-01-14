@@ -114,7 +114,7 @@ export const authCheckState = () => dispatch => {
             dispatch(logout())
         } else {
             dispatch({ type: actionTypes.AUTH_SUCCESS, token, userId })
-            dispatch(checkAuthTimeout(expirationTimeStamp - new Date().getTime()))
+            dispatch(checkAuthTimeout(expirationTimeStamp))
         }
     }
 }

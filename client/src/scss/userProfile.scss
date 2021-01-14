@@ -94,15 +94,16 @@
 
             & .label {
                 @include WL(max, 100px, 100px);
+                clip-path: circle();
                 position: absolute;
                 top: 0;
                 left: 0;
                 z-index: z(i);
-                transition: 0.4s ease-in;
+                transition: 0.5s ease;
 
                 &:hover {
                     cursor: pointer;
-                    background-color: color(fade-white);
+                    background-color: color(transparent-grey);
                 }
             }
 
@@ -113,7 +114,7 @@
                 top: 0;
                 left: 0;
                 overflow: hidden;
-                clip: rect(0, 0, 0, 0);
+                clip: rect();
                 white-space: nowrap;
                 border: none;
             }
@@ -124,6 +125,7 @@
                 left: 0;
                 @include WL(max, 100px, 100px);
                 object-fit: cover;
+                clip-path: circle();
             }
         }
     }

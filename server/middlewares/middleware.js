@@ -3,8 +3,11 @@ const jwt = require('jsonwebtoken')
 const { validationResult } = require('express-validator')
 const User = require('../models/user')
 
+const storage = multer.memoryStorage()
+
 const upload = multer({
-    limits: { fileSize: 1000000 },
+    storage,
+    limits: { fileSize: 90000000 },
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return cb(new Error('The file type should be jpg/jpeg/png.'))

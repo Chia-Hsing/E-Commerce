@@ -70,7 +70,8 @@
 .dropDown {
     @include position(absolute, 200px, -10, 0);
     @include WL(min, 100vw);
-    background-color: color(fade-white);
+    background-color: color(white);
+    border-bottom: 1px solid color(lighter-grey);
     margin-top: 30px;
     padding: 8px;
     opacity: 0;

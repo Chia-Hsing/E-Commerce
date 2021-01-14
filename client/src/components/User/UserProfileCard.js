@@ -11,8 +11,8 @@ const userProfileCard = props => {
                 <h3>{props.name}</h3>
             </div>
             <div className="link">
-                <Link>PROFILE</Link>
-                <Link>ORDER</Link>
+                <Link to="#">PROFILE</Link>
+                <Link to="#">ORDER</Link>
             </div>
         </div>
     )

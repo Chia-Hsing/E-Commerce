@@ -108,8 +108,6 @@ class UserProfile extends Component {
             postalCode: { ...this.state.controls.postalCode, val: this.props.userProfile.postalCode || '' },
         })
 
-        console.log(this.state)
-
         this.setState({ controls: update })
     }
 
