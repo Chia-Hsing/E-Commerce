@@ -11,6 +11,7 @@ import ShoppingBag from './container/ShoppingBag'
 import Signup from './container/Signup'
 import Login from './container/Login'
 import UserProfile from './container/UserProfile'
+import OrderManagement from './container/OrderManagement'
 import * as actions from './store/actions/index'
 
 import './scss/CSSTransition.scss'
@@ -19,6 +20,7 @@ const routes = [
     { path: '/auth/signup', name: 'signup', Component: Signup },
     { path: '/auth/login', name: 'login', Component: Login },
     { path: '/user/profile', name: 'user', Component: UserProfile },
+    { path: '/user/order', name: 'user', Component: OrderManagement },
     { path: '/products', name: 'products', Component: Products },
     { path: '/products/product/:PID', name: 'product', Component: Product },
     { path: '/shopping-bag', name: 'shopping-bag', Component: ShoppingBag },

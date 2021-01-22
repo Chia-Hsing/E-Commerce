@@ -4,8 +4,7 @@
 .userContainer {
     @include WL(max, 70%);
     @include display-flex(row, space-around, flex-start);
-    min-height: 70vh;
-    border: 1px solid color(lighter-grey);
+    min-height: 70%;
     padding: 2em;
     border-radius: 5px;
     margin: 2em auto;
@@ -99,6 +98,7 @@
                 top: 0;
                 left: 0;
                 z-index: z(i);
+                margin: 0;
                 transition: 0.5s ease;
 
                 &:hover {
@@ -141,23 +141,39 @@
             @include WL(max, 100%, 200px);
             clip-path: circle();
             margin: 1rem 0;
+
             img {
-                @include WL(max, 300px, 200px);
+                @include WL(max, 200px, 200px);
                 object-fit: cover;
             }
         }
         .userName {
             width: 100%;
             border-bottom: 1px solid color(lighter-grey);
+
             h3 {
                 text-align: center;
             }
         }
+
         .link {
-            height: 150px;
             @include display-flex(column, center, flex-start);
             @include WL(max, 100%, auto);
             padding: 1rem;
+
+            a {
+                text-decoration: none;
+                color: color(heavy-grey);
+                transition: 0.4s;
+
+                &:hover {
+                    color: color(yellow);
+                }
+            }
+
+            a.active {
+                color: color(yellow);
+            }
         }
     }
 }

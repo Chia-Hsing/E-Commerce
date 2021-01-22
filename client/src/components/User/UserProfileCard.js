@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const userProfileCard = props => {
     return (
@@ -11,8 +11,8 @@ const userProfileCard = props => {
                 <h3>{props.name}</h3>
             </div>
             <div className="link">
-                <Link to="#">PROFILE</Link>
-                <Link to="#">ORDER</Link>
+                <NavLink to="/user/profile">PROFILE</NavLink>
+                <NavLink to="/user/order">ORDER</NavLink>
             </div>
         </div>
     )

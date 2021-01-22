@@ -66,10 +66,10 @@ class UserProfile extends Component {
                 touched: false,
             },
             city: {
-                eleType: 'select',
+                eleType: 'input',
                 eleConfig: {
-                    placeholder: '- City -',
-                    options: ['Taipei', 'New Taipei'],
+                    type: 'text',
+                    placeholder: ' ',
                 },
                 val: '',
                 validation: {
@@ -160,7 +160,7 @@ class UserProfile extends Component {
         const form = formElement.map(ele => {
             return (
                 <Input
-                    // error={this.props.error}
+                    error={this.props.error}
                     key={ele.key}
                     label={ele.key}
                     value={ele.config.val}
@@ -187,11 +187,17 @@ class UserProfile extends Component {
                 avatarPreview = avatarImg
             }
         } else {
-            avatarImg =
-                'https://thumbs.dreamstime.com/z/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
+            avatarImg = 'https://i.pinimg.com/564x/a6/f3/c5/a6f3c55ace829310723adcb7a468869b.jpg'
+
+            if (this.state.avatarPreview) {
+                avatarPreview = this.state.avatarPreview
+            } else {
+                avatarPreview = avatarImg
+            }
         }
 
         const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
+
         const avatarUpload = <FileUploader img={avatarPreview} fileChange={files => this.uploadImgHandler(files)} />
 
         return (
@@ -210,7 +216,6 @@ class UserProfile extends Component {
 const mapStateToProps = state => {
     return {
         userProfile: state.user.userProfile,
-        isAuthenticated: state.auth.token !== null,
     }
 }
 
