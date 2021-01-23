@@ -79,7 +79,7 @@
     .productContainer {
         @include display-flex(column, space-around, center);
         @include WL(max, 100%);
-        min-height: 70vh;
+        min-height: 76vh;
 
         .imgContainer {
             width: 60%;

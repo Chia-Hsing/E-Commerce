@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .ShoppingBagContainer {
-    @include WL(max, 70%);
+    @include WL(max, 83%);
     @include display-flex(column, flex-start, center);
     min-height: 50vh;
     margin: 3em auto;
@@ -83,6 +83,69 @@
 
         span:nth-of-type(2) {
             color: color(heavy-grey);
+        }
+    }
+}
+
+@include response(l) {
+    .ShoppingBagContainer {
+        @include WL(max, 90%);
+        min-height: 69vh;
+    }
+}
+
+@include response(m) {
+    .ShoppingBagContainer {
+        @include WL(max, 95%);
+        min-height: 60vh;
+
+        .checkOutItemWrap {
+            padding: 1rem 0.5rem;
+
+            .checkOutItem {
+                grid-template-columns: 50% 15% repeat(3, 1fr);
+                font-size: size(xs);
+
+                span:first-child {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+@include response(s) {
+    .ShoppingBagContainer {
+        @include WL(max, 100%);
+        min-height: 57vh;
+
+        .ShoppingBagHeader {
+            h4 {
+                font-size: size(m);
+            }
+        }
+
+        .checkOutItemWrap {
+            padding: 1rem 0;
+
+            .checkOutItem {
+                grid-template-columns: 55% 15% repeat(3, 1fr);
+                grid-column-gap: 5px;
+                margin-bottom: 1rem;
+                font-size: size(xxs);
+
+                span:first-child {
+                    text-align: left;
+                }
+            }
+        }
+
+        .checkOutItemSummary {
+            span {
+                font: {
+                    size: size(xs);
+                }
+            }
         }
     }
 }

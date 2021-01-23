@@ -105,7 +105,7 @@
 @include response(l) {
     .auth {
         @include WL(max, 80%);
-        min-height: 75vh;
+        min-height: 60vh;
         form {
             @include WL(max, 80%, 65%);
         }

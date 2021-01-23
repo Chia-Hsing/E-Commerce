@@ -114,6 +114,8 @@
 @include response(l) {
     .products-container {
         @include WL(max, 80%, auto);
+
+        min-height: 65vh;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
 
@@ -143,7 +145,6 @@
 @include response(s) {
     .products-container {
         @include WL(max, 100%, auto);
-        // min-height: 70vh;
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(6, 1fr);
 
