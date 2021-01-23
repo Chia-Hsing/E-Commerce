@@ -65,11 +65,14 @@ class ShoppingBag extends Component {
                     <span onClick={() => this.props.onCleanBag()}>Clean this Bag</span>
                 </div>
                 <div className="checkOutItemWrap">{checkOutItems}</div>
-                <div className="checkOutItemSummary">
-                    <div>
-                        <span>ITEMS: {this.props.totalQuantity}</span>
-                        <span>SUBTOTAL: ￥{this.props.totalAmount}</span>
-                    </div>
+
+                <div className="checkOutSummary">
+                    <span>ITEMS: {this.props.totalQuantity}</span>
+                    <span>SUBTOTAL: ￥{this.props.totalAmount}</span>
+                </div>
+                <div className="checkOut">
+                    <Link to="/checkout">CHECK OUT</Link>
+                    <Link to="/">CONTINUE SHOPPING</Link>
                 </div>
             </section>
         )

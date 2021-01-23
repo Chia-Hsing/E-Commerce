@@ -52,13 +52,18 @@
     a {
         color: color($color);
         text-decoration: none;
-        transition: color 0.7s;
+        transition: color 0.4s;
     }
 
     &:hover a {
         color: color($hoverColor);
         text-decoration: none;
-        border-bottom: 2px solid color($bottomColor);
+
+        @if ($bottomColor == none) {
+            border-bottom: none;
+        } @else {
+            border-bottom: 2px solid color($bottomColor);
+        }
     }
 }
 

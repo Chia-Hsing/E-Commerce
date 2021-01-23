@@ -63,9 +63,9 @@
         }
     }
 
-    .checkOutItemSummary {
+    .checkOutSummary {
         @include WL(max, 85%);
-        @include display-flex(row, flex-end, stretch);
+        @include display-flex(row, space-between);
         border-top: 1px solid color(lighter-grey);
         padding-top: 0.6rem;
 
@@ -74,7 +74,6 @@
                 weight: weight(bold);
                 size: size(m);
             }
-            margin-left: 3rem;
         }
 
         span:first-child {
@@ -85,12 +84,36 @@
             color: color(heavy-grey);
         }
     }
+
+    .checkOut {
+        @include WL(min, 85%);
+        @include display-flex(row, flex-end);
+        margin-top: 2rem;
+        a {
+            margin-left: 2rem;
+            font-weight: weight(bold);
+            cursor: pointer;
+            transition: 0.5s;
+            color: color(yellow);
+            text-decoration: none;
+
+            &:hover {
+                color: color(light-yellow);
+            }
+        }
+    }
 }
 
 @include response(l) {
     .ShoppingBagContainer {
         @include WL(max, 90%);
         min-height: 69vh;
+
+        .checkOutOperation {
+            span {
+                font-size: size(xs);
+            }
+        }
     }
 }
 
@@ -109,6 +132,13 @@
                 span:first-child {
                     text-align: left;
                 }
+            }
+        }
+
+        .checkOutOperation {
+            span {
+                font-size: size(xs);
+                @include WL(min, 50%);
             }
         }
     }
@@ -140,11 +170,17 @@
             }
         }
 
-        .checkOutItemSummary {
+        .checkOutSummary {
             span {
                 font: {
                     size: size(xs);
                 }
+            }
+        }
+
+        .checkOut {
+            a {
+                font-size: size(xs);
             }
         }
     }
