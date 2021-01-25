@@ -70,7 +70,7 @@
         }
         .goToBag {
             @include WL(max, 30%, auto);
-            @include A(yellow, heavy-grey, yellow);
+            @include A(yellow, light-yellow, none);
         }
     }
 }

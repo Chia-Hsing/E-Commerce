@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
 import FileUploader from '../components/UI/FileUploader'
@@ -202,6 +203,7 @@ class UserProfile extends Component {
 
         return (
             <section className="userContainer">
+                {!this.props.isAuthenticated && <Redirect to="/" />}
                 {userProfileCard}
                 <form onSubmit={this.submitHandler} className="userProfileDetail">
                     {form}
@@ -216,6 +218,7 @@ class UserProfile extends Component {
 const mapStateToProps = state => {
     return {
         userProfile: state.user.userProfile,
+        isAuthenticated: state.auth.token !== null,
     }
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { icons } from '../../utils/icons'
 
-const CheckOutItems = props => {
+const CheckOutItem = props => {
     return (
         <section className="checkOutItem">
             <span>{props.name}</span>
@@ -29,4 +29,4 @@ const CheckOutItems = props => {
     )
 }
 
-export default CheckOutItems
+export default CheckOutItem

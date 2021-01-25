@@ -1,8 +1,8 @@
 import { React, Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-import CheckOutItems from '../components/ShoppingBag/CheckOutItems'
+import CheckOutItem from '../components/ShoppingBag/CheckOutItem'
 import * as actions from '../store/actions/index'
 import '../scss/shoppingBag.scss'
 
@@ -26,12 +26,17 @@ class ShoppingBag extends Component {
         }
     }
 
+    onCheckout = () => {
+        this.props.onPostOrder(this.props.UID)
+        this.props.history.push('/checkout')
+    }
+
     render() {
         let checkOutItems =
             this.props.bagItems.length > 0 ? (
                 this.props.bagItems.map(product => {
                     return (
-                        <CheckOutItems
+                        <CheckOutItem
                             key={Math.random()}
                             name={product.item.name}
                             price={product.item.price}
@@ -58,6 +63,14 @@ class ShoppingBag extends Component {
                 </div>
             )
 
+        let checkout =
+            this.props.totalQuantity > 0 ? (
+                <div className="checkOut">
+                    <span onClick={this.onCheckout}>CHECK OUT</span>
+                    <Link to="/">CONTINUE SHOPPING</Link>
+                </div>
+            ) : null
+
         return (
             <section className="ShoppingBagContainer">
                 <div className="ShoppingBagHeader">
@@ -70,10 +83,7 @@ class ShoppingBag extends Component {
                     <span>ITEMS: {this.props.totalQuantity}</span>
                     <span>SUBTOTAL: ￥{this.props.totalAmount}</span>
                 </div>
-                <div className="checkOut">
-                    <Link to="/checkout">CHECK OUT</Link>
-                    <Link to="/">CONTINUE SHOPPING</Link>
-                </div>
+                {checkout}
             </section>
         )
     }
@@ -85,6 +95,7 @@ const mapStateToProps = state => {
         totalQuantity: state.bag.totalQuantity,
         totalAmount: state.bag.totalAmount,
         isPurchasing: state.bag.purchasing,
+        UID: state.auth.userId,
     }
 }
 
@@ -94,7 +105,8 @@ const mapDispatchToProps = dispatch => {
         onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
         onRemoveWholeItem: (id, itemSize) => dispatch(actions.removeWholeItem(id, itemSize)),
         onCleanBag: () => dispatch(actions.cleanBag()),
+        onPostOrder: id => dispatch(actions.postOrder(id)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ShoppingBag))

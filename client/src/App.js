@@ -58,9 +58,6 @@ const App = props => {
     )
 }
 
-// const mapStateToProps = state => {
-//     return
-// }
 const mapDispatchToProps = dispatch => {
     return {
         onSetBagItems: () => dispatch(actions.setBagItems()),

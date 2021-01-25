@@ -66,8 +66,8 @@
     .checkOutSummary {
         @include WL(max, 85%);
         @include display-flex(row, space-between);
-        border-top: 1px solid color(lighter-grey);
-        padding-top: 0.6rem;
+        padding: 0.6rem;
+        background-color: color(lighter-grey);
 
         span {
             font: {
@@ -89,13 +89,15 @@
         @include WL(min, 85%);
         @include display-flex(row, flex-end);
         margin-top: 2rem;
-        a {
+        a,
+        span {
             margin-left: 2rem;
             font-weight: weight(bold);
             cursor: pointer;
             transition: 0.5s;
             color: color(yellow);
             text-decoration: none;
+            cursor: pointer;
 
             &:hover {
                 color: color(light-yellow);
