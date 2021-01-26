@@ -6,6 +6,7 @@ const { auth, bagItemToken } = require('../middlewares/middleware')
 const router = new express.Router()
 
 router.post('/:UID', auth, bagItemToken, orderController.postOrder)
+router.delete('/:UID', auth, orderController.deleteOrder)
 
 router.get('/latest', orderController.getLatestOrder)
 router.get('/latest/edit/:OID', orderController.getEditLatestOrder)

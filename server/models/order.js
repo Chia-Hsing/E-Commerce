@@ -19,14 +19,6 @@ const orderSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        address: {
-            type: String,
-            required: true,
-        },
-        phone: {
-            type: String,
-            required: true,
-        },
         paymentStatus: {
             type: String,
             default: 'pending',
@@ -41,6 +33,6 @@ const orderSchema = new mongoose.Schema(
     }
 )
 
-const Order = new mongoose.Model('Order', orderSchema)
+const Order = mongoose.model('Order', orderSchema)
 
 module.exports = Order

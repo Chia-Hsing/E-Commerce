@@ -1,8 +1,50 @@
-const postOrder = (req, res) => {
+const Order = require('../models/order')
+
+const postOrder = async (req, res) => {
+    try {
+        const UID = req.params.UID
+
+        const pendingOrder = await Order.findOne({ customer: UID })
+
+        if (pendingOrder) {
+            if (pendingOrder.paymentStatus === 'pending') {
+                return
+            }
+        }
+
+        const order = new Order({
+            customer: UID,
+            items: req.bag.items.bag,
+            totalAmount: req.bag.items.totalAmount,
+            totalQuantity: req.bag.items.totalQuantity,
+        })
+
+        await order.save(error => {
+            if (error) {
+                console.log(error)
+                return
+            }
+        })
+
+        return res.status(200).json({ status: 'success', product, message: 'Creating order success.' })
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+const deleteOrder = async (req, res) => {
     const UID = req.params.UID
 
-    console.log(UID)
-    console.log(req.bag.items.bag)
+    const pendingOrder = await Order.findOne({ customer: UID })
+
+    if (!pendingOrder) {
+        return
+    }
+
+    if (pendingOrder.paymentStatus === 'pending') {
+        await Order.deleteOne({ customer: UID })
+    }
+
     return
 }
 
@@ -24,6 +66,7 @@ const putCancelLatestOrder = (req, res) => {
 
 module.exports = {
     postOrder,
+    deleteOrder,
     getLatestOrder,
     getEditLatestOrder,
     putLatestOrder,

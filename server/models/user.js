@@ -46,6 +46,12 @@ const userSchema = new mongoose.Schema(
     }
 )
 
+userSchema.virtual('Order', {
+    ref: 'Order',
+    localField: '_id',
+    foreignField: 'customer',
+})
+
 userSchema.methods.generateAuthToken = function () {
     const user = this
     const token = jwt.sign(

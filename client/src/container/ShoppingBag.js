@@ -14,15 +14,17 @@ class ShoppingBag extends Component {
         return false
     }
 
-    onAddProductHandler = (id, itemStock, itemSize) => {
+    onAddProductHandler = (PID, itemStock, itemSize) => {
         if (itemStock > 0) {
-            this.props.onAddItemToBag(id, itemStock, itemSize)
+            const UID = this.props.UID
+            this.props.onAddItemToBag(PID, UID, itemStock, itemSize)
         }
     }
 
-    onDeleteProductHandler = (id, quantity, itemSize) => {
+    onDeleteProductHandler = (PID, quantity, itemSize) => {
         if (quantity > 1) {
-            this.props.onDeleteItemFromBag(id, itemSize)
+            const UID = this.props.UID
+            this.props.onDeleteItemFromBag(PID, UID, itemSize)
         }
     }
 
@@ -50,7 +52,9 @@ class ShoppingBag extends Component {
                             deleteItemFromBag={() =>
                                 this.onDeleteProductHandler(product.item._id, product.quantity, product.itemSize)
                             }
-                            removeItem={() => this.props.onRemoveWholeItem(product.item._id, product.itemSize)}
+                            removeItem={() =>
+                                this.props.onRemoveWholeItem(product.item._id, this.props.UID, product.itemSize)
+                            }
                         />
                     )
                 })
@@ -75,7 +79,7 @@ class ShoppingBag extends Component {
             <section className="ShoppingBagContainer">
                 <div className="ShoppingBagHeader">
                     <h4>Shopping Bag</h4>
-                    <span onClick={() => this.props.onCleanBag()}>Clean this Bag</span>
+                    <span onClick={() => this.props.onCleanBag(this.props.UID)}>Clean this Bag</span>
                 </div>
                 <div className="checkOutItemWrap">{checkOutItems}</div>
 
@@ -101,11 +105,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItemToBag: (id, itemStock, itemSize) => dispatch(actions.addItemToBag(id, itemStock, itemSize)),
-        onDeleteItemFromBag: (id, itemSize) => dispatch(actions.deleteItemFromBag(id, itemSize)),
-        onRemoveWholeItem: (id, itemSize) => dispatch(actions.removeWholeItem(id, itemSize)),
-        onCleanBag: () => dispatch(actions.cleanBag()),
-        onPostOrder: id => dispatch(actions.postOrder(id)),
+        onAddItemToBag: (PID, UID, itemStock, itemSize) =>
+            dispatch(actions.addItemToBag(PID, UID, itemStock, itemSize)),
+        onDeleteItemFromBag: (PID, UID, itemSize) => dispatch(actions.deleteItemFromBag(PID, UID, itemSize)),
+        onRemoveWholeItem: (PID, UID, itemSize) => dispatch(actions.removeWholeItem(PID, UID, itemSize)),
+        onCleanBag: UID => dispatch(actions.cleanBag(UID)),
+        onPostOrder: UID => dispatch(actions.postOrder(UID)),
     }
 }
 
