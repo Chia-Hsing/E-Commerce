@@ -11,6 +11,7 @@ import ShoppingBag from './container/ShoppingBag'
 import Signup from './container/Signup'
 import Login from './container/Login'
 import UserProfile from './container/UserProfile'
+import Delivery from './container/Delivery'
 import OrderManagement from './container/OrderManagement'
 import Checkout from './container/Checkout'
 import * as actions from './store/actions/index'
@@ -21,6 +22,7 @@ const routes = [
     { path: '/auth/signup', name: 'signup', Component: Signup },
     { path: '/auth/login', name: 'login', Component: Login },
     { path: '/user/profile', name: 'user', Component: UserProfile },
+    { path: '/user/delivery', name: 'delivery', Component: Delivery },
     { path: '/user/order', name: 'user', Component: OrderManagement },
     { path: '/products', name: 'products', Component: Products },
     { path: '/products/product/:PID', name: 'product', Component: Product },

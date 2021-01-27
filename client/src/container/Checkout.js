@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import CheckoutSummary from '../components/Order/CheckoutSummary'
+import CheckoutInfo from '../components/Order/CheckoutInfo'
 
 class Checkout extends Component {
     componentDidMount() {}
@@ -11,7 +11,7 @@ class Checkout extends Component {
         return (
             <section>
                 {!this.props.isAuthenticated && <Redirect to="/auth/login" />}
-                <CheckoutSummary bagItems={this.props.bagItems} />
+                <CheckoutInfo />
             </section>
         )
     }
@@ -20,8 +20,11 @@ class Checkout extends Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.token !== null,
-        bagItems: state.bag.bagItems,
     }
 }
 
-export default connect(mapStateToProps)(Checkout)
+const mapDispatchToProps = dispatch => {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

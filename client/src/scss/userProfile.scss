@@ -13,7 +13,7 @@
         flex-basis: 60%;
         min-height: 65vh;
         border-radius: 5px;
-        border: 1px solid color(lighter-grey);
+        // border: 1px solid color(lighter-grey);
         position: relative;
         padding: 1rem;
 
@@ -88,8 +88,9 @@
         }
 
         .avatarUpload {
-            @include WL(max, 100%, 100px);
+            @include WL(max, 90%, 100px);
             position: relative;
+            margin: 1rem auto;
 
             & .label {
                 @include WL(max, 100px, 100px);
@@ -128,6 +129,10 @@
                 clip-path: circle();
             }
         }
+
+        button {
+            @include button;
+        }
     }
 
     .userProfileCard {
@@ -135,15 +140,14 @@
         flex-basis: 30%;
         min-height: 40vh;
         border-radius: 5px;
-        border: 1px solid color(lighter-grey);
+        // border: 1px solid color(lighter-grey);
 
         figure {
             @include WL(max, 100%, 200px);
-            clip-path: circle();
             margin: 1rem 0;
 
             img {
-                @include WL(max, 200px, 200px);
+                @include WL(max, 300px, 200px);
                 object-fit: cover;
             }
         }

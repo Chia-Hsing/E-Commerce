@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
-import FileUploader from '../components/UI/FileUploader'
 import Input from '../components/UI/Input'
 import * as actions from '../store/actions/index'
-import { updateObj, checkValidity, arrayBufferToBase64Img } from '../utils/utilities'
+import { updateObj, checkValidity } from '../utils/utilities'
 import '../scss/userProfile.scss'
 
 class UserProfile extends Component {
@@ -25,34 +23,78 @@ class UserProfile extends Component {
                 valid: false,
                 touched: false,
             },
-            email: {
+
+            phone: {
                 eleType: 'input',
                 eleConfig: {
-                    type: 'email',
+                    type: 'text',
                     placeholder: ' ',
                 },
                 val: '',
                 validation: {
                     isRequired: true,
-                    isEmail: true,
+                    isPhone: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            address: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            city: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            postalCode: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                    isPostalCode: true,
                 },
                 valid: false,
                 touched: false,
             },
         },
-        avatarPreview: '',
     }
 
-    async componentDidMount() {
-        await this.props.onGetUserProfile()
+    // async componentDidMount() {
+    //     await this.props.onGetUserProfile()
 
-        const update = updateObj(this.state.controls, {
-            name: { ...this.state.controls.name, val: this.props.userProfile.name || '' },
-            email: { ...this.state.controls.email, val: this.props.userProfile.email || '' },
-        })
+    //     const update = updateObj(this.state.controls, {
+    //         name: { ...this.state.controls.name, val: this.props.userProfile.name || '' },
+    //         email: { ...this.state.controls.email, val: this.props.userProfile.email || '' },
+    //         phone: { ...this.state.controls.phone, val: this.props.userProfile.phone || '' },
+    //         address: { ...this.state.controls.address, val: this.props.userProfile.address || '' },
+    //         city: { ...this.state.controls.city, val: this.props.userProfile.city || '' },
+    //         postalCode: { ...this.state.controls.postalCode, val: this.props.userProfile.postalCode || '' },
+    //     })
 
-        this.setState({ controls: update })
-    }
+    //     this.setState({ controls: update })
+    // }
 
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
@@ -71,7 +113,7 @@ class UserProfile extends Component {
 
         var formData = new FormData(target)
 
-        const stateKeys = ['name', 'email']
+        const stateKeys = ['name', 'phone', 'address', 'city', 'postalCode']
 
         stateKeys.forEach(stateKey => {
             formData.set([stateKey], this.state.controls[stateKey].val)
@@ -82,12 +124,6 @@ class UserProfile extends Component {
         }
 
         this.props.onUpdateUserProfile(formData, config)
-    }
-
-    uploadImgHandler = files => {
-        if (files.length <= 0) return
-        const url = URL.createObjectURL(files[0])
-        this.setState({ avatarPreview: url })
     }
 
     render() {
@@ -117,38 +153,11 @@ class UserProfile extends Component {
             )
         })
 
-        let avatarImg = null
-        let avatarPreview = null
-
-        if (this.props.userProfile.avatar) {
-            const imgBuffer = this.props.userProfile.avatar.data
-            avatarImg = arrayBufferToBase64Img(imgBuffer)
-
-            if (this.state.avatarPreview) {
-                avatarPreview = this.state.avatarPreview
-            } else {
-                avatarPreview = avatarImg
-            }
-        } else {
-            avatarImg = 'https://i.pinimg.com/564x/a6/f3/c5/a6f3c55ace829310723adcb7a468869b.jpg'
-
-            if (this.state.avatarPreview) {
-                avatarPreview = this.state.avatarPreview
-            } else {
-                avatarPreview = avatarImg
-            }
-        }
-
-        const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
-
-        const avatarUpload = <FileUploader img={avatarPreview} fileChange={files => this.uploadImgHandler(files)} />
-
         return (
             <section className="userContainer">
-                {userProfileCard}
+                <UserProfileCard />
                 <form onSubmit={this.submitHandler} className="userProfileDetail">
                     {form}
-                    {avatarUpload}
                     <button>Update</button>
                 </form>
             </section>

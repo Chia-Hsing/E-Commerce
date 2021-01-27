@@ -6,10 +6,8 @@ const postOrder = async (req, res) => {
 
         const pendingOrder = await Order.findOne({ customer: UID })
 
-        if (pendingOrder) {
-            if (pendingOrder.paymentStatus === 'pending') {
-                return
-            }
+        if (pendingOrder && pendingOrder.paymentStatus === 'pending') {
+            return
         }
 
         const order = new Order({

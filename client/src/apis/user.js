@@ -5,6 +5,5 @@ export const getUserProfile = () => {
 }
 
 export const updateUserProfile = (formData, config) => {
-    // const userDetail = { name, email, phone, address, city, postalCode }
     return apiHelper.patch('/user/profile', formData, config)
 }
