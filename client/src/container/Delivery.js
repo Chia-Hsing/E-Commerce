@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import UserProfileCard from '../components/User/UserProfileCard'
 import Input from '../components/UI/Input'
+import DeliveryInfoCard from '../components/User/DeliveryInfoCard'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity } from '../utils/utilities'
 import '../scss/userProfile.scss'
 
-class UserProfile extends Component {
+class Delivery extends Component {
     state = {
         controls: {
-            name: {
+            firstName: {
                 eleType: 'input',
                 eleConfig: {
                     type: 'text',
@@ -23,7 +23,19 @@ class UserProfile extends Component {
                 valid: false,
                 touched: false,
             },
-
+            lastName: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
             phone: {
                 eleType: 'input',
                 eleConfig: {
@@ -39,6 +51,19 @@ class UserProfile extends Component {
                 touched: false,
             },
             address: {
+                eleType: 'input',
+                eleConfig: {
+                    type: 'text',
+                    placeholder: ' ',
+                },
+                val: '',
+                validation: {
+                    isRequired: true,
+                },
+                valid: false,
+                touched: false,
+            },
+            district: {
                 eleType: 'input',
                 eleConfig: {
                     type: 'text',
@@ -81,20 +106,9 @@ class UserProfile extends Component {
         },
     }
 
-    // async componentDidMount() {
-    //     await this.props.onGetUserProfile()
-
-    //     const update = updateObj(this.state.controls, {
-    //         name: { ...this.state.controls.name, val: this.props.userProfile.name || '' },
-    //         email: { ...this.state.controls.email, val: this.props.userProfile.email || '' },
-    //         phone: { ...this.state.controls.phone, val: this.props.userProfile.phone || '' },
-    //         address: { ...this.state.controls.address, val: this.props.userProfile.address || '' },
-    //         city: { ...this.state.controls.city, val: this.props.userProfile.city || '' },
-    //         postalCode: { ...this.state.controls.postalCode, val: this.props.userProfile.postalCode || '' },
-    //     })
-
-    //     this.setState({ controls: update })
-    // }
+    async componentDidMount() {
+        await this.props.onGetDefaultDeliveryInfo()
+    }
 
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
@@ -113,17 +127,13 @@ class UserProfile extends Component {
 
         var formData = new FormData(target)
 
-        const stateKeys = ['name', 'phone', 'address', 'city', 'postalCode']
+        const stateKeys = ['firstName', 'lastName', 'phone', 'address', 'district', 'city', 'postalCode']
 
         stateKeys.forEach(stateKey => {
             formData.set([stateKey], this.state.controls[stateKey].val)
         })
 
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-        }
-
-        this.props.onUpdateUserProfile(formData, config)
+        this.props.onPostDeliveryInfo(formData)
     }
 
     render() {
@@ -154,11 +164,12 @@ class UserProfile extends Component {
         })
 
         return (
-            <section className="userContainer">
-                <UserProfileCard />
-                <form onSubmit={this.submitHandler} className="userProfileDetail">
+            <section className="deliveryContainer">
+                <DeliveryInfoCard />
+                <form onSubmit={this.submitHandler} className="deliveryInfoForm">
+                    <h6>delivery info</h6>
                     {form}
-                    <button>Update</button>
+                    <button>create</button>
                 </form>
             </section>
         )
@@ -173,9 +184,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetUserProfile: () => dispatch(actions.getUserProfile()),
-        onUpdateUserProfile: (formData, config) => dispatch(actions.updateUserProfile(formData, config)),
+        onGetDefaultDeliveryInfo: () => dispatch(actions.getDefaultDeliveryInfo()),
+        onPostDeliveryInfo: () => dispatch(actions.postDeliveryInfo()),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)
+export default connect(mapStateToProps, mapDispatchToProps)(Delivery)

@@ -1,182 +1,299 @@
 @import 'variables';
 @import 'mixins';
 
-.userContainer {
-    @include WL(max, 70%);
-    @include display-flex(row, space-around, flex-start);
+.userProfileWrap {
+    @include WL(max, 80%);
     min-height: 70%;
     padding: 2em;
-    border-radius: 5px;
     margin: 0.5em auto;
 
-    .userProfileDetail {
-        flex-basis: 60%;
-        min-height: 65vh;
-        border-radius: 5px;
-        // border: 1px solid color(lighter-grey);
-        position: relative;
-        padding: 1rem;
+    h5 {
+        margin-bottom: 2rem;
+    }
 
-        & .inputBody {
-            @include WL(max, 90%, 70px);
-            display: block;
+    .userContainer {
+        @include display-flex(row, space-around, flex-start);
+
+        .userProfileDetail {
+            flex-basis: 60%;
+            min-height: 40vh;
+            border-radius: 5px;
             position: relative;
-            margin: 0 auto;
+            padding: 1rem;
+            box-shadow: 2px 3px 15px -7px color(lighter-grey);
 
-            & input {
-                @include WL(max, 100%, 100%);
-                color: color(light-grey);
-                padding-top: 20px;
-                border: none;
-                outline: none;
+            h6 {
+                text-align: left;
             }
 
-            & label {
-                color: color(heavy-grey);
-                position: absolute;
-                bottom: 0px;
-                left: 0%;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                border-bottom: 1px solid color(light-grey);
-            }
+            & .inputBody {
+                @include WL(max, 90%, 70px);
+                display: block;
+                position: relative;
+                margin: 0 auto;
 
-            & label::after {
-                content: '';
-                position: absolute;
-                bottom: -1px;
-                left: 0;
-                height: 100%;
-                width: 0%;
-                border-bottom: 3px solid color(yellow);
-                transition: all 0.3s ease;
-            }
+                & input {
+                    @include WL(max, 100%, 100%);
+                    color: color(light-grey);
+                    padding-top: 20px;
+                    border: none;
+                    outline: none;
+                }
 
-            .errorMSG {
-                position: absolute;
-                color: color(heavy-grey);
-                font-size: size(xs);
-                bottom: 5px;
-                right: 0;
-            }
+                & label {
+                    color: color(heavy-grey);
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0%;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    border-bottom: 1px solid color(light-grey);
+                }
 
-            .contentName {
-                position: absolute;
-                bottom: 5px;
-                left: 0;
-                transition: all 0.3s ease;
-            }
-            & input:not(:placeholder-shown) + .labelName .contentName,
-            & input:focus + .labelName .contentName {
-                transform: translateY(-150%);
-                font-size: 14px;
-                color: color(yellow);
-            }
+                & label::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    height: 100%;
+                    width: 0%;
+                    border-bottom: 3px solid color(yellow);
+                    transition: all 0.3s ease;
+                }
 
-            & input:not(:placeholder-shown) + .labelName::after,
-            & input:focus + .labelName::after {
-                width: 100%;
-            }
-            input.invalid + label::after {
-                border-bottom: 3px solid color(red);
-            }
+                .errorMSG {
+                    position: absolute;
+                    color: color(heavy-grey);
+                    font-size: size(xs);
+                    bottom: 5px;
+                    right: 0;
+                }
 
-            input.invalid + .labelName .contentName {
-                color: color(red);
-            }
-        }
+                .contentName {
+                    position: absolute;
+                    bottom: 5px;
+                    left: 0;
+                    transition: all 0.3s ease;
+                }
+                & input:not(:placeholder-shown) + .labelName .contentName,
+                & input:focus + .labelName .contentName {
+                    transform: translateY(-150%);
+                    font-size: 14px;
+                    color: color(yellow);
+                }
 
-        .avatarUpload {
-            @include WL(max, 90%, 100px);
-            position: relative;
-            margin: 1rem auto;
+                & input:not(:placeholder-shown) + .labelName::after,
+                & input:focus + .labelName::after {
+                    width: 100%;
+                }
+                input.invalid + label::after {
+                    border-bottom: 3px solid color(red);
+                }
 
-            & .label {
-                @include WL(max, 100px, 100px);
-                clip-path: circle();
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: z(i);
-                margin: 0;
-                transition: 0.5s ease;
-
-                &:hover {
-                    cursor: pointer;
-                    background-color: color(transparent-grey);
+                input.invalid + .labelName .contentName {
+                    color: color(red);
                 }
             }
 
-            & input {
-                @include WL(max, 1px, 1px);
-                opacity: 0;
-                position: absolute;
-                top: 0;
-                left: 0;
-                overflow: hidden;
-                clip: rect();
-                white-space: nowrap;
-                border: none;
+            .avatarUpload {
+                @include WL(max, 90%, 100px);
+                position: relative;
+                margin: 1rem auto;
+
+                & .label {
+                    @include WL(max, 100px, 100px);
+                    clip-path: circle();
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: z(i);
+                    margin: 0;
+                    transition: 0.5s ease;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: color(transparent-grey);
+                    }
+                }
+
+                & input {
+                    @include WL(max, 1px, 1px);
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    overflow: hidden;
+                    clip: rect();
+                    white-space: nowrap;
+                    border: none;
+                }
+
+                & img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    @include WL(max, 100px, 100px);
+                    object-fit: cover;
+                    clip-path: circle();
+                }
             }
 
-            & img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                @include WL(max, 100px, 100px);
-                object-fit: cover;
-                clip-path: circle();
-            }
-        }
-
-        button {
-            @include button;
-        }
-    }
-
-    .userProfileCard {
-        @include display-flex(column, space-around, flex-start);
-        flex-basis: 30%;
-        min-height: 40vh;
-        border-radius: 5px;
-        // border: 1px solid color(lighter-grey);
-
-        figure {
-            @include WL(max, 100%, 200px);
-            margin: 1rem 0;
-
-            img {
-                @include WL(max, 300px, 200px);
-                object-fit: cover;
-            }
-        }
-        .userName {
-            width: 100%;
-            border-bottom: 1px solid color(lighter-grey);
-
-            h3 {
-                text-align: center;
+            button {
+                @include button;
             }
         }
 
-        .link {
-            @include display-flex(column, center, flex-start);
-            @include WL(max, 100%, auto);
-            padding: 1rem;
+        .userProfileCard {
+            @include display-flex(column, space-around, flex-start);
+            flex-basis: 30%;
+            min-height: 40vh;
+            border-radius: 5px;
 
-            a {
-                text-decoration: none;
-                color: color(heavy-grey);
-                transition: 0.4s;
+            figure {
+                @include WL(max, 100%, 200px);
+                margin: 1rem 0;
 
-                &:hover {
+                img {
+                    @include WL(max, 300px, 200px);
+                    object-fit: cover;
+                }
+            }
+            .userName {
+                width: 100%;
+                border-bottom: 1px solid color(lighter-grey);
+
+                h3 {
+                    text-align: center;
+                }
+            }
+
+            .link {
+                @include display-flex(column, center, flex-start);
+                @include WL(max, 100%, auto);
+                padding: 1rem;
+
+                a {
+                    text-decoration: none;
+                    color: color(heavy-grey);
+                    transition: 0.4s;
+
+                    &:hover {
+                        color: color(yellow);
+                    }
+                }
+
+                a.active {
                     color: color(yellow);
                 }
             }
+        }
+    }
 
-            a.active {
-                color: color(yellow);
+    .deliveryContainer {
+        @include display-flex(row, space-around, flex-start);
+        margin-top: 2rem;
+
+        .deliveryInfoCard {
+            padding: 1rem;
+            flex-basis: 30%;
+            min-height: 30vh;
+            border-radius: 5px;
+
+            h6 {
+                text-align: left;
+            }
+
+            span {
+                display: inline-block;
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        .deliveryInfoForm {
+            flex-basis: 60%;
+            min-height: 50vh;
+            border-radius: 5px;
+            position: relative;
+            padding: 1rem;
+            box-shadow: 2px 3px 15px -7px color(lighter-grey);
+
+            h6 {
+                text-align: left;
+            }
+
+            & .inputBody {
+                @include WL(max, 90%, 70px);
+                display: block;
+                position: relative;
+                margin: 0 auto;
+
+                & input {
+                    @include WL(max, 100%, 100%);
+                    color: color(light-grey);
+                    padding-top: 20px;
+                    border: none;
+                    outline: none;
+                }
+
+                & label {
+                    color: color(heavy-grey);
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0%;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    border-bottom: 1px solid color(light-grey);
+                }
+
+                & label::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    height: 100%;
+                    width: 0%;
+                    border-bottom: 3px solid color(yellow);
+                    transition: all 0.3s ease;
+                }
+
+                .errorMSG {
+                    position: absolute;
+                    color: color(heavy-grey);
+                    font-size: size(xs);
+                    bottom: 5px;
+                    right: 0;
+                }
+
+                .contentName {
+                    position: absolute;
+                    bottom: 5px;
+                    left: 0;
+                    transition: all 0.3s ease;
+                }
+                & input:not(:placeholder-shown) + .labelName .contentName,
+                & input:focus + .labelName .contentName {
+                    transform: translateY(-150%);
+                    font-size: 14px;
+                    color: color(yellow);
+                }
+
+                & input:not(:placeholder-shown) + .labelName::after,
+                & input:focus + .labelName::after {
+                    width: 100%;
+                }
+                input.invalid + label::after {
+                    border-bottom: 3px solid color(red);
+                }
+
+                input.invalid + .labelName .contentName {
+                    color: color(red);
+                }
+            }
+            button {
+                @include button;
             }
         }
     }

@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
 import FileUploader from '../components/UI/FileUploader'
+import Delivery from './Delivery'
 import Input from '../components/UI/Input'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity, arrayBufferToBase64Img } from '../utils/utilities'
@@ -144,13 +145,20 @@ class UserProfile extends Component {
         const avatarUpload = <FileUploader img={avatarPreview} fileChange={files => this.uploadImgHandler(files)} />
 
         return (
-            <section className="userContainer">
-                {userProfileCard}
-                <form onSubmit={this.submitHandler} className="userProfileDetail">
-                    {form}
-                    {avatarUpload}
-                    <button>Update</button>
-                </form>
+            <section className="userProfileWrap">
+                <h5>ACCOUNT DASHBOARD</h5>
+                <div className="userContainer">
+                    {userProfileCard}
+                    <form onSubmit={this.submitHandler} className="userProfileDetail">
+                        <h6>user info</h6>
+                        {form}
+                        {avatarUpload}
+                        <button>update</button>
+                    </form>
+                </div>
+                <div>
+                    <Delivery />
+                </div>
             </section>
         )
     }

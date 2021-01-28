@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const userProfileCard = props => {
+const UserProfileCard = props => {
     return (
         <div className="userProfileCard">
             <figure>
@@ -12,11 +12,10 @@ const userProfileCard = props => {
             </div>
             <div className="link">
                 <NavLink to="/user/profile">PROFILE</NavLink>
-                <NavLink to="/user/delivery">DELIVERY</NavLink>
                 <NavLink to="/user/order">ORDER</NavLink>
             </div>
         </div>
     )
 }
 
-export default userProfileCard
+export default UserProfileCard

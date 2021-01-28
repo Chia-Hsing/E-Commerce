@@ -41,10 +41,18 @@
 @include response(m) {
     .breadCrumbWrap {
         @include WL(max, 50%, auto);
+
+        .breadCrumb {
+            @include WL(min, 100%);
+        }
     }
 }
 @include response(s) {
     .breadCrumbWrap {
         @include WL(max, 90%, auto);
+
+        .breadCrumb {
+            @include WL(min, 100%);
+        }
     }
 }

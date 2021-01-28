@@ -3,8 +3,8 @@
 
 .auth {
     @include WL(max, 90%);
-    min-height: 60vh;
-    margin: 0 auto;
+    min-height: 50vh;
+    margin: 2em auto;
 
     .spinner {
         @include spinner;
@@ -15,8 +15,7 @@
         @include display-flex(column, center, center);
         margin: 2em auto;
         position: relative;
-        padding: 1rem;
-        background-color: #fff;
+        padding: 1em;
 
         & .inputBody {
             @include WL(max, 90%, 70px);
@@ -93,7 +92,7 @@
         @include display-flex(row, space-between, center);
 
         .link {
-            @include A(yellow, light-grey, yellow);
+            @include A(yellow, light-yellow, none);
         }
 
         button {

@@ -3,7 +3,7 @@
 
 .products-container {
     @include WL(max, 70%);
-    min-height: 55vh;
+    min-height: 49vh;
     margin: 0 auto;
     display: grid;
     place-items: center;

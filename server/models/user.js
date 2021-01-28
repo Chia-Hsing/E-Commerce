@@ -21,25 +21,6 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-
-        address: {
-            type: String,
-            default: '',
-        },
-        city: {
-            type: String,
-            default: '',
-        },
-
-        postalCode: {
-            type: Number,
-            default: null,
-        },
-
-        phone: {
-            type: String,
-            default: '',
-        },
     },
     {
         timeStamps: true,
