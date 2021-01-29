@@ -106,9 +106,9 @@ class Delivery extends Component {
         },
     }
 
-    async componentDidMount() {
-        await this.props.onGetDefaultDeliveryInfo()
-    }
+    // async componentDidMount() {
+    //     await this.props.getDeliveryInfo()
+    // }
 
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
@@ -123,15 +123,17 @@ class Delivery extends Component {
     }
 
     submitHandler = e => {
-        const target = e.target
+        e.preventDefault()
 
-        var formData = new FormData(target)
+        const firstName = this.state.controls.firstName.val
+        const lastName = this.state.controls.lastName.val
+        const phone = this.state.controls.phone.val
+        const address = this.state.controls.address.val
+        const district = this.state.controls.district.val
+        const city = this.state.controls.city.val
+        const postalCode = this.state.controls.postalCode.val
 
-        const stateKeys = ['firstName', 'lastName', 'phone', 'address', 'district', 'city', 'postalCode']
-
-        stateKeys.forEach(stateKey => {
-            formData.set([stateKey], this.state.controls[stateKey].val)
-        })
+        const formData = { firstName, lastName, phone, address, district, city, postalCode }
 
         this.props.onPostDeliveryInfo(formData)
     }
@@ -184,8 +186,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetDefaultDeliveryInfo: () => dispatch(actions.getDefaultDeliveryInfo()),
-        onPostDeliveryInfo: () => dispatch(actions.postDeliveryInfo()),
+        getDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
+        onPostDeliveryInfo: formData => dispatch(actions.postDeliveryInfo(formData)),
     }
 }
 

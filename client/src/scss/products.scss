@@ -114,10 +114,26 @@
 @include response(l) {
     .products-container {
         @include WL(max, 80%, auto);
-
         min-height: 65vh;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
+
+        .single-item {
+            @include WL(max, 100%);
+
+            span {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            span:first-of-type {
+                color: color(heavy-grey);
+                transform: translateY(0);
+            }
+            span:nth-of-type(2) {
+                transform: translateY(0);
+            }
+        }
 
         .spinner {
             grid-column: 1 / span 2;
@@ -138,6 +154,19 @@
 
         .single-item {
             @include WL(max, 100%);
+
+            span {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            span:first-of-type {
+                color: color(heavy-grey);
+                transform: translateY(0);
+            }
+            span:nth-of-type(2) {
+                transform: translateY(0);
+            }
         }
     }
 }
@@ -150,6 +179,19 @@
 
         .single-item {
             @include WL(max, 100%);
+
+            span {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            span:first-of-type {
+                color: color(heavy-grey);
+                transform: translateY(0);
+            }
+            span:nth-of-type(2) {
+                transform: translateY(0);
+            }
         }
     }
 }

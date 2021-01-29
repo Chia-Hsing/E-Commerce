@@ -56,6 +56,33 @@ const validator = {
             return true
         }),
     ],
+    checkDeliveryInfo: [
+        body('firstName').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid first name!'),
+        body('lastName').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid last name!'),
+        body('phone')
+            .trim()
+            .custom(value => {
+                const regex = /09\d{2}(\d{6}$|-\d{3}-\d{3})$/
+                const phoneCheck = value.match(regex)
+                if (!phoneCheck) {
+                    throw new Error('Invalid phone number!')
+                }
+                return true
+            }),
+        body('address').trim().notEmpty().withMessage('Invalid address!'),
+        body('district').trim().notEmpty().withMessage('Invalid district!'),
+        body('city').trim().notEmpty().withMessage('Invalid city!'),
+        body('postalCode')
+            .trim()
+            .custom(value => {
+                const regex = /^\d{5}$|^\d{3}$/
+                const PostalCodeCheck = value.match(regex)
+                if (!PostalCodeCheck) {
+                    throw new Error('Invalid postal code!')
+                }
+                return true
+            }),
+    ],
 }
 
 module.exports = validator

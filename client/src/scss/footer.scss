@@ -2,7 +2,7 @@
 @import 'variables';
 
 footer {
-    @include WL(max, 100vw, auto);
+    @include WL(max, 100vw, 180px);
     background-color: color(lighter-grey);
     padding: 10px;
 }

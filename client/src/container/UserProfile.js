@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Route, withRouter } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
 import FileUploader from '../components/UI/FileUploader'
@@ -91,6 +91,11 @@ class UserProfile extends Component {
         this.setState({ avatarPreview: url })
     }
 
+    deliveryInfoHandler = () => {
+        this.props.history.replace('/user/profile/deliveryInfo')
+        console.log(this.props.location)
+    }
+
     render() {
         let formElement = []
 
@@ -156,9 +161,10 @@ class UserProfile extends Component {
                         <button>update</button>
                     </form>
                 </div>
-                <div>
-                    <Delivery />
-                </div>
+                {this.props.location.pathname === '/user/profile' ? (
+                    <button onClick={this.deliveryInfoHandler}>add delivery info</button>
+                ) : null}
+                <Route path={this.props.match.path + '/deliveryInfo'} component={Delivery} />
             </section>
         )
     }
@@ -177,4 +183,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserProfile))

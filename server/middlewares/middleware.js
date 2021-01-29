@@ -78,7 +78,7 @@ const auth = async (req, res, next) => {
 
         next()
     } catch (error) {
-        res.status(401).send('User authorization failed!')
+        return res.json({ status: 'error', message: error.message })
     }
 }
 

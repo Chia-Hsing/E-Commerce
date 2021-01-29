@@ -18,14 +18,14 @@ import * as actions from './store/actions/index'
 import './scss/CSSTransition.scss'
 
 const routes = [
-    { path: '/auth/signup', name: 'signup', Component: Signup },
-    { path: '/auth/login', name: 'login', Component: Login },
-    { path: '/user/profile', name: 'user', Component: UserProfile },
-    { path: '/user/order', name: 'user', Component: OrderManagement },
-    { path: '/products', name: 'products', Component: Products },
-    { path: '/products/product/:PID', name: 'product', Component: Product },
-    { path: '/shopping-bag', name: 'shopping-bag', Component: ShoppingBag },
-    { path: '/checkout', name: 'checkout', Component: Checkout },
+    { path: '/auth/signup', exact: true, name: 'signup', Component: Signup },
+    { path: '/auth/login', exact: true, name: 'login', Component: Login },
+    { path: '/user/profile', exact: false, name: 'user', Component: UserProfile },
+    { path: '/user/order', exact: true, name: 'user', Component: OrderManagement },
+    { path: '/products', exact: true, name: 'products', Component: Products },
+    { path: '/products/product/:PID', exact: true, name: 'product', Component: Product },
+    { path: '/shopping-bag', exact: true, name: 'shopping-bag', Component: ShoppingBag },
+    { path: '/checkout', exact: true, name: 'checkout', Component: Checkout },
     { path: '/', name: 'Home', Component: Home },
 ]
 
@@ -36,8 +36,8 @@ const App = props => {
         props.onSetBagItems()
     })
 
-    let routers = routes.map(({ path, Component }) => (
-        <Route key={path} exact path={path}>
+    let routers = routes.map(({ path, exact, Component }) => (
+        <Route key={path} exact={exact} path={path}>
             {({ match }) => (
                 <CSSTransition in={match != null} appear={true} timeout={2000} classNames="home" unmountOnExit>
                     <div className="page">

@@ -1,4 +1,5 @@
 const sharp = require('sharp')
+const Customer = require('../models/customer')
 
 const getUserProfile = (req, res) => {
     const user = req.user
@@ -36,6 +37,26 @@ const patchUserProfile = async (req, res) => {
     }
 }
 
+const getCustomer = (req, res) => {
+    return
+}
+
+const postCustomer = async (req, res) => {
+    try {
+        const customer = new Customer({ user: req.user._id, ...req.body })
+        await customer.save(error => {
+            if (error) {
+                console.log(error)
+            }
+            return
+        })
+
+        return res.json({ status: 'success', customer, message: 'create delivery information success!' })
+    } catch (error) {
+        return res.send(error)
+    }
+}
+
 // const getUserOrder = (req, res) => {
 //     return
 // }
@@ -49,6 +70,8 @@ const patchUserProfile = async (req, res) => {
 module.exports = {
     getUserProfile,
     patchUserProfile,
+    getCustomer,
+    postCustomer,
     // getUserOrder,
     // getUserCanceledOrder,
     // putUserOrderHistory,

@@ -10,8 +10,8 @@
     .ShoppingBagHeader {
         @include WL(max, 85%);
         @include display-flex(row, space-between, center);
-        margin-bottom: 0.4rem;
-        padding: 0.4rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
         border-bottom: 1px solid color(lighter-grey);
 
         h4 {
@@ -109,7 +109,8 @@
 @include response(l) {
     .ShoppingBagContainer {
         @include WL(max, 90%);
-        min-height: 69vh;
+        min-height: 72vh;
+        margin: 1.7em auto;
 
         .checkOutOperation {
             span {
@@ -122,7 +123,8 @@
 @include response(m) {
     .ShoppingBagContainer {
         @include WL(max, 95%);
-        min-height: 60vh;
+        min-height: 62vh;
+        margin: 1.9em auto;
 
         .checkOutItemWrap {
             padding: 1rem 0.5rem;
@@ -149,7 +151,7 @@
 @include response(s) {
     .ShoppingBagContainer {
         @include WL(max, 100%);
-        min-height: 57vh;
+        min-height: 60vh;
 
         .ShoppingBagHeader {
             h4 {
@@ -158,16 +160,28 @@
         }
 
         .checkOutItemWrap {
-            padding: 1rem 0;
+            padding: 0.5rem 1.5rem;
 
             .checkOutItem {
-                grid-template-columns: 55% 15% repeat(3, 1fr);
-                grid-column-gap: 5px;
-                margin-bottom: 1rem;
+                grid-template-columns: 65% 25% 10%;
+                grid-template-rows: repeat(2, 1fr);
                 font-size: size(xxs);
+                border-bottom: 1px solid color(lighter-grey);
 
                 span:first-child {
                     text-align: left;
+                }
+
+                .productPurchaseController {
+                    grid-column: 2 / 3;
+
+                    .operator {
+                        cursor: pointer;
+                    }
+                }
+
+                .removeItem {
+                    cursor: pointer;
                 }
             }
         }
@@ -181,7 +195,8 @@
         }
 
         .checkOut {
-            a {
+            a,
+            span {
                 font-size: size(xs);
             }
         }

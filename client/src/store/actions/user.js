@@ -27,9 +27,9 @@ export const updateUserProfile = (formData, config) => async dispatch => {
     }
 }
 
-export const getDefaultDeliveryInfo = () => async dispatch => {
+export const getDeliveryInfo = () => async dispatch => {
     try {
-        const res = await apis.getDefaultDeliveryInfo()
+        const res = await apis.getDeliveryInfo()
 
         const {
             data: { user },
@@ -41,4 +41,14 @@ export const getDefaultDeliveryInfo = () => async dispatch => {
     }
 }
 
-export const postDeliveryInfo = () => async dispatch => {}
+export const postDeliveryInfo = formData => async dispatch => {
+    try {
+        const customer = await apis.postDeliveryInfo(formData)
+
+        // const { data } = customer
+
+        console.log(customer)
+    } catch (error) {
+        console.log(error.message)
+    }
+}

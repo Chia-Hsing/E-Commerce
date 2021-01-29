@@ -6,6 +6,7 @@ const CheckOutItem = props => {
     return (
         <section className="checkOutItem">
             <span>{props.name}</span>
+
             <span>{props.price}</span>
             <span>{props.itemSize}</span>
 

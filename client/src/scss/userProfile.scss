@@ -4,8 +4,8 @@
 .userProfileWrap {
     @include WL(max, 80%);
     min-height: 70%;
-    padding: 2em;
-    margin: 0.5em auto;
+    padding: 1em;
+    margin: 1em auto 0;
 
     h5 {
         margin-bottom: 2rem;
@@ -14,13 +14,12 @@
     .userContainer {
         @include display-flex(row, space-around, flex-start);
 
+        box-shadow: 3px 4px 11px -5px color(lighter-grey);
         .userProfileDetail {
             flex-basis: 60%;
-            min-height: 40vh;
             border-radius: 5px;
             position: relative;
             padding: 1rem;
-            box-shadow: 2px 3px 15px -7px color(lighter-grey);
 
             h6 {
                 text-align: left;
@@ -192,6 +191,7 @@
 
     .deliveryContainer {
         @include display-flex(row, space-around, flex-start);
+        box-shadow: 3px 4px 11px -5px color(lighter-grey);
         margin-top: 2rem;
 
         .deliveryInfoCard {
@@ -217,7 +217,6 @@
             border-radius: 5px;
             position: relative;
             padding: 1rem;
-            box-shadow: 2px 3px 15px -7px color(lighter-grey);
 
             h6 {
                 text-align: left;
@@ -296,5 +295,9 @@
                 @include button;
             }
         }
+    }
+    button {
+        @include button;
+        margin-top: 2rem;
     }
 }

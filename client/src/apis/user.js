@@ -8,10 +8,10 @@ export const updateUserProfile = (formData, config) => {
     return apiHelper.patch('/user/profile', formData, config)
 }
 
-export const getDefaultDeliveryInfo = formData => {
+export const getDeliveryInfo = formData => {
     return apiHelper.get('/user/customer', formData)
 }
 
 export const postDeliveryInfo = formData => {
-    return apiHelper.patch('/user/customer', formData)
+    return apiHelper.post('/user/customer', formData)
 }
