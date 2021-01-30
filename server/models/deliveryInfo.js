@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const customerSchema = new mongoose.Schema(
+const deliveryInfoSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +42,6 @@ const customerSchema = new mongoose.Schema(
     }
 )
 
-const Customer = mongoose.model('Customer', customerSchema)
+const DeliveryInfo = mongoose.model('DeliveryInfo', deliveryInfoSchema)
 
-module.exports = Customer
+module.exports = DeliveryInfo

@@ -11,23 +11,21 @@ export const getUserProfile = () => async dispatch => {
 
         dispatch({ type: actionTypes.GET_USER_PROFILE_SUCCESS, user })
     } catch (error) {
-        dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error })
+        dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error: error.message })
     }
 }
 
 export const updateUserProfile = (formData, config) => async dispatch => {
     try {
         const {
-            data: { user, status, error, message },
+            data: { user, status, error },
             statusText,
         } = await apis.updateUserProfile(formData, config)
 
         if (status !== 'success' || statusText !== 'OK') {
             if (error) {
-                console.log(1)
                 return dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error: error })
             }
-            return dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error: message })
         }
 
         dispatch({ type: actionTypes.GET_USER_PROFILE_SUCCESS, user })
@@ -38,26 +36,47 @@ export const updateUserProfile = (formData, config) => async dispatch => {
 
 export const getDeliveryInfo = () => async dispatch => {
     try {
-        const res = await apis.getDeliveryInfo()
-
         const {
-            data: { user },
-        } = res
+            data: { deliveryInfoList, message, status, error },
+            statusText,
+        } = await apis.getDeliveryInfo()
 
-        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_SUCCESS, user })
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                return dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error })
+            }
+            return dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: message })
+        }
+
+        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_SUCCESS, deliveryInfoList })
     } catch (error) {
-        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error })
+        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
 }
 
 export const postDeliveryInfo = formData => async dispatch => {
     try {
-        const customer = await apis.postDeliveryInfo(formData)
+        const {
+            data: { status, error },
+            statusText,
+        } = await apis.postDeliveryInfo(formData)
 
-        // const { data } = customer
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                return dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error })
+            }
+        }
 
-        console.log(customer)
+        dispatch(getDeliveryInfo())
     } catch (error) {
-        console.log(error.message)
+        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
+    }
+}
+
+export const deleteDeliveryInfo = DID => async dispatch => {
+    try {
+        await apis.deleteDeliveryInfo(DID)
+    } catch (error) {
+        // dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
 }

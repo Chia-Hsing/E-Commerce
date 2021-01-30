@@ -78,7 +78,7 @@ const auth = async (req, res, next) => {
 
         next()
     } catch (error) {
-        return res.json({ status: 'error', message: error.message })
+        res.status(401).send({ status: 'error', error: 'Please authenticate!' })
     }
 }
 

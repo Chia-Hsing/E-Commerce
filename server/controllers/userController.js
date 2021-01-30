@@ -1,5 +1,5 @@
 const sharp = require('sharp')
-const Customer = require('../models/customer')
+const DeliveryInfo = require('../models/deliveryInfo')
 
 const getUserProfile = (req, res) => {
     const user = req.user
@@ -38,24 +38,42 @@ const patchUserProfile = async (req, res) => {
     }
 }
 
-const getCustomer = (req, res) => {
-    return
+const getDeliveryInfo = async (req, res) => {
+    try {
+        const deliveryInfoList = await DeliveryInfo.find({ user: req.user._id })
+        if (!deliveryInfoList) {
+            return res.json({ status: 'error', message: 'Unable to recognize current user!' })
+        }
+        return res
+            .status(200)
+            .json({ status: 'success', deliveryInfoList, message: 'Success to get the delivery information list!' })
+    } catch (error) {
+        res.status(500).send(error)
+    }
 }
 
-const postCustomer = async (req, res) => {
+const postDeliveryInfo = async (req, res) => {
     try {
-        const customer = new Customer({ user: req.user._id, ...req.body })
-        await customer.save(error => {
+        const deliveryInfoList = new DeliveryInfo({ user: req.user._id, ...req.body })
+        await deliveryInfoList.save(error => {
             if (error) {
                 console.log(error)
             }
             return
         })
 
-        return res.json({ status: 'success', customer, message: 'Success to create delivery information!' })
+        return res
+            .status(200)
+            .json({ status: 'success', deliveryInfoList, message: 'Success to create delivery information!' })
     } catch (error) {
         res.status(500).send(error)
     }
+}
+
+const deleteDeliveryInfo = (req, res) => {
+    const DID = req.params.DID
+
+    console.log(DID)
 }
 
 // const getUserOrder = (req, res) => {
@@ -71,8 +89,9 @@ const postCustomer = async (req, res) => {
 module.exports = {
     getUserProfile,
     patchUserProfile,
-    getCustomer,
-    postCustomer,
+    getDeliveryInfo,
+    postDeliveryInfo,
+    deleteDeliveryInfo,
     // getUserOrder,
     // getUserCanceledOrder,
     // putUserOrderHistory,

@@ -106,10 +106,6 @@ class Delivery extends Component {
         },
     }
 
-    // async componentDidMount() {
-    //     await this.props.getDeliveryInfo()
-    // }
-
     inputChangeHandler = (e, controlName) => {
         const updatedControls = updateObj(this.state.controls, {
             [controlName]: updateObj(this.state.controls[controlName], {
@@ -138,6 +134,12 @@ class Delivery extends Component {
         this.props.onPostDeliveryInfo(formData)
     }
 
+    // deleteDeliveryInfoHandler = DID => {
+    //     console.log(DID)
+    //     window.confirm('Are you sure you wish to delete this address?')
+    //     this.onDeleteDeliveryInfo()
+    // }
+
     render() {
         let formElement = []
 
@@ -165,9 +167,16 @@ class Delivery extends Component {
             )
         })
 
+        const deliveryInfoCard = this.props.deliveryInfoList.map(info => {
+            return <DeliveryInfoCard key={info._id} list={info} />
+        })
+
         return (
             <section className="deliveryContainer">
-                <DeliveryInfoCard />
+                <div className="deliveryInfoCardContainer">
+                    <h6>address list</h6>
+                    {deliveryInfoCard}
+                </div>
                 <form onSubmit={this.submitHandler} className="deliveryInfoForm">
                     <h6>delivery info</h6>
                     {form}
@@ -181,6 +190,7 @@ class Delivery extends Component {
 const mapStateToProps = state => {
     return {
         userProfile: state.user.userProfile,
+        deliveryInfoList: state.user.deliveryInfoList,
     }
 }
 
@@ -188,6 +198,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
         onPostDeliveryInfo: formData => dispatch(actions.postDeliveryInfo(formData)),
+        onDeleteDeliveryInfo: DID => dispatch(actions.deleteDeliveryInfo(DID)),
     }
 }
 

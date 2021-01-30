@@ -8,10 +8,14 @@ export const updateUserProfile = (formData, config) => {
     return apiHelper.patch('/user/profile', formData, config)
 }
 
-export const getDeliveryInfo = formData => {
-    return apiHelper.get('/user/customer', formData)
+export const getDeliveryInfo = () => {
+    return apiHelper.get('/user/deliveryInfo')
 }
 
 export const postDeliveryInfo = formData => {
-    return apiHelper.post('/user/customer', formData)
+    return apiHelper.post('/user/deliveryInfo', formData)
+}
+
+export const deleteDeliveryInfo = DID => {
+    return apiHelper.delete(`/user/deliveryInfo/${DID}`)
 }

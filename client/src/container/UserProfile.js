@@ -7,7 +7,7 @@ import FileUploader from '../components/UI/FileUploader'
 import Delivery from './Delivery'
 import Input from '../components/UI/Input'
 import * as actions from '../store/actions/index'
-import { updateObj, checkValidity, arrayBufferToBase64Img } from '../utils/utilities'
+import { updateObj, checkValidity, arrayBufferToBase64Img, alert } from '../utils/utilities'
 import '../scss/userProfile.scss'
 
 class UserProfile extends Component {
@@ -46,6 +46,7 @@ class UserProfile extends Component {
 
     async componentDidMount() {
         await this.props.onGetUserProfile()
+        await this.props.onGetDeliveryInfo()
 
         const update = updateObj(this.state.controls, {
             name: { ...this.state.controls.name, val: this.props.userProfile.name || '' },
@@ -92,12 +93,34 @@ class UserProfile extends Component {
         this.setState({ avatarPreview: url })
     }
 
-    deliveryInfoHandler = () => {
+    showDeliveryInfoHandler = () => {
         this.props.history.replace('/user/profile/deliveryInfo')
         console.log(this.props.location)
     }
 
+    onAlertHandler = () => {
+        alert
+            .fire({
+                title: 'Oops...',
+                text: this.props.error,
+                icon: 'warning',
+                iconHtml: '!',
+                iconColor: '#2a2c30',
+                confirmButtonText: 'redirect to homepage',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    this.props.history.push('/')
+                }
+            })
+    }
+
     render() {
+        if (this.props.error) {
+            this.onAlertHandler()
+            this.props.history.push('/')
+        }
+
         let formElement = []
 
         for (let key in this.state.controls) {
@@ -164,7 +187,7 @@ class UserProfile extends Component {
                     </form>
                 </div>
                 {this.props.location.pathname === '/user/profile' ? (
-                    <button onClick={this.deliveryInfoHandler}>add delivery info</button>
+                    <button onClick={this.showDeliveryInfoHandler}>add delivery info</button>
                 ) : null}
                 <Route path={this.props.match.path + '/deliveryInfo'} component={Delivery} />
             </section>
@@ -182,6 +205,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
+        onGetDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
         onUpdateUserProfile: (formData, config) => dispatch(actions.updateUserProfile(formData, config)),
     }
 }

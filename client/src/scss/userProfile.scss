@@ -194,7 +194,8 @@
         box-shadow: 3px 4px 11px -5px color(lighter-grey);
         margin-top: 2rem;
 
-        .deliveryInfoCard {
+        .deliveryInfoCardContainer {
+            @include display-flex(column, space-around, flex-start);
             padding: 1rem;
             flex-basis: 30%;
             min-height: 30vh;
@@ -204,10 +205,52 @@
                 text-align: left;
             }
 
-            span {
-                display: inline-block;
-                width: 100%;
-                text-align: left;
+            .deliveryInfoCard {
+                @include WL(min, 100%);
+                // border: 1px solid color(lighter-grey);
+                // border-radius: 5px;
+                margin: 0.5rem 0;
+                padding: 0.5rem;
+
+                .deliveryInfoCardDetail {
+                    display: grid;
+                    justify-content: stretch;
+                    grid-template-rows: repeat(4, 1fr);
+
+                    .name {
+                        font-weight: weight(bold);
+                        color: color(heavy-grey);
+                    }
+
+                    .phone {
+                        color: color(lighter-grey);
+                    }
+
+                    .address,
+                    .city {
+                        color: color(light-grey);
+                    }
+
+                    span {
+                        display: inline-block;
+                        width: 100%;
+                        text-align: left;
+                    }
+                }
+                .operation {
+                    @include display-flex(row, space-between);
+                    @include WL(min, 20%);
+                    margin-top: 0.5rem;
+
+                    span {
+                        cursor: pointer;
+                        transition: 0.4s;
+
+                        &:hover {
+                            color: color(yellow);
+                        }
+                    }
+                }
             }
         }
 

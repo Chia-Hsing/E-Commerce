@@ -16,8 +16,9 @@ router.patch(
     userController.patchUserProfile
 )
 
-router.get('/customer', auth, userController.getCustomer)
-router.post('/customer', auth, validator.checkDeliveryInfo, validationMessage, userController.postCustomer)
+router.get('/deliveryInfo', auth, userController.getDeliveryInfo)
+router.post('/deliveryInfo', auth, validator.checkDeliveryInfo, validationMessage, userController.postDeliveryInfo)
+router.delete('/deliveryInfo/:DID', auth, userController.deleteDeliveryInfo)
 
 // router.get('/order', auth, userController.getUserOrder)
 // router.get('/canceledOrder', auth, userController.getUserCanceledOrder)
