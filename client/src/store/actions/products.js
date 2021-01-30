@@ -10,7 +10,7 @@ export const getProducts = (gender, category, pageItemsLimit, page) => async dis
         const res = await apis.getProducts(gender, category, pageItemsLimit, page)
 
         if (res.data.status !== 'success' || res.statusText !== 'OK') {
-            dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: res.data.message })
+            return dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: res.data.message })
         }
 
         const {
@@ -19,7 +19,7 @@ export const getProducts = (gender, category, pageItemsLimit, page) => async dis
 
         dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, productResponse })
     } catch (error) {
-        dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error })
+        dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: error.message })
     }
 }
 
@@ -32,7 +32,7 @@ export const getProduct = PID => async dispatch => {
         const res = await apis.getProduct(PID)
 
         if (res.data.status !== 'success' || res.statusText !== 'OK') {
-            dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: res.data.message })
+            return dispatch({ type: actionTypes.GET_PRODUCTS_FAILED, error: res.data.message })
         }
 
         const {
@@ -52,6 +52,6 @@ export const getProduct = PID => async dispatch => {
 
         dispatch({ type: actionTypes.GET_PRODUCT_SUCCESS, product })
     } catch (error) {
-        dispatch({ type: actionTypes.GET_PRODUCT_FAILED, error })
+        dispatch({ type: actionTypes.GET_PRODUCT_FAILED, error: error.message })
     }
 }

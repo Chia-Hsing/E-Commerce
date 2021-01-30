@@ -29,7 +29,7 @@ export const setBagItems = () => async dispatch => {
             type: actionTypes.INIT_BAG_ITEMS,
         })
     } catch (error) {
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: error.message })
     }
 }
 
@@ -41,8 +41,17 @@ export const addItemToBag = (PID, UID, itemStock, itemSize) => async dispatch =>
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
         const {
-            data: { token },
+            data: { token, status, message, error },
+            statusText,
         } = await bagApis.addItemToBag(PID, itemStock, itemSize, oldToken || {})
+
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                // express validation results Object
+                return dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: error })
+            }
+            return dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: message })
+        }
 
         const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
@@ -53,7 +62,7 @@ export const addItemToBag = (PID, UID, itemStock, itemSize) => async dispatch =>
 
         dispatch({ type: actionTypes.SET_BAG_ITEMS_SUCCESS, bagItems, totalQuantity, totalAmount })
     } catch (error) {
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: error.message })
     }
 }
 
@@ -65,8 +74,16 @@ export const deleteItemFromBag = (PID, UID, itemSize) => async dispatch => {
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
         const {
-            data: { token },
+            data: { token, status, error },
+            statusText,
         } = await bagApis.deleteItemFromBag(PID, itemSize, oldToken || {})
+
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                // express validation results Object
+                return dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: error })
+            }
+        }
 
         const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))
@@ -82,7 +99,7 @@ export const deleteItemFromBag = (PID, UID, itemSize) => async dispatch => {
             dispatch({ type: actionTypes.INIT_PURCHASING })
         }
     } catch (error) {
-        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error })
+        dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: error.message })
     }
 }
 
@@ -94,8 +111,16 @@ export const removeWholeItem = (PID, UID, itemSize) => async dispatch => {
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
         const {
-            data: { token },
+            data: { token, status, error },
+            statusText,
         } = await bagApis.removeWholeItem(PID, itemSize, oldToken || {})
+
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                // express validation results Object
+                return dispatch({ type: actionTypes.SET_BAG_ITEMS_FAILED, error: error })
+            }
+        }
 
         const tokenLS = { token }
         localStorage.setItem('bagToken', JSON.stringify(tokenLS))

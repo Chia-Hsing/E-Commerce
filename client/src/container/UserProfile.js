@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, Route, withRouter } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
 import FileUploader from '../components/UI/FileUploader'
@@ -68,6 +68,7 @@ class UserProfile extends Component {
     }
 
     submitHandler = e => {
+        e.preventDefault()
         const target = e.target
 
         var formData = new FormData(target)
@@ -153,6 +154,7 @@ class UserProfile extends Component {
             <section className="userProfileWrap">
                 <h5>ACCOUNT DASHBOARD</h5>
                 <div className="userContainer">
+                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
                     {userProfileCard}
                     <form onSubmit={this.submitHandler} className="userProfileDetail">
                         <h6>user info</h6>
@@ -172,6 +174,7 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => {
     return {
+        error: state.user.error,
         userProfile: state.user.userProfile,
     }
 }

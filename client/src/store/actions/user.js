@@ -18,12 +18,21 @@ export const getUserProfile = () => async dispatch => {
 export const updateUserProfile = (formData, config) => async dispatch => {
     try {
         const {
-            data: { user },
+            data: { user, status, error, message },
+            statusText,
         } = await apis.updateUserProfile(formData, config)
+
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                console.log(1)
+                return dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error: error })
+            }
+            return dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error: message })
+        }
 
         dispatch({ type: actionTypes.GET_USER_PROFILE_SUCCESS, user })
     } catch (error) {
-        dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error })
+        dispatch({ type: actionTypes.GET_USER_PROFILE_FAILED, error: error.message })
     }
 }
 

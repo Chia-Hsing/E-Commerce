@@ -4,12 +4,13 @@ const Customer = require('../models/customer')
 const getUserProfile = (req, res) => {
     const user = req.user
 
-    return res.status(200).json({ status: 'success', user, message: 'get user profile success!' })
+    return res.status(200).json({ status: 'success', user, message: 'Success to get user profile.!' })
 }
 
 const patchUserProfile = async (req, res) => {
     try {
         const updates = Object.keys(req.body)
+
         updates.forEach(update => (req.user[update] = req.body[update]))
 
         if (!req.file) {
@@ -31,9 +32,9 @@ const patchUserProfile = async (req, res) => {
             })
         }
 
-        return res.status(200).json({ status: 'success', user: req.user, message: 'patch user profile success!' })
+        return res.status(200).json({ status: 'success', user: req.user, message: 'Success to update user profile!' })
     } catch (error) {
-        res.status(500).send()
+        res.status(500).send(error)
     }
 }
 
@@ -51,9 +52,9 @@ const postCustomer = async (req, res) => {
             return
         })
 
-        return res.json({ status: 'success', customer, message: 'create delivery information success!' })
+        return res.json({ status: 'success', customer, message: 'Success to create delivery information!' })
     } catch (error) {
-        return res.send(error)
+        res.status(500).send(error)
     }
 }
 

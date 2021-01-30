@@ -26,7 +26,7 @@ const validator = {
     ],
     bagOperation: [param('id').isMongoId().withMessage('Invalid id')],
     signupAuthenticate: [
-        body('name').trim().notEmpty().isLength({ min: 1, max: 50 }).withMessage('Invalid user name.'),
+        body('name').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid user name.'),
         body('email').trim().isEmail().withMessage('Invalid email address!'),
         body('password').custom(value => {
             const regex = /^\S{8,12}$/
@@ -55,6 +55,10 @@ const validator = {
             // if pass the validation, must return true
             return true
         }),
+    ],
+    checkUserProfileUpdate: [
+        body('name').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid name!'),
+        body('email').trim().isEmail().withMessage('Invalid email address!'),
     ],
     checkDeliveryInfo: [
         body('firstName').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid first name!'),

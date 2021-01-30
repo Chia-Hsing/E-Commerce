@@ -7,11 +7,11 @@ const initialState = {
 }
 
 const getUserProfileSuccess = (state, action) => {
-    return updateObj(state, { userProfile: action.user })
+    return updateObj(state, { userProfile: action.user, error: null })
 }
 
 const getUserProfileFailed = (state, action) => {
-    return updateObj(state, { user: {}, error: action.error.message })
+    return updateObj(state, { user: {}, error: action.error })
 }
 
 const reducer = (state = initialState, action) => {

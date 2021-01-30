@@ -6,7 +6,15 @@ const getProducts = async (req, res) => {
         const { gender, category, pageItemsLimit, page } = req.query
         let productResponse = {}
 
-        // while there's neither category nor gender search query.
+        // when there is neither category nor gender search query.
+        if (!category || !gender) {
+            return res.json({
+                status: 'error',
+                message: 'Request rejected - invalid search condition!',
+            })
+        }
+
+        // when there is neither the value of category nor the value of gender search query.
         if (category === 'null' && gender === 'null') {
             return res.json({
                 status: 'error',

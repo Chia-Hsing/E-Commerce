@@ -23,6 +23,7 @@ const Input = props => {
                         {...props.config}
                         onChange={props.inputChange}
                     />
+
                     <label className="labelName">
                         {props.error && <span className="errorMSG">{props.error[props.label]}</span>}
                         <span className="contentName">{props.label}</span>
