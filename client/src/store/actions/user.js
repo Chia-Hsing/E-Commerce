@@ -76,7 +76,8 @@ export const postDeliveryInfo = formData => async dispatch => {
 export const deleteDeliveryInfo = DID => async dispatch => {
     try {
         await apis.deleteDeliveryInfo(DID)
+        dispatch(getDeliveryInfo())
     } catch (error) {
-        // dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
+        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
 }

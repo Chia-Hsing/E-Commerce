@@ -116,7 +116,7 @@ class UserProfile extends Component {
     }
 
     render() {
-        if (this.props.error) {
+        if (typeof this.props.error === 'string') {
             this.onAlertHandler()
             this.props.history.push('/')
         }
@@ -177,7 +177,6 @@ class UserProfile extends Component {
             <section className="userProfileWrap">
                 <h5>ACCOUNT DASHBOARD</h5>
                 <div className="userContainer">
-                    {typeof this.props.error === 'string' && <h5 className="errorMSG">{this.props.error}</h5>}
                     {userProfileCard}
                     <form onSubmit={this.submitHandler} className="userProfileDetail">
                         <h6>user info</h6>

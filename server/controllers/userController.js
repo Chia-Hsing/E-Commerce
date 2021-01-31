@@ -70,10 +70,16 @@ const postDeliveryInfo = async (req, res) => {
     }
 }
 
-const deleteDeliveryInfo = (req, res) => {
+const deleteDeliveryInfo = async (req, res) => {
     const DID = req.params.DID
 
-    console.log(DID)
+    try {
+        await DeliveryInfo.deleteOne({ _id: DID })
+
+        res.status(200).json({ status: 'success', message: 'Delete delivery information success!' })
+    } catch (error) {
+        res.status(500).send(error)
+    }
 }
 
 // const getUserOrder = (req, res) => {

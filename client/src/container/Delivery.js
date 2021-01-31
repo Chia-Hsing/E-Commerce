@@ -134,11 +134,11 @@ class Delivery extends Component {
         this.props.onPostDeliveryInfo(formData)
     }
 
-    // deleteDeliveryInfoHandler = DID => {
-    //     console.log(DID)
-    //     window.confirm('Are you sure you wish to delete this address?')
-    //     this.onDeleteDeliveryInfo()
-    // }
+    deleteDeliveryInfoHandler = DID => {
+        if (window.confirm('Are you sure you wish to delete this address?')) {
+            this.props.onDeleteDeliveryInfo(DID)
+        }
+    }
 
     render() {
         let formElement = []
@@ -167,15 +167,26 @@ class Delivery extends Component {
             )
         })
 
-        const deliveryInfoCard = this.props.deliveryInfoList.map(info => {
-            return <DeliveryInfoCard key={info._id} list={info} />
-        })
+        let deliveryInfoCard = <span>No addresses currently saved</span>
+
+        if (this.props.deliveryInfoList.length > 0) {
+            deliveryInfoCard = this.props.deliveryInfoList.map(info => {
+                return (
+                    <DeliveryInfoCard
+                        key={info._id}
+                        DID={info._id}
+                        list={info}
+                        delete={this.deleteDeliveryInfoHandler}
+                    />
+                )
+            })
+        }
 
         return (
             <section className="deliveryContainer">
                 <div className="deliveryInfoCardContainer">
                     <h6>address list</h6>
-                    {deliveryInfoCard}
+                    <div className="deliveryInfoCard">{deliveryInfoCard}</div>
                 </div>
                 <form onSubmit={this.submitHandler} className="deliveryInfoForm">
                     <h6>delivery info</h6>
@@ -191,6 +202,7 @@ const mapStateToProps = state => {
     return {
         userProfile: state.user.userProfile,
         deliveryInfoList: state.user.deliveryInfoList,
+        error: state.user.error,
     }
 }
 

@@ -21,7 +21,7 @@ const getDeliveryInfoSuccess = (state, action) => {
 }
 
 const getDeliveryInfoFailed = (state, action) => {
-    return updateObj(state, { deliveryInfoList: [], error: action.error })
+    return updateObj(state, { error: action.error })
 }
 
 const reducer = (state = initialState, action) => {
