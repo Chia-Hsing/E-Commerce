@@ -81,3 +81,13 @@ export const deleteDeliveryInfo = DID => async dispatch => {
         dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
 }
+
+export const updateDeliveryInfo = (DID, formData) => async dispatch => {
+    try {
+        await apis.updateDeliveryInfo(DID, formData)
+
+        dispatch(getDeliveryInfo())
+    } catch (error) {
+        dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
+    }
+}

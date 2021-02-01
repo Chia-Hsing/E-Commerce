@@ -19,6 +19,13 @@ router.patch(
 router.get('/deliveryInfo', auth, userController.getDeliveryInfo)
 router.post('/deliveryInfo', auth, validator.checkDeliveryInfo, validationMessage, userController.postDeliveryInfo)
 router.delete('/deliveryInfo/:DID', auth, userController.deleteDeliveryInfo)
+router.patch(
+    '/deliveryInfo/:DID',
+    auth,
+    validator.checkDeliveryInfo,
+    validationMessage,
+    userController.updateDeliveryInfo
+)
 
 // router.get('/order', auth, userController.getUserOrder)
 // router.get('/canceledOrder', auth, userController.getUserCanceledOrder)

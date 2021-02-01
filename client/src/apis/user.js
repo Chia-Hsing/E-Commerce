@@ -19,3 +19,7 @@ export const postDeliveryInfo = formData => {
 export const deleteDeliveryInfo = DID => {
     return apiHelper.delete(`/user/deliveryInfo/${DID}`)
 }
+
+export const updateDeliveryInfo = (DID, formData) => {
+    return apiHelper.patch(`/user/deliveryInfo/${DID}`, formData)
+}

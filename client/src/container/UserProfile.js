@@ -48,12 +48,12 @@ class UserProfile extends Component {
         await this.props.onGetUserProfile()
         await this.props.onGetDeliveryInfo()
 
-        const update = updateObj(this.state.controls, {
+        const updatedControls = updateObj(this.state.controls, {
             name: { ...this.state.controls.name, val: this.props.userProfile.name || '' },
             email: { ...this.state.controls.email, val: this.props.userProfile.email || '' },
         })
 
-        this.setState({ controls: update })
+        this.setState({ controls: updatedControls })
     }
 
     inputChangeHandler = (e, controlName) => {
@@ -95,7 +95,6 @@ class UserProfile extends Component {
 
     showDeliveryInfoHandler = () => {
         this.props.history.replace('/user/profile/deliveryInfo')
-        console.log(this.props.location)
     }
 
     onAlertHandler = () => {

@@ -104,6 +104,10 @@ class Delivery extends Component {
                 touched: false,
             },
         },
+        submitStatus: {
+            addNewDeliveryInfo: true,
+            deliveryInfoId: '',
+        },
     }
 
     inputChangeHandler = (e, controlName) => {
@@ -115,10 +119,10 @@ class Delivery extends Component {
             }),
         })
 
-        this.setState({ controls: updatedControls })
+        this.setState({ ...this.state, controls: updatedControls })
     }
 
-    submitHandler = e => {
+    submitHandler = async e => {
         e.preventDefault()
 
         const firstName = this.state.controls.firstName.val
@@ -131,12 +135,72 @@ class Delivery extends Component {
 
         const formData = { firstName, lastName, phone, address, district, city, postalCode }
 
-        this.props.onPostDeliveryInfo(formData)
+        this.state.submitStatus.addNewDeliveryInfo === true
+            ? await this.props.onPostDeliveryInfo(formData)
+            : await this.props.onUpdateDeliveryInfo(this.state.submitStatus.deliveryInfoId, formData)
+
+        let updatedControls = updateObj(this.state.controls, {
+            firstName: updateObj(this.state.controls[firstName], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[firstName], { placeholder: ' ' }),
+            }),
+            lastName: updateObj(this.state.controls[lastName], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[lastName], { placeholder: ' ' }),
+            }),
+            phone: updateObj(this.state.controls[phone], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[phone], { placeholder: ' ' }),
+            }),
+            address: updateObj(this.state.controls[address], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[address], { placeholder: ' ' }),
+            }),
+            district: updateObj(this.state.controls[district], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[district], { placeholder: ' ' }),
+            }),
+            city: updateObj(this.state.controls[city], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[city], { placeholder: ' ' }),
+            }),
+            postalCode: updateObj(this.state.controls[postalCode], {
+                val: '',
+                eleConfig: updateObj(this.state.controls[postalCode], { placeholder: ' ' }),
+            }),
+        })
+
+        this.setState({
+            controls: updatedControls,
+            submitStatus: { ...this.state.submitStatus, addNewDeliveryInfo: true, deliveryInfoId: '' },
+        })
     }
 
     deleteDeliveryInfoHandler = DID => {
         if (window.confirm('Are you sure you wish to delete this address?')) {
             this.props.onDeleteDeliveryInfo(DID)
+        }
+    }
+
+    updateDeliveryInfoHandler = DID => {
+        if (window.confirm('Are you sure you wish to update this address?')) {
+            const updatedDeliveryInfo = this.props.deliveryInfoList.find(info => {
+                return info._id === DID
+            })
+            const updatedControls = updateObj(this.state.controls, {
+                firstName: { ...this.state.controls.firstName, val: updatedDeliveryInfo.firstName },
+                lastName: { ...this.state.controls.lastName, val: updatedDeliveryInfo.lastName },
+                phone: { ...this.state.controls.phone, val: updatedDeliveryInfo.phone },
+                address: { ...this.state.controls.address, val: updatedDeliveryInfo.address },
+                district: { ...this.state.controls.district, val: updatedDeliveryInfo.district },
+                city: { ...this.state.controls.city, val: updatedDeliveryInfo.city },
+                postalCode: { ...this.state.controls.postalCode, val: updatedDeliveryInfo.postalCode },
+            })
+
+            this.setState({
+                controls: updatedControls,
+                submitStatus: { ...this.state.submitStatus, addNewDeliveryInfo: false, deliveryInfoId: DID },
+            })
         }
     }
 
@@ -177,6 +241,7 @@ class Delivery extends Component {
                         DID={info._id}
                         list={info}
                         delete={this.deleteDeliveryInfoHandler}
+                        update={this.updateDeliveryInfoHandler}
                     />
                 )
             })
@@ -211,6 +276,7 @@ const mapDispatchToProps = dispatch => {
         getDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
         onPostDeliveryInfo: formData => dispatch(actions.postDeliveryInfo(formData)),
         onDeleteDeliveryInfo: DID => dispatch(actions.deleteDeliveryInfo(DID)),
+        onUpdateDeliveryInfo: (DID, formData) => dispatch(actions.updateDeliveryInfo(DID, formData)),
     }
 }
 

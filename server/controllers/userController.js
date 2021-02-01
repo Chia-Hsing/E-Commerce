@@ -82,6 +82,21 @@ const deleteDeliveryInfo = async (req, res) => {
     }
 }
 
+const updateDeliveryInfo = async (req, res) => {
+    const DID = req.params.DID
+
+    try {
+        await DeliveryInfo.findOneAndUpdate({ _id: DID }, { ...req.body }, { new: true })
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Update delivery information success!',
+        })
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 // const getUserOrder = (req, res) => {
 //     return
 // }
@@ -98,6 +113,7 @@ module.exports = {
     getDeliveryInfo,
     postDeliveryInfo,
     deleteDeliveryInfo,
+    updateDeliveryInfo,
     // getUserOrder,
     // getUserCanceledOrder,
     // putUserOrderHistory,

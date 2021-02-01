@@ -7,6 +7,10 @@ const DeliveryInfoCard = props => {
         props.delete(props.DID)
     }
 
+    const updateDeliveryItem = () => {
+        props.update(props.DID)
+    }
+
     return (
         <div className="deliveryInfoCardDetailWrap">
             <div className="deliveryInfoCardDetail">
@@ -23,7 +27,7 @@ const DeliveryInfoCard = props => {
             </div>
             <div className="operation">
                 <span onClick={deleteDeliveryItem}>{icons.close()}</span>
-                <span>{icons.edit()}</span>
+                <span onClick={updateDeliveryItem}>{icons.edit()}</span>
             </div>
         </div>
     )
