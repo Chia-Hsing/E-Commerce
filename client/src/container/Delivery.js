@@ -5,6 +5,7 @@ import Input from '../components/UI/Input'
 import DeliveryInfoCard from '../components/User/DeliveryInfoCard'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity } from '../utils/utilities'
+import { icons } from '../utils/icons'
 import '../scss/userProfile.scss'
 
 class Delivery extends Component {
@@ -139,34 +140,38 @@ class Delivery extends Component {
             ? await this.props.onPostDeliveryInfo(formData)
             : await this.props.onUpdateDeliveryInfo(this.state.submitStatus.deliveryInfoId, formData)
 
+        this.initFormHandler()
+    }
+
+    initFormHandler = e => {
         let updatedControls = updateObj(this.state.controls, {
-            firstName: updateObj(this.state.controls[firstName], {
+            firstName: updateObj(this.state.controls.firstName, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[firstName], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.firstName.eleConfig, { placeholder: ' ' }),
             }),
-            lastName: updateObj(this.state.controls[lastName], {
+            lastName: updateObj(this.state.controls.lastName, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[lastName], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.lastName.eleConfig, { placeholder: ' ' }),
             }),
-            phone: updateObj(this.state.controls[phone], {
+            phone: updateObj(this.state.controls.phone, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[phone], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.phone.eleConfig, { placeholder: ' ' }),
             }),
-            address: updateObj(this.state.controls[address], {
+            address: updateObj(this.state.controls.address, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[address], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.address.eleConfig, { placeholder: ' ' }),
             }),
-            district: updateObj(this.state.controls[district], {
+            district: updateObj(this.state.controls.district, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[district], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.district.eleConfig, { placeholder: ' ' }),
             }),
-            city: updateObj(this.state.controls[city], {
+            city: updateObj(this.state.controls.city, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[city], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.city.eleConfig, { placeholder: ' ' }),
             }),
-            postalCode: updateObj(this.state.controls[postalCode], {
+            postalCode: updateObj(this.state.controls.postalCode, {
                 val: '',
-                eleConfig: updateObj(this.state.controls[postalCode], { placeholder: ' ' }),
+                eleConfig: updateObj(this.state.controls.postalCode.eleConfig, { placeholder: ' ' }),
             }),
         })
 
@@ -180,13 +185,18 @@ class Delivery extends Component {
         if (window.confirm('Are you sure you wish to delete this address?')) {
             this.props.onDeleteDeliveryInfo(DID)
         }
+
+        this.initFormHandler()
     }
 
-    updateDeliveryInfoHandler = DID => {
+    getUpdateDeliveryInfoHandler = DID => {
         if (window.confirm('Are you sure you wish to update this address?')) {
             const updatedDeliveryInfo = this.props.deliveryInfoList.find(info => {
                 return info._id === DID
             })
+
+            this.props.onInitDeliveryInfoError()
+
             const updatedControls = updateObj(this.state.controls, {
                 firstName: { ...this.state.controls.firstName, val: updatedDeliveryInfo.firstName },
                 lastName: { ...this.state.controls.lastName, val: updatedDeliveryInfo.lastName },
@@ -202,6 +212,10 @@ class Delivery extends Component {
                 submitStatus: { ...this.state.submitStatus, addNewDeliveryInfo: false, deliveryInfoId: DID },
             })
         }
+    }
+
+    closeDeliveryInfoSection = () => {
+        this.props.history.replace('/user/profile')
     }
 
     render() {
@@ -241,7 +255,7 @@ class Delivery extends Component {
                         DID={info._id}
                         list={info}
                         delete={this.deleteDeliveryInfoHandler}
-                        update={this.updateDeliveryInfoHandler}
+                        update={this.getUpdateDeliveryInfoHandler}
                     />
                 )
             })
@@ -256,8 +270,11 @@ class Delivery extends Component {
                 <form onSubmit={this.submitHandler} className="deliveryInfoForm">
                     <h6>delivery info</h6>
                     {form}
-                    <button>create</button>
+                    <button>{this.state.submitStatus.addNewDeliveryInfo ? 'create new one' : 'update'}</button>
                 </form>
+                <div className="deliveryInfoSectionClose" onClick={this.closeDeliveryInfoSection}>
+                    {icons.close()}
+                </div>
             </section>
         )
     }
@@ -268,6 +285,7 @@ const mapStateToProps = state => {
         userProfile: state.user.userProfile,
         deliveryInfoList: state.user.deliveryInfoList,
         error: state.user.error,
+        initFrom: state.user.initFrom,
     }
 }
 
@@ -277,6 +295,7 @@ const mapDispatchToProps = dispatch => {
         onPostDeliveryInfo: formData => dispatch(actions.postDeliveryInfo(formData)),
         onDeleteDeliveryInfo: DID => dispatch(actions.deleteDeliveryInfo(DID)),
         onUpdateDeliveryInfo: (DID, formData) => dispatch(actions.updateDeliveryInfo(DID, formData)),
+        onInitDeliveryInfoError: () => dispatch(actions.initDeliveryInfoError()),
     }
 }
 

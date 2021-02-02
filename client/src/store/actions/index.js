@@ -5,6 +5,7 @@ export { signup, login, initErrorAuth, authCheckState, setAuthRedirectPath, logo
 export {
     getUserProfile,
     updateUserProfile,
+    initDeliveryInfoError,
     getDeliveryInfo,
     postDeliveryInfo,
     deleteDeliveryInfo,

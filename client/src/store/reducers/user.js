@@ -15,6 +15,10 @@ const getUserProfileFailed = (state, action) => {
     return updateObj(state, { user: {}, error: action.error })
 }
 
+const initDeliveryInfoError = (state, action) => {
+    return updateObj(state, { error: null })
+}
+
 const getDeliveryInfoSuccess = (state, action) => {
     const deliveryInfoListArr = [...action.deliveryInfoList]
     return updateObj(state, { deliveryInfoList: deliveryInfoListArr, error: null })
@@ -30,6 +34,8 @@ const reducer = (state = initialState, action) => {
             return getUserProfileSuccess(state, action)
         case actionTypes.GET_USER_PROFILE_FAILED:
             return getUserProfileFailed(state, action)
+        case actionTypes.INIT_DELIVERY_INFO_ERROR:
+            return initDeliveryInfoError(state, action)
         case actionTypes.GET_USER_DELIVERY_INFO_SUCCESS:
             return getDeliveryInfoSuccess(state, action)
         case actionTypes.GET_USER_DELIVERY_INFO_FAILED:

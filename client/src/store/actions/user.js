@@ -34,7 +34,12 @@ export const updateUserProfile = (formData, config) => async dispatch => {
     }
 }
 
+export const initDeliveryInfoError = () => dispatch => {
+    dispatch({ type: actionTypes.INIT_DELIVERY_INFO_ERROR })
+}
+
 export const getDeliveryInfo = () => async dispatch => {
+    dispatch(initDeliveryInfoError())
     try {
         const {
             data: { deliveryInfoList, message, status, error },
@@ -76,6 +81,7 @@ export const postDeliveryInfo = formData => async dispatch => {
 export const deleteDeliveryInfo = DID => async dispatch => {
     try {
         await apis.deleteDeliveryInfo(DID)
+
         dispatch(getDeliveryInfo())
     } catch (error) {
         dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
@@ -83,8 +89,18 @@ export const deleteDeliveryInfo = DID => async dispatch => {
 }
 
 export const updateDeliveryInfo = (DID, formData) => async dispatch => {
+    dispatch(initDeliveryInfoError())
     try {
-        await apis.updateDeliveryInfo(DID, formData)
+        const {
+            data: { status, error },
+            statusText,
+        } = await apis.updateDeliveryInfo(DID, formData)
+
+        if (status !== 'success' || statusText !== 'OK') {
+            if (error) {
+                return dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error })
+            }
+        }
 
         dispatch(getDeliveryInfo())
     } catch (error) {
