@@ -9,6 +9,7 @@ const CheckoutSummary = props => {
                 key={Math.random()}
                 name={product.item.name}
                 price={product.item.price}
+                quantity={product.item.quantity}
                 id={product.item._id}
                 itemSize={product.itemSize}
                 quantity={product.quantity}

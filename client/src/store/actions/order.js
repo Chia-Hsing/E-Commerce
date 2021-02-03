@@ -5,7 +5,12 @@ export const postOrder = id => async dispatch => {
     try {
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
-        await apis.postOrder(id, oldToken || {})
-        dispatch({ type: actionTypes.POST_ORDER_SUCCESS })
-    } catch (error) {}
+        const {
+            data: { order },
+        } = await apis.postOrder(id, oldToken || {})
+
+        dispatch({ type: actionTypes.POST_ORDER_SUCCESS, order })
+    } catch (error) {
+        dispatch({ type: actionTypes.POST_ORDER_FAILED, error: error.message })
+    }
 }

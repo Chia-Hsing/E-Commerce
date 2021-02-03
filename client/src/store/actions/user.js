@@ -39,7 +39,6 @@ export const initDeliveryInfoError = () => dispatch => {
 }
 
 export const getDeliveryInfo = () => async dispatch => {
-    dispatch(initDeliveryInfoError())
     try {
         const {
             data: { deliveryInfoList, message, status, error },

@@ -1,16 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { icons } from '../../utils/icons'
 
 const CheckOutItem = props => {
     return (
-        <section className="checkOutItem">
+        <div className="checkOutItem">
             <span>{props.name}</span>
             <span>{props.price}</span>
             <span>{props.itemSize}</span>
-
-            <div>
-                <span className="editItems"></span>
-            </div>
-        </section>
+            <span>{props.quantity}</span>
+            <Link to="/shopping-bag">
+                <span className="editItem">{icons.edit()}</span>
+            </Link>
+        </div>
     )
 }
 

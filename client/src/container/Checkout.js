@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import CheckoutInfo from '../components/Order/CheckoutInfo'
+import CheckoutSummary from '../components/Order/CheckoutSummary'
+import '../scss/checkout.scss'
 
 class Checkout extends Component {
     componentDidMount() {}
 
     render() {
         return (
-            <section>
+            <section className="checkoutItems">
                 {!this.props.isAuthenticated && <Redirect to="/auth/login" />}
-                <CheckoutInfo />
+                <CheckoutSummary bagItems={this.props.bagItems} />
             </section>
         )
     }
@@ -20,6 +21,7 @@ class Checkout extends Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.token !== null,
+        bagItems: state.bag.bagItems,
     }
 }
 

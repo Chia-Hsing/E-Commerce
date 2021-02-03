@@ -4,6 +4,7 @@ import products from './products'
 import bag from './bag'
 import auth from './auth'
 import user from './user'
+import order from './order'
 
 const rootReducer = combineReducers({
     mainMaterials,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     bag,
     auth,
     user,
+    order,
 })
 
 export default rootReducer

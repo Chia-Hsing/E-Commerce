@@ -1,0 +1,24 @@
+@import 'mixins';
+@import 'variables';
+
+.checkoutItems {
+    @include WL(max, 80vw, 20vh);
+    border: 1px solid #000;
+    min-height: 30vh;
+    margin: 2em auto;
+
+    .checkOutItem {
+        @include WL(max, 100%);
+        display: grid;
+        grid-template-columns: 40% 20% 15% 15% 10%;
+        margin: 1rem 0;
+
+        .editItem {
+            color: color(light-grey);
+            transition: 0.4s;
+            &:hover {
+                color: color(yellow);
+            }
+        }
+    }
+}

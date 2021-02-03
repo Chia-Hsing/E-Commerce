@@ -17,6 +17,7 @@ const postOrder = async (req, res) => {
             totalQuantity: req.bag.items.totalQuantity,
         })
 
+        console.log(order)
         await order.save(error => {
             if (error) {
                 console.log(error)
@@ -24,7 +25,7 @@ const postOrder = async (req, res) => {
             }
         })
 
-        return res.status(200).json({ status: 'success', product, message: 'Creating order success.' })
+        return res.status(200).json({ status: 'success', order, message: 'Create order success.' })
     } catch (error) {
         res.status(500).send(error)
     }

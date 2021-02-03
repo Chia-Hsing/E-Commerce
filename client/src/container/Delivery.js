@@ -216,6 +216,7 @@ class Delivery extends Component {
 
     closeDeliveryInfoSection = () => {
         this.props.history.replace('/user/profile')
+        this.props.onInitDeliveryInfoError()
     }
 
     render() {
