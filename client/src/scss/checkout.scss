@@ -2,15 +2,23 @@
 @import 'variables';
 
 .checkoutItems {
-    @include WL(max, 80vw, 20vh);
-    border: 1px solid #000;
+    @include WL(max, 80vw);
+    min-height: 20%;
+    border-bottom: 1px solid color(light-grey);
     min-height: 30vh;
     margin: 2em auto;
 
-    .checkOutItem {
+    .checkOutHeader {
+        span {
+            font-weight: weight(bold);
+        }
+    }
+
+    .checkOutItem,
+    .checkOutHeader {
         @include WL(max, 100%);
         display: grid;
-        grid-template-columns: 40% 20% 15% 15% 10%;
+        grid-template-columns: 40% 15% 15% 15% 15%;
         margin: 1rem 0;
 
         .editItem {

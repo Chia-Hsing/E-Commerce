@@ -7,8 +7,8 @@ const CheckOutItem = props => {
     return (
         <div className="checkOutItem">
             <span>{props.name}</span>
-            <span>{props.price}</span>
             <span>{props.itemSize}</span>
+            <span>{props.price}</span>
             <span>{props.quantity}</span>
             <Link to="/shopping-bag">
                 <span className="editItem">{icons.edit()}</span>

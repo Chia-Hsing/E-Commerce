@@ -8,12 +8,26 @@ import '../scss/checkout.scss'
 class Checkout extends Component {
     componentDidMount() {}
 
+    itemsTotal = items => {
+        const totalPrice = items
+            .map(product => {
+                return parseInt(product.item.price.replace('￥', '').split(',').join(''))
+            })
+            .reduce((sum, el) => {
+                return sum + el
+            }, 0)
+        return totalPrice
+    }
+
     render() {
         return (
-            <section className="checkoutItems">
-                {!this.props.isAuthenticated && <Redirect to="/auth/login" />}
-                <CheckoutSummary bagItems={this.props.bagItems} />
-            </section>
+            <>
+                <section className="checkoutItems">
+                    {!this.props.isAuthenticated && <Redirect to="/auth/login" />}
+                    <CheckoutSummary bagItems={this.props.bagItems} />
+                </section>
+                <div className="itemsTotal">ITEMS TOTAL: ￥{this.itemsTotal(this.props.bagItems)}</div>
+            </>
         )
     }
 }

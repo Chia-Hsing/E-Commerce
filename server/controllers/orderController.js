@@ -17,7 +17,6 @@ const postOrder = async (req, res) => {
             totalQuantity: req.bag.items.totalQuantity,
         })
 
-        console.log(order)
         await order.save(error => {
             if (error) {
                 console.log(error)

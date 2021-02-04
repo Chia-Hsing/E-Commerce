@@ -17,7 +17,18 @@ const CheckoutSummary = props => {
         )
     })
 
-    return <div>{checkoutItems}</div>
+    return (
+        <>
+            <div className="checkOutHeader">
+                <span>order summary</span>
+                <span>size</span>
+                <span>price</span>
+                <span>quantity</span>
+                <span>edit</span>
+            </div>
+            {checkoutItems}
+        </>
+    )
 }
 
 export default CheckoutSummary
