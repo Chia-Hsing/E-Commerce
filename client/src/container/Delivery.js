@@ -6,7 +6,6 @@ import DeliveryInfoCard from '../components/User/DeliveryInfoCard'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity } from '../utils/utilities'
 import { icons } from '../utils/icons'
-import '../scss/userProfile.scss'
 
 class Delivery extends Component {
     state = {
@@ -214,6 +213,10 @@ class Delivery extends Component {
         }
     }
 
+    cancelUpdateHandler = () => {
+        this.initFormHandler()
+    }
+
     closeDeliveryInfoSection = () => {
         this.props.history.replace('/user/profile')
         this.props.onInitDeliveryInfoError()
@@ -263,7 +266,7 @@ class Delivery extends Component {
         }
 
         return (
-            <section className="deliveryContainer">
+            <div className="deliveryContainer">
                 <div className="deliveryInfoCardContainer">
                     <h6>address list</h6>
                     <div className="deliveryInfoCard">{deliveryInfoCard}</div>
@@ -271,12 +274,17 @@ class Delivery extends Component {
                 <form onSubmit={this.submitHandler} className="deliveryInfoForm">
                     <h6>delivery info</h6>
                     {form}
-                    <button>{this.state.submitStatus.addNewDeliveryInfo ? 'create new one' : 'update'}</button>
+                    <div className="btgp">
+                        <button>{this.state.submitStatus.addNewDeliveryInfo ? 'create new one' : 'update'}</button>
+                        {this.state.submitStatus.addNewDeliveryInfo ? null : (
+                            <button onClick={this.cancelUpdateHandler}>cancel</button>
+                        )}
+                    </div>
                 </form>
                 <div className="deliveryInfoSectionClose" onClick={this.closeDeliveryInfoSection}>
                     {icons.close()}
                 </div>
-            </section>
+            </div>
         )
     }
 }
@@ -292,7 +300,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
+        onGetDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
         onPostDeliveryInfo: formData => dispatch(actions.postDeliveryInfo(formData)),
         onDeleteDeliveryInfo: DID => dispatch(actions.deleteDeliveryInfo(DID)),
         onUpdateDeliveryInfo: (DID, formData) => dispatch(actions.updateDeliveryInfo(DID, formData)),

@@ -94,14 +94,14 @@ class UserProfile extends Component {
     }
 
     showDeliveryInfoHandler = () => {
-        this.props.history.replace('/user/profile/deliveryInfo')
+        this.props.history.replace('/user/profile/delivery')
     }
 
-    onAlertHandler = () => {
+    onErrorAlertHandler = msg => {
         alert
             .fire({
                 title: 'Oops...',
-                text: this.props.error,
+                text: msg,
                 icon: 'warning',
                 iconHtml: '!',
                 iconColor: '#2a2c30',
@@ -116,7 +116,7 @@ class UserProfile extends Component {
 
     render() {
         if (typeof this.props.error === 'string') {
-            this.onAlertHandler()
+            this.onErrorAlertHandler(this.props.error)
             this.props.history.push('/')
         }
 
@@ -187,7 +187,7 @@ class UserProfile extends Component {
                 {this.props.location.pathname === '/user/profile' ? (
                     <button onClick={this.showDeliveryInfoHandler}>add delivery info</button>
                 ) : null}
-                <Route path={this.props.match.path + '/deliveryInfo'} component={Delivery} />
+                <Route path={this.props.match.path + '/delivery'} component={Delivery} />
             </section>
         )
     }

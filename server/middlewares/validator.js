@@ -61,8 +61,8 @@ const validator = {
         body('email').trim().isEmail().withMessage('Invalid email address!'),
     ],
     checkDeliveryInfo: [
-        body('firstName').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid first name!'),
-        body('lastName').trim().notEmpty().isLength({ min: 1, max: 20 }).withMessage('Invalid last name!'),
+        body('firstName').trim().notEmpty().withMessage('Invalid first name!'),
+        body('lastName').trim().notEmpty().withMessage('Invalid last name!'),
         body('phone')
             .trim()
             .custom(value => {

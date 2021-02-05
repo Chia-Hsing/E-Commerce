@@ -1,0 +1,180 @@
+@import 'variables';
+@import 'mixins';
+
+.deliveryContainer {
+    @include display-flex(row, space-around, flex-start);
+    box-shadow: 3px 4px 11px -5px color(lighter-grey);
+    margin-top: 2rem;
+    position: relative;
+
+    .deliveryInfoCardContainer {
+        @include display-flex(column, space-around, flex-start);
+        padding: 1rem;
+        flex-basis: 30%;
+        min-height: 30vh;
+        border-radius: 5px;
+
+        h6 {
+            text-align: left;
+        }
+
+        .deliveryInfoCard {
+            @include WL(min, 100%);
+            min-height: 200px;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            text-align: left;
+
+            .deliveryInfoCardDetailWrap {
+                margin-bottom: 1.5rem;
+
+                .deliveryInfoCardDetail {
+                    display: grid;
+                    justify-content: stretch;
+                    grid-template-rows: repeat(4, 1fr);
+
+                    .name {
+                        font-weight: weight(bold);
+                        color: color(heavy-grey);
+                    }
+
+                    .phone {
+                        color: color(lighter-grey);
+                    }
+
+                    .address,
+                    .city {
+                        color: color(light-grey);
+                    }
+
+                    span {
+                        display: inline-block;
+                        width: 100%;
+                        text-align: left;
+                    }
+                }
+                .operation {
+                    @include display-flex(row, space-between);
+                    @include WL(min, 20%);
+                    margin-top: 0.5rem;
+
+                    span {
+                        cursor: pointer;
+                        transition: 0.4s;
+
+                        &:hover {
+                            color: color(yellow);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .deliveryInfoForm {
+        flex-basis: 60%;
+        min-height: 50vh;
+        border-radius: 5px;
+        position: relative;
+        padding: 1rem;
+
+        h6 {
+            text-align: left;
+        }
+
+        & .inputBody {
+            @include WL(max, 90%, 70px);
+            display: block;
+            position: relative;
+            margin: 0 auto;
+
+            & input {
+                @include WL(max, 100%, 100%);
+                color: color(light-grey);
+                padding-top: 20px;
+                border: none;
+                outline: none;
+            }
+
+            & label {
+                color: color(heavy-grey);
+                position: absolute;
+                bottom: 0px;
+                left: 0%;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                border-bottom: 1px solid color(light-grey);
+            }
+
+            & label::after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                height: 100%;
+                width: 0%;
+                border-bottom: 3px solid color(yellow);
+                transition: all 0.3s ease;
+            }
+
+            .errorMSG {
+                position: absolute;
+                color: color(heavy-grey);
+                font-size: size(xs);
+                bottom: 5px;
+                right: 0;
+            }
+
+            .contentName {
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                transition: all 0.3s ease;
+            }
+            & input:not(:placeholder-shown) + .labelName .contentName,
+            & input:focus + .labelName .contentName {
+                transform: translateY(-150%);
+                font-size: 14px;
+                color: color(yellow);
+            }
+
+            & input:not(:placeholder-shown) + .labelName::after,
+            & input:focus + .labelName::after {
+                width: 100%;
+            }
+            input.invalid + label::after {
+                border-bottom: 3px solid color(red);
+            }
+
+            input.invalid + .labelName .contentName {
+                color: color(red);
+            }
+        }
+
+        .btgp {
+            button {
+                @include button;
+                margin: 1rem;
+            }
+        }
+    }
+}
+
+.deliveryInfoSectionClose {
+    cursor: pointer;
+    transition: 0.4s;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: size(m);
+
+    &:hover {
+        color: color(yellow);
+    }
+}
+
+button {
+    @include button;
+    margin-top: 2rem;
+}

@@ -1,32 +1,46 @@
 @import 'mixins';
 @import 'variables';
 
-.checkoutItems {
+.checkoutItemsWrap {
     @include WL(max, 80vw);
     min-height: 20%;
-    border-bottom: 1px solid color(light-grey);
-    min-height: 30vh;
     margin: 2em auto;
+    padding: 1.2em;
+    box-shadow: 3px 4px 11px -5px color(lighter-grey);
 
-    .checkOutHeader {
-        span {
-            font-weight: weight(bold);
+    .checkoutItems {
+        @include WL(max, 90%);
+        margin: 0 auto;
+        border-bottom: 1px solid color(light-grey);
+
+        .checkOutHeader {
+            span {
+                font-weight: weight(bold);
+            }
         }
-    }
 
-    .checkOutItem,
-    .checkOutHeader {
-        @include WL(max, 100%);
-        display: grid;
-        grid-template-columns: 40% 15% 15% 15% 15%;
-        margin: 1rem 0;
+        .checkOutItem,
+        .checkOutHeader {
+            @include WL(max, 100%);
+            display: grid;
+            grid-template-columns: 40% 15% 15% 15% 15%;
+            margin: 1rem 0;
 
-        .editItem {
-            color: color(light-grey);
-            transition: 0.4s;
-            &:hover {
-                color: color(yellow);
+            .editItem {
+                color: color(light-grey);
+                transition: 0.4s;
+                &:hover {
+                    color: color(yellow);
+                }
             }
         }
     }
+}
+
+.checkoutInfoWrap {
+    @include WL(max, 80vw);
+    // min-height: 20%;
+    margin: 2em auto;
+    padding: 1.2em;
+    box-shadow: 3px 4px 11px -5px color(lighter-grey);
 }
