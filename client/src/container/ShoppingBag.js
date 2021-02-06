@@ -28,8 +28,8 @@ class ShoppingBag extends Component {
         }
     }
 
-    onCheckout = () => {
-        this.props.onPostOrder(this.props.UID)
+    onCheckout = async () => {
+        await this.props.onPostOrder(this.props.UID)
         this.props.history.push('/checkout')
     }
 
@@ -78,7 +78,7 @@ class ShoppingBag extends Component {
         return (
             <section className="ShoppingBagContainer">
                 <div className="ShoppingBagHeader">
-                    <h4>Shopping Bag</h4>
+                    <h4>SHOPPING BAG</h4>
                     <span onClick={() => this.props.onCleanBag(this.props.UID)}>Clean this Bag</span>
                 </div>
                 <div className="checkOutItemWrap">{checkOutItems}</div>

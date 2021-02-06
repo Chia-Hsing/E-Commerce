@@ -1,46 +1,143 @@
 @import 'mixins';
 @import 'variables';
 
-.checkoutItemsWrap {
-    @include WL(max, 80vw);
-    min-height: 20%;
-    margin: 2em auto;
-    padding: 1.2em;
-    box-shadow: 3px 4px 11px -5px color(lighter-grey);
+.checkout {
+    @include WL(max, 83%);
+    min-height: 70%;
+    padding: 1em;
+    margin: 1em auto 0;
 
-    .checkoutItems {
-        @include WL(max, 90%);
-        margin: 0 auto;
-        border-bottom: 1px solid color(light-grey);
+    h4 {
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
 
-        .checkOutHeader {
-            span {
-                font-weight: weight(bold);
+    .checkoutItemsWrap {
+        @include WL(max, 100%);
+        min-height: 25vh;
+
+        .checkoutItemsContainer {
+            border-top: 1px solid color(lighter-grey);
+            border-bottom: 1px solid color(lighter-grey);
+
+            .checkoutItems {
+                @include WL(max, 90%);
+                margin: 0 auto;
+                padding: 1rem;
+
+                .checkOutHeader {
+                    span {
+                        font-size: size(s);
+                        font-weight: weight(bold);
+                    }
+                }
+
+                .checkOutItem,
+                .checkOutHeader {
+                    @include WL(max, 100%);
+                    display: grid;
+                    grid-template-columns: 40% 15% 15% 15% 15%;
+                    margin: 1rem 0;
+
+                    .editItem {
+                        color: color(light-grey);
+                        transition: 0.4s;
+                        &:hover {
+                            color: color(yellow);
+                        }
+                    }
+                }
             }
         }
 
-        .checkOutItem,
-        .checkOutHeader {
-            @include WL(max, 100%);
-            display: grid;
-            grid-template-columns: 40% 15% 15% 15% 15%;
-            margin: 1rem 0;
+        .itemsTotal {
+            text-align: right;
+            @include WL(max, 90%);
+            margin: 0 auto;
+            padding: 1rem;
+        }
+    }
 
-            .editItem {
-                color: color(light-grey);
-                transition: 0.4s;
-                &:hover {
-                    color: color(yellow);
+    .checkoutInfoWrap {
+        border-top: 1px solid color(lighter-grey);
+        border-bottom: 1px solid color(lighter-grey);
+        margin: 2rem 0;
+
+        .userInfoWrap {
+            @include WL(max, 70%);
+            grid-template-columns: 40% 60%;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+
+            .userInfoTitle {
+                font-size: size(s);
+                font-weight: weight(bold);
+                align-self: center;
+                justify-self: start;
+            }
+
+            .userInfoList {
+                @include display-flex(column, space-around, flex-start);
+                padding: 0;
+
+                li {
+                    list-style: none;
+                }
+            }
+        }
+
+        .deliveryInfoWrap {
+            @include WL(max, 70%);
+            grid-template-columns: 40% 60%;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+
+            .deliveryInfoTitle {
+                font-size: size(s);
+                font-weight: weight(bold);
+                align-self: center;
+                justify-self: start;
+            }
+
+            ul {
+                padding: 0;
+
+                li {
+                    @include display-flex(row, flex-start, center);
+                    margin-top: 0.5rem;
+                    list-style: none;
+
+                    input[type='radio'] {
+                        color: color(yellow);
+                        font-size: size(l);
+                        &:visited {
+                        }
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: color(yellow);
+                        transition: 0.4s;
+
+                        &:hover {
+                            color: color(light-yellow);
+                        }
+                    }
+
+                    .deliveryInfoList {
+                        @include display-flex(column, center, flex-start);
+                        margin-left: 2rem;
+                        span {
+                            em,
+                            strong {
+                                margin-right: 0.5rem;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-}
-
-.checkoutInfoWrap {
-    @include WL(max, 80vw);
-    // min-height: 20%;
-    margin: 2em auto;
-    padding: 1.2em;
-    box-shadow: 3px 4px 11px -5px color(lighter-grey);
 }

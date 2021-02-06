@@ -3,8 +3,8 @@
 
 .deliveryContainer {
     @include display-flex(row, space-around, flex-start);
-    box-shadow: 3px 4px 11px -5px color(lighter-grey);
     margin-top: 2rem;
+    border-top: 1px solid color(lighter-grey);
     position: relative;
 
     .deliveryInfoCardContainer {

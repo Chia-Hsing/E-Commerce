@@ -28,10 +28,12 @@ class Checkout extends Component {
     render() {
         let checkoutSummary = (
             <section className="checkoutItemsWrap">
-                <div className="checkoutItems">
-                    <CheckoutSummary bagItems={this.props.bagItems} />
+                <div className="checkoutItemsContainer">
+                    <div className="checkoutItems">
+                        <CheckoutSummary bagItems={this.props.bagItems} />
+                    </div>
                 </div>
-                <div className="itemsTotal">ITEMS TOTAL: ￥{this.itemsTotal(this.props.bagItems)}</div>
+                <h6 className="itemsTotal">ITEMS TOTAL: ￥{this.itemsTotal(this.props.bagItems)}</h6>
             </section>
         )
 
@@ -47,8 +49,11 @@ class Checkout extends Component {
         return (
             <>
                 {!this.props.isAuthenticated && <Redirect to="/auth/login" />}
-                {checkoutSummary}
-                {checkoutInfo}
+                <section className="checkout">
+                    <h4>CHECKOUT SUMMARY</h4>
+                    {checkoutSummary}
+                    {checkoutInfo}
+                </section>
             </>
         )
     }

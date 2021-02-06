@@ -8,6 +8,7 @@ import Delivery from './Delivery'
 import Input from '../components/UI/Input'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity, arrayBufferToBase64Img, alert } from '../utils/utilities'
+import Spinner from '../components/UI/Spinner'
 import '../scss/userProfile.scss'
 
 class UserProfile extends Component {
@@ -120,32 +121,6 @@ class UserProfile extends Component {
             this.props.history.push('/')
         }
 
-        let formElement = []
-
-        for (let key in this.state.controls) {
-            formElement.push({
-                key,
-                config: this.state.controls[key],
-            })
-        }
-
-        const form = formElement.map(ele => {
-            return (
-                <Input
-                    error={this.props.error}
-                    key={ele.key}
-                    label={ele.key}
-                    value={ele.config.val}
-                    type={ele.config.eleType}
-                    config={ele.config.eleConfig}
-                    isValid={ele.config.valid}
-                    touched={ele.config.touched}
-                    shouldValidate={ele.config.validation}
-                    inputChange={e => this.inputChangeHandler(e, ele.key)}
-                />
-            )
-        })
-
         let avatarImg = null
         let avatarPreview = null
 
@@ -172,24 +147,56 @@ class UserProfile extends Component {
 
         const avatarUpload = <FileUploader img={avatarPreview} fileChange={files => this.uploadImgHandler(files)} />
 
-        return (
-            <section className="userProfileWrap">
-                <h5>ACCOUNT DASHBOARD</h5>
-                <div className="userContainer">
-                    {userProfileCard}
-                    <form onSubmit={this.submitHandler} className="userProfileDetail">
-                        <h6>user info</h6>
-                        {form}
-                        {avatarUpload}
-                        <button>update</button>
-                    </form>
-                </div>
-                {this.props.location.pathname === '/user/profile' ? (
-                    <button onClick={this.showDeliveryInfoHandler}>add delivery info</button>
-                ) : null}
-                <Route path={this.props.match.path + '/delivery'} component={Delivery} />
-            </section>
-        )
+        let formElement = []
+
+        for (let key in this.state.controls) {
+            formElement.push({
+                key,
+                config: this.state.controls[key],
+            })
+        }
+
+        const form = formElement.map(ele => {
+            return (
+                <Input
+                    error={this.props.error}
+                    key={ele.key}
+                    label={ele.key}
+                    value={ele.config.val}
+                    type={ele.config.eleType}
+                    config={ele.config.eleConfig}
+                    isValid={ele.config.valid}
+                    touched={ele.config.touched}
+                    shouldValidate={ele.config.validation}
+                    inputChange={e => this.inputChangeHandler(e, ele.key)}
+                />
+            )
+        })
+
+        let userProfile = <Spinner />
+
+        if (this.props.userProfile._id) {
+            userProfile = (
+                <>
+                    <h4>ACCOUNT DASHBOARD</h4>
+                    <div className="userContainer">
+                        {userProfileCard}
+                        <form onSubmit={this.submitHandler} className="userProfileDetail">
+                            <h6>user info</h6>
+                            {form}
+                            {avatarUpload}
+                            <button>update</button>
+                        </form>
+                    </div>
+                    {this.props.location.pathname === '/user/profile' ? (
+                        <button onClick={this.showDeliveryInfoHandler}>add delivery info</button>
+                    ) : null}
+                    <Route path={this.props.match.path + '/delivery'} component={Delivery} />
+                </>
+            )
+        }
+
+        return <section className="userProfileWrap">{userProfile}</section>
     }
 }
 

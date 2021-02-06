@@ -1,40 +1,48 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const CheckoutInfo = props => {
     const list = props.deliveryInfoList.map(info => {
         return (
             <li>
                 <input type="radio" name="shippingInfo" value={info._id} />
-                <span>
-                    <strong>{info.firstName}</strong>
-                    <strong>{info.lastName}</strong>
-                </span>
-                <span>
-                    <em>
-                        {info.address}
-                        {info.district}
-                        {info.city}
-                        {info.postalCode}
-                    </em>
-                </span>
-                <span>
-                    <em>{info.phone}</em>
-                </span>
+                <div className="deliveryInfoList">
+                    <span>
+                        <strong>{info.firstName}</strong>
+                        <strong>{info.lastName}</strong>
+                    </span>
+                    <span>
+                        <em>{info.address}</em>
+                        <em>{info.district}</em>
+                        <em>{info.city}</em>
+                        <em>{info.postalCode}</em>
+                    </span>
+                    <span>
+                        <em>{info.phone}</em>
+                    </span>
+                </div>
             </li>
         )
     })
 
     return (
         <>
-            <div>
-                <span>user</span>
-                <span>delivery information</span>
-            </div>
-            <div>
-                <span>{props.username}</span>
-                <span>{props.email}</span>
-            </div>
-            <ul>{list}</ul>
+            <section className="userInfoWrap">
+                <span className="userInfoTitle">user</span>
+                <ul className="userInfoList">
+                    <li>{props.username}</li>
+                    <li>{props.email}</li>
+                </ul>
+            </section>
+            <section className="deliveryInfoWrap">
+                <span className="deliveryInfoTitle">delivery Info.</span>
+                <ul>
+                    {list}
+                    <li>
+                        <Link to="/user/profile/delivery">+ edit delivery info.</Link>
+                    </li>
+                </ul>
+            </section>
         </>
     )
 }

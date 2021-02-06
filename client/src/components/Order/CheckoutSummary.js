@@ -20,7 +20,7 @@ const CheckoutSummary = props => {
     return (
         <>
             <div className="checkOutHeader">
-                <span>order summary</span>
+                <span>items</span>
                 <span>size</span>
                 <span>price</span>
                 <span>quantity</span>

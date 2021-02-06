@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes'
 import { checkBagFromLS } from '../../utils/utilities'
 import * as bagApis from '../../apis/bag'
-import * as orderApis from '../../apis/order'
 import jwt_decode from 'jwt-decode'
 
 export const setBagItems = () => async dispatch => {
@@ -36,7 +35,6 @@ export const setBagItems = () => async dispatch => {
 export const addItemToBag = (PID, UID, itemStock, itemSize) => async dispatch => {
     try {
         // once edit the product in the bag, delete the pending order that already exists in the database.
-        orderApis.deleteOrder(UID)
         // bagToken: { token: ...}
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
@@ -69,7 +67,6 @@ export const addItemToBag = (PID, UID, itemStock, itemSize) => async dispatch =>
 export const deleteItemFromBag = (PID, UID, itemSize) => async dispatch => {
     try {
         // once edit the product in the bag, delete the pending order that already exists in the database.
-        orderApis.deleteOrder(UID)
 
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
@@ -106,7 +103,6 @@ export const deleteItemFromBag = (PID, UID, itemSize) => async dispatch => {
 export const removeWholeItem = (PID, UID, itemSize) => async dispatch => {
     try {
         // once edit the product in the bag, delete the pending order that already exists in the database.
-        orderApis.deleteOrder(UID)
 
         const oldToken = JSON.parse(localStorage.getItem('bagToken'))
 
@@ -142,7 +138,6 @@ export const removeWholeItem = (PID, UID, itemSize) => async dispatch => {
 export const cleanBag = UID => async dispatch => {
     localStorage.removeItem('bagToken')
     // once edit the product in the bag, delete the pending order that already exists in the database.
-    orderApis.deleteOrder(UID)
     await bagApis.cleanBag()
     dispatch({ type: actionTypes.CLEAN_BAG_SUCCESS })
     dispatch({ type: actionTypes.INIT_PURCHASING })

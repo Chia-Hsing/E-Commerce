@@ -2,19 +2,24 @@
 @import 'mixins';
 
 .userProfileWrap {
-    @include WL(max, 80%);
-    min-height: 70%;
+    @include WL(max, 83%);
+    min-height: 68vh;
     padding: 1em;
     margin: 1em auto 0;
 
-    h5 {
-        margin-bottom: 2rem;
+    .spinner {
+        @include spinner;
+    }
+
+    h4 {
+        text-align: left;
+        margin-bottom: 0.5rem;
     }
 
     .userContainer {
         @include display-flex(row, space-around, flex-start);
+        border-top: 1px solid color(lighter-grey);
 
-        box-shadow: 3px 4px 11px -5px color(lighter-grey);
         .userProfileDetail {
             flex-basis: 60%;
             border-radius: 5px;

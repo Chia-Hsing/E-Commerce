@@ -1,15 +1,14 @@
 import * as actionTypes from './actionTypes'
-import * as apis from '../../apis/order'
+
+import { checkBagFromLS } from '../../utils/utilities'
 
 export const postOrder = id => async dispatch => {
     try {
-        const oldToken = JSON.parse(localStorage.getItem('bagToken'))
-
         const {
-            data: { order },
-        } = await apis.postOrder(id, oldToken || {})
+            items: { bag },
+        } = await checkBagFromLS()
 
-        dispatch({ type: actionTypes.POST_ORDER_SUCCESS, order })
+        dispatch({ type: actionTypes.POST_ORDER_SUCCESS, items: bag })
     } catch (error) {
         dispatch({ type: actionTypes.POST_ORDER_FAILED, error: error.message })
     }
