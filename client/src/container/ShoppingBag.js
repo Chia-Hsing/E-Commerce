@@ -8,23 +8,20 @@ import '../scss/shoppingBag.scss'
 
 class ShoppingBag extends Component {
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.bagItems !== nextProps.bagItems) {
+        if (nextProps.bagItems !== this.props.bagItems) {
             return true
         }
-        return false
     }
 
     onAddProductHandler = (PID, itemStock, itemSize) => {
         if (itemStock > 0) {
-            const UID = this.props.UID
-            this.props.onAddItemToBag(PID, UID, itemStock, itemSize)
+            this.props.onAddItemToBag(PID, itemStock, itemSize)
         }
     }
 
     onDeleteProductHandler = (PID, quantity, itemSize) => {
         if (quantity > 1) {
-            const UID = this.props.UID
-            this.props.onDeleteItemFromBag(PID, UID, itemSize)
+            this.props.onDeleteItemFromBag(PID, itemSize)
         }
     }
 
@@ -51,9 +48,7 @@ class ShoppingBag extends Component {
                             deleteItemFromBag={() =>
                                 this.onDeleteProductHandler(product.item._id, product.quantity, product.itemSize)
                             }
-                            removeItem={() =>
-                                this.props.onRemoveWholeItem(product.item._id, this.props.UID, product.itemSize)
-                            }
+                            removeItem={() => this.props.onRemoveWholeItem(product.item._id, product.itemSize)}
                         />
                     )
                 })
@@ -78,7 +73,7 @@ class ShoppingBag extends Component {
             <section className="ShoppingBagContainer">
                 <div className="ShoppingBagHeader">
                     <h4>SHOPPING BAG</h4>
-                    <span onClick={() => this.props.onCleanBag(this.props.UID)}>Clean this Bag</span>
+                    <span onClick={() => this.props.onCleanBag()}>Clean this Bag</span>
                 </div>
                 <div className="checkOutItemWrap">{checkOutItems}</div>
 
@@ -98,17 +93,15 @@ const mapStateToProps = state => {
         totalQuantity: state.bag.totalQuantity,
         totalAmount: state.bag.totalAmount,
         isPurchasing: state.bag.purchasing,
-        UID: state.auth.userId,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItemToBag: (PID, UID, itemStock, itemSize) =>
-            dispatch(actions.addItemToBag(PID, UID, itemStock, itemSize)),
-        onDeleteItemFromBag: (PID, UID, itemSize) => dispatch(actions.deleteItemFromBag(PID, UID, itemSize)),
-        onRemoveWholeItem: (PID, UID, itemSize) => dispatch(actions.removeWholeItem(PID, UID, itemSize)),
-        onCleanBag: UID => dispatch(actions.cleanBag(UID)),
+        onAddItemToBag: (PID, itemStock, itemSize) => dispatch(actions.addItemToBag(PID, itemStock, itemSize)),
+        onDeleteItemFromBag: (PID, itemSize) => dispatch(actions.deleteItemFromBag(PID, itemSize)),
+        onRemoveWholeItem: (PID, itemSize) => dispatch(actions.removeWholeItem(PID, itemSize)),
+        onCleanBag: () => dispatch(actions.cleanBag()),
     }
 }
 

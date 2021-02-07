@@ -25,7 +25,6 @@ const orderSchema = new mongoose.Schema(
         },
         shippingDetail: {
             type: Object,
-            required: true,
         },
     },
     {

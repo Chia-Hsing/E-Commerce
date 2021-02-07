@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import CheckoutSummary from '../components/Order/CheckoutSummary'
 import CheckoutInfo from '../components/Order/CheckoutInfo'
@@ -31,9 +31,13 @@ class Checkout extends Component {
     }
 
     cancelCheckout = (items, totalAmount, totalQuantity, shippingDetail) => {
-        const order = { items, totalAmount, totalQuantity, shippingDetail }
+        if (window.confirm('Do you really want to cancel this order?')) {
+            const order = { items, totalAmount, totalQuantity, shippingDetail }
 
-        this.props.onPostOrder(order, 'cancel')
+            this.props.onPostOrder(order, 'canceled')
+            this.props.onCleanBag()
+            this.props.history.push('/')
+        }
     }
 
     render() {
@@ -67,18 +71,21 @@ class Checkout extends Component {
                     {checkoutSummary}
                     {checkoutInfo}
                     <div className="buttonGround">
+                        {this.props.deliveryInfoList.length <= 0 ? null : <button id="pay">pay</button>}
+
                         <button
-                            id="pay"
-                            onClick={this.cancelCheckout(
-                                this.props.items,
-                                this.props.totalAmount,
-                                this.props.totalQuantity,
-                                this.props.shippingDetail
-                            )}
+                            id="cancel"
+                            onClick={() =>
+                                this.cancelCheckout(
+                                    this.props.items,
+                                    this.props.totalAmount,
+                                    this.props.totalQuantity,
+                                    this.props.shippingDetail
+                                )
+                            }
                         >
-                            pay
+                            cancel
                         </button>
-                        <button id="cancel">cancel</button>
                     </div>
                 </section>
             </>
@@ -106,7 +113,8 @@ const mapDispatchToProps = dispatch => {
         onGetDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
         onAddShippingDetail: detail => dispatch(actions.addShippingDetail(detail)),
         onPostOrder: (order, status) => dispatch(actions.postOrder(order, status)),
+        onCleanBag: () => dispatch(actions.cleanBag()),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Checkout))

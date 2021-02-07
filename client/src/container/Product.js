@@ -48,15 +48,14 @@ class Product extends Component {
     onAddProductHandler = () => {
         // this product's id
         const PID = this.props.product._id
-        // current user's id
-        const UID = this.props.UID
+
         // check out if there is a product same as this product in the shopping bag.
         const inBagItem = this.isInBag(PID)
 
         // if the stock left great than the item stock selected, or yet select.
         if (this.state.itemStock > inBagItem.realItemStock || inBagItem.realItemStock === undefined) {
             if (this.state.itemStock !== 0 && this.state.itemSize !== null) {
-                this.props.onAddItemToBag(PID, UID, this.state.itemStock, this.state.itemSize)
+                this.props.onAddItemToBag(PID, this.state.itemStock, this.state.itemSize)
             }
         }
     }
@@ -64,9 +63,8 @@ class Product extends Component {
     // minus the quantity of a product by one from the shopping bag.
     onDeleteProductHandler = () => {
         const PID = this.props.product._id
-        const UID = this.props.userId
         const itemSize = this.state.itemSize
-        this.props.onDeleteItemFromBag(PID, UID, itemSize)
+        this.props.onDeleteItemFromBag(PID, itemSize)
     }
 
     // use id to get the product items same as the selected one in the shopping bag coming from local storage.
@@ -140,9 +138,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onInitProduct: () => dispatch(actions.initProduct()),
         onGetProduct: PID => dispatch(actions.getProduct(PID)),
-        onAddItemToBag: (PID, UID, itemStock, itemSize) =>
-            dispatch(actions.addItemToBag(PID, UID, itemStock, itemSize)),
-        onDeleteItemFromBag: (PID, UID, itemSize) => dispatch(actions.deleteItemFromBag(PID, UID, itemSize)),
+        onAddItemToBag: (PID, itemStock, itemSize) => dispatch(actions.addItemToBag(PID, itemStock, itemSize)),
+        onDeleteItemFromBag: (PID, itemSize) => dispatch(actions.deleteItemFromBag(PID, itemSize)),
     }
 }
 
@@ -152,7 +149,6 @@ const mapStateToProps = state => {
         loading: state.products.loading,
         bagItems: state.bag.bagItems,
         error: state.products.error,
-        UID: state.auth.userId,
     }
 }
 

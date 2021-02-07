@@ -32,7 +32,7 @@ export const setBagItems = () => async dispatch => {
     }
 }
 
-export const addItemToBag = (PID, UID, itemStock, itemSize) => async dispatch => {
+export const addItemToBag = (PID, itemStock, itemSize) => async dispatch => {
     try {
         // once edit the product in the bag, delete the pending order that already exists in the database.
         // bagToken: { token: ...}
@@ -64,7 +64,7 @@ export const addItemToBag = (PID, UID, itemStock, itemSize) => async dispatch =>
     }
 }
 
-export const deleteItemFromBag = (PID, UID, itemSize) => async dispatch => {
+export const deleteItemFromBag = (PID, itemSize) => async dispatch => {
     try {
         // once edit the product in the bag, delete the pending order that already exists in the database.
 
@@ -100,7 +100,7 @@ export const deleteItemFromBag = (PID, UID, itemSize) => async dispatch => {
     }
 }
 
-export const removeWholeItem = (PID, UID, itemSize) => async dispatch => {
+export const removeWholeItem = (PID, itemSize) => async dispatch => {
     try {
         // once edit the product in the bag, delete the pending order that already exists in the database.
 
@@ -135,7 +135,7 @@ export const removeWholeItem = (PID, UID, itemSize) => async dispatch => {
     }
 }
 
-export const cleanBag = UID => async dispatch => {
+export const cleanBag = () => async dispatch => {
     localStorage.removeItem('bagToken')
     // once edit the product in the bag, delete the pending order that already exists in the database.
     await bagApis.cleanBag()
