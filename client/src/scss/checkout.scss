@@ -6,7 +6,6 @@
     min-height: 70%;
     padding: 1em;
     margin: 1em auto 0;
-
     h4 {
         text-align: left;
         margin-bottom: 0.5rem;
@@ -15,11 +14,10 @@
     .checkoutItemsWrap {
         @include WL(max, 100%);
         min-height: 25vh;
+        border: 1px solid color(light-yellow);
+        // background-color: color(light-yellow);
 
         .checkoutItemsContainer {
-            border-top: 1px solid color(lighter-grey);
-            border-bottom: 1px solid color(lighter-grey);
-
             .checkoutItems {
                 @include WL(max, 90%);
                 margin: 0 auto;
@@ -59,8 +57,7 @@
     }
 
     .checkoutInfoWrap {
-        border-top: 1px solid color(lighter-grey);
-        border-bottom: 1px solid color(lighter-grey);
+        border: 1px solid color(lighter-grey);
         margin: 2rem 0;
 
         .userInfoWrap {
@@ -138,6 +135,17 @@
                     }
                 }
             }
+        }
+    }
+
+    .buttonGround {
+        @include display-flex(row, space-around);
+        @include WL(min, 20rem);
+        margin: 0 auto;
+
+        #pay,
+        #cancel {
+            @include button;
         }
     }
 }

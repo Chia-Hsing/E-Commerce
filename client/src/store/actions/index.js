@@ -11,4 +11,4 @@ export {
     deleteDeliveryInfo,
     updateDeliveryInfo,
 } from './user'
-export { postOrder } from './order'
+export { setOrder, addShippingDetail, postOrder } from './order'

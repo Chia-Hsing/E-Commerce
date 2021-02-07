@@ -12,7 +12,7 @@ const getUserProfileSuccess = (state, action) => {
 }
 
 const getUserProfileFailed = (state, action) => {
-    return updateObj(state, { user: {}, error: action.error })
+    return updateObj(state, { userProfile: {}, error: action.error })
 }
 
 const initDeliveryInfoError = (state, action) => {
@@ -25,7 +25,7 @@ const getDeliveryInfoSuccess = (state, action) => {
 }
 
 const getDeliveryInfoFailed = (state, action) => {
-    return updateObj(state, { error: action.error })
+    return updateObj(state, { deliveryInfoList: [], error: action.error })
 }
 
 const reducer = (state = initialState, action) => {

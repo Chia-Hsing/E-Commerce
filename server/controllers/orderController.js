@@ -1,42 +1,32 @@
 const Order = require('../models/order')
 
-const getOrder = async () => {
-    try {
-        const UID = req.params.UID
-
-        const pendingOrder = await Order.findOne({ customer: UID })
-
-        return res.status(200).json({ status: 'success', order: pendingOrder, message: 'Get order success.' })
-    } catch (error) {
-        res.status(500).send(error)
-    }
-}
-
 const postOrder = async (req, res) => {
     try {
-        const UID = req.params.UID
+        const UID = req.user._id
 
-        const pendingOrder = await Order.findOne({ customer: UID })
+        console.log(UID, req.body.order)
 
-        if (pendingOrder && pendingOrder.paymentStatus === 'pending') {
-            return res.json({ status: 'error', message: 'Order already exist.' })
-        }
+        // const pendingOrder = await Order.findOne({ customer: UID })
 
-        const order = new Order({
-            customer: UID,
-            items: req.bag.items.bag,
-            totalAmount: req.bag.items.totalAmount,
-            totalQuantity: req.bag.items.totalQuantity,
-        })
+        // if (pendingOrder && pendingOrder.paymentStatus === 'pending') {
+        //     return res.json({ status: 'error', message: 'Order already exist.' })
+        // }
 
-        await order.save(error => {
-            if (error) {
-                console.log(error)
-                return
-            }
-        })
+        // const order = new Order({
+        //     customer: UID,
+        //     items: req.bag.items.bag,
+        //     totalAmount: req.bag.items.totalAmount,
+        //     totalQuantity: req.bag.items.totalQuantity,
+        // })
 
-        return res.status(200).json({ status: 'success', order, message: 'Create order success.' })
+        // await order.save(error => {
+        //     if (error) {
+        //         console.log(error)
+        //         return
+        //     }
+        // })
+
+        // return res.status(200).json({ status: 'success', order, message: 'Create order success.' })
     } catch (error) {
         res.status(500).send(error)
     }
@@ -77,7 +67,6 @@ const putCancelLatestOrder = (req, res) => {
 }
 
 module.exports = {
-    getOrder,
     postOrder,
     deleteOrder,
     getLatestOrder,

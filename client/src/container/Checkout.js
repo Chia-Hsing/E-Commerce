@@ -8,21 +8,32 @@ import * as actions from '../store/actions/index'
 import '../scss/checkout.scss'
 
 class Checkout extends Component {
+    state = {
+        currentSelectedId: null,
+    }
+
     async componentDidMount() {
+        await this.props.onSetOrder()
         await this.props.onGetUserProfile()
         await this.props.onGetDeliveryInfo()
     }
 
-    itemsTotal = items => {
-        const totalPrice = items
-            .map(product => {
-                return parseInt(product.item.price.replace('￥', '').split(',').join('')) * +product.quantity
-            })
-            .reduce((sum, el) => {
-                return sum + el
-            }, 0)
+    onTickHandler = e => {
+        const val = e.currentTarget.value
 
-        return totalPrice
+        this.setState({ currentSelectedId: val }, () => {
+            const selectedShippingDetail = this.props.deliveryInfoList.filter(info => {
+                return this.state.currentSelectedId === info._id
+            })
+
+            this.props.onAddShippingDetail(selectedShippingDetail[0])
+        })
+    }
+
+    cancelCheckout = (items, totalAmount, totalQuantity, shippingDetail) => {
+        const order = { items, totalAmount, totalQuantity, shippingDetail }
+
+        this.props.onPostOrder(order, 'cancel')
     }
 
     render() {
@@ -33,7 +44,7 @@ class Checkout extends Component {
                         <CheckoutSummary bagItems={this.props.bagItems} />
                     </div>
                 </div>
-                <h6 className="itemsTotal">ITEMS TOTAL: ￥{this.itemsTotal(this.props.bagItems)}</h6>
+                <h6 className="itemsTotal">ITEMS TOTAL: ￥{this.state.totalAmount}</h6>
             </section>
         )
 
@@ -43,6 +54,8 @@ class Checkout extends Component {
                     username={this.props.userProfile.name}
                     email={this.props.userProfile.email}
                     deliveryInfoList={this.props.deliveryInfoList}
+                    ticked={this.onTickHandler}
+                    selectedId={this.state.currentSelectedId}
                 />
             </section>
         )
@@ -53,6 +66,20 @@ class Checkout extends Component {
                     <h4>CHECKOUT SUMMARY</h4>
                     {checkoutSummary}
                     {checkoutInfo}
+                    <div className="buttonGround">
+                        <button
+                            id="pay"
+                            onClick={this.cancelCheckout(
+                                this.props.items,
+                                this.props.totalAmount,
+                                this.props.totalQuantity,
+                                this.props.shippingDetail
+                            )}
+                        >
+                            pay
+                        </button>
+                        <button id="cancel">cancel</button>
+                    </div>
                 </section>
             </>
         )
@@ -63,15 +90,22 @@ const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.token !== null,
         bagItems: state.bag.bagItems,
+        totalAmount: state.bag.totalAmount,
+        totalQuantity: state.bag.totalQuantity,
+        items: state.order.items,
         userProfile: state.user.userProfile,
         deliveryInfoList: state.user.deliveryInfoList,
+        shippingDetail: state.order.shippingDetail,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        onSetOrder: () => dispatch(actions.setOrder()),
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
         onGetDeliveryInfo: () => dispatch(actions.getDeliveryInfo()),
+        onAddShippingDetail: detail => dispatch(actions.addShippingDetail(detail)),
+        onPostOrder: (order, status) => dispatch(actions.postOrder(order, status)),
     }
 }
 

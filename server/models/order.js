@@ -23,9 +23,9 @@ const orderSchema = new mongoose.Schema(
             type: String,
             default: 'pending',
         },
-        delivery: {
-            type: String,
-            default: 'pending',
+        shippingDetail: {
+            type: Object,
+            required: true,
         },
     },
     {

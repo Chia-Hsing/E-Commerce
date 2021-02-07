@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom'
 const CheckoutInfo = props => {
     const list = props.deliveryInfoList.map(info => {
         return (
-            <li>
-                <input type="radio" name="shippingInfo" value={info._id} />
+            <li key={info._id}>
+                <input
+                    type="radio"
+                    name="shippingInfo"
+                    onChange={props.ticked}
+                    checked={info._id === props.selectedId}
+                    value={info._id}
+                />
                 <div className="deliveryInfoList">
                     <span>
                         <strong>{info.firstName}</strong>

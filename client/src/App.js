@@ -58,6 +58,10 @@ const App = props => {
     )
 }
 
+const mapStateToProps = state => {
+    return { bagItems: state.bag.bagItems, UID: state.auth.userId }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onSetBagItems: () => dispatch(actions.setBagItems()),
@@ -65,4 +69,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

@@ -29,7 +29,6 @@ class ShoppingBag extends Component {
     }
 
     onCheckout = async () => {
-        await this.props.onPostOrder(this.props.UID)
         this.props.history.push('/checkout')
     }
 
@@ -110,7 +109,6 @@ const mapDispatchToProps = dispatch => {
         onDeleteItemFromBag: (PID, UID, itemSize) => dispatch(actions.deleteItemFromBag(PID, UID, itemSize)),
         onRemoveWholeItem: (PID, UID, itemSize) => dispatch(actions.removeWholeItem(PID, UID, itemSize)),
         onCleanBag: UID => dispatch(actions.cleanBag(UID)),
-        onPostOrder: UID => dispatch(actions.postOrder(UID)),
     }
 }
 
