@@ -7,8 +7,8 @@ const { bagItemToken, validationMessage } = require('../middlewares/middleware')
 const router = new express.Router()
 
 router.post('/:id', validator.bagOperation, validationMessage, bagItemToken, bagController.addItemToBag)
-router.put('/:id', validator.bagOperation, validationMessage, bagItemToken, bagController.deleteItemFromBag)
-router.put('/remove/:id', validator.bagOperation, validationMessage, bagItemToken, bagController.removeWholeItem)
+router.patch('/:id', validator.bagOperation, validationMessage, bagItemToken, bagController.deleteItemFromBag)
+router.patch('/remove/:id', validator.bagOperation, validationMessage, bagItemToken, bagController.removeWholeItem)
 router.delete('/', bagController.cleanBag)
 
 module.exports = router
