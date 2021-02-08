@@ -86,6 +86,16 @@ class UserProfile extends Component {
         }
 
         this.props.onUpdateUserProfile(formData, config)
+
+        if (!this.props.error) {
+            alert.fire({
+                title: 'Success!',
+                icon: 'success',
+                iconColor: '#f0e787',
+                confirmButtonColor: '#f0e787',
+                confirmButtonText: 'OK!',
+            })
+        }
     }
 
     uploadImgHandler = files => {

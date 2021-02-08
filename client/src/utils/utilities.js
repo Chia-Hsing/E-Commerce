@@ -11,11 +11,10 @@ export const updateObj = (oldObj, updatedProperties) => {
 export const alert = Swal.mixin({
     customClass: {
         toast: true,
-        confirmButton: 'btn btn-light',
         position: 'center',
         timer: 3000,
     },
-    buttonsStyling: false,
+    buttonsStyling: true,
 })
 
 // regarding image response, the backend returns the type of array buffer, so need a converter to convert it to a readable string.

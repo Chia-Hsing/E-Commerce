@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Input from '../components/UI/Input'
 import DeliveryInfoCard from '../components/User/DeliveryInfoCard'
 import * as actions from '../store/actions/index'
-import { updateObj, checkValidity } from '../utils/utilities'
+import { updateObj, checkValidity, alert } from '../utils/utilities'
 import { icons } from '../utils/icons'
 
 class Delivery extends Component {
@@ -139,6 +139,16 @@ class Delivery extends Component {
             ? await this.props.onPostDeliveryInfo(formData)
             : await this.props.onUpdateDeliveryInfo(this.state.submitStatus.deliveryInfoId, formData)
 
+        if (!this.props.error) {
+            alert.fire({
+                title: 'Success!',
+                icon: 'success',
+                iconColor: '#f0e787',
+                confirmButtonColor: '#f0e787',
+                confirmButtonText: 'OK!',
+            })
+        }
+
         this.initFormHandler()
     }
 
@@ -181,36 +191,60 @@ class Delivery extends Component {
     }
 
     deleteDeliveryInfoHandler = DID => {
-        if (window.confirm('Are you sure you wish to delete this address?')) {
-            this.props.onDeleteDeliveryInfo(DID)
-        }
+        alert
+            .fire({
+                title: 'Hey...',
+                text: 'Are you sure you wish to delete this address?',
+                cancelButtonColor: '#6e6e6e',
+                confirmButtonColor: '#f0e787',
+                showCancelButton: true,
+                confirmButtonText: 'YES!',
+                cancelButtonText: 'NO!',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    this.props.onDeleteDeliveryInfo(DID)
+                }
+            })
 
         this.initFormHandler()
     }
 
     getUpdateDeliveryInfoHandler = DID => {
-        if (window.confirm('Are you sure you wish to update this address?')) {
-            const updatedDeliveryInfo = this.props.deliveryInfoList.find(info => {
-                return info._id === DID
+        alert
+            .fire({
+                title: 'Hey...',
+                text: 'Are you sure you wish to update this address?',
+                cancelButtonColor: '#6e6e6e',
+                confirmButtonColor: '#f0e787',
+                showCancelButton: true,
+                confirmButtonText: 'YES!',
+                cancelButtonText: 'NO!',
             })
+            .then(result => {
+                if (result.isConfirmed) {
+                    const updatedDeliveryInfo = this.props.deliveryInfoList.find(info => {
+                        return info._id === DID
+                    })
 
-            this.props.onInitDeliveryInfoError()
+                    this.props.onInitDeliveryInfoError()
 
-            const updatedControls = updateObj(this.state.controls, {
-                firstName: { ...this.state.controls.firstName, val: updatedDeliveryInfo.firstName },
-                lastName: { ...this.state.controls.lastName, val: updatedDeliveryInfo.lastName },
-                phone: { ...this.state.controls.phone, val: updatedDeliveryInfo.phone },
-                address: { ...this.state.controls.address, val: updatedDeliveryInfo.address },
-                district: { ...this.state.controls.district, val: updatedDeliveryInfo.district },
-                city: { ...this.state.controls.city, val: updatedDeliveryInfo.city },
-                postalCode: { ...this.state.controls.postalCode, val: updatedDeliveryInfo.postalCode },
+                    const updatedControls = updateObj(this.state.controls, {
+                        firstName: { ...this.state.controls.firstName, val: updatedDeliveryInfo.firstName },
+                        lastName: { ...this.state.controls.lastName, val: updatedDeliveryInfo.lastName },
+                        phone: { ...this.state.controls.phone, val: updatedDeliveryInfo.phone },
+                        address: { ...this.state.controls.address, val: updatedDeliveryInfo.address },
+                        district: { ...this.state.controls.district, val: updatedDeliveryInfo.district },
+                        city: { ...this.state.controls.city, val: updatedDeliveryInfo.city },
+                        postalCode: { ...this.state.controls.postalCode, val: updatedDeliveryInfo.postalCode },
+                    })
+
+                    this.setState({
+                        controls: updatedControls,
+                        submitStatus: { ...this.state.submitStatus, addNewDeliveryInfo: false, deliveryInfoId: DID },
+                    })
+                }
             })
-
-            this.setState({
-                controls: updatedControls,
-                submitStatus: { ...this.state.submitStatus, addNewDeliveryInfo: false, deliveryInfoId: DID },
-            })
-        }
     }
 
     cancelUpdateHandler = () => {

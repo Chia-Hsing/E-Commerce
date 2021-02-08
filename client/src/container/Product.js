@@ -82,15 +82,16 @@ class Product extends Component {
         return {}
     }
 
-    onAlertHandler = () => {
+    onAlertHandler = mag => {
         alert
             .fire({
                 title: 'Oops...',
-                text: this.props.error,
+                text: mag,
                 icon: 'warning',
                 iconHtml: '!',
-                iconColor: '#2a2c30',
+                iconColor: '#f0e787',
                 confirmButtonText: 'redirect to homepage',
+                confirmButtonColor: '#f0e787',
             })
             .then(result => {
                 if (result.isConfirmed) {
@@ -103,7 +104,7 @@ class Product extends Component {
         let product = <Spinner loading={this.props.loading} />
 
         if (this.props.error) {
-            this.onAlertHandler()
+            this.onAlertHandler(this.props.error)
             this.props.history.push('/')
         }
 

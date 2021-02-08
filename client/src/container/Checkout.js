@@ -4,6 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 
 import CheckoutSummary from '../components/Order/CheckoutSummary'
 import CheckoutInfo from '../components/Order/CheckoutInfo'
+import { alert } from '../utils/utilities'
 import * as actions from '../store/actions/index'
 import '../scss/checkout.scss'
 
@@ -31,12 +32,34 @@ class Checkout extends Component {
     }
 
     cancelCheckout = (items, totalAmount, totalQuantity, shippingDetail) => {
-        if (window.confirm('Do you really want to cancel this order?')) {
-            const order = { items, totalAmount, totalQuantity, shippingDetail }
+        alert
+            .fire({
+                title: 'Hey...',
+                text: 'Do you really want to cancel this order?',
+                cancelButtonColor: '#6e6e6e',
+                confirmButtonColor: '#f0e787',
+                showCancelButton: true,
+                confirmButtonText: 'YES!',
+                cancelButtonText: 'NO!',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    const order = { items, totalAmount, totalQuantity, shippingDetail }
+                    this.props.onPostOrder(order, 'canceled')
+                    this.props.onCleanBag()
+                    this.props.history.push('/')
+                }
+            })
+    }
 
-            this.props.onPostOrder(order, 'canceled')
-            this.props.onCleanBag()
-            this.props.history.push('/')
+    onPaymentProcessHandler = () => {
+        if (Object.keys(this.props.shippingDetail) <= 0) {
+            alert.fire({
+                title: 'Hey...',
+                text: 'You must select a shipping option or create one before continuing.',
+                confirmButtonText: 'GOT IT!',
+                confirmButtonColor: '#f0e787',
+            })
         }
     }
 
@@ -48,7 +71,7 @@ class Checkout extends Component {
                         <CheckoutSummary bagItems={this.props.bagItems} />
                     </div>
                 </div>
-                <h6 className="itemsTotal">ITEMS TOTAL: ￥{this.state.totalAmount}</h6>
+                <h6 className="itemsTotal">ITEMS TOTAL: ￥{this.props.totalAmount}</h6>
             </section>
         )
 
@@ -59,7 +82,7 @@ class Checkout extends Component {
                     email={this.props.userProfile.email}
                     deliveryInfoList={this.props.deliveryInfoList}
                     ticked={this.onTickHandler}
-                    selectedId={this.state.currentSelectedId}
+                    selectedId={this.props.selectedShippingDetailId}
                 />
             </section>
         )
@@ -71,7 +94,11 @@ class Checkout extends Component {
                     {checkoutSummary}
                     {checkoutInfo}
                     <div className="buttonGround">
-                        {this.props.deliveryInfoList.length <= 0 ? null : <button id="pay">pay</button>}
+                        {this.props.deliveryInfoList.length <= 0 ? null : (
+                            <button id="pay" onClick={this.onPaymentProcessHandler}>
+                                pay
+                            </button>
+                        )}
 
                         <button
                             id="cancel"
@@ -103,6 +130,7 @@ const mapStateToProps = state => {
         userProfile: state.user.userProfile,
         deliveryInfoList: state.user.deliveryInfoList,
         shippingDetail: state.order.shippingDetail,
+        selectedShippingDetailId: state.order.shippingDetail._id,
     }
 }
 

@@ -7,12 +7,12 @@ export const addItemToBag = (id, itemStock, itemSize, oldToken) => {
 
 export const deleteItemFromBag = (id, itemSize, oldToken) => {
     const productDetail = { oldToken, itemSize }
-    return apiHelper.put(`/bag/${id}`, productDetail)
+    return apiHelper.patch(`/bag/${id}`, productDetail)
 }
 
 export const removeWholeItem = (id, itemSize, oldToken) => {
     const productDetail = { oldToken, itemSize }
-    return apiHelper.put(`/bag/remove/${id}`, productDetail)
+    return apiHelper.patch(`/bag/remove/${id}`, productDetail)
 }
 
 export const cleanBag = () => {
