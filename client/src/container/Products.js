@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 import * as actions from '../store/actions/index'
 import SingleItem from '../components/Products/SingleItem'
 import { alert, arrayBufferToBase64Img } from '../utils/utilities'
-import Spinner from '../components/UI/Spinner'
 import BreadCrumb from '../components/UI/Breadcrumb'
+import Skeleton from 'react-loading-skeleton'
 import '../scss/products.scss'
 
 class Products extends Component {
@@ -86,7 +86,21 @@ class Products extends Component {
     }
 
     render() {
-        let products = <Spinner loading={this.props.loading} />
+        let products = Array(6)
+            .fill()
+            .map((item, i) => {
+                return (
+                    <div className="single-item-box">
+                        <Skeleton width={300} height={190} />
+                        <div className="single-item-box-line">
+                            <Skeleton width={260} height={25} />
+                        </div>
+                        <div className="single-item-box-line">
+                            <Skeleton width={80} height={25} />
+                        </div>
+                    </div>
+                )
+            })
         let moreProductsButton = null
 
         // if there is a error.
@@ -136,7 +150,15 @@ class Products extends Component {
 
         return (
             <section>
-                <BreadCrumb gender={this.state.gender} category={this.state.category} />
+                {this.props.products.length <= 0 && !this.props.isNoItem ? (
+                    <div className="breadCrumbWrap">
+                        <ul className="breadCrumb">
+                            <Skeleton width={170} height={30} />
+                        </ul>
+                    </div>
+                ) : (
+                    <BreadCrumb gender={this.state.gender} category={this.state.category} />
+                )}
 
                 <div className="products-container">{products}</div>
                 {moreProductsButton}

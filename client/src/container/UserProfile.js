@@ -69,7 +69,7 @@ class UserProfile extends Component {
         this.setState({ controls: updatedControls })
     }
 
-    submitHandler = e => {
+    submitHandler = async e => {
         e.preventDefault()
         const target = e.target
 
@@ -85,9 +85,9 @@ class UserProfile extends Component {
             headers: { 'content-type': 'multipart/form-data' },
         }
 
-        this.props.onUpdateUserProfile(formData, config)
+        await this.props.onUpdateUserProfile(formData, config)
 
-        if (!this.props.error) {
+        if (this.props.error === null) {
             alert.fire({
                 title: 'Success!',
                 icon: 'success',

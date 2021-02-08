@@ -71,7 +71,7 @@ export const postDeliveryInfo = formData => async dispatch => {
             }
         }
 
-        dispatch(getDeliveryInfo())
+        await dispatch(getDeliveryInfo())
     } catch (error) {
         dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
@@ -81,7 +81,7 @@ export const deleteDeliveryInfo = DID => async dispatch => {
     try {
         await apis.deleteDeliveryInfo(DID)
 
-        dispatch(getDeliveryInfo())
+        await dispatch(getDeliveryInfo())
     } catch (error) {
         dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
@@ -101,7 +101,7 @@ export const updateDeliveryInfo = (DID, formData) => async dispatch => {
             }
         }
 
-        dispatch(getDeliveryInfo())
+        await dispatch(getDeliveryInfo())
     } catch (error) {
         dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }

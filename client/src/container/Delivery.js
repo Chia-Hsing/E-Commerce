@@ -135,11 +135,13 @@ class Delivery extends Component {
 
         const formData = { firstName, lastName, phone, address, district, city, postalCode }
 
-        this.state.submitStatus.addNewDeliveryInfo === true
-            ? await this.props.onPostDeliveryInfo(formData)
-            : await this.props.onUpdateDeliveryInfo(this.state.submitStatus.deliveryInfoId, formData)
+        if (this.state.submitStatus.addNewDeliveryInfo === true) {
+            await this.props.onPostDeliveryInfo(formData)
+        } else {
+            await this.props.onUpdateDeliveryInfo(this.state.submitStatus.deliveryInfoId, formData)
+        }
 
-        if (!this.props.error) {
+        if (this.props.error === null) {
             alert.fire({
                 title: 'Success!',
                 icon: 'success',
@@ -147,9 +149,9 @@ class Delivery extends Component {
                 confirmButtonColor: '#f0e787',
                 confirmButtonText: 'OK!',
             })
-        }
 
-        this.initFormHandler()
+            this.initFormHandler()
+        }
     }
 
     initFormHandler = e => {
@@ -249,6 +251,7 @@ class Delivery extends Component {
 
     cancelUpdateHandler = () => {
         this.initFormHandler()
+        this.props.onInitDeliveryInfoError()
     }
 
     closeDeliveryInfoSection = () => {
