@@ -1,5 +1,6 @@
 const sharp = require('sharp')
 const DeliveryInfo = require('../models/deliveryInfo')
+const Order = require('../models/order')
 
 const getUserProfile = (req, res) => {
     const user = req.user
@@ -97,15 +98,13 @@ const updateDeliveryInfo = async (req, res) => {
     }
 }
 
-// const getUserOrder = (req, res) => {
-//     return
-// }
-// const getUserCanceledOrder = (req, res) => {
-//     return
-// }
-// const putUserOrderHistory = (req, res) => {
-//     return
-// }
+const getUserOrder = async (req, res) => {
+    const { status } = req.query
+
+    const userOrders = await Order.find({ paymentStatus: status })
+
+    return res.status(200).json({ status: 'success', userOrders, message: 'Get user Orders success!' })
+}
 
 module.exports = {
     getUserProfile,
@@ -114,7 +113,5 @@ module.exports = {
     postDeliveryInfo,
     deleteDeliveryInfo,
     updateDeliveryInfo,
-    // getUserOrder,
-    // getUserCanceledOrder,
-    // putUserOrderHistory,
+    getUserOrder,
 }

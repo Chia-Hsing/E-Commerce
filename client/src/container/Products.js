@@ -42,8 +42,8 @@ class Products extends Component {
                     gender,
                     category,
                 }),
-                () => {
-                    this.props.onGetProducts(gender, category, pageItemsLimit, this.state.page)
+                async () => {
+                    await this.props.onGetProducts(gender, category, pageItemsLimit, this.state.page)
                 }
             )
         } catch (e) {}
@@ -90,7 +90,7 @@ class Products extends Component {
             .fill()
             .map((item, i) => {
                 return (
-                    <div className="single-item-box">
+                    <div key={i} className="single-item-box">
                         <Skeleton width={300} height={190} />
                         <div className="single-item-box-line">
                             <Skeleton width={260} height={25} />

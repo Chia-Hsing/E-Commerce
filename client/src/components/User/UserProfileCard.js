@@ -12,7 +12,7 @@ const UserProfileCard = props => {
             </div>
             <div className="link">
                 <NavLink to="/user/profile">PROFILE</NavLink>
-                <NavLink to="/user/order">ORDER</NavLink>
+                <NavLink to="/user/order?status=canceled">ORDER</NavLink>
             </div>
         </div>
     )

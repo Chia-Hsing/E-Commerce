@@ -23,3 +23,7 @@ export const updateDeliveryInfo = (DID, formData) => {
 export const deleteDeliveryInfo = DID => {
     return apiHelper.delete(`/user/deliveryInfo/${DID}`)
 }
+
+export const getUserCanceledOrder = status => {
+    return apiHelper.get(`/user/order?status=${status}`)
+}

@@ -10,5 +10,6 @@ export {
     postDeliveryInfo,
     deleteDeliveryInfo,
     updateDeliveryInfo,
+    getUserCanceledOrder,
 } from './user'
 export { setOrder, addShippingDetail, postOrder } from './order'

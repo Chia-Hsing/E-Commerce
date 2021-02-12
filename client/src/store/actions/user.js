@@ -106,3 +106,10 @@ export const updateDeliveryInfo = (DID, formData) => async dispatch => {
         dispatch({ type: actionTypes.GET_USER_DELIVERY_INFO_FAILED, error: error.message })
     }
 }
+
+export const getUserCanceledOrder = status => async dispatch => {
+    try {
+        const canceledOrder = await apis.getUserCanceledOrder(status)
+        console.log(canceledOrder)
+    } catch (error) {}
+}

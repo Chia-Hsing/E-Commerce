@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
+import UserOrdersBar from '../components/User/UserOrdersBar'
 import { arrayBufferToBase64Img } from '../utils/utilities'
 import * as actions from '../store/actions/index'
 import '../scss/userProfile.scss'
@@ -9,6 +11,23 @@ import '../scss/userProfile.scss'
 class OrderManagement extends Component {
     async componentDidMount() {
         await this.props.onGetUserProfile()
+        await this.getOrdersHandler()
+    }
+
+    getOrdersHandler = async () => {
+        const search = this.props.location.search
+        const query = new URLSearchParams(search)
+
+        for (let param of query.entries()) {
+            const orderStatus = param[1]
+            await this.props.onGetUserCanceledOrder(orderStatus)
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.location.search !== prevProps.location.search) {
+            this.getOrdersHandler()
+        }
     }
 
     render() {
@@ -24,10 +43,13 @@ class OrderManagement extends Component {
         const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
 
         return (
-            <>
+            <section className="userProfileWrap">
                 <h4>ACCOUNT DASHBOARD</h4>
                 <div className="userContainer">{userProfileCard}</div>
-            </>
+                <div>
+                    <UserOrdersBar />
+                </div>
+            </section>
         )
     }
 }
@@ -42,7 +64,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
+        onGetUserCanceledOrder: status => dispatch(actions.getUserCanceledOrder(status)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderManagement)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderManagement))

@@ -21,7 +21,7 @@ const routes = [
     { path: '/auth/signup', exact: true, name: 'signup', Component: Signup },
     { path: '/auth/login', exact: true, name: 'login', Component: Login },
     { path: '/user/profile', exact: false, name: 'user', Component: UserProfile },
-    { path: '/user/order', exact: true, name: 'user', Component: OrderManagement },
+    { path: '/user/order', exact: false, name: 'user', Component: OrderManagement },
     { path: '/products', exact: true, name: 'products', Component: Products },
     { path: '/products/product/:PID', exact: true, name: 'product', Component: Product },
     { path: '/shopping-bag', exact: true, name: 'shopping-bag', Component: ShoppingBag },

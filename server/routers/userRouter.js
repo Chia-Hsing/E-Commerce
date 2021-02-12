@@ -27,8 +27,6 @@ router.patch(
     userController.updateDeliveryInfo
 )
 
-// router.get('/order', auth, userController.getUserOrder)
-// router.get('/canceledOrder', auth, userController.getUserCanceledOrder)
-// router.get('/history', auth, userController.putUserOrderHistory)
+router.get('/order', auth, userController.getUserOrder)
 
 module.exports = router
