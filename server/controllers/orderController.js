@@ -16,8 +16,7 @@ const postOrder = async (req, res) => {
 
         await order.save(error => {
             if (error) {
-                console.log(error)
-                return
+                return res.json({ status: 'error', message: error.message })
             }
         })
 
@@ -29,8 +28,6 @@ const postOrder = async (req, res) => {
 
 const deleteOrder = async (req, res) => {
     const UID = req.params.UID
-
-    console.log(UID)
 
     const pendingOrder = await Order.findOne({ customer: UID })
 

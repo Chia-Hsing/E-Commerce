@@ -99,11 +99,17 @@ const updateDeliveryInfo = async (req, res) => {
 }
 
 const getUserOrder = async (req, res) => {
-    const { status } = req.query
+    const userId = req.user._id
 
-    const userOrders = await Order.find({ paymentStatus: status })
+    const userOrder = await Order.find({ customer: userId }).select([
+        'items',
+        'totalAmount',
+        'totalQuantity',
+        '_id',
+        'paymentStatus',
+    ])
 
-    return res.status(200).json({ status: 'success', userOrders, message: 'Get user Orders success!' })
+    return res.status(200).json({ status: 'success', userOrder, message: 'Get user Orders success!' })
 }
 
 module.exports = {

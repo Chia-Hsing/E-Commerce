@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const UserOrdersBar = props => {
+const UserOrderBar = props => {
     return (
-        <nav>
+        <nav className="orderNav">
             <NavLink
                 active="true"
                 to={{
@@ -25,4 +25,4 @@ const UserOrdersBar = props => {
     )
 }
 
-export default UserOrdersBar
+export default UserOrderBar

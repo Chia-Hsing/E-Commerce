@@ -1,0 +1,43 @@
+@import 'variables';
+@import 'mixins';
+
+.userProfileWrap {
+    @include WL(max, 83%);
+    min-height: 68vh;
+    padding: 1em;
+    margin: 1em auto 0;
+
+    .spinner {
+        @include spinner;
+    }
+
+    h4 {
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+
+    .orderContainer {
+        @include display-flex(row, space-around, flex-start);
+        border-top: 1px solid color(lighter-grey);
+
+        .userProfileCard {
+            @include userProfileCard;
+        }
+
+        .orderDetail {
+            .orderNav {
+                @include display-flex(row, space-between);
+                @include WL(min, 50%);
+                margin: 1rem auto;
+                padding: 1rem;
+                border: 1px solid #000;
+            }
+
+            flex-basis: 60%;
+            border-radius: 5px;
+            position: relative;
+            padding: 1rem;
+            border: 1px solid #000;
+        }
+    }
+}

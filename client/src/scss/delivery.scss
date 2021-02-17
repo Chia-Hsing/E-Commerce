@@ -82,75 +82,7 @@
             text-align: left;
         }
 
-        & .inputBody {
-            @include WL(max, 90%, 70px);
-            display: block;
-            position: relative;
-            margin: 0 auto;
-
-            & input {
-                @include WL(max, 100%, 100%);
-                color: color(light-grey);
-                padding-top: 20px;
-                border: none;
-                outline: none;
-            }
-
-            & label {
-                color: color(heavy-grey);
-                position: absolute;
-                bottom: 0px;
-                left: 0%;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                border-bottom: 1px solid color(light-grey);
-            }
-
-            & label::after {
-                content: '';
-                position: absolute;
-                bottom: -1px;
-                left: 0;
-                height: 100%;
-                width: 0%;
-                border-bottom: 3px solid color(yellow);
-                transition: all 0.3s ease;
-            }
-
-            .errorMSG {
-                position: absolute;
-                color: color(heavy-grey);
-                font-size: size(xs);
-                bottom: 5px;
-                right: 0;
-            }
-
-            .contentName {
-                position: absolute;
-                bottom: 5px;
-                left: 0;
-                transition: all 0.3s ease;
-            }
-            & input:not(:placeholder-shown) + .labelName .contentName,
-            & input:focus + .labelName .contentName {
-                transform: translateY(-150%);
-                font-size: 14px;
-                color: color(yellow);
-            }
-
-            & input:not(:placeholder-shown) + .labelName::after,
-            & input:focus + .labelName::after {
-                width: 100%;
-            }
-            input.invalid + label::after {
-                border-bottom: 3px solid color(red);
-            }
-
-            input.invalid + .labelName .contentName {
-                color: color(red);
-            }
-        }
+        @include inputForm;
 
         .btgp {
             button {

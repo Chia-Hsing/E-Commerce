@@ -6,10 +6,10 @@ import { checkBagFromLS } from '../../utils/utilities'
 export const setOrder = () => async dispatch => {
     try {
         const {
-            items: { bag },
+            items: { bag, totalQuantity, totalAmount },
         } = await checkBagFromLS()
 
-        dispatch({ type: actionTypes.SET_ORDER_SUCCESS, items: bag })
+        dispatch({ type: actionTypes.SET_ORDER_SUCCESS, items: bag, totalQuantity, totalAmount })
     } catch (error) {
         dispatch({ type: actionTypes.SET_ORDER_FAILED, error: error.message })
     }
@@ -19,14 +19,20 @@ export const addShippingDetail = detail => dispatch => {
     dispatch({ type: actionTypes.SET_SHIPPING_DETAIL_SUCCESS, shippingDetail: detail })
 }
 
-export const postOrder = (order, status) => async dispatch => {
+export const postOrder = (order, orderStatus) => async dispatch => {
     try {
-        await apis.postOrder(order, status)
-        dispatch({ type: actionTypes.POST_ORDER_SUCCESS, order, status })
-    } catch (error) {}
-}
+        const {
+            data: { status },
+            statusText,
+            message,
+        } = await apis.postOrder(order, orderStatus)
 
-// export const paymentProgress = () => async dispatch => {
-//     try {
-//     } catch (error) {}
-// }
+        if (status !== 'success' || statusText !== 'OK') {
+            return dispatch({ type: actionTypes.POST_ORDER_FAILED, error: message })
+        }
+
+        dispatch({ type: actionTypes.POST_ORDER_SUCCESS })
+    } catch (error) {
+        return dispatch({ type: actionTypes.POST_ORDER_FAILED, error: error.message })
+    }
+}

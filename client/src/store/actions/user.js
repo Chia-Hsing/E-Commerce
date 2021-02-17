@@ -107,9 +107,19 @@ export const updateDeliveryInfo = (DID, formData) => async dispatch => {
     }
 }
 
-export const getUserCanceledOrder = status => async dispatch => {
+export const getUserOrder = () => async dispatch => {
     try {
-        const canceledOrder = await apis.getUserCanceledOrder(status)
-        console.log(canceledOrder)
-    } catch (error) {}
+        const {
+            data: { userOrder, status, message },
+            statusText,
+        } = await apis.getUserOrder()
+
+        if (status !== 'success' || statusText !== 'OK') {
+            return dispatch({ type: actionTypes.GET_USER_ORDER_FAILED, error: message })
+        }
+
+        dispatch({ type: actionTypes.GET_USER_ORDER_SUCCESS, userOrder })
+    } catch (error) {
+        dispatch({ type: actionTypes.GET_USER_ORDER_FAILED, error: error.message })
+    }
 }

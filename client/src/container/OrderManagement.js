@@ -3,30 +3,44 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
-import UserOrdersBar from '../components/User/UserOrdersBar'
+import UserOrderBar from '../components/User/UserOrderBar'
+import UserOrderItem from '../components/User/UserOrderItem'
 import { arrayBufferToBase64Img } from '../utils/utilities'
 import * as actions from '../store/actions/index'
-import '../scss/userProfile.scss'
+import '../scss/orderManagement.scss'
 
 class OrderManagement extends Component {
+    state = { selectedOrder: [] }
+
     async componentDidMount() {
         await this.props.onGetUserProfile()
-        await this.getOrdersHandler()
+        await this.getOrderHandler()
+
+        const orders = this.props.userOrder.filter(order => {
+            return order.paymentStatus === 'canceled'
+        })
+
+        this.setState({ selectedOrder: orders })
     }
 
-    getOrdersHandler = async () => {
-        const search = this.props.location.search
-        const query = new URLSearchParams(search)
-
-        for (let param of query.entries()) {
-            const orderStatus = param[1]
-            await this.props.onGetUserCanceledOrder(orderStatus)
-        }
+    getOrderHandler = async () => {
+        await this.props.onGetUserOrder()
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.location.search !== prevProps.location.search) {
-            this.getOrdersHandler()
+            const search = this.props.location.search
+            const query = new URLSearchParams(search)
+
+            for (let param of query.entries()) {
+                const orderStatus = param[1]
+                console.log(orderStatus)
+                const orders = this.props.userOrder.filter(order => {
+                    return order.paymentStatus === orderStatus
+                })
+
+                this.setState({ selectedOrder: orders })
+            }
         }
     }
 
@@ -42,12 +56,31 @@ class OrderManagement extends Component {
 
         const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
 
+        this.state.selectedOrder.forEach(order => order.items)
+
+        let userOrder = this.state.selectedOrder.map((order, i) => {
+            return (
+                <div key={i}>
+                    <div>
+                        {order.items.map((item, i) => {
+                            return <UserOrderItem key={i} item={item} />
+                        })}
+                    </div>
+                    <span>{order.totalQuantity}</span>
+                    <span>{order.totalAmount}</span>
+                </div>
+            )
+        })
+
         return (
             <section className="userProfileWrap">
                 <h4>ACCOUNT DASHBOARD</h4>
-                <div className="userContainer">{userProfileCard}</div>
-                <div>
-                    <UserOrdersBar />
+                <div className="orderContainer">
+                    {userProfileCard}
+                    <div className="orderDetail">
+                        <UserOrderBar />
+                        {userOrder}
+                    </div>
                 </div>
             </section>
         )
@@ -58,13 +91,14 @@ const mapStateToProps = state => {
     return {
         error: state.user.error,
         userProfile: state.user.userProfile,
+        userOrder: state.user.userOrder,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
-        onGetUserCanceledOrder: status => dispatch(actions.getUserCanceledOrder(status)),
+        onGetUserOrder: () => dispatch(actions.getUserOrder()),
     }
 }
 

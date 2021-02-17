@@ -24,6 +24,6 @@ export const deleteDeliveryInfo = DID => {
     return apiHelper.delete(`/user/deliveryInfo/${DID}`)
 }
 
-export const getUserCanceledOrder = status => {
-    return apiHelper.get(`/user/order?status=${status}`)
+export const getUserOrder = () => {
+    return apiHelper.get(`/user/order`)
 }

@@ -4,6 +4,7 @@ import { updateObj } from '../../utils/utilities'
 const initialState = {
     userProfile: {},
     deliveryInfoList: [],
+    userOrder: [],
     error: null,
 }
 
@@ -28,6 +29,9 @@ const getDeliveryInfoFailed = (state, action) => {
     return updateObj(state, { error: action.error })
 }
 
+const getUserOrderSuccess = (state, action) => {
+    return updateObj(state, { userOrder: action.userOrder })
+}
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_USER_PROFILE_SUCCESS:
@@ -40,6 +44,8 @@ const reducer = (state = initialState, action) => {
             return getDeliveryInfoSuccess(state, action)
         case actionTypes.GET_USER_DELIVERY_INFO_FAILED:
             return getDeliveryInfoFailed(state, action)
+        case actionTypes.GET_USER_ORDER_SUCCESS:
+            return getUserOrderSuccess(state, action)
         default:
             return state
     }
