@@ -95,6 +95,22 @@
     margin: 0 auto;
 }
 
+@mixin navActive {
+    a {
+        text-decoration: none;
+        color: color(heavy-grey);
+        transition: 0.4s;
+
+        &:hover {
+            color: color(yellow);
+        }
+    }
+
+    a.active {
+        color: color(yellow);
+    }
+}
+
 @mixin userProfileCard {
     @include display-flex(column, space-around, flex-start);
     flex-basis: 30%;
@@ -124,19 +140,7 @@
         @include WL(max, 100%, auto);
         padding: 1rem;
 
-        a {
-            text-decoration: none;
-            color: color(heavy-grey);
-            transition: 0.4s;
-
-            &:hover {
-                color: color(yellow);
-            }
-        }
-
-        a.active {
-            color: color(yellow);
-        }
+        @include navActive;
     }
 }
 

@@ -5,7 +5,7 @@ import '../../../scss/navigation.scss'
 const Logo = props => {
     return (
         <div className={props.class}>
-            <Link to="/">THREE BEATS</Link>
+            <Link to="/">TRIPLE TIME</Link>
         </div>
     )
 }

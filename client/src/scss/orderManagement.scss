@@ -25,19 +25,25 @@
         }
 
         .orderDetail {
-            .orderNav {
-                @include display-flex(row, space-between);
-                @include WL(min, 50%);
-                margin: 1rem auto;
-                padding: 1rem;
-                border: 1px solid #000;
-            }
-
             flex-basis: 60%;
             border-radius: 5px;
             position: relative;
-            padding: 1rem;
-            border: 1px solid #000;
+
+            .orderNav {
+                @include display-flex(row, flex-start);
+                @include WL(min, 100%);
+                @include navActive;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid color(lighter-grey);
+
+                .orderNavItem:first-child {
+                    margin-right: 2rem;
+                }
+            }
+
+            .orderDetailItem {
+                margin: 2rem 1rem;
+            }
         }
     }
 }

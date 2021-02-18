@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import UserProfileCard from '../components/User/UserProfileCard'
-import UserOrderBar from '../components/User/UserOrderBar'
+import UserOrderNav from '../components/User/UserOrderNav'
 import UserOrderItem from '../components/User/UserOrderItem'
 import { arrayBufferToBase64Img } from '../utils/utilities'
 import * as actions from '../store/actions/index'
@@ -34,7 +34,6 @@ class OrderManagement extends Component {
 
             for (let param of query.entries()) {
                 const orderStatus = param[1]
-                console.log(orderStatus)
                 const orders = this.props.userOrder.filter(order => {
                     return order.paymentStatus === orderStatus
                 })
@@ -60,7 +59,7 @@ class OrderManagement extends Component {
 
         let userOrder = this.state.selectedOrder.map((order, i) => {
             return (
-                <div key={i}>
+                <div key={i} className="orderDetailItem">
                     <div>
                         {order.items.map((item, i) => {
                             return <UserOrderItem key={i} item={item} />
@@ -68,6 +67,7 @@ class OrderManagement extends Component {
                     </div>
                     <span>{order.totalQuantity}</span>
                     <span>{order.totalAmount}</span>
+                    <button>reorder</button>
                 </div>
             )
         })
@@ -78,7 +78,7 @@ class OrderManagement extends Component {
                 <div className="orderContainer">
                     {userProfileCard}
                     <div className="orderDetail">
-                        <UserOrderBar />
+                        <UserOrderNav />
                         {userOrder}
                     </div>
                 </div>
