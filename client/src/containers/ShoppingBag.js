@@ -11,6 +11,7 @@ class ShoppingBag extends Component {
         if (nextProps.bagItems !== this.props.bagItems) {
             return true
         }
+        return false
     }
 
     onAddProductHandler = (PID, itemStock, itemSize) => {

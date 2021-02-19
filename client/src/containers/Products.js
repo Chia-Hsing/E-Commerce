@@ -67,16 +67,15 @@ class Products extends Component {
         }
     }
 
-    onAlertHandler = mag => {
+    errorAlertHandler = msg => {
         alert
             .fire({
                 title: 'Oops...',
-                text: mag,
+                text: msg,
                 icon: 'warning',
                 iconHtml: '!',
-                iconColor: '#f0e787',
+                iconColor: '#2a2c30',
                 confirmButtonText: 'redirect to homepage',
-                confirmButtonColor: '#f0e787',
             })
             .then(result => {
                 if (result.isConfirmed) {
@@ -105,7 +104,7 @@ class Products extends Component {
 
         // if there is a error.
         if (this.props.error) {
-            this.onAlertHandler(this.props.error)
+            this.errorAlertHandler(this.props.error)
             this.props.history.push('/')
         }
 

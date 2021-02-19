@@ -24,7 +24,7 @@ const SideDrawer = props => {
             <Logo class="logo-Side-Drawer" />
             <NavItems class="navItems-Side-Drawer" />
             {props.isAuthenticated ? (
-                <Logout class="logout-Side-Drawer" onLogout={props.onLogout} />
+                <Logout class="logout-Side-Drawer" logout={props.logout} />
             ) : (
                 <Login class="login-Side-Drawer" />
             )}

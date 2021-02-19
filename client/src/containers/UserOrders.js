@@ -6,6 +6,7 @@ import UserProfileCard from '../components/User/UserProfileCard'
 import UserOrderNav from '../components/User/UserOrderNav'
 import UserOrderItem from '../components/User/UserOrderItem'
 import { arrayBufferToBase64Img } from '../utils/utilities'
+import Spinner from '../components/UI/Spinner'
 import * as actions from '../store/actions/index'
 import '../scss/orderManagement.scss'
 
@@ -14,17 +15,13 @@ class OrderManagement extends Component {
 
     async componentDidMount() {
         await this.props.onGetUserProfile()
-        await this.getOrderHandler()
+        await this.props.onGetUserOrder()
 
         const orders = this.props.userOrder.filter(order => {
             return order.paymentStatus === 'canceled'
         })
 
         this.setState({ selectedOrder: orders })
-    }
-
-    getOrderHandler = async () => {
-        await this.props.onGetUserOrder()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -55,35 +52,43 @@ class OrderManagement extends Component {
 
         const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
 
-        this.state.selectedOrder.forEach(order => order.items)
-
-        let userOrder = this.state.selectedOrder.map((order, i) => {
+        let userOrderList = this.state.selectedOrder.map((order, i) => {
             return (
                 <div key={i} className="orderDetailItem">
-                    <div>
-                        {order.items.map((item, i) => {
-                            return <UserOrderItem key={i} item={item} />
-                        })}
+                    <div className="productBody">
+                        <div>
+                            {order.items.map((item, i) => {
+                                return <UserOrderItem key={i} item={item} />
+                            })}
+                        </div>
+                        <div className="total">
+                            <span id="totalQuantity">items: {order.totalQuantity}</span>
+                            <span id="totalAmount">amount: {order.totalAmount}</span>
+                        </div>
                     </div>
-                    <span>{order.totalQuantity}</span>
-                    <span>{order.totalAmount}</span>
-                    <button>reorder</button>
+                    <button onClick={this.props.onReorder}>reorder</button>
                 </div>
             )
         })
 
-        return (
-            <section className="userProfileWrap">
-                <h4>ACCOUNT DASHBOARD</h4>
-                <div className="orderContainer">
-                    {userProfileCard}
-                    <div className="orderDetail">
-                        <UserOrderNav />
-                        {userOrder}
+        let userOrder = <Spinner />
+
+        if (this.props.userOrder.length > 0) {
+            userOrder = (
+                <>
+                    <h4>ACCOUNT DASHBOARD</h4>
+                    <div className="orderContainer">
+                        {userProfileCard}
+                        <div className="orderDetail">
+                            <UserOrderNav />
+                            {userOrderList}
+                        </div>
                     </div>
-                </div>
-            </section>
-        )
+                </>
+            )
+        }
+
+        return <section className="userProfileWrap">{userOrder}</section>
     }
 }
 
@@ -99,6 +104,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
         onGetUserOrder: () => dispatch(actions.getUserOrder()),
+        onReorder: () => dispatch(actions.reorder()),
     }
 }
 

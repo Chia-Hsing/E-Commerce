@@ -36,3 +36,7 @@ export const postOrder = (order, orderStatus) => async dispatch => {
         return dispatch({ type: actionTypes.POST_ORDER_FAILED, error: error.message })
     }
 }
+
+export const clearOrder = () => dispatch => {
+    dispatch({ type: actionTypes.CLEAR_ORDER })
+}

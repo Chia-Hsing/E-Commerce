@@ -108,7 +108,7 @@ class UserProfile extends Component {
         this.props.history.replace('/user/profile/delivery')
     }
 
-    onErrorAlertHandler = msg => {
+    errorAlertHandler = msg => {
         alert
             .fire({
                 title: 'Oops...',
@@ -127,7 +127,7 @@ class UserProfile extends Component {
 
     render() {
         if (typeof this.props.error === 'string') {
-            this.onErrorAlertHandler(this.props.error)
+            this.errorAlertHandler(this.props.error)
             this.props.history.push('/')
         }
 

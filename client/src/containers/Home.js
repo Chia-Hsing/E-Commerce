@@ -14,13 +14,30 @@ export class Home extends Component {
         await this.props.onInitProducts()
     }
 
+    errorAlertHandler = msg => {
+        alert
+            .fire({
+                title: 'Oops...',
+                text: msg,
+                icon: 'warning',
+                iconHtml: '!',
+                iconColor: '#2a2c30',
+                confirmButtonText: 'redirect to homepage',
+            })
+            .then(result => {
+                if (result.isConfirmed) {
+                    this.props.history.push('/')
+                }
+            })
+    }
+
     render() {
-        let mainPage
-        // = this.props.error ? <div> </div> : null
+        let mainPage = null
 
         if (this.props.mainCategories) {
             mainPage = (
                 <>
+                    {this.props.error ? this.errorAlertHandler(this.props.error) : null}
                     <MainCarousel />
                     <MerchandiseCarousel newArrival={this.props.newArrival} />
                     <CategoriesBanner mainCategories={this.props.mainCategories} />

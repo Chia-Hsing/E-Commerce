@@ -9,6 +9,6 @@ export const getMainMaterials = () => async dispatch => {
         } = res
         dispatch({ type: actionTypes.GET_MAIN_MATERIALS_SUCCESS, mainCategories, newArrival })
     } catch (error) {
-        dispatch({ type: actionTypes.GET_MAIN_MATERIALS_FAILED, error })
+        dispatch({ type: actionTypes.GET_MAIN_MATERIALS_FAILED, error: error.message })
     }
 }

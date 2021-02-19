@@ -123,3 +123,7 @@ export const getUserOrder = () => async dispatch => {
         dispatch({ type: actionTypes.GET_USER_ORDER_FAILED, error: error.message })
     }
 }
+
+export const clearUser = () => dispatch => {
+    dispatch({ type: actionTypes.CLEAR_USER })
+}

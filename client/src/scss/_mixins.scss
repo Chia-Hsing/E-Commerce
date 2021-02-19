@@ -70,10 +70,10 @@
 @mixin button {
     background-color: transparent;
     border: 1px solid color(heavy-grey);
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: size(s);
     color: color(heavy-grey);
-    margin: 20px 0;
+    margin: 15px 0;
     padding: 6px 15px;
     outline: none;
     transition: 0.7s;

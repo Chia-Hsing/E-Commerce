@@ -42,27 +42,7 @@ const deleteOrder = async (req, res) => {
     return
 }
 
-const getLatestOrder = (req, res) => {
-    return
-}
-
-const getEditLatestOrder = (req, res) => {
-    return
-}
-
-const putLatestOrder = (req, res) => {
-    return
-}
-
-const putCancelLatestOrder = (req, res) => {
-    return
-}
-
 module.exports = {
     postOrder,
     deleteOrder,
-    getLatestOrder,
-    getEditLatestOrder,
-    putLatestOrder,
-    putCancelLatestOrder,
 }

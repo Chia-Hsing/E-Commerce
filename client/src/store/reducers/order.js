@@ -56,6 +56,10 @@ const postOrderFailed = (state, action) => {
     })
 }
 
+const clearOrder = (state, action) => {
+    return initialState
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_ORDER_SUCCESS:
@@ -68,6 +72,8 @@ const reducer = (state = initialState, action) => {
             return postOrderSuccess(state, action)
         case actionTypes.POST_ORDER_FAILED:
             return postOrderFailed(state, action)
+        case actionTypes.CLEAR_ORDER:
+            return clearOrder(state, action)
         default:
             return state
     }

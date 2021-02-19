@@ -20,18 +20,24 @@ const Layout = props => {
         setDrawerOpen(false)
     }
 
+    const onLogoutHandler = async () => {
+        await props.onLogout()
+        await props.onClearUser()
+        await props.onClearOrder()
+    }
+
     return (
         <>
             <SideDrawer
                 isAuthenticated={props.isAuthenticated}
-                onLogout={() => props.onLogout()}
+                logout={onLogoutHandler}
                 close={() => drawerCloseHandler()}
                 show={drawerOpen}
             />
             <Backdrop close={() => drawerCloseHandler()} show={drawerOpen} />
             <NavBar
                 isAuthenticated={props.isAuthenticated}
-                onLogout={() => props.onLogout()}
+                logout={onLogoutHandler}
                 open={() => drawerToggleHandler()}
             />
             <main>{props.children}</main>
@@ -49,6 +55,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onLogout: () => dispatch(actions.logout()),
+        onClearUser: () => dispatch(actions.clearUser()),
+        onClearOrder: () => dispatch(actions.clearOrder()),
     }
 }
 

@@ -25,7 +25,6 @@ const NavItems = props => {
                 fifthItem="DRESSES"
                 gender="women"
             />
-            <NavItem>search</NavItem>
         </nav>
     )
 }

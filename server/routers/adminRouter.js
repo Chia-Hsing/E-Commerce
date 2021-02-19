@@ -12,10 +12,11 @@ router.post(
     validationMessage,
     adminController.postProduct
 )
+
+router.post('/category', validator.createNewCategory, validationMessage, adminController.postCategory)
+
 // router.get('/product')
 // router.put('/product')
 // router.delete('/product')
-
-router.post('/category', validator.createNewCategory, validationMessage, adminController.postCategory)
 
 module.exports = router

@@ -47,7 +47,7 @@
 
     .navItems {
         @include display-flex(row, space-around, none);
-        @include WL(min, 500px, 30px);
+        @include WL(min, 300px, 30px);
         box-sizing: border-box;
     }
 }

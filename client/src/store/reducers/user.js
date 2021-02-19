@@ -32,6 +32,11 @@ const getDeliveryInfoFailed = (state, action) => {
 const getUserOrderSuccess = (state, action) => {
     return updateObj(state, { userOrder: action.userOrder })
 }
+
+const clearUser = (state, action) => {
+    return initialState
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_USER_PROFILE_SUCCESS:
@@ -46,6 +51,8 @@ const reducer = (state = initialState, action) => {
             return getDeliveryInfoFailed(state, action)
         case actionTypes.GET_USER_ORDER_SUCCESS:
             return getUserOrderSuccess(state, action)
+        case actionTypes.CLEAR_USER:
+            return clearUser(state, action)
         default:
             return state
     }

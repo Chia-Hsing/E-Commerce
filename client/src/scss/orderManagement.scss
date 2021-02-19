@@ -42,7 +42,35 @@
             }
 
             .orderDetailItem {
-                margin: 2rem 1rem;
+                @include display-flex(row, space-around);
+                margin: 1.5rem 1rem;
+                padding: 1rem;
+                box-shadow: 2px 2px 5px -3px color(light-grey);
+
+                .productBody {
+                    flex-basis: 80%;
+                    .products {
+                        display: grid;
+                        grid-template-columns: 70% 15% 15%;
+
+                        #name {
+                            font-weight: weight(bold);
+                            justify-self: start;
+                        }
+                    }
+
+                    .total {
+                        @include WL(min, 60%);
+                        display: grid;
+                        margin-top: 1.5rem;
+                        grid-template-columns: 50% 50%;
+                        justify-items: start;
+
+                        span {
+                            color: color(yellow);
+                        }
+                    }
+                }
             }
         }
     }

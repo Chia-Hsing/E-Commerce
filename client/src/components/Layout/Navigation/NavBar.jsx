@@ -21,7 +21,7 @@ const NavBar = props => {
                 {props.isAuthenticated ? (
                     <>
                         <User class="user" />
-                        <Logout onLogout={props.onLogout} class="logout" />
+                        <Logout logout={props.logout} class="logout" />
                     </>
                 ) : (
                     <Login class="login" />

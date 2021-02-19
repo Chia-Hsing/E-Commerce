@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes'
 import { checkBagFromLS } from '../../utils/utilities'
-import * as bagApis from '../../apis/bag'
+import * as apis from '../../apis/bag'
 import jwt_decode from 'jwt-decode'
 
 export const setBagItems = () => async dispatch => {
@@ -41,7 +41,7 @@ export const addItemToBag = (PID, itemStock, itemSize) => async dispatch => {
         const {
             data: { token, status, message, error },
             statusText,
-        } = await bagApis.addItemToBag(PID, itemStock, itemSize, oldToken || {})
+        } = await apis.addItemToBag(PID, itemStock, itemSize, oldToken || {})
 
         if (status !== 'success' || statusText !== 'OK') {
             if (error) {
@@ -73,7 +73,7 @@ export const deleteItemFromBag = (PID, itemSize) => async dispatch => {
         const {
             data: { token, status, error },
             statusText,
-        } = await bagApis.deleteItemFromBag(PID, itemSize, oldToken || {})
+        } = await apis.deleteItemFromBag(PID, itemSize, oldToken || {})
 
         if (status !== 'success' || statusText !== 'OK') {
             if (error) {
@@ -109,7 +109,7 @@ export const removeWholeItem = (PID, itemSize) => async dispatch => {
         const {
             data: { token, status, error },
             statusText,
-        } = await bagApis.removeWholeItem(PID, itemSize, oldToken || {})
+        } = await apis.removeWholeItem(PID, itemSize, oldToken || {})
 
         if (status !== 'success' || statusText !== 'OK') {
             if (error) {
@@ -138,7 +138,14 @@ export const removeWholeItem = (PID, itemSize) => async dispatch => {
 export const cleanBag = () => async dispatch => {
     localStorage.removeItem('bagToken')
     // once edit the product in the bag, delete the pending order that already exists in the database.
-    await bagApis.cleanBag()
+    await apis.cleanBag()
     dispatch({ type: actionTypes.CLEAN_BAG_SUCCESS })
     dispatch({ type: actionTypes.INIT_PURCHASING })
+}
+
+export const reorder = PID => async dispatch => {
+    try {
+        await apis.addItemToBag(PID)
+        dispatch({ type: actionTypes.REORDER })
+    } catch (error) {}
 }
