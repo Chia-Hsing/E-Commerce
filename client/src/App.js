@@ -3,16 +3,16 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
-import Layout from './container/Layout'
-import Home from './container/Home'
-import Products from './container/Products'
-import Product from './container/Product'
-import ShoppingBag from './container/ShoppingBag'
-import Signup from './container/Signup'
-import Login from './container/Login'
-import UserProfile from './container/UserProfile'
-import OrderManagement from './container/OrderManagement'
-import Checkout from './container/Checkout'
+import Layout from './containers/Layout'
+import Home from './containers/Home'
+import Products from './containers/Products'
+import Product from './containers/Product'
+import ShoppingBag from './containers/ShoppingBag'
+import Signup from './containers/Signup'
+import Login from './containers/Login'
+import UserProfile from './containers/UserProfile'
+import UserOrders from './containers/UserOrders'
+import Checkout from './containers/Checkout'
 import * as actions from './store/actions/index'
 
 import './scss/CSSTransition.scss'
@@ -21,7 +21,7 @@ const routes = [
     { path: '/auth/signup', exact: true, name: 'signup', Component: Signup },
     { path: '/auth/login', exact: true, name: 'login', Component: Login },
     { path: '/user/profile', exact: false, name: 'user', Component: UserProfile },
-    { path: '/user/order', exact: false, name: 'user', Component: OrderManagement },
+    { path: '/user/orders', exact: false, name: 'user', Component: UserOrders },
     { path: '/products', exact: true, name: 'products', Component: Products },
     { path: '/products/product/:PID', exact: true, name: 'product', Component: Product },
     { path: '/shopping-bag', exact: true, name: 'shopping-bag', Component: ShoppingBag },

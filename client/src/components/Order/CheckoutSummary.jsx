@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CheckoutItem from '../Order/CheckoutItem'
+import CheckoutItem from './CheckoutItem'
 
 const CheckoutSummary = props => {
     const checkoutItems = props.bagItems.map(product => {

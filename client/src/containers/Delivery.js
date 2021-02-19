@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Input from '../components/UI/Input'
-import DeliveryInfoCard from '../components/User/DeliveryInfoCard'
+import DeliveryInfo from '../components/User/DeliveryInfo'
 import * as actions from '../store/actions/index'
 import { updateObj, checkValidity, alert } from '../utils/utilities'
 import { icons } from '../utils/icons'
@@ -291,7 +291,7 @@ class Delivery extends Component {
         if (this.props.deliveryInfoList.length > 0) {
             deliveryInfoCard = this.props.deliveryInfoList.map(info => {
                 return (
-                    <DeliveryInfoCard
+                    <DeliveryInfo
                         key={info._id}
                         DID={info._id}
                         list={info}

@@ -7,7 +7,7 @@ const UserOrderNav = props => {
             <div className="orderNavItem">
                 <NavLink
                     to={{
-                        pathname: `/user/order`,
+                        pathname: `/user/orders`,
                         search: `status=canceled`,
                     }}
                     isActive={(match, location) => {
@@ -26,7 +26,7 @@ const UserOrderNav = props => {
             <div className="orderNavItem">
                 <NavLink
                     to={{
-                        pathname: `/user/order/`,
+                        pathname: `/user/orders/`,
                         search: `status=paid`,
                     }}
                     isActive={(match, location) => {
