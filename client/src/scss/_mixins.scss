@@ -89,7 +89,7 @@
 }
 
 @mixin spinner {
-    @include WL(max, 40%);
+    @include WL(min, 100%);
     @include display-flex(column, center, center);
     min-height: inherit;
     margin: 0 auto;

@@ -3,6 +3,7 @@ const express = require('express')
 const bagController = require('../controllers/bagController')
 const validator = require('../middlewares/validator')
 const { bagItemToken, validationMessage } = require('../middlewares/middleware')
+const { auth } = require('../middlewares/middleware')
 
 const router = new express.Router()
 

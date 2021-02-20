@@ -54,7 +54,7 @@ const Footer = props => {
                 </div>
             </div>
             <div className="copyright">
-                <span>&copy; {new Date().getFullYear()} three beats</span>
+                <span>&copy; {new Date().getFullYear()} triple time</span>
             </div>
         </footer>
     )

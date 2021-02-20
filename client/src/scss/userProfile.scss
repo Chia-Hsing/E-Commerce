@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .userProfileWrap {
-    @include WL(max, 83%);
+    @include WL(min, 83%);
     min-height: 68vh;
     padding: 1em;
     margin: 1em auto 0;
@@ -85,4 +85,63 @@
         }
     }
     @import 'delivery';
+}
+
+@include response(l) {
+    .userProfileWrap {
+        @include WL(min, 90%);
+        min-height: 75vh;
+
+        .userContainer {
+            @include display-flex(column, flex-start);
+
+            .userProfileDetail {
+                @include WL(max, 60%);
+                min-height: auto;
+            }
+
+            .userProfileCard {
+                @include WL(max, 60%);
+                min-height: auto;
+            }
+        }
+    }
+}
+
+@include response(m) {
+    .userProfileWrap {
+        @include WL(min, 90%);
+
+        .userContainer {
+            @include display-flex(column, flex-start);
+
+            .userProfileDetail {
+                @include WL(max, 60%);
+                min-height: auto;
+            }
+
+            .userProfileCard {
+                @include WL(max, 60%);
+                min-height: auto;
+            }
+        }
+    }
+}
+
+@include response(s) {
+    .userProfileWrap {
+        @include WL(min, 90%);
+
+        .userContainer {
+            @include display-flex(column, flex-start);
+
+            .userProfileDetail {
+                @include WL(max, 100%);
+            }
+
+            .userProfileCard {
+                @include WL(max, 100%);
+            }
+        }
+    }
 }

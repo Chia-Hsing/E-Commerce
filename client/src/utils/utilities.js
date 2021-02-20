@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2'
 import jwt_decode from 'jwt-decode'
-import { Redirect } from 'react-router-dom'
 
 export const updateObj = (oldObj, updatedProperties) => {
     return {

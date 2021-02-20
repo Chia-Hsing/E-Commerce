@@ -52,7 +52,7 @@ class Checkout extends Component {
             })
     }
 
-    onPaymentProcessHandler = () => {
+    onPaymentProcessHandler = (items, totalAmount, totalQuantity, shippingDetail) => {
         if (Object.keys(this.props.shippingDetail) <= 0) {
             alert.fire({
                 title: 'Hey...',
@@ -60,6 +60,25 @@ class Checkout extends Component {
                 confirmButtonText: 'GOT IT!',
                 confirmButtonColor: '#f0e787',
             })
+        } else {
+            alert
+                .fire({
+                    title: 'Cheers!',
+                    text: 'Continue to payment process!',
+                    cancelButtonColor: '#6e6e6e',
+                    confirmButtonColor: '#f0e787',
+                    showCancelButton: true,
+                    confirmButtonText: 'YES!',
+                    cancelButtonText: 'NO!',
+                })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        const order = { items, totalAmount, totalQuantity, shippingDetail }
+                        this.props.onPostOrder(order, 'paid')
+                        this.props.onCleanBag()
+                        this.props.history.push('/')
+                    }
+                })
         }
     }
 
@@ -95,7 +114,17 @@ class Checkout extends Component {
                     {checkoutInfo}
                     <div className="buttonGround">
                         {this.props.deliveryInfoList.length <= 0 ? null : (
-                            <button id="pay" onClick={this.onPaymentProcessHandler}>
+                            <button
+                                id="pay"
+                                onClick={() =>
+                                    this.onPaymentProcessHandler(
+                                        this.props.items,
+                                        this.props.totalAmount,
+                                        this.props.totalQuantity,
+                                        this.props.shippingDetail
+                                    )
+                                }
+                            >
                                 pay
                             </button>
                         )}

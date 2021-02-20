@@ -142,10 +142,3 @@ export const cleanBag = () => async dispatch => {
     dispatch({ type: actionTypes.CLEAN_BAG_SUCCESS })
     dispatch({ type: actionTypes.INIT_PURCHASING })
 }
-
-export const reorder = PID => async dispatch => {
-    try {
-        await apis.addItemToBag(PID)
-        dispatch({ type: actionTypes.REORDER })
-    } catch (error) {}
-}

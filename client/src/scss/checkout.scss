@@ -109,8 +109,6 @@
                     input[type='radio'] {
                         color: color(yellow);
                         font-size: size(l);
-                        &:visited {
-                        }
                     }
 
                     a {
@@ -124,7 +122,7 @@
                     }
 
                     .deliveryInfoList {
-                        @include display-flex(column, center, flex-start);
+                        @include display-flex(column, flex-start, flex-start);
                         margin-left: 2rem;
                         span {
                             em,
@@ -146,6 +144,95 @@
         #pay,
         #cancel {
             @include button;
+        }
+    }
+}
+
+@include response(l) {
+    .checkout {
+        @include WL(max, 83%);
+        min-height: 80vh;
+
+        .checkoutInfoWrap {
+            .userInfoWrap {
+                @include WL(max, 90%);
+                grid-template-columns: 30% 70%;
+            }
+
+            .deliveryInfoWrap {
+                @include WL(max, 90%);
+                grid-template-columns: 30% 70%;
+            }
+        }
+    }
+}
+
+@include response(m) {
+    .checkout {
+        @include WL(max, 83%);
+        min-height: 80vh;
+
+        .checkoutInfoWrap {
+            .userInfoWrap {
+                @include WL(max, 90%);
+                grid-template-columns: 30% 70%;
+            }
+
+            .deliveryInfoWrap {
+                @include WL(max, 90%);
+                grid-template-columns: 30% 70%;
+            }
+        }
+    }
+}
+
+@include response(s) {
+    .checkout {
+        @include WL(max, 100%);
+        min-height: 80vh;
+
+        .checkoutItemsWrap {
+            .checkoutItemsContainer {
+                .checkoutItems {
+                    @include WL(max, 100%);
+                    padding: 0.5rem;
+
+                    .checkOutHeader {
+                        span {
+                            font-size: size(xxs);
+                            font-weight: weight(normal);
+                        }
+                    }
+
+                    .checkOutItem,
+                    .checkOutHeader {
+                        @include WL(max, 100%);
+                        margin: 0.5rem 0;
+                        font-size: size(xxs);
+                        font-weight: weight(light);
+                    }
+                }
+            }
+
+            .itemsTotal {
+                padding: 0.5rem;
+                font-size: size(xxs);
+                font-weight: weight(light);
+            }
+        }
+
+        .checkoutInfoWrap {
+            .userInfoWrap {
+                @include WL(max, 100%);
+                grid-template-columns: 30% 70%;
+                font-size: size(xxs);
+            }
+
+            .deliveryInfoWrap {
+                @include WL(max, 100%);
+                grid-template-columns: 30% 70%;
+                font-size: size(xxs);
+            }
         }
     }
 }

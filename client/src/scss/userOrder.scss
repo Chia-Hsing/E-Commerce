@@ -1,0 +1,103 @@
+@import 'variables';
+@import 'mixins';
+
+.orderContainer {
+    @include display-flex(row, space-around, flex-start);
+    border-top: 1px solid color(lighter-grey);
+
+    .userProfileCard {
+        @include userProfileCard;
+    }
+
+    .orderDetail {
+        flex-basis: 60%;
+        border-radius: 5px;
+        position: relative;
+
+        .orderNav {
+            @include display-flex(row, flex-start);
+            @include WL(min, 100%);
+            @include navActive;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid color(lighter-grey);
+
+            .orderNavItem:first-child {
+                margin-right: 2rem;
+            }
+        }
+
+        .orderDetailItem {
+            margin: 1.5rem 1rem;
+            padding: 1rem;
+            box-shadow: 2px 2px 5px -3px color(light-grey);
+
+            .productBody {
+                .products {
+                    display: grid;
+                    grid-template-columns: 70% 15% 15%;
+
+                    #name {
+                        font-weight: weight(bold);
+                        justify-self: start;
+                    }
+                }
+
+                .total {
+                    @include WL(min, 100%);
+                    display: grid;
+                    margin-top: 1.5rem;
+                    grid-template-columns: 50% 50%;
+                    justify-items: center;
+
+                    span {
+                        color: color(yellow);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include response(m) {
+    .orderContainer {
+        @include display-flex(column, flex-start);
+
+        .userProfileCard {
+            @include userProfileCard;
+        }
+
+        .orderDetail {
+            @include WL(max, 90%);
+            min-height: auto;
+        }
+    }
+}
+
+@include response(s) {
+    .orderContainer {
+        @include display-flex(column, flex-start);
+
+        .userProfileCard {
+            @include userProfileCard;
+        }
+
+        .orderDetail {
+            @include WL(max, 100%);
+            min-height: auto;
+
+            .orderDetailItem {
+                margin: 0;
+                .products {
+                    #name {
+                        font-weight: weight(light);
+                        font-size: size(xs);
+                    }
+                }
+
+                .total {
+                    font-size: size(xs);
+                }
+            }
+        }
+    }
+}

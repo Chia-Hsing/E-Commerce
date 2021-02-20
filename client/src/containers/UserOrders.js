@@ -8,7 +8,7 @@ import UserOrderItem from '../components/User/UserOrderItem'
 import { arrayBufferToBase64Img } from '../utils/utilities'
 import Spinner from '../components/UI/Spinner'
 import * as actions from '../store/actions/index'
-import '../scss/orderManagement.scss'
+import '../scss/userOrder.scss'
 
 class OrderManagement extends Component {
     state = { selectedOrder: [] }
@@ -66,7 +66,6 @@ class OrderManagement extends Component {
                             <span id="totalAmount">amount: {order.totalAmount}</span>
                         </div>
                     </div>
-                    <button onClick={this.props.onReorder}>reorder</button>
                 </div>
             )
         })
@@ -104,7 +103,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetUserProfile: () => dispatch(actions.getUserProfile()),
         onGetUserOrder: () => dispatch(actions.getUserOrder()),
-        onReorder: () => dispatch(actions.reorder()),
     }
 }
 
