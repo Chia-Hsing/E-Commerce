@@ -52,27 +52,39 @@ class OrderManagement extends Component {
 
         const userProfileCard = <UserProfileCard avatar={avatarImg} name={this.props.userProfile.name} />
 
-        let userOrderList = this.state.selectedOrder.map((order, i) => {
-            return (
-                <div key={i} className="orderDetailItem">
-                    <div className="productBody">
-                        <div>
-                            {order.items.map((item, i) => {
-                                return <UserOrderItem key={i} item={item} />
-                            })}
-                        </div>
-                        <div className="total">
-                            <span id="totalQuantity">items: {order.totalQuantity}</span>
-                            <span id="totalAmount">amount: {order.totalAmount}</span>
-                        </div>
+        let userOrderList = (
+            <div className="orderDetailItem">
+                <div className="productBody">
+                    <div>
+                        <span>There is no order !</span>
                     </div>
                 </div>
-            )
-        })
+            </div>
+        )
+
+        if (this.state.selectedOrder.length > 0) {
+            userOrderList = this.state.selectedOrder.map((order, i) => {
+                return (
+                    <div key={i} className="orderDetailItem">
+                        <div className="productBody">
+                            <div>
+                                {order.items.map((item, i) => {
+                                    return <UserOrderItem key={i} item={item} />
+                                })}
+                            </div>
+                            <div className="total">
+                                <span id="totalQuantity">items: {order.totalQuantity}</span>
+                                <span id="totalAmount">amount: {order.totalAmount}</span>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        }
 
         let userOrder = <Spinner />
 
-        if (this.props.userOrder.length > 0) {
+        if (this.props.userOrder.length >= 0) {
             userOrder = (
                 <>
                     <h4>ACCOUNT DASHBOARD</h4>

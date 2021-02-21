@@ -182,12 +182,16 @@
                 }
             }
         }
+        .user-Side-Drawer-container {
+            @include display-flex(column, center, flex-start);
 
-        .login-Side-Drawer,
-        .logout-Side-Drawer {
-            margin-top: 30px;
-            text-align: left;
-            @include A(lighter-grey, heavy-grey, yellow);
+            .login-Side-Drawer,
+            .logout-Side-Drawer,
+            .user-Side-Drawer {
+                margin-top: 30px;
+                text-align: left;
+                @include A(lighter-grey, heavy-grey, yellow);
+            }
         }
     }
 
