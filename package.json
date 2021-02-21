@@ -4,7 +4,7 @@
     "description": "e-commerce",
     "main": "index.js",
     "scripts": {
-        "start": "node -r dotenv/config server/index.js dotenv_config_path=/Users/ChiaHsing/Projects/React/e-commerce/server/`config/dev.env",
+        "start": "node -r dotenv/config server/index.js dotenv_config_path=/Users/ChiaHsing/Projects/React/e-commerce/server/config/dev.env",
         "dev": "nodemon -r dotenv/config server/index.js -e js dotenv_config_path=/Users/ChiaHsing/Projects/React/e-commerce/server/config/dev.env",
         "heroku-postbuild": "cd client/ && npm install && npm run build"
     },
