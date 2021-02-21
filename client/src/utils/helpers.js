@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-// const baseURL = process.env.REACT_APP_BASE_URL
-const baseURL = 'https://chia-e-commerce-app.herokuapp.com/api'
-
+const baseURL = process.env.REACT_APP_BASE_URL
+// const baseURL = 'https://chia-e-commerce-app.herokuapp.com/api'
 const axiosInstance = axios.create({
     baseURL,
 })
