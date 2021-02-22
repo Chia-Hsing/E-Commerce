@@ -10,7 +10,6 @@ const validator = {
             }
             return true
         }),
-        body('description').notEmpty().withMessage('The description should not be blank!'),
         body('price')
             .isCurrency({
                 symbol: '￥',
@@ -19,6 +18,7 @@ const validator = {
                 thousands_separator: ',',
             })
             .withMessage('The price must be a positive integer number.'),
+        body('description').trim().notEmpty().withMessage('The description should not be blank!'),
         body('stock.*').isInt().withMessage('The stock should be a positive integer!'),
     ],
     createNewCategory: [

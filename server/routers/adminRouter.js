@@ -7,8 +7,8 @@ const router = new express.Router()
 
 router.post(
     '/product',
-    validator.createNewProduct,
     upload.single('image'),
+    validator.createNewProduct,
     validationMessage,
     adminController.postProduct
 )

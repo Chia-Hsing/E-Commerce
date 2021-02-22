@@ -23,23 +23,10 @@ const productSchema = new mongoose.Schema(
             required: true,
         },
         stock: {
-            S: {
-                type: Number,
-                min: 0,
-                max: 999,
-                required: true,
-            },
-            M: {
-                type: Number,
-                min: 0,
-                max: 999,
-                required: true,
-            },
-            L: {
-                type: Number,
-                min: 0,
-                max: 999,
-                required: true,
+            type: {
+                S: { type: Number },
+                M: { type: Number },
+                L: { type: Number },
             },
         },
         description: {
