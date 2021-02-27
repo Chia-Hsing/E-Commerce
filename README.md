@@ -1,5 +1,5 @@
 # E-Commerce-react
-
+Online shopping e-commerce platform for visitors to find and buy the latest japanese trendy clothing brands. ** All the reference, information and materials are taken from and refer to the Japanese online shopping platform "[DigitalMountain](https://www.digital-mountain.net/)"
 
 # Live Demo
 
@@ -117,4 +117,4 @@ $ npm start
 
 
 
-# Current progress
+# Current Progress
