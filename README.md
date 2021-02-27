@@ -1,6 +1,6 @@
 # E-Commerce-react
 
-<<<<<<< HEAD
+
 # Live Demo
 
 [Triple_Time_E-Commerce_App](https://chia-e-commerce-app.herokuapp.com/)
@@ -16,8 +16,6 @@
 
 ## Server Side
 
-=======
-
 
 # Live Demo
 [Triple_Time_E-Commerce_App](https://chia-e-commerce-app.herokuapp.com/)
@@ -32,12 +30,10 @@
 ## Server Side
 
 
->>>>>>> 157dd0206ba4b31f249181951d3df61d025b6df6
 # APIs
 
 ## APIs used
 
-<<<<<<< HEAD
 # Running
 
 ## Clone
@@ -79,7 +75,7 @@ REACT_APP_GOOGLE_GEO_API_KEY =
 $ npm start
 ```
 
-=======
+
 
 # Running
 ## Clone
@@ -109,16 +105,16 @@ REACT_APP_GOOGLE_GEO_API_KEY =
 ```
 $ npm start
 ```
->>>>>>> 157dd0206ba4b31f249181951d3df61d025b6df6
+
 # App Display
 
-![image](https://github.com/Chia-Hsing/Good-Day-Weather-App-react/blob/master/src/img/1.png)
+![image](https://github.com/Chia-Hsing/E-Commerce-react/blob/master/client/public/img/1.png)
+![image](https://github.com/Chia-Hsing/E-Commerce-react/blob/master/client/public/img/2.png)
+![image](https://github.com/Chia-Hsing/E-Commerce-react/blob/master/client/public/img/3.png)
+![image](https://github.com/Chia-Hsing/E-Commerce-react/blob/master/client/public/img/4.png)
+![image](https://github.com/Chia-Hsing/E-Commerce-react/blob/master/client/public/img/5.png)
+![image](https://github.com/Chia-Hsing/E-Commerce-react/blob/master/client/public/img/6.png)
 
-![image](https://github.com/Chia-Hsing/Good-Day-Weather-App-react/blob/master/src/img/GoodDayWeatherApp.png)
-
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 157dd0206ba4b31f249181951d3df61d025b6df6
 # Current progress
