@@ -3,7 +3,7 @@ const Product = require('../models/product')
 
 const getMainMaterials = async (req, res) => {
     try {
-        const newArrival = await Product.find().limit(8).sort({ createdAt: 1 })
+        const newArrival = await Product.find().limit(8).sort({ createdAt: -1 })
 
         return res.status(200).json({
             status: 'success',
