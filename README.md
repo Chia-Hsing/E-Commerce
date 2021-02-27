@@ -15,7 +15,7 @@ email: user@test.com | password: 11111111
 -   Use [Redux](https://redux.js.org/) for global state management. .
 -   Use [redux-thunk](https://github.com/reduxjs/redux-thunk) as a middleware for Redux side effects logic.
 -   Use [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom) for navigating between components and managing routes.
--   Use [axios](https://www.npmjs.com/package/axios) to send requests and fench data from server side. 
+-   Use [axios](https://www.npmjs.com/package/axios) to send requests and fetch data from the server-side. 
 -   Use [SASS](https://sass-lang.com/) to make CSS code much more manageable.
 
 ## Back-End
