@@ -1,6 +1,6 @@
 # E-Commerce-react
-Online shopping e-commerce platform for visitors to find and buy the latest Japanese trendy clothing brands. 
-** All the reference, information and materials are taken from and refer to the Japanese online shopping platform "[DigitalMountain](https://www.digital-mountain.net/)"
+A full-stack side project, which is an online shopping e-commerce platform for visitors to find and buy the latest Japanese trendy clothing brands. 
+** All the reference, information, and materials are taken from and refer to the Japanese online shopping platform "[DigitalMountain](https://www.digital-mountain.net/)"
 
 # Live Demo
 [Triple_Time_E-Commerce_App](https://chia-e-commerce-app.herokuapp.com/)
